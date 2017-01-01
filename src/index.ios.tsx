@@ -42,15 +42,15 @@ export default class ThatsCamping extends React.Component<object, object> {
           data={[
             {
               "name": "Acacia Flat",
-              "parkName": "Blue Mountains NP"
+              "parkName": "Blue Mountains National Park"
             },
             {
               "name": "Alexanders Hut",
-              "parkName": "South East Forest NP"
+              "parkName": "South East Forest National Park"
             },
             {
               "name": "Apsley Falls campground",
-              "parkName": "Oxley Wild Rivers NP"
+              "parkName": "Oxley Wild Rivers National Park"
             }
           ]}
           renderItem={({item}) => this.renderItem(item)}
