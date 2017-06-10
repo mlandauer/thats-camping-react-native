@@ -14,6 +14,12 @@ import {
 } from 'react-native';
 
 export default class ThatsCamping extends React.Component<object, object> {
+  renderItem(item: {key: string}) {
+    return (
+      <Text style={styles.item}>{item.key}</Text>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -28,7 +34,7 @@ export default class ThatsCamping extends React.Component<object, object> {
             {key: 'Jimmy'},
             {key: 'Julie'},
           ]}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          renderItem={({item}) => this.renderItem(item)}
         />
       </View>
     );
