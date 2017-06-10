@@ -8,10 +8,10 @@ import * as React from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View,
   FlatList
 } from 'react-native';
+import CampsiteListItem from './components/CampsiteListItem'
 
 interface Campsite {
   name: string;
@@ -20,7 +20,7 @@ interface Campsite {
 export default class ThatsCamping extends React.Component<object, object> {
   renderItem(campsite: Campsite) {
     return (
-      <Text style={styles.item}>{campsite.name}</Text>
+      <CampsiteListItem name={campsite.name}/>
     )
   }
 
@@ -52,11 +52,6 @@ const styles = StyleSheet.create({
   container: {
    flex: 1,
    paddingTop: 22
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
   },
 })
 
