@@ -13,14 +13,18 @@ import {
   FlatList
 } from 'react-native';
 
+interface Campsite {
+  name: string;
+}
+
 export default class ThatsCamping extends React.Component<object, object> {
-  renderItem(item: {name: string}) {
+  renderItem(campsite: Campsite) {
     return (
-      <Text style={styles.item}>{item.name}</Text>
+      <Text style={styles.item}>{campsite.name}</Text>
     )
   }
 
-  _keyExtractor = (item: {name: string}, index: number) => item.name;
+  _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
 
   render() {
     return (
