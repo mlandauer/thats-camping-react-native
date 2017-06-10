@@ -14,27 +14,30 @@ import {
 } from 'react-native';
 
 export default class ThatsCamping extends React.Component<object, object> {
-  renderItem(item: {key: string}) {
+  renderItem(item: {name: string}) {
     return (
-      <Text style={styles.item}>{item.key}</Text>
+      <Text style={styles.item}>{item.name}</Text>
     )
   }
+
+  _keyExtractor = (item: {name: string}, index: number) => item.name;
 
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={[
-            {key: 'Devin'},
-            {key: 'Jackson'},
-            {key: 'James'},
-            {key: 'Joel'},
-            {key: 'John'},
-            {key: 'Jillian'},
-            {key: 'Jimmy'},
-            {key: 'Julie'},
+            {name: 'Devin'},
+            {name: 'Jackson'},
+            {name: 'James'},
+            {name: 'Joel'},
+            {name: 'John'},
+            {name: 'Jillian'},
+            {name: 'Jimmy'},
+            {name: 'Julie'},
           ]}
           renderItem={({item}) => this.renderItem(item)}
+          keyExtractor={this._keyExtractor}
         />
       </View>
     );
