@@ -5,12 +5,13 @@ import {
 } from 'react-native'
 
 interface Props {
-  name: string;
+  campsiteName: string;
+  parkName: string;
 }
 
 function CampsiteListItem(props: Props) {
   return (
-    <Text style={styles.item}>{props.name}</Text>
+    <Text style={styles.item}>{props.campsiteName}, {props.parkName}</Text>
   )
 }
 
@@ -20,6 +21,6 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     fontSize: 18,
-    height: 44,
+    height: 60,
   },
 })
