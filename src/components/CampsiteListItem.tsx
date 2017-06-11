@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   campsiteName: {
     fontSize: 20,
-    fontWeight: "500"
+    fontWeight: "500" as "500"
   },
   parkName: {
     fontSize: 20
