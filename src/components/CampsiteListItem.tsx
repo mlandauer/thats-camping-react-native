@@ -8,6 +8,8 @@ import {
 interface Props {
   campsiteName: string;
   parkName: string;
+  distance: number;
+  bearing: number;
 }
 
 function CampsiteListItem(props: Props) {

@@ -29,7 +29,7 @@ class Separator extends React.Component<any, any> {
 export default class ThatsCamping extends React.Component<object, object> {
   renderItem(campsite: Campsite) {
     return (
-      <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName}/>
+      <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={1.0} bearing={180}/>
     )
   }
 
