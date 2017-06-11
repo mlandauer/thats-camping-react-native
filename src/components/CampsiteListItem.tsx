@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {
   StyleSheet,
-  Text
+  Text,
+  View
 } from 'react-native'
 
 interface Props {
@@ -11,16 +12,24 @@ interface Props {
 
 function CampsiteListItem(props: Props) {
   return (
-    <Text style={styles.item}>{props.campsiteName}, {props.parkName}</Text>
+    <View style={styles.container}>
+      <Text style={styles.campsiteName}>{props.campsiteName}</Text>
+      <Text style={styles.parkName}>{props.parkName}</Text>
+    </View>
   )
 }
 
 export default CampsiteListItem
 
 const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 60,
+  container: {
+    padding: 15
   },
+  campsiteName: {
+    fontSize: 20,
+    fontWeight: "500"
+  },
+  parkName: {
+    fontSize: 20
+  }
 })
