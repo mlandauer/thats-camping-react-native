@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native'
+import shortenName from '../libs/shortenName'
 
 interface Props {
   campsiteName: string;
@@ -15,8 +16,8 @@ interface Props {
 function CampsiteListItem(props: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.campsiteName}>{props.campsiteName}</Text>
-      <Text style={styles.parkName}>{props.parkName}</Text>
+      <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
+      <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
     </View>
   )
 }
