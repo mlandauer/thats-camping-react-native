@@ -18,6 +18,14 @@ interface Campsite {
   parkName: string;
 }
 
+class Separator extends React.Component<any, any> {
+  render() {
+    return (
+      <View style={styles.separator} />
+    )
+  }
+}
+
 export default class ThatsCamping extends React.Component<object, object> {
   renderItem(campsite: Campsite) {
     return (
@@ -47,6 +55,7 @@ export default class ThatsCamping extends React.Component<object, object> {
           ]}
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={this._keyExtractor}
+          ItemSeparatorComponent={Separator}
         />
       </View>
     );
@@ -58,6 +67,10 @@ const styles = StyleSheet.create({
    flex: 1,
    paddingTop: 22
   },
+  separator: {
+    height: 1,
+    backgroundColor: "#CED0CE",
+  }
 })
 
 AppRegistry.registerComponent('ThatsCamping', () => ThatsCamping);
