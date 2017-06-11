@@ -33,6 +33,10 @@
   dependencies:
     "@types/babel-types" "*"
 
+"@types/expect@^1.20.1":
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/@types/expect/-/expect-1.20.1.tgz#db794c8a2127e302ed341221a0cba83d51c4e5fc"
+
 "@types/jest@^19.2.4":
   version "19.2.4"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-19.2.4.tgz#543651712535962b7dc615e18e4a381fc2687442"
