@@ -30,7 +30,7 @@ export default CampsiteListItem
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

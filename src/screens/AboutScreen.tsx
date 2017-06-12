@@ -8,7 +8,7 @@ import Markdown from 'react-native-simple-markdown'
 export default class About extends React.Component<{},{}> {
   render() {
     return (
-      <View style={{padding: 30}}>
+      <View style={{padding: 20}}>
         <Markdown>
          # About That's Camping{'\n\n'}
 

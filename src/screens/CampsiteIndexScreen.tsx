@@ -60,8 +60,7 @@ class Separator extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-   paddingTop: 22
+   flex: 1
   },
   separator: {
     height: 1,
