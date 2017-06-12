@@ -8,18 +8,18 @@ registerScreens(); // this is where you register all of your app's screens
 Navigation.startTabBasedApp({
   tabs: [
     {
-      label: 'One',
-      screen: 'example.FirstTabScreen', // this is a registered name for a screen
+      label: 'About',
+      screen: 'thatscamping.AboutScreen', // this is a registered name for a screen
       // icon: require('../img/one.png'),
       // selectedIcon: require('../img/one_selected.png'), // iOS only
-      title: 'Screen One'
+      title: 'About'
     },
     {
-      label: 'Two',
-      screen: 'example.SecondTabScreen',
+      label: 'Campsites',
+      screen: 'thatscamping.CampsiteIndexScreen',
       // icon: require('../img/two.png'),
       // selectedIcon: require('../img/two_selected.png'), // iOS only
-      title: 'Screen Two'
+      title: 'Camping near you'
     }
   ]
 });

@@ -5,6 +5,6 @@ import CampsiteIndexScreen from './CampsiteIndexScreen'
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
-  Navigation.registerComponent('example.FirstTabScreen', () => AboutScreen);
-  Navigation.registerComponent('example.SecondTabScreen', () => CampsiteIndexScreen);
+  Navigation.registerComponent('thatscamping.AboutScreen', () => AboutScreen);
+  Navigation.registerComponent('thatscamping.CampsiteIndexScreen', () => CampsiteIndexScreen);
 }
