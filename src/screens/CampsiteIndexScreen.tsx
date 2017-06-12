@@ -5,8 +5,10 @@ import {
   StyleSheet
 } from 'react-native'
 import CampsiteListItem from '../components/CampsiteListItem'
+import { Event, Navigator } from 'react-native-navigation'
 
 interface Props {
+  navigator: Navigator;
 }
 
 interface Campsite {
@@ -24,12 +26,12 @@ export default class CampsiteList extends React.Component<Props, {}> {
     ]
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
-  onNavigatorEvent(event) {
+  onNavigatorEvent(event: Event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'about') {
         this.props.navigator.push({
