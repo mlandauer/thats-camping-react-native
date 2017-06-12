@@ -4,7 +4,7 @@ import {
   FlatList,
   StyleSheet
 } from 'react-native'
-import CampsiteListItem from './CampsiteListItem'
+import CampsiteListItem from '../components/CampsiteListItem'
 
 interface Props {
 }
