@@ -2,7 +2,8 @@ import * as React from 'react'
 import {
   View,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  Button
 } from 'react-native'
 import CampsiteListItem from '../components/CampsiteListItem'
 
@@ -22,6 +23,13 @@ export default class CampsiteList extends React.Component<Props, {}> {
   }
 
   _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
+
+  onPressAbout = () => {
+    this.props.navigator.push({
+      screen: 'thatscamping.AboutScreen',
+      title: 'About'
+    });
+  }
 
   render() {
     return (
@@ -44,6 +52,10 @@ export default class CampsiteList extends React.Component<Props, {}> {
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={this._keyExtractor}
           ItemSeparatorComponent={Separator}
+        />
+        <Button
+          onPress={this.onPressAbout}
+          title="About"
         />
       </View>
     );
