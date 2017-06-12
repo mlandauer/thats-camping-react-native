@@ -1,56 +1,32 @@
 import * as React from 'react'
-import { Text } from 'react-native';
+import { View } from 'react-native'
+import Markdown from 'react-native-simple-markdown'
 
-// Move this somewhere else (.d.ts)
-// var REVISION: string;
+// TODO: Add version number of app here
+// TODO: Update wording to match elm version of the app
 
 export default class About extends React.Component<{},{}> {
   render() {
     return (
-      <Text style={{padding: 30}}>Hello!</Text>
+      <View style={{padding: 30}}>
+        <Markdown>
+         # About That's Camping{'\n\n'}
+
+         Find campsites near you in New South Wales, Australia.
+         It covers camping on public, common land such as National Parks,
+         State Forests and Local Council land.{'\n\n'}
+
+         It works **completely offline**, even when you're
+         far far away from a mobile phone tower. When does that ever happen
+         while camping?{'\n\n'}
+
+         Made by [Matthew Landauer](https://twitter.com/matthewlandauer). It's free and [open source](https://github.com/mlandauer/thats-camping-react-native) because that's the way it ought to be.{'\n\n'}
+
+         ## Things you might want to do{'\n\n'}
+
+         [Suggest a **feature** or report an **issue**](https://github.com/mlandauer/thats-camping-react/issues)
+        </Markdown>
+      </View>
     )
   }
-    // var githubURL = "https://github.com/mlandauer/thats-camping-react/commit/" + REVISION
-
-  //   return (
-  //     <div className="about">
-  //       <Header title="About" hideBackButton={false} showAboutButton={false}/>
-  //       <div className="content">
-  //         <div className="container">
-  //           <h2>About That's Camping</h2>
-  //
-  //           <img src="/apple-touch-icon.png" className="img-rounded" />
-  //
-  //           <p>
-  //             Find campsites near you in New South Wales, Australia.
-  //             It covers camping on public, common land such as National Parks,
-  //             State Forests and Local Council land.
-  //           </p>
-  //
-  //           <p>
-  //             It works <strong>completely offline</strong>, even when you're
-  //             far far away from a mobile phone tower. When does that ever happen
-  //             while camping?
-  //           </p>
-  //
-  //           <p>
-  //             Made by <a href="https://twitter.com/matthewlandauer">Matthew Landauer</a> based on an iOS app by Matthew and <a href="https://twitter.com/katska">Katherine Szuminska</a>. It's free and <a href="https://github.com/mlandauer/thats-camping-react">open source</a> because that's the way it ought to be.
-  //           </p>
-  //
-  //           <p>
-  //             You're currently using version <a href={githubURL}>{REVISION}</a>.
-  //           </p>
-  //
-  //           <h2>Things you might want to do</h2>
-  //
-  //           <p>
-  //             <a href="https://github.com/mlandauer/thats-camping-react/issues">
-  //               Suggest a <strong>feature</strong> or report an <strong>issue</strong>
-  //             </a>
-  //           </p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   )
-  // }
 }
