@@ -8,7 +8,7 @@ import CampsiteListItem from '../components/CampsiteListItem'
 import { Event, Navigator } from 'react-native-navigation'
 
 interface Props {
-  navigator: Navigator;
+  navigator?: Navigator;
 }
 
 interface Campsite {
@@ -28,7 +28,10 @@ export default class CampsiteList extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props);
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    // The navigator prop isn't necessarily set when we run tests
+    if (this.props.navigator) {
+      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    }
   }
 
   onNavigatorEvent(event: Event) {
