@@ -37,10 +37,12 @@ export default class CampsiteList extends React.Component<Props, {}> {
   onNavigatorEvent(event: Event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'about') {
-        this.props.navigator.push({
-          screen: 'thatscamping.AboutScreen',
-          title: 'About'
-        });
+        if (this.props.navigator) {
+          this.props.navigator.push({
+            screen: 'thatscamping.AboutScreen',
+            title: 'About'
+          });          
+        }
       }
     }
   }
