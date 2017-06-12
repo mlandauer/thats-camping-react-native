@@ -2,8 +2,7 @@ import * as React from 'react'
 import {
   View,
   FlatList,
-  StyleSheet,
-  Button
+  StyleSheet
 } from 'react-native'
 import CampsiteListItem from '../components/CampsiteListItem'
 
@@ -16,6 +15,31 @@ interface Campsite {
 }
 
 export default class CampsiteList extends React.Component<Props, {}> {
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        title: 'About',
+        id: 'about'
+      }
+    ]
+  }
+
+  constructor(props) {
+    super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'about') {
+        this.props.navigator.push({
+          screen: 'thatscamping.AboutScreen',
+          title: 'About'
+        });
+      }
+    }
+  }
+
   renderItem(campsite: Campsite) {
     return (
       <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={1.0} bearing={180}/>
@@ -23,13 +47,6 @@ export default class CampsiteList extends React.Component<Props, {}> {
   }
 
   _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
-
-  onPressAbout = () => {
-    this.props.navigator.push({
-      screen: 'thatscamping.AboutScreen',
-      title: 'About'
-    });
-  }
 
   render() {
     return (
@@ -52,10 +69,6 @@ export default class CampsiteList extends React.Component<Props, {}> {
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={this._keyExtractor}
           ItemSeparatorComponent={Separator}
-        />
-        <Button
-          onPress={this.onPressAbout}
-          title="About"
         />
       </View>
     );
