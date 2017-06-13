@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 import CampsiteListItem from '../components/CampsiteListItem'
 import { Event, Navigator } from 'react-native-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 interface Props {
   navigator?: Navigator;
@@ -17,21 +18,24 @@ interface Campsite {
 }
 
 export default class CampsiteList extends React.Component<Props, {}> {
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: 'About',
-        id: 'about'
-      }
-    ]
-  }
-
   constructor(props: Props) {
     super(props);
     // The navigator prop isn't necessarily set when we run tests
     if (this.props.navigator) {
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
+  }
+
+  componentDidMount() {
+    Icon.getImageSource('info-circle', 20).then((about) => {
+      if (this.props.navigator) {
+        this.props.navigator.setButtons({
+          rightButtons: [
+            { id: 'about', icon: about }
+          ]
+        })
+      }
+    })
   }
 
   onNavigatorEvent(event: Event) {
