@@ -27,7 +27,7 @@ export default class CampsiteList extends React.Component<Props, {}> {
   }
 
   componentDidMount() {
-    Icon.getImageSource('info-circle', 20).then((about) => {
+    Icon.getImageSource('info-circle', 20).then((about: any) => {
       if (this.props.navigator) {
         this.props.navigator.setButtons({
           rightButtons: [
@@ -45,7 +45,7 @@ export default class CampsiteList extends React.Component<Props, {}> {
           this.props.navigator.push({
             screen: 'thatscamping.AboutScreen',
             title: 'About'
-          });          
+          });
         }
       }
     }
