@@ -27,15 +27,19 @@ export default class CampsiteList extends React.Component<Props, {}> {
   }
 
   componentDidMount() {
-    Icon.getImageSource('info-circle', 20).then((about: any) => {
-      if (this.props.navigator) {
-        this.props.navigator.setButtons({
-          rightButtons: [
-            { id: 'about', icon: about }
-          ]
-        })
-      }
-    })
+    // HACK HACK Temporary workaround for not figuring out how to mock out Icon for testing
+    // Just set it to undefined for the time being during testing
+    if (Icon) {
+      Icon.getImageSource('info-circle', 20).then((about: any) => {
+        if (this.props.navigator) {
+          this.props.navigator.setButtons({
+            rightButtons: [
+              { id: 'about', icon: about }
+            ]
+          })
+        }
+      })
+    }
   }
 
   onNavigatorEvent(event: Event) {
