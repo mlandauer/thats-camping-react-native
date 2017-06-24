@@ -11,7 +11,7 @@ export interface State {
     readonly starred: StarredState;
 }
 
-export let reducer = combineReducers({
+export let reducer = combineReducers<State>({
   campsites,
   position,
   starred
