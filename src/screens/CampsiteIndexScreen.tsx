@@ -4,20 +4,21 @@ import {
   FlatList,
   StyleSheet
 } from 'react-native'
+import { connect, Dispatch } from 'react-redux'
 import CampsiteListItem from '../components/CampsiteListItem'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import { Campsite } from '../libs/types'
+import { State } from '../reducers'
+
 interface Props {
   navigator?: Navigator;
+  campsites: {[index: number]: Campsite};
+  dispatch: Dispatch<State>
 }
 
-interface Campsite {
-  name: string;
-  parkName: string;
-}
-
-export default class CampsiteList extends React.Component<Props, {}> {
+export class CampsiteIndexScreen extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
     // The navigator prop isn't necessarily set when we run tests
@@ -64,6 +65,7 @@ export default class CampsiteList extends React.Component<Props, {}> {
   _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
 
   render() {
+    console.log('props.campsites', this.props.campsites)
     return (
       <View style={styles.container}>
         <FlatList
@@ -107,3 +109,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#CED0CE",
   }
 })
+
+function mapStateToProps(state: State, ownProps: {}) {
+  return {
+    campsites: state.campsites
+  };
+}
+
+export default connect(mapStateToProps)(CampsiteIndexScreen)

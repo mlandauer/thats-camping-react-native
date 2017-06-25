@@ -1,6 +1,8 @@
 // Copied from https://gist.github.com/webzepter/ddedeb159b332365049c460b1f7352a0
 
 declare module 'react-native-navigation' {
+  import * as Redux from 'redux'
+
   export interface NavigatorStyle {
     navBarTextColor?: string;
     navBarBackgroundColor?: string;
@@ -100,8 +102,7 @@ declare module 'react-native-navigation' {
   }
 
   export class Navigation {
-    // static registerComponent(screenID: string, generator: () => any, store?: Redux.Store, provider?: any): any;
-    static registerComponent(screenID: string, generator: () => any): any;
+    static registerComponent(screenID: string, generator: () => any, store?: Redux.Store<any>, provider?: any): any;
 
     static registerScreen(screenId: string, generator: () => any): any;
 

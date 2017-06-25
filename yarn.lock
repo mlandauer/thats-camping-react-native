@@ -51,6 +51,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-redux@^4.4.45":
+  version "4.4.45"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-4.4.45.tgz#afad851d8592119225aa6bcc402c7f6b9c7e4106"
+  dependencies:
+    "@types/react" "*"
+    redux "^3.6.0"
+
 "@types/react-test-renderer@^15.5.0":
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-15.5.0.tgz#2ef6052c483616b36c38b688a95a7f5da06223c3"
@@ -3454,7 +3461,11 @@ rebound@^0.0.13:
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/rebound/-/rebound-0.0.13.tgz#4a225254caf7da756797b19c5817bf7a7941fac1"
 
-redux@^3.7.0:
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
+
+redux@^3.6.0, redux@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.0.tgz#07a623cafd92eee8abe309d13d16538f6707926f"
   dependencies:

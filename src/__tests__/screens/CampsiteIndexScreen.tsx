@@ -1,6 +1,6 @@
 import 'react-native';
 import * as React from 'react';
-import CampsiteIndexScreen from '../../screens/CampsiteIndexScreen';
+import { CampsiteIndexScreen } from '../../screens/CampsiteIndexScreen';
 
 // CampsiteIndexScreen uses a native library for rendering icons
 // So, let's mock this
@@ -15,6 +15,6 @@ import * as renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <CampsiteIndexScreen />
+    <CampsiteIndexScreen campsites={{}}/>
   );
 });
