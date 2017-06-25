@@ -62,7 +62,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     )
   }
 
-  _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
+  _keyExtractor = (campsite: Campsite, index: number) => String(campsite.id);
 
   render() {
     return (
