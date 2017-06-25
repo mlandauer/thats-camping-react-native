@@ -12,8 +12,7 @@ interface Props {
   campsites: {[index: number]: Campsite};
 }
 
-function CampsiteList(props: Props) {
-  console.log("props", props)
+export default function CampsiteList(props: Props) {
   return (
     <View style={styles.container}>
       <FlatList
@@ -25,8 +24,6 @@ function CampsiteList(props: Props) {
     </View>
   )
 }
-
-export default CampsiteList
 
 function renderItem(campsite: Campsite) {
   return (
