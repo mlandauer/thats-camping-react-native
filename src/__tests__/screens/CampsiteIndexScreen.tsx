@@ -15,6 +15,6 @@ import * as renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <CampsiteIndexScreen campsites={{}}/>
+    <CampsiteIndexScreen campsites={{}} dispatch={() => {}}/>
   );
 });

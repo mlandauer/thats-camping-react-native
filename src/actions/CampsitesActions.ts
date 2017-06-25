@@ -1,4 +1,3 @@
-import * as fetch from 'isomorphic-fetch'
 import { CampsitesJson } from '../libs/types'
 
 interface NoopAction {

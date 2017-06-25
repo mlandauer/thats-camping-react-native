@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/isomorphic-fetch": "^0.0.34",
     "@types/react-redux": "^4.4.45",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",

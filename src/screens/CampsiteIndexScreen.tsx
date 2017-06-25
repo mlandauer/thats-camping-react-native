@@ -65,24 +65,10 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   _keyExtractor = (campsite: Campsite, index: number) => campsite.name;
 
   render() {
-    console.log('props.campsites', this.props.campsites)
     return (
       <View style={styles.container}>
         <FlatList
-          data={[
-            {
-              "name": "Acacia Flat",
-              "parkName": "Blue Mountains National Park"
-            },
-            {
-              "name": "Alexanders Hut",
-              "parkName": "South East Forest National Park"
-            },
-            {
-              "name": "Apsley Falls campground",
-              "parkName": "Oxley Wild Rivers National Park"
-            }
-          ]}
+          data={Object.values(this.props.campsites)}
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={this._keyExtractor}
           ItemSeparatorComponent={Separator}
