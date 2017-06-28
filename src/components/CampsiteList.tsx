@@ -5,18 +5,32 @@ import {
   StyleSheet
 } from 'react-native'
 
-import { Campsite } from '../libs/types'
+import { Campsite, Position } from '../libs/types'
 import CampsiteListItem from './CampsiteListItem'
+import PositionRelationship from '../libs/PositionRelationship'
+
+interface CampsiteWithDistanceAndBearing extends Campsite {
+  distance: number | undefined;
+  bearing: number | undefined;
+}
 
 interface Props {
-  campsites: {[index: number]: Campsite};
+  campsites: Campsite[];
+  position: Position | null;
 }
 
 export default function CampsiteList(props: Props) {
+  var campsites2 = props.campsites.map(function(c): CampsiteWithDistanceAndBearing {
+  let positions = new PositionRelationship(c.position, props.position)
+  return Object.assign({}, c, {
+    distance: positions.distanceInMetres(),
+    bearing: positions.bearingInDegrees()})
+  });
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={Object.values(props.campsites)}
+        data={campsites2}
         renderItem={({item}) => renderItem(item)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={Separator}
@@ -25,9 +39,9 @@ export default function CampsiteList(props: Props) {
   )
 }
 
-function renderItem(campsite: Campsite) {
+function renderItem(campsite: CampsiteWithDistanceAndBearing) {
   return (
-    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={1.0} bearing={180}/>
+    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={campsite.distance} bearing={campsite.bearing}/>
   )
 }
 

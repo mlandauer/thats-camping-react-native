@@ -57,7 +57,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     return (
       <View style={{flex: 1}}>
         <PositionDisplay position={this.props.position} />
-        <CampsiteList campsites={this.props.campsites} />
+        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} />
       </View>
     );
   }

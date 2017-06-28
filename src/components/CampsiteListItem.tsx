@@ -10,8 +10,8 @@ import * as TextFormatter from '../libs/TextFormatter'
 interface Props {
   campsiteName: string;
   parkName: string;
-  distance: number;
-  bearing: number;
+  distance: number | undefined;
+  bearing: number | undefined;
 }
 
 function CampsiteListItem(props: Props) {
