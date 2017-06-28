@@ -22,7 +22,7 @@ export interface Campsite {
   id: number;
   name: string;
   description: string;
-  position: Position | undefined;
+  position: Position | null;
   facilities: Facilities;
   access: Access;
   parkName: string;

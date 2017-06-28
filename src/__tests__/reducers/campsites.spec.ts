@@ -46,7 +46,7 @@ describe('campsites reducer', () => {
       id: 1,
       name: "A campsite",
       description: "A nice campsite",
-      position: undefined,
+      position: null,
       facilities: {
         toilets: 'none' as 'none',
         picnicTables: false,
