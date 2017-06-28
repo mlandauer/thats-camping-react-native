@@ -30,7 +30,7 @@ export default function CampsiteList(props: Props) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={campsites2}
+        data={sortCampsitesArrayByDistance(campsites2, props.position)}
         renderItem={({item}) => renderItem(item)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={Separator}
@@ -53,6 +53,28 @@ class Separator extends React.Component<any, any> {
       <View style={styles.separator} />
     )
   }
+}
+
+function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[], position: Position | null): CampsiteWithDistanceAndBearing[] {
+  // Sort campsites by distance
+  return campsites.sort(function(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing) {
+    if (a.distance == undefined && b.distance == undefined) {
+      return a.name.localeCompare(b.name)
+    }
+    if (a.distance == undefined) {
+      return 1
+    }
+    if (b.distance == undefined) {
+      return -1
+    }
+    if (a.distance > b.distance) {
+      return 1
+    }
+    if (a.distance < b.distance) {
+      return -1
+    }
+    return 0;
+  })
 }
 
 const styles = StyleSheet.create({
