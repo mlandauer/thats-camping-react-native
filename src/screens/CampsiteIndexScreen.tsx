@@ -56,26 +56,10 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   render() {
     return (
       <View style={{flex: 1}}>
-        <PositionDisplay position={this.props.position} />
         <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} />
       </View>
     );
   }
-}
-
-interface PositionDisplayProps {
-  position: (Position | null);
-}
-
-function PositionDisplay(props: PositionDisplayProps) {
-  let text = "undefined"
-  if(props.position) {
-    text = (props.position as Position).lat.toString() + ", " +
-      (props.position as Position).lng.toString()
-  }
-  return (
-    <Text>Position: {text}</Text>
-  )
 }
 
 function mapStateToProps(state: State, ownProps: {}) {
