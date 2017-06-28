@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import { registerScreens } from './screens';
 import { reducer, State } from './reducers'
 import * as CampsitesActions from './actions/CampsitesActions'
+import * as PositionActions from './actions/PositionActions'
 
 const store = createStore(reducer, {
   campsites: {},
@@ -14,8 +15,9 @@ const store = createStore(reducer, {
   starred: []
 }, applyMiddleware(thunk))
 
-// Immediately start getting the campsites data
+// Immediately start getting the campsites data and location
 store.dispatch(CampsitesActions.startSync())
+store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
 
