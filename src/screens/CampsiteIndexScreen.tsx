@@ -24,6 +24,12 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
   }
 
+  static navigatorStyle = {
+    navBarBackgroundColor: '#97b13d',
+    navBarTextColor: '#ffffff',
+    navBarButtonColor: '#ffffff'
+  }
+
   componentDidMount() {
     // HACK HACK Temporary workaround for not figuring out how to mock out Icon for testing
     // Just set it to undefined for the time being during testing
