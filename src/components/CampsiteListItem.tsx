@@ -2,7 +2,8 @@ import * as React from 'react'
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native'
 import shortenName from '../libs/shortenName'
 import * as TextFormatter from '../libs/TextFormatter'
@@ -12,17 +13,20 @@ interface Props {
   parkName: string;
   distance: number | undefined;
   bearing: number | undefined;
+  onPress: () => void;
 }
 
 function CampsiteListItem(props: Props) {
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
-        <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
+    <TouchableHighlight onPress={props.onPress}>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
+          <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
+        </View>
+        <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
       </View>
-      <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
-    </View>
+    </TouchableHighlight>
   )
 }
 
@@ -32,7 +36,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: 'white'
   },
   campsiteName: {
     fontSize: 20,

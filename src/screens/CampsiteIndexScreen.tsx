@@ -60,10 +60,14 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
   }
 
+  onPress(id: number) {
+    console.log("Campsite", id, "pressed")
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} />
+        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} onPress={this.onPress}/>
       </View>
     );
   }
