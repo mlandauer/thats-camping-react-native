@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { View } from 'react-native'
-import Markdown from 'react-native-simple-markdown'
+import { View, Text, StyleSheet } from 'react-native'
 
 import { Campsite } from '../libs/types'
 
@@ -11,11 +10,24 @@ interface Props {
 export default class CampsiteDetailScreen extends React.Component<Props, {}> {
   render() {
     return (
-      <View style={{padding: 20}}>
-        <Markdown>
-          This is a campsite detail page for id {this.props.campsite.id}
-        </Markdown>
+      <View style={styles.container}>
+        <Text style={styles.heading}>{this.props.campsite.name}</Text>
+        <Text style={styles.description}>{this.props.campsite.description}</Text>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+   padding: 20
+  },
+  heading: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginBottom: 20
+  },
+  description: {
+    fontSize: 20
+  }
+})
