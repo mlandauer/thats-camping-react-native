@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import CampsiteList from '../components/CampsiteList'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -61,13 +61,20 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   }
 
   onPress(id: number) {
-    console.log("Campsite", id, "pressed")
+    if (this.props.navigator) {
+      this.props.navigator.push({
+        screen: 'thatscamping.CampsiteDetailScreen',
+        passProps: {
+          campsite: this.props.campsites[id]
+        }
+      })
+    }
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} onPress={this.onPress}/>
+        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
       </View>
     );
   }
