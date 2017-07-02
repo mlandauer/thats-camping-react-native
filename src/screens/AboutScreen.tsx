@@ -43,22 +43,23 @@ function onPress() {
 const styles = StyleSheet.create({
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 17,
+    fontSize: 20,
     marginBottom: 10
   },
   paragraph: {
-    fontSize: 17,
+    fontSize: 20,
     marginBottom: 10
   },
   buttonContainer: {
     padding: 10,
-    marginTop: 17,
+    marginTop: 20,
     height: 45,
     overflow: 'hidden',
     borderRadius: 4,
     backgroundColor: '#eee'
   },
   buttonText: {
+    fontSize: 18,
     color: '#888'
   }
 })
