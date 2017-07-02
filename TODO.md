@@ -7,6 +7,6 @@ Keeping this list here so that I don't always need to have access to the interne
 * Add typescript linter for editing (or I guess a JS equivalent to rubocop)
 * Make startup screen show logo and name
 * Shorten text on back button
-* Make the about page not hideous
 * Pick a font and use consistently in the app
 * Set base font size for the app to simplify
+* Use better buttons: try https://github.com/ide/react-native-button and https://github.com/APSL/react-native-button

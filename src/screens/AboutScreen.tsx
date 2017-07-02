@@ -1,32 +1,48 @@
 import * as React from 'react'
-import { ScrollView } from 'react-native'
-import Markdown from 'react-native-simple-markdown'
-
-// TODO: Add version number of app here
-// TODO: Update wording to match elm version of the app
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  Button,
+  Linking
+} from 'react-native'
 
 export default class About extends React.Component<{},{}> {
   render() {
     return (
       <ScrollView style={{padding: 20}}>
-        <Markdown>
-         # About That's Camping{'\n\n'}
-
-         Find campsites near you in New South Wales, Australia.
-         It covers camping on public, common land such as National Parks,
-         State Forests and Local Council land.{'\n\n'}
-
-         It works **completely offline**, even when you're
-         far far away from a mobile phone tower. When does that ever happen
-         while camping?{'\n\n'}
-
-         Made by [Matthew Landauer](https://twitter.com/matthewlandauer). It's free and [open source](https://github.com/mlandauer/thats-camping-react-native) because that's the way it ought to be.{'\n\n'}
-
-         ## Things you might want to do{'\n\n'}
-
-         [Suggest a **feature** or report an **issue**](https://github.com/mlandauer/thats-camping-react/issues)
-        </Markdown>
+        <Text style={styles.heading}>About That's Camping</Text>
+        <Text style={styles.paragraph}>
+          Find campsites near you in New South Wales, Australia.
+          It covers camping on public, common land such as National Parks,
+          State Forests and Local Council land.
+        </Text>
+        <Text style={styles.paragraph}>
+          It works <Text style={{fontWeight: 'bold'}}>completely offline</Text>, even when you're
+          far far away from a mobile phone tower. When does that ever happen
+          while camping?
+        </Text>
+        <Text style={styles.paragraph}>
+          Made by Matthew Landauer. It's free and open source because that's the way it ought to be.
+        </Text>
+        <Button title="Suggest a feature or report an issue" onPress={onPress} />
       </ScrollView>
     )
   }
 }
+
+function onPress() {
+  Linking.openURL('https://github.com/mlandauer/thats-camping-react-native/issues')
+}
+
+const styles = StyleSheet.create({
+  heading: {
+    fontWeight: 'bold' as 'bold',
+    fontSize: 20,
+    marginBottom: 10
+  },
+  paragraph: {
+    fontSize: 20,
+    marginBottom: 10
+  }
+})

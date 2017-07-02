@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   Button,
-  Linking
+  Linking,
+  View
 } from 'react-native'
 
 import { Campsite, Position } from '../libs/types'
