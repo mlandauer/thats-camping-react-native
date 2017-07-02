@@ -40,15 +40,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   campsiteName: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: "500" as "500"
   },
   parkName: {
-    fontSize: 20,
+    fontSize: 17,
     color: '#aaa'
   },
   distanceAndBearing: {
-    fontSize: 20,
+    fontSize: 17,
     color: '#aaa'
   }
 })

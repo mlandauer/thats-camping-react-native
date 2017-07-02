@@ -38,11 +38,11 @@ function onPress() {
 const styles = StyleSheet.create({
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20,
+    fontSize: 17,
     marginBottom: 10
   },
   paragraph: {
-    fontSize: 20,
+    fontSize: 17,
     marginBottom: 10
   }
 })

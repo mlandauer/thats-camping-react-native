@@ -57,27 +57,27 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 17,
+    marginBottom: 8
   },
   park: {
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 17,
+    marginBottom: 8
   },
   description: {
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 17,
+    marginBottom: 8
   },
   facilities: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginTop: 20,
-    marginBottom: 10,
+    fontSize: 17,
+    marginTop: 17,
+    marginBottom: 8,
   },
   access: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginTop: 20,
-    marginBottom: 10
+    fontSize: 17,
+    marginTop: 17,
+    marginBottom: 8
   }
 })
