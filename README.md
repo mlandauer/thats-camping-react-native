@@ -22,8 +22,9 @@ npm run test
 
 We're using [fastlane](https://fastlane.tools/) to ease deployment of new versions. For beta testing we're currently using [TestFlight](https://developer.apple.com/testflight/).
 
-To deploy a new version of the beta
+To deploy a new version of the beta for iOS
 
 ```
+cd ios
 fastlane beta
 ```
