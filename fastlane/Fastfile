@@ -14,6 +14,9 @@ default_platform :ios
 # don't worry, fastlane will prompt you for required
 # info which you can add here later
 lane :beta do
+  # Ensure that your git status is not dirty
+  ensure_git_status_clean
+
   increment_build_number(xcodeproj: "ios/ThatsCamping.xcodeproj")
 
   # Commit the version bump
