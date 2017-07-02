@@ -16,6 +16,16 @@ default_platform :ios
 lane :beta do
   increment_build_number(xcodeproj: "ios/ThatsCamping.xcodeproj")
 
+  # Commit the version bump
+  commit_version_bump(xcodeproj: "ios/ThatsCamping.xcodeproj")
+
+  # Add a git tag for this build. This will automatically
+  # use an appropriate git tag name
+  add_git_tag
+
+  # Push the new commit and tag back to your git remote
+  push_to_git_remote
+
   # build your iOS app
   gym(
     scheme: "ThatsCamping",
@@ -24,5 +34,5 @@ lane :beta do
   )
 
   # upload to Testflight
-  pilot(skip_waiting_for_build_processing: true)
+  pilot
 end
