@@ -9,3 +9,6 @@ Keeping this list here so that I don't always need to have access to the interne
 * Pick a font and use consistently in the app
 * Set base font size for the app to simplify
 * Use better buttons: try https://github.com/ide/react-native-button and https://github.com/APSL/react-native-button
+* Add a map
+* Make it use pouchdb
+* Add ability to star favorite campsites
