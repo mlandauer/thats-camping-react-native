@@ -18,8 +18,9 @@ lane :beta do
 
   # build your iOS app
   gym(
-    # scheme: "YourScheme",
-    export_method: "app-store"
+    scheme: "ThatsCamping",
+    export_method: "app-store",
+    project: 'ios/ThatsCamping.xcodeproj'
   )
 
   # upload to Testflight
