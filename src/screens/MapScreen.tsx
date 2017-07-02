@@ -1,9 +1,7 @@
 import * as React from 'react'
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native'
+import { View, Text } from 'react-native'
+
+import CampsiteMap from '../components/CampsiteMap'
 
 export default class MapScreen extends React.Component<{},{}> {
   // Duplicated from CampsiteIndexScreen
@@ -19,18 +17,7 @@ export default class MapScreen extends React.Component<{},{}> {
 
   render() {
     return (
-      <View style={{padding: 20}}>
-        <Text style={styles.paragraph}>
-          The future home of maps
-        </Text>
-      </View>
+      <CampsiteMap />
     )
   }
 }
-
-const styles = StyleSheet.create({
-  paragraph: {
-    fontSize: 20,
-    marginBottom: 10
-  },
-})
