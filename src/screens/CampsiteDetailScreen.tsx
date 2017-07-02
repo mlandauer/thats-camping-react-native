@@ -3,10 +3,10 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  Button,
   Linking,
   View
 } from 'react-native'
+import Button from 'react-native-button'
 
 import { Campsite, Position } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
@@ -26,7 +26,12 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
         <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
         <Text style={styles.access}>Access</Text>
         <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
-        <Button title="Directions to campsite" onPress={() => {this.onPress()}}/>
+        <Button
+          containerStyle={styles.buttonContainer}
+          style={styles.buttonText}
+          onPress={() => {this.onPress()}}>
+          Directions to campsite
+        </Button>
       </ScrollView>
     )
   }
@@ -79,5 +84,16 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginTop: 17,
     marginBottom: 8
+  },
+  buttonContainer: {
+    padding: 10,
+    marginTop: 17,
+    height: 45,
+    overflow: 'hidden',
+    borderRadius: 4,
+    backgroundColor: '#eee'
+  },
+  buttonText: {
+    color: '#888'
   }
 })

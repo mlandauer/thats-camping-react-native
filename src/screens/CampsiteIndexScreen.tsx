@@ -68,7 +68,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),
-        backButtonTitle: 'Back'
+        backButtonTitle: 'Back',
         passProps: {
           campsite: campsite
         }

@@ -3,9 +3,9 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  Button,
   Linking
 } from 'react-native'
+import Button from 'react-native-button'
 
 export default class About extends React.Component<{},{}> {
   render() {
@@ -25,7 +25,12 @@ export default class About extends React.Component<{},{}> {
         <Text style={styles.paragraph}>
           Made by Matthew Landauer. It's free and open source because that's the way it ought to be.
         </Text>
-        <Button title="Suggest a feature or report an issue" onPress={onPress} />
+        <Button
+          containerStyle={styles.buttonContainer}
+          style={styles.buttonText}
+          onPress={onPress} >
+          Suggest a feature or report an issue
+        </Button>
       </ScrollView>
     )
   }
@@ -44,5 +49,16 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 17,
     marginBottom: 10
+  },
+  buttonContainer: {
+    padding: 10,
+    marginTop: 17,
+    height: 45,
+    overflow: 'hidden',
+    borderRadius: 4,
+    backgroundColor: '#eee'
+  },
+  buttonText: {
+    color: '#888'
   }
 })
