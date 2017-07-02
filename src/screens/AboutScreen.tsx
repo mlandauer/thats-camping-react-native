@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import Markdown from 'react-native-simple-markdown'
 
 // TODO: Add version number of app here
@@ -8,7 +8,7 @@ import Markdown from 'react-native-simple-markdown'
 export default class About extends React.Component<{},{}> {
   render() {
     return (
-      <View style={{padding: 20}}>
+      <ScrollView style={{padding: 20}}>
         <Markdown>
          # About That's Camping{'\n\n'}
 
@@ -26,7 +26,7 @@ export default class About extends React.Component<{},{}> {
 
          [Suggest a **feature** or report an **issue**](https://github.com/mlandauer/thats-camping-react/issues)
         </Markdown>
-      </View>
+      </ScrollView>
     )
   }
 }

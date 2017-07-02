@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {
-  View,
+  ScrollView,
   Text,
   StyleSheet,
   Button,
@@ -17,7 +17,7 @@ interface Props {
 export default class CampsiteDetailScreen extends React.Component<Props, {}> {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.heading}>{this.props.campsite.name}</Text>
         <Text style={styles.park}>In {this.props.campsite.parkName}</Text>
         <Text style={styles.description}>{this.props.campsite.description}</Text>
@@ -26,7 +26,7 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
         <Text style={styles.access}>Access</Text>
         <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
         <Button title="Directions to campsite" onPress={() => {this.onPress()}}/>
-      </View>
+      </ScrollView>
     )
   }
 
