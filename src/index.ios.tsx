@@ -16,7 +16,8 @@ const store = createStore(reducer, {
 }, applyMiddleware(thunk))
 
 // Immediately start getting the campsites data and location
-store.dispatch(CampsitesActions.startSync())
+var json = require('../data_simplified.json')
+store.dispatch(CampsitesActions.addCampsitesJson(json))
 store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens

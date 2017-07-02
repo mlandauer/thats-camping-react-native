@@ -17,10 +17,3 @@ export function addCampsitesJson(json: CampsitesJson): CampsitesAction {
     json: json
   }
 }
-
-export function startSync() {
-  return (dispatch: ((action: {}) => void)) => {
-    var json = require('../../data_simplified.json')
-    dispatch(addCampsitesJson(json))
-  }
-}
