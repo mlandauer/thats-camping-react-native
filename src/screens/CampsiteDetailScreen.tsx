@@ -1,7 +1,13 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Linking
+} from 'react-native'
 
-import { Campsite } from '../libs/types'
+import { Campsite, Position } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
 
 interface Props {
@@ -19,8 +25,28 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
         <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
         <Text style={styles.access}>Access</Text>
         <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
+        <Button title="Directions to campsite" onPress={() => {this.onPress()}}/>
       </View>
     )
+  }
+
+  // TODO: Disable button when appropriate
+  onPress() {
+    let url = mapUrl(this.props.campsite.position)
+    if (url != undefined) {
+      Linking.openURL(url)
+    }
+  }
+}
+
+
+function mapUrl(position: Position | null): string | undefined {
+  if (position == null) {
+    return undefined;
+  } else {
+    return "https://maps.google.com/maps?" +
+      "daddr=" +
+      position.lat + "," + position.lng;
   }
 }
 
