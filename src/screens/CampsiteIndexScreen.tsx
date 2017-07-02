@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { Campsite, Position } from '../libs/types'
 import { State } from '../reducers'
+import shortenName from '../libs/shortenName'
 
 interface Props {
   navigator?: Navigator;
@@ -62,10 +63,12 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
 
   onPress(id: number) {
     if (this.props.navigator) {
+      var campsite = this.props.campsites[id]
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
+        title: shortenName(campsite.name),
         passProps: {
-          campsite: this.props.campsites[id]
+          campsite: campsite
         }
       })
     }

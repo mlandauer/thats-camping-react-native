@@ -2,7 +2,6 @@
 
 Keeping this list here so that I don't always need to have access to the internet.
 
-* Add title for campsite detail page
 * Increase font size of title in nav bar
 * Update title of app on home screen to "Camping!"
 * Make the about page scrollable
