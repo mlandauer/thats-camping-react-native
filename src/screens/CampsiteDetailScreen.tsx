@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     height: 45,
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: '#eee'
+    borderWidth: 0.5
   },
   buttonText: {
     fontSize: 18,
-    color: '#888'
+    color: '#777'
   }
 })
