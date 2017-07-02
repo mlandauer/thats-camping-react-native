@@ -20,11 +20,7 @@ export function addCampsitesJson(json: CampsitesJson): CampsitesAction {
 
 export function startSync() {
   return (dispatch: ((action: {}) => void)) => {
-    // TODO Also dispatch something immediately to let the user know something is going on
-    fetch('https://raw.githubusercontent.com/mlandauer/thats-camping-react/f7127966df876b9cf9172dbeaf80fc0d75131215/data_simplified.json')
-      .then(response => response.json())
-      .then(json => {
-        dispatch(addCampsitesJson(json))
-      })
+    var json = require('../../data_simplified.json')
+    dispatch(addCampsitesJson(json))
   }
 }
