@@ -25,6 +25,5 @@ We're using [fastlane](https://fastlane.tools/) to ease deployment of new versio
 To deploy a new version of the beta for iOS
 
 ```
-cd ios
 fastlane beta
 ```
