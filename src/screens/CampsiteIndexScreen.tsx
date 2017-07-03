@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { View, Text, Alert } from 'react-native'
-import CampsiteList from '../components/CampsiteList'
+import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -86,7 +86,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
     return (
       <View style={{flex: 1}}>
-        <CampsiteList campsites={campsites} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
+        <CampsiteIndex campsites={campsites} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
       </View>
     );
   }
