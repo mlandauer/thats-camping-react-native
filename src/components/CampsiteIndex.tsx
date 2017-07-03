@@ -24,8 +24,9 @@ interface State {
 
 // State is whether list is currently shown
 export default class CampsiteIndex extends React.Component<Props, State> {
-  getInitialState() {
-    return {selectedTab: 'list'}
+  constructor(props: Props) {
+    super(props)
+    this.state = {selectedTab: 'list'}
   }
 
   render() {
