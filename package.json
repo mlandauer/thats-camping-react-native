@@ -11,25 +11,25 @@
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
     "react-native-button": "^2.0.0",
-    "react-native-navigation": "^1.1.131",
+    "react-native-navigation": "^1.1.134",
     "react-native-vector-icons": "^4.2.0",
     "react-redux": "^5.0.5",
-    "redux": "^3.7.0",
+    "redux": "^3.7.1",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@types/expect": "^1.20.1",
-    "@types/jest": "^19.2.4",
+    "@types/jest": "^20.0.2",
     "@types/react": "^15.0.27",
-    "@types/react-native": "^0.44.10",
-    "@types/react-test-renderer": "^15.5.0",
+    "@types/react-native": "^0.44.15",
+    "@types/react-test-renderer": "^15.5.1",
     "babel-jest": "20.0.3",
-    "babel-preset-react-native": "1.9.2",
+    "babel-preset-react-native": "^2.0.0",
     "expect": "^1.20.2",
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12",
     "ts-jest": "^20.0.6",
-    "typescript": "^2.3.4"
+    "typescript": "^2.4.1"
   },
   "jest": {
     "preset": "react-native",
