@@ -1,18 +1,19 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Alert } from 'react-native'
 import * as MapView from 'react-native-maps'
 
 import { Campsite } from '../libs/types'
 
 interface Props {
   campsites: Campsite[];
+  onPress: (id: number) => void;
 }
 
 export default function CampsiteMap(props: Props) {
   return (
     <MapView style={{flex: 1}}>
       {props.campsites.map(campsite => (
-        <CampsiteMarker campsite={campsite} key={campsite.id} />
+        <CampsiteMarker campsite={campsite} key={campsite.id} onPress={() => {props.onPress(campsite.id)}} />
       ))}
     </MapView>
   )
@@ -20,6 +21,7 @@ export default function CampsiteMap(props: Props) {
 
 interface CampsiteMarkerProps {
   campsite: Campsite;
+  onPress: () => void;
 }
 
 function CampsiteMarker(props: CampsiteMarkerProps) {
@@ -35,6 +37,7 @@ function CampsiteMarker(props: CampsiteMarkerProps) {
       coordinate={coordinate}
       title={props.campsite.name}
       description={props.campsite.description}
+      onCalloutPress={props.onPress}
     />
   )
 }

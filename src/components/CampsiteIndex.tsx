@@ -40,7 +40,7 @@ export default class CampsiteIndex extends React.Component<Props, State> {
           </Icon.TabBarItemIOS>
           <Icon.TabBarItemIOS title="Map" iconName="map-marker" selected={this.state.selectedTab === 'map'} onPress={() => {this.setState({selectedTab: 'map'})}}>
             <View style={{flex: 1}}>
-              <CampsiteMap campsites={this.props.campsites} />
+              <CampsiteMap campsites={this.props.campsites} onPress={this.props.onPress}/>
             </View>
           </Icon.TabBarItemIOS>
         </TabBarIOS>
