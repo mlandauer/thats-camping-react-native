@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/react-redux": "^4.4.45",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
     "react-native-button": "^2.0.0",
@@ -21,6 +20,7 @@
     "@types/expect": "^1.20.1",
     "@types/jest": "^20.0.2",
     "@types/react-native": "^0.44.15",
+    "@types/react-redux": "^4.4.45",
     "@types/react-test-renderer": "^15.5.1",
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "^2.0.0",
