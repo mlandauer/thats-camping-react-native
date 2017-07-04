@@ -1,17 +1,15 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import * as MapView from 'react-native-maps'
 
 interface Props {
 
 }
 
 export default function CampsiteMap(props: Props) {
+  console.log("mapview", MapView)
   return (
-    <View style={{padding: 20}}>
-      <Text style={styles.paragraph}>
-        The future home of maps
-      </Text>
-    </View>
+    <MapView style={{flex: 1}}/>
   )
 }
 
