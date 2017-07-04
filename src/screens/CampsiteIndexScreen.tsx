@@ -79,9 +79,14 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   }
 
   render() {
+    // We could use Object.values to do this but typescript complains. So...
+    let campsites = []
+    for (let id in this.props.campsites) {
+      campsites.push(this.props.campsites[id])
+    }
     return (
       <View style={{flex: 1}}>
-        <CampsiteList campsites={Object.values(this.props.campsites)} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
+        <CampsiteList campsites={campsites} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
       </View>
     );
   }
