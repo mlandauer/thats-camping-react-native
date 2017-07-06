@@ -1,3 +1,5 @@
 #!/bin/bash
-rvm 2.2.0 do bundle
-rvm 2.2.0 do fastlane
+rvm install 2.2.0
+rvm 2.2.0
+bundle
+fastlane
