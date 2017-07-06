@@ -32,3 +32,7 @@ To deploy a new version of the beta for iOS
 ```
 fastlane beta
 ```
+
+## Copyright & License
+
+Copyright Matthew Landauer. Licensed under the GPL v3. See LICENSE.md for more details.
