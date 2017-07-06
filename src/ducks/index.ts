@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux'
-import { campsites, CampsitesState } from './campsites'
-import { position, PositionState } from './position'
-import { starred, StarredState } from './starred'
+import campsites from '../ducks/campsites'
+import position from '../ducks/position'
+import starred from '../ducks/starred'
+import { CampsitesState } from '../ducks/campsites'
+import { PositionState } from '../ducks/position'
+import { StarredState } from '../ducks/starred'
 
 // Hmmm. I wonder if combineReducers already knows the shape of this type
 // so we can do this differently and more elegantly

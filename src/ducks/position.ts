@@ -1,5 +1,6 @@
 import { Position } from '../libs/types'
 
+// Actions
 export type PositionAction = UpdatePositionAction | NoopAction;
 
 interface NoopAction {
@@ -11,13 +12,6 @@ interface UpdatePositionAction {
   position: Position;
 }
 
-export function updatePosition(lat: number, lng: number): PositionAction {
-  return {
-    type: 'UPDATE_POSITION',
-    position: {lat: lat, lng: lng}
-  }
-}
-
 interface Coords {
     latitude: number;
     longitude: number;
@@ -25,6 +19,26 @@ interface Coords {
 
 interface Location {
   coords: Coords;
+}
+
+// Reducer
+export type PositionState = Position | null
+
+export default function reducer(state: PositionState = null, action: PositionAction): PositionState {
+  switch(action.type) {
+    case 'UPDATE_POSITION':
+      return action.position;
+    default:
+      return state
+  }
+}
+
+// Action Creators
+export function updatePosition(lat: number, lng: number): PositionAction {
+  return {
+    type: 'UPDATE_POSITION',
+    position: {lat: lat, lng: lng}
+  }
 }
 
 export function startUpdatePosition() {

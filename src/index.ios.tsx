@@ -4,9 +4,9 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import { registerScreens } from './screens';
-import { reducer, State } from './reducers'
-import * as CampsitesActions from './actions/CampsitesActions'
-import * as PositionActions from './actions/PositionActions'
+import { reducer, State } from './ducks'
+import * as CampsitesActions from './ducks/campsites'
+import * as PositionActions from './ducks/position'
 
 const store = createStore(reducer, {
   campsites: {},
