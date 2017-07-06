@@ -1,3 +1,3 @@
 #!/bin/bash
-rvm all do 2.2.0 bundle
-rvm all do 2.2.0 fastlane
+rvm 2.2.0 do bundle
+rvm 2.2.0 do fastlane
