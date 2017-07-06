@@ -1,5 +1,16 @@
-import { StarredAction } from '../actions/StarredActions'
+export type StarredAction = ToggleStarredAction | NoopAction;
 
+// Actions
+interface NoopAction {
+  type: 'NOOP'
+}
+
+interface ToggleStarredAction {
+  type: 'TOGGLE_STARRED';
+  campsite_id: number;
+}
+
+// Reducer
 export type StarredState = number[]
 
 export function starred(state: StarredState = [], action: StarredAction): StarredState {
@@ -14,5 +25,13 @@ export function starred(state: StarredState = [], action: StarredAction): Starre
       }
     default:
       return state
+  }
+}
+
+// Action Creators
+export function toggleStarredCampsite(campsite_id: number): StarredAction {
+  return {
+    type: 'TOGGLE_STARRED',
+    campsite_id: campsite_id
   }
 }

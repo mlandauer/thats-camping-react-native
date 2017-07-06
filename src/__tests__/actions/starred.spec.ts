@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import * as actions from '../../actions/StarredActions'
+import * as actions from '../../ducks/starred'
 
 describe('starred actions', () => {
   it('toggleStarredCampsite', () => {

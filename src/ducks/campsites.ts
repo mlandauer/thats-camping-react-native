@@ -1,6 +1,18 @@
-import { Campsite, Position } from '../libs/types'
-import { CampsitesAction } from '../actions/CampsitesActions'
+import { CampsitesJson, Campsite, Position } from '../libs/types'
 
+// Actions
+interface NoopAction {
+  type: 'NOOP'
+}
+
+interface AddCampsitesJsonAction {
+  type: 'ADD_CAMPSITES_JSON';
+  json: CampsitesJson;
+}
+
+export type CampsitesAction = AddCampsitesJsonAction | NoopAction;
+
+// Reducer
 export interface CampsitesState {
   readonly [index: number]: Campsite
 };
@@ -36,5 +48,13 @@ function convertPosition(position: Position | {}): (Position | null) {
     return <Position>position
   } else {
     return null
+  }
+}
+
+// Action Creators
+export function addCampsitesJson(json: CampsitesJson): CampsitesAction {
+  return {
+    type: 'ADD_CAMPSITES_JSON',
+    json: json
   }
 }

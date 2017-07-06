@@ -6,7 +6,7 @@ import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { Campsite, Position } from '../libs/types'
-import { State } from '../reducers'
+import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
 
 interface Props {

@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import { campsites as reducer } from '../../reducers/campsites'
+import { campsites as reducer } from '../../ducks/campsites'
 import { Position, Facilities } from '../../libs/types'
 
 describe('campsites reducer', () => {

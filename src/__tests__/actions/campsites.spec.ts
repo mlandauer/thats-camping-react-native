@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import * as actions from '../../actions/CampsitesActions'
+import * as actions from '../../ducks/campsites'
 import { Position, Facilities } from '../../libs/types'
 
 describe('campsites actions', () => {

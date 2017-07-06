@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import * as actions from '../../actions/PositionActions'
+import * as actions from '../../ducks/position'
 
 describe('position actions', () => {
   it('updatePosition', () => {

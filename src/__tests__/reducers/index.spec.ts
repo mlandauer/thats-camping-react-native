@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import { reducer } from '../../reducers/index'
+import { reducer } from '../../ducks/index'
 
 describe('index reducer', () => {
   it('should return the initial state', () => {
