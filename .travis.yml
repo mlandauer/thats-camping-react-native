@@ -1,6 +1,6 @@
 language: node_js
 deploy:
   provider: script
-  script: rvm 2.2.0 do scripts/deploy.sh
+  script: rvm install 2.2.0; rvm 2.2.0 do scripts/deploy.sh
   on:
     branch: master
