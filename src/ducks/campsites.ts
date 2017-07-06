@@ -17,7 +17,7 @@ export interface CampsitesState {
   readonly [index: number]: Campsite
 };
 
-export function campsites(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
+export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
   switch(action.type) {
     case 'ADD_CAMPSITES_JSON':
       // Turn parks array into hash

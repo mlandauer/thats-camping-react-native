@@ -1,5 +1,5 @@
 import * as expect from 'expect'
-import { starred as reducer } from '../../ducks/starred'
+import reducer from '../../ducks/starred'
 
 describe('starred reducer', () => {
   it('should return the initial state', () => {
