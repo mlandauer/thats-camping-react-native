@@ -11,7 +11,7 @@ interface Props {
 
 export default function CampsiteMap(props: Props) {
   return (
-    <MapView style={{flex: 1}}>
+    <MapView style={{flex: 1}} showsUserLocation={true}>
       {props.campsites.map(campsite => (
         <CampsiteMarker campsite={campsite} key={campsite.id} onPress={() => {props.onPress(campsite.id)}} />
       ))}
