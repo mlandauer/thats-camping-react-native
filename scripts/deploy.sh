@@ -1,4 +1,4 @@
 #!/bin/bash
 gem install bundler
 bundle
-fastlane
+fastlane beta
