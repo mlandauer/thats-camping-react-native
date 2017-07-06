@@ -5,10 +5,13 @@ fastlane_version '1.109.0'
 
 default_platform :ios
 
-lane :beta do
+
+before_all do
   # Ensure that your git status is not dirty
   ensure_git_status_clean
+end
 
+lane :beta do
   increment_build_number(xcodeproj: 'ios/ThatsCamping.xcodeproj')
 
   # Commit the version bump
