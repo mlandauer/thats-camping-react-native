@@ -1,4 +1,3 @@
 #!/bin/bash
-gem install bundler
-bundle
+brew cask install fastlane
 fastlane beta
