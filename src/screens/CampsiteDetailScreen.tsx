@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import Button from 'react-native-button'
 
-import { Campsite, Position } from '../libs/types'
+import { Campsite, Position, Facilities, Access } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
 
 interface Props {
@@ -23,10 +23,8 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
           <Text style={styles.heading}>{this.props.campsite.name}</Text>
           <Text style={styles.park}>{this.props.campsite.parkName}</Text>
           <DescriptionText description={this.props.campsite.description}/>
-          <Text style={styles.facilities}>Facilities</Text>
-          <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
-          <Text style={styles.access}>Access</Text>
-          <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
+          <FacilitiesSection facilities={this.props.campsite.facilities} />
+          <AccessSection access={this.props.campsite.access} />
           <Button
             containerStyle={styles.buttonContainer}
             style={styles.buttonText}
@@ -43,6 +41,76 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
     let url = mapUrl(this.props.campsite.position)
     if (url != undefined) {
       Linking.openURL(url)
+    }
+  }
+}
+
+function AccessSection(props: {access: Access}) {
+  let fields = TextFormatter.accessFields(props.access)
+  let haveText = TextFormatter.listAsText(fields.have)
+  let notHaveText = TextFormatter.listAsText(fields.notHave)
+  if (haveText) {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>For {haveText}</Text>
+          <Text style={styles.description}>But not for {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>For {haveText}</Text>
+        </View>
+      )
+    }
+  } else {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>Not for {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return null
+    }
+  }
+}
+
+function FacilitiesSection(props: {facilities: Facilities}) {
+  let fields = TextFormatter.facilitiesFields(props.facilities)
+  let haveText = TextFormatter.listAsText(fields.have)
+  let notHaveText = TextFormatter.listAsText(fields.notHave)
+  if (haveText) {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>Has {haveText}</Text>
+          <Text style={styles.description}>But no {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>Has {haveText}</Text>
+        </View>
+      )
+    }
+  } else {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>No {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return null
     }
   }
 }
