@@ -115,11 +115,7 @@ function FacilitiesSection(props: {facilities: Facilities}) {
   }
 }
 
-interface DescriptionTextProps {
-  description: string;
-}
-
-function DescriptionText(props: DescriptionTextProps) {
+function DescriptionText(props: {description: string}) {
   if (props.description == "") {
     return null
   } else {
