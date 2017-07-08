@@ -45,7 +45,7 @@ export function startUpdatePosition() {
   return (dispatch: (action: {}) => void) => {
     // TODO Also dispatch something immediately to let the user know something is going on
     let locator = new Promise((resolve, reject) => {
-			navigator.geolocation.getCurrentPosition(resolve, reject, {enableHighAccuracy: true});
+			navigator.geolocation.watchPosition(resolve, reject, {enableHighAccuracy: true});
 		})
     locator.then((location: Location) => {
       dispatch(updatePosition(location.coords.latitude, location.coords.longitude))
