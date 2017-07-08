@@ -33,7 +33,7 @@ export default class CampsiteIndex extends React.Component<Props, State> {
     return (
       <View style={{flex: 1}}>
         <TabBarIOS barTintColor="#97b13d" tintColor='white' unselectedItemTintColor='white'>
-          <Icon.TabBarItemIOS title="List" iconName="ios-list-outline" selectedIconName="ios-list-box" selected={this.state.selectedTab === 'list'} onPress={() => {this.setState({selectedTab: 'list'})}}>
+          <Icon.TabBarItemIOS title="List" iconName="ios-list-box-outline" selectedIconName="ios-list-box" selected={this.state.selectedTab === 'list'} onPress={() => {this.setState({selectedTab: 'list'})}}>
             <View style={{flex: 1}}>
               <CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/>
             </View>
