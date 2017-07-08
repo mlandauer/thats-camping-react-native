@@ -27,6 +27,13 @@
                         <navigationItem title="Camping near you" id="wng-UY-hab"/>
                     </items>
                 </navigationBar>
+                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PhC-t5-meW">
+                    <rect key="frame" x="0.0" y="975" width="320" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <items/>
+                    <color key="barTintColor" red="0.58627176280000004" green="0.69159507750000004" blue="0.23680654170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </tabBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <rect key="contentStretch" x="0.0" y="0.0" width="0.40000000000000002" height="1"/>
