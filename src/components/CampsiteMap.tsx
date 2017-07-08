@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import * as MapView from 'react-native-maps'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { Campsite } from '../libs/types'
 import shortenName from '../libs/shortenName'
@@ -48,8 +49,15 @@ function CampsiteMarker(props: CampsiteMarkerProps) {
       title={props.campsite.name}
       description={props.campsite.description}>
       <MapView.Callout onPress={props.onPress}>
-        <Text style={styles.heading}>{shortenName(props.campsite.name)}</Text>
-        <Text style={styles.park}>{shortenName(props.campsite.parkName)}</Text>
+        <View style={{flexDirection: 'row'}} >
+          <View>
+            <Text style={styles.heading}>{shortenName(props.campsite.name)}</Text>
+            <Text style={styles.park}>{shortenName(props.campsite.parkName)}</Text>
+          </View>
+          <View style={{justifyContent: 'center'}}>
+            <Icon style={styles.arrow} name="ios-arrow-forward"/>
+          </View>
+        </View>
       </MapView.Callout>
     </MapView.Marker>
   )
@@ -61,6 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   park: {
+    fontSize: 20,
+    color: '#aaa'
+  },
+  arrow: {
+    marginLeft: 20,
     fontSize: 20,
     color: '#aaa'
   }
