@@ -10,8 +10,17 @@ interface Props {
 }
 
 export default function CampsiteMap(props: Props) {
+  let initialRegion = {
+    // Centering on the "Heartbreak Hill camping area"
+    // to start with
+    latitude: -33.2709845533332,
+    longitude: 150.897112779999,
+    latitudeDelta: 5.0,
+    longitudeDelta: 5.0
+  }
+
   return (
-    <MapView style={{flex: 1}} showsUserLocation={true}>
+    <MapView style={{flex: 1}} showsUserLocation={true} rotateEnabled={false} initialRegion={initialRegion}>
       {props.campsites.map(campsite => (
         <CampsiteMarker campsite={campsite} key={campsite.id} onPress={() => {props.onPress(campsite.id)}} />
       ))}
@@ -41,10 +50,3 @@ function CampsiteMarker(props: CampsiteMarkerProps) {
     />
   )
 }
-
-const styles = StyleSheet.create({
-  paragraph: {
-    fontSize: 20,
-    marginBottom: 10
-  },
-})
