@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux'
 import { View, Text, Alert } from 'react-native'
 import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { Campsite, Position } from '../libs/types'
 import { State } from '../ducks'
@@ -38,7 +38,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     // HACK HACK Temporary workaround for not figuring out how to mock out Icon for testing
     // Just set it to undefined for the time being during testing
     if (Icon) {
-      Icon.getImageSource('info-circle', 20).then((about: any) => {
+      Icon.getImageSource('ios-help-circle-outline', 22).then((about: any) => {
         if (this.props.navigator) {
           this.props.navigator.setButtons({
             rightButtons: [
