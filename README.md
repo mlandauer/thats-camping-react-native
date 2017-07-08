@@ -57,6 +57,7 @@ Ensure that when you set the value on travis it is surrounded by single quotes.
 ### `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD`
 To generate the value for this visit [appleid.apple.com/account/manage](https://appleid.apple.com/account/manage) and generate a new application specific password.
 
+
 ## Copyright & License
 
 Copyright Matthew Landauer. Licensed under the GPL v3. See LICENSE.md for more details.
