@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
    flex: 1
   },
   separator: {
-    height: 1,
-    backgroundColor: "#CED0CE",
+    height: 0.5,
+    backgroundColor: "#ccc",
   }
 })
