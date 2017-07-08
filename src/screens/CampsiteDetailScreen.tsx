@@ -18,20 +18,22 @@ interface Props {
 export default class CampsiteDetailScreen extends React.Component<Props, {}> {
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <Text style={styles.heading}>{this.props.campsite.name}</Text>
-        <Text style={styles.park}>{this.props.campsite.parkName}</Text>
-        <DescriptionText description={this.props.campsite.description}/>
-        <Text style={styles.facilities}>Facilities</Text>
-        <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
-        <Text style={styles.access}>Access</Text>
-        <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
-        <Button
-          containerStyle={styles.buttonContainer}
-          style={styles.buttonText}
-          onPress={() => {this.onPress()}}>
-          Directions to campsite
-        </Button>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.heading}>{this.props.campsite.name}</Text>
+          <Text style={styles.park}>{this.props.campsite.parkName}</Text>
+          <DescriptionText description={this.props.campsite.description}/>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
+          <Button
+            containerStyle={styles.buttonContainer}
+            style={styles.buttonText}
+            onPress={() => {this.onPress()}}>
+            Directions to campsite
+          </Button>
+        </View>
       </ScrollView>
     )
   }
