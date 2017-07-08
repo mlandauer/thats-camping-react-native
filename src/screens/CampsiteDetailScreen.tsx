@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   ScrollView,
   Text,
+  TextStyle,
   StyleSheet,
   Linking,
   View
@@ -116,11 +117,17 @@ function FacilitiesSection(props: {facilities: Facilities}) {
 }
 
 function DescriptionText(props: {description: string}) {
-  if (props.description == "") {
+  return (
+    <HideText style={styles.description} text={props.description} />
+  )
+}
+
+function HideText(props: {text: string, style: TextStyle}) {
+  if (props.text == "") {
     return null
   } else {
     return (
-      <Text style={styles.description}>{props.description}</Text>
+      <Text style={props.style}>{props.text}</Text>
     )
   }
 }
