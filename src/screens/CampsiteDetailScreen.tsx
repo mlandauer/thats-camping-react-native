@@ -20,7 +20,7 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.heading}>{this.props.campsite.name}</Text>
-        <Text style={styles.park}>In {this.props.campsite.parkName}</Text>
+        <Text style={styles.park}>{this.props.campsite.parkName}</Text>
         <Text style={styles.description}>{this.props.campsite.description}</Text>
         <Text style={styles.facilities}>Facilities</Text>
         <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 20
   },
   park: {
     fontSize: 20,
-    marginBottom: 10
+    color: '#aaa',
+    marginBottom: 20
   },
   description: {
     fontSize: 20,
