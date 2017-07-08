@@ -21,7 +21,7 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
       <ScrollView style={styles.container}>
         <Text style={styles.heading}>{this.props.campsite.name}</Text>
         <Text style={styles.park}>{this.props.campsite.parkName}</Text>
-        <Text style={styles.description}>{this.props.campsite.description}</Text>
+        <DescriptionText description={this.props.campsite.description}/>
         <Text style={styles.facilities}>Facilities</Text>
         <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
         <Text style={styles.access}>Access</Text>
@@ -45,6 +45,19 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
   }
 }
 
+interface DescriptionTextProps {
+  description: string;
+}
+
+function DescriptionText(props: DescriptionTextProps) {
+  if (props.description == "") {
+    return null
+  } else {
+    return (
+      <Text style={styles.description}>{props.description}</Text>
+    )
+  }
+}
 
 function mapUrl(position: Position | null): string | undefined {
   if (position == null) {
@@ -71,18 +84,16 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 20,
-    marginBottom: 10
+    marginBottom: 20
   },
   facilities: {
     fontWeight: 'bold' as 'bold',
     fontSize: 20,
-    marginTop: 20,
     marginBottom: 10,
   },
   access: {
     fontWeight: 'bold' as 'bold',
     fontSize: 20,
-    marginTop: 20,
     marginBottom: 10
   },
   buttonContainer: {
