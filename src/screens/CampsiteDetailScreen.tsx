@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native'
 import Button from 'react-native-button'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
@@ -20,8 +21,13 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.heading}>{this.props.campsite.name}</Text>
-          <Text style={styles.park}>{this.props.campsite.parkName}</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{flex: 1}}>
+              <Text style={styles.heading}>{this.props.campsite.name}</Text>
+              <Text style={styles.park}>{this.props.campsite.parkName}</Text>
+            </View>
+            <Icon style={styles.star} name="ios-star-outline" />
+          </View>
           <DescriptionText description={this.props.campsite.description}/>
           <Text style={styles.facilities}>Facilities</Text>
           <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
@@ -77,12 +83,17 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20
+    fontSize: 20,
+    flexShrink: 0.6
   },
   park: {
     fontSize: 20,
     color: '#aaa',
     marginBottom: 20
+  },
+  star: {
+    fontSize: 30,
+    marginLeft: 15
   },
   description: {
     fontSize: 20,
