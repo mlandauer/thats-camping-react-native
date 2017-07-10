@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import * as MapView from 'react-native-maps'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import { Campsite } from '../libs/types'
+import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
 
 interface Props {
-  campsites: Campsite[];
+  campsites: CampsiteWithStarred[];
   onPress: (id: number) => void;
 }
 
@@ -31,7 +31,7 @@ export default function CampsiteMap(props: Props) {
 }
 
 interface CampsiteMarkerProps {
-  campsite: Campsite;
+  campsite: CampsiteWithStarred;
   onPress: () => void;
 }
 

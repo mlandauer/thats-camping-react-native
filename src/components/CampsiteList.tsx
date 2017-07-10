@@ -5,17 +5,17 @@ import {
   StyleSheet
 } from 'react-native'
 
-import { Campsite, Position } from '../libs/types'
+import { CampsiteWithStarred, Position } from '../libs/types'
 import CampsiteListItem from './CampsiteListItem'
 import PositionRelationship from '../libs/PositionRelationship'
 
-interface CampsiteWithDistanceAndBearing extends Campsite {
+interface CampsiteWithDistanceAndBearing extends CampsiteWithStarred {
   distance: number | undefined;
   bearing: number | undefined;
 }
 
 interface Props {
-  campsites: Campsite[];
+  campsites: CampsiteWithStarred[];
   position: Position | null;
   onPress: (id: number) => void;
 }
@@ -46,7 +46,7 @@ function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: numb
   )
 }
 
-let keyExtractor = (campsite: Campsite, index: number) => String(campsite.id);
+let keyExtractor = (campsite: CampsiteWithStarred, index: number) => String(campsite.id);
 
 class Separator extends React.Component<any, any> {
   render() {
@@ -57,6 +57,7 @@ class Separator extends React.Component<any, any> {
 }
 
 function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[], position: Position | null): CampsiteWithDistanceAndBearing[] {
+  // TODO: Put starred campsites at the top
   // Sort campsites by distance
   return campsites.sort(function(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing) {
     if (a.distance == undefined && b.distance == undefined) {

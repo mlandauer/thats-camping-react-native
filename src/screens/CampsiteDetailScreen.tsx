@@ -8,11 +8,11 @@ import {
 } from 'react-native'
 import Button from 'react-native-button'
 
-import { Campsite, Position } from '../libs/types'
+import { CampsiteWithStarred, Position } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
 
 interface Props {
-  campsite: Campsite;
+  campsite: CampsiteWithStarred;
 }
 
 export default class CampsiteDetailScreen extends React.Component<Props, {}> {

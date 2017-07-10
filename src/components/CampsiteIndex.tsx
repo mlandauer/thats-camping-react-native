@@ -7,13 +7,13 @@ import {
   Alert
 } from 'react-native'
 
-import { Campsite, Position } from '../libs/types'
+import { CampsiteWithStarred, Position } from '../libs/types'
 import CampsiteList from './CampsiteList'
 import CampsiteMap from './CampsiteMap'
 import * as Icon from 'react-native-vector-icons/Ionicons'
 
 interface Props {
-  campsites: Campsite[];
+  campsites: CampsiteWithStarred[];
   position: Position | null;
   onPress: (id: number) => void;
 }

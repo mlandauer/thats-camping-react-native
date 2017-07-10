@@ -5,13 +5,17 @@ import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import { Campsite, Position } from '../libs/types'
+import {
+  Campsite,
+  CampsiteWithStarred,
+  Position
+} from '../libs/types'
 import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
 
 interface Props {
   navigator?: Navigator;
-  campsites: {[index: number]: Campsite};
+  campsites: {[index: number]: CampsiteWithStarred};
   position: Position | null;
   dispatch: Dispatch<State>
 }
@@ -66,7 +70,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
 
   onPress(id: number) {
     if (this.props.navigator) {
-      var campsite = this.props.campsites[id]
+      var campsite: CampsiteWithStarred = this.props.campsites[id]
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),
@@ -93,8 +97,19 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
 }
 
 function mapStateToProps(state: State, ownProps: {}) {
+  // Put the star state directly into each campsite object to make things easier
+  // elsewhere
+  // Ugh. This is all fairly horrible
+  let campsitesWithStarred : {[index:number]: CampsiteWithStarred} = {}
+  for (var id in state.campsites) {
+    // Don't want to use strict equality (with indexOf) as a workaround
+    let i = state.starred.findIndex((v) => {return v.toString() == id})
+    let starred = i != -1
+    campsitesWithStarred[id] = Object.assign({}, state.campsites[id], {starred: starred})
+  }
+
   return {
-    campsites: state.campsites,
+    campsites: campsitesWithStarred,
     position: state.position
   };
 }
