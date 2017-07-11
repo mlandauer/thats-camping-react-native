@@ -19,7 +19,7 @@ interface Props {
   onPress: () => void;
 }
 
-function CampsiteListItem(props: Props) {
+export default function CampsiteListItem(props: Props) {
   return (
     <TouchableHighlight onPress={props.onPress}>
       <View style={styles.container}>
@@ -35,8 +35,6 @@ function CampsiteListItem(props: Props) {
     </TouchableHighlight>
   )
 }
-
-export default CampsiteListItem
 
 const styles = StyleSheet.create({
   container: {
