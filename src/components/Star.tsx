@@ -12,9 +12,9 @@ export default function Star(props: {starred: boolean}) {
 
 const styles = StyleSheet.create({
   star: {
-    fontSize: 30,
+    fontSize: 24,
     color: "#97b13d",
     // TODO: Move this margin out of this component?
-    marginLeft: 15
+    marginLeft: 10
   }
 })
