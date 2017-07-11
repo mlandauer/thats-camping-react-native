@@ -29,11 +29,21 @@ export default function CampsiteListItem(props: Props) {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
-          <Star starred={props.starred}/>
+          <HidingStar starred={props.starred}/>
         </View>
       </View>
     </TouchableHighlight>
   )
+}
+
+function HidingStar(props: {starred: boolean}) {
+  if (props.starred) {
+    return (
+      <Star starred={props.starred} />
+    )
+  } else {
+    return null
+  }
 }
 
 const styles = StyleSheet.create({
