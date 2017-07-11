@@ -16,6 +16,6 @@ import * as renderer from 'react-test-renderer';
 // TODO: Figure out why this test fails
 xit('renders correctly', () => {
   const tree = renderer.create(
-    <CampsiteIndexScreen campsites={{}} position={null} dispatch={() => {}}/>
+    <CampsiteIndexScreen campsites={{}} position={null} onStarToggled={(id: number) => {}}/>
   );
 });

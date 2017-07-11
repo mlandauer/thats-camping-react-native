@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
-import { View, Text, Alert } from 'react-native'
+import { View, Text } from 'react-native'
 import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -11,13 +11,14 @@ import {
   Position
 } from '../libs/types'
 import { State } from '../ducks'
+import { toggleStarredCampsite } from '../ducks/starred'
 import shortenName from '../libs/shortenName'
 
 interface Props {
   navigator?: Navigator;
   campsites: {[index: number]: CampsiteWithStarred};
   position: Position | null;
-  dispatch: Dispatch<State>
+  onStarToggled: (id: number) => void;
 }
 
 export class CampsiteIndexScreen extends React.Component<Props, {}> {
@@ -68,10 +69,6 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
   }
 
-  onStarToggled(id: number) {
-    Alert.alert(`Star on campsite ${id} toggled`)
-  }
-
   onPress(id: number) {
     if (this.props.navigator) {
       var campsite: CampsiteWithStarred = this.props.campsites[id]
@@ -81,7 +78,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
         backButtonTitle: 'Back',
         passProps: {
           campsite: campsite,
-          onStarToggled: () => {this.onStarToggled(id)}
+          onStarToggled: () => {this.props.onStarToggled(id)}
         }
       })
     }
@@ -119,4 +116,12 @@ function mapStateToProps(state: State, ownProps: {}) {
   };
 }
 
-export default connect(mapStateToProps)(CampsiteIndexScreen)
+const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+  return {
+    onStarToggled: (id: number) => {
+      dispatch(toggleStarredCampsite(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteIndexScreen)
