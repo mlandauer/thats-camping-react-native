@@ -5,18 +5,21 @@ import {
   View,
   TouchableHighlight
 } from 'react-native'
+
 import shortenName from '../libs/shortenName'
 import * as TextFormatter from '../libs/TextFormatter'
+import Star from '../components/Star'
 
 interface Props {
   campsiteName: string;
   parkName: string;
+  starred: boolean;
   distance: number | undefined;
   bearing: number | undefined;
   onPress: () => void;
 }
 
-function CampsiteListItem(props: Props) {
+export default function CampsiteListItem(props: Props) {
   return (
     <TouchableHighlight onPress={props.onPress}>
       <View style={styles.container}>
@@ -24,13 +27,24 @@ function CampsiteListItem(props: Props) {
           <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
           <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
         </View>
-        <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
+          <HidingStar starred={props.starred}/>
+        </View>
       </View>
     </TouchableHighlight>
   )
 }
 
-export default CampsiteListItem
+function HidingStar(props: {starred: boolean}) {
+  if (props.starred) {
+    return (
+      <Star starred={props.starred} />
+    )
+  } else {
+    return null
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

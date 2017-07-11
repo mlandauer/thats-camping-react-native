@@ -1,19 +1,23 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
-import { View, Text, Alert } from 'react-native'
+import { View, Text } from 'react-native'
 import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import { Campsite, Position } from '../libs/types'
+import {
+  Campsite,
+  CampsiteWithStarred,
+  Position
+} from '../libs/types'
 import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
+import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
 
 interface Props {
   navigator?: Navigator;
-  campsites: {[index: number]: Campsite};
+  campsites: {[index: number]: CampsiteWithStarred};
   position: Position | null;
-  dispatch: Dispatch<State>
 }
 
 export class CampsiteIndexScreen extends React.Component<Props, {}> {
@@ -66,14 +70,12 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
 
   onPress(id: number) {
     if (this.props.navigator) {
-      var campsite = this.props.campsites[id]
+      var campsite: CampsiteWithStarred = this.props.campsites[id]
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),
         backButtonTitle: 'Back',
-        passProps: {
-          campsite: campsite
-        }
+        passProps: { id: id }
       })
     }
   }
@@ -93,10 +95,22 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
 }
 
 function mapStateToProps(state: State, ownProps: {}) {
+  // Put the star state directly into each campsite object to make things easier
+  // elsewhere
+  let campsitesWithStarred : {[index:number]: CampsiteWithStarred} = {}
+  for (var id in state.campsites) {
+    campsitesWithStarred[id] = convertToCampsiteWithStarred(state.campsites[id],
+      state.starred)
+  }
+
   return {
-    campsites: state.campsites,
+    campsites: campsitesWithStarred,
     position: state.position
   };
 }
 
-export default connect(mapStateToProps)(CampsiteIndexScreen)
+const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+  return { }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteIndexScreen)

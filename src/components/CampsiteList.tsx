@@ -5,33 +5,30 @@ import {
   StyleSheet
 } from 'react-native'
 
-import { Campsite, Position } from '../libs/types'
+import { CampsiteWithStarred, Position } from '../libs/types'
 import CampsiteListItem from './CampsiteListItem'
 import PositionRelationship from '../libs/PositionRelationship'
 
-interface CampsiteWithDistanceAndBearing extends Campsite {
+interface CampsiteWithDistanceAndBearing extends CampsiteWithStarred {
   distance: number | undefined;
   bearing: number | undefined;
 }
 
 interface Props {
-  campsites: Campsite[];
+  campsites: CampsiteWithStarred[];
   position: Position | null;
   onPress: (id: number) => void;
 }
 
 export default function CampsiteList(props: Props) {
-  var campsites2 = props.campsites.map(function(c): CampsiteWithDistanceAndBearing {
-  let positions = new PositionRelationship(c.position, props.position)
-  return Object.assign({}, c, {
-    distance: positions.distanceInMetres(),
-    bearing: positions.bearingInDegrees()})
-  });
+  var campsites = props.campsites.map(function(campsite) {
+    return includeDistanceAndBearing(campsite, props.position)
+  }).sort(orderCampsites)
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={sortCampsitesArrayByDistance(campsites2, props.position)}
+        data={campsites}
         renderItem={({item}) => renderItem(item, props.onPress)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={Separator}
@@ -40,13 +37,21 @@ export default function CampsiteList(props: Props) {
   )
 }
 
+function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
+  let positions = new PositionRelationship(campsite.position, position)
+  return Object.assign({}, campsite, {
+    distance: positions.distanceInMetres(),
+    bearing: positions.bearingInDegrees()
+  })
+}
+
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: number) => void) {
   return (
-    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite.id) }}/>
+    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite.id) }}/>
   )
 }
 
-let keyExtractor = (campsite: Campsite, index: number) => String(campsite.id);
+let keyExtractor = (campsite: CampsiteWithStarred, index: number) => String(campsite.id);
 
 class Separator extends React.Component<any, any> {
   render() {
@@ -56,9 +61,8 @@ class Separator extends React.Component<any, any> {
   }
 }
 
-function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[], position: Position | null): CampsiteWithDistanceAndBearing[] {
-  // Sort campsites by distance
-  return campsites.sort(function(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing) {
+function orderCampsites(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing): number {
+  if (a.starred == b.starred) {
     if (a.distance == undefined && b.distance == undefined) {
       return a.name.localeCompare(b.name)
     }
@@ -75,7 +79,12 @@ function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[
       return -1
     }
     return 0;
-  })
+  } else if (a.starred && !b.starred) {
+    return -1;
+  }
+  else {
+    return 1;
+  }
 }
 
 const styles = StyleSheet.create({

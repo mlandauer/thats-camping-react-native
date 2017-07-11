@@ -7,22 +7,37 @@ import {
   Linking,
   View
 } from 'react-native'
+import { connect, Dispatch } from 'react-redux'
 import Button from 'react-native-button'
 
-import { Campsite, Position, Facilities, Access } from '../libs/types'
+import { Campsite, CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
+import { State } from '../ducks'
+import { toggleStarredCampsite } from '../ducks/starred'
+import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
+import Star from '../components/Star'
 import * as TextFormatter from '../libs/TextFormatter'
 
 interface Props {
-  campsite: Campsite;
+  campsite: CampsiteWithStarred;
+  onStarToggled: () => void;
+  // Passed by the parent screen
+  id: number;
 }
 
-export default class CampsiteDetailScreen extends React.Component<Props, {}> {
+export class CampsiteDetailScreen extends React.Component<Props, {}> {
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.heading}>{this.props.campsite.name}</Text>
-          <Text style={styles.park}>{this.props.campsite.parkName}</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{flex: 1}}>
+              <Text style={styles.heading}>{this.props.campsite.name}</Text>
+              <Text style={styles.park}>{this.props.campsite.parkName}</Text>
+            </View>
+            <Button onPress={this.props.onStarToggled}>
+              <Star starred={this.props.campsite.starred} />
+            </Button>
+          </View>
           <DescriptionText description={this.props.campsite.description}/>
           <FacilitiesSection facilities={this.props.campsite.facilities} />
           <AccessSection access={this.props.campsite.access} />
@@ -148,7 +163,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: 'bold' as 'bold',
-    fontSize: 20
+    fontSize: 20,
+    flexShrink: 0.6
   },
   park: {
     fontSize: 20,
@@ -182,3 +198,20 @@ const styles = StyleSheet.create({
     color: '#777'
   }
 })
+
+function mapStateToProps(state: State, ownProps: {id: number}) {
+  let campsite = convertToCampsiteWithStarred(state.campsites[ownProps.id], state.starred)
+  return {
+    campsite: campsite
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<State>, ownProps: {id: number}) => {
+  return {
+    onStarToggled: () => {
+      dispatch(toggleStarredCampsite(ownProps.id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteDetailScreen)
