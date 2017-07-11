@@ -21,23 +21,28 @@ interface Props {
 }
 
 export default function CampsiteList(props: Props) {
-  var campsites2 = props.campsites.map(function(c): CampsiteWithDistanceAndBearing {
-  let positions = new PositionRelationship(c.position, props.position)
-  return Object.assign({}, c, {
-    distance: positions.distanceInMetres(),
-    bearing: positions.bearingInDegrees()})
-  });
+  var campsites = props.campsites.map(function(campsite) {
+    return includeDistanceAndBearing(campsite, props.position)
+  }).sort(orderCampsites)
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={campsites2.sort(orderCampsites)}
+        data={campsites}
         renderItem={({item}) => renderItem(item, props.onPress)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={Separator}
       />
     </View>
   )
+}
+
+function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
+  let positions = new PositionRelationship(campsite.position, position)
+  return Object.assign({}, campsite, {
+    distance: positions.distanceInMetres(),
+    bearing: positions.bearingInDegrees()
+  })
 }
 
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: number) => void) {
