@@ -60,22 +60,29 @@ function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[
   // TODO: Put starred campsites at the top
   // Sort campsites by distance
   return campsites.sort(function(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing) {
-    if (a.distance == undefined && b.distance == undefined) {
-      return a.name.localeCompare(b.name)
+    if (a.starred == b.starred) {
+      if (a.distance == undefined && b.distance == undefined) {
+        return a.name.localeCompare(b.name)
+      }
+      if (a.distance == undefined) {
+        return 1
+      }
+      if (b.distance == undefined) {
+        return -1
+      }
+      if (a.distance > b.distance) {
+        return 1
+      }
+      if (a.distance < b.distance) {
+        return -1
+      }
+      return 0;
+    } else if (a.starred && !b.starred) {
+      return -1;
     }
-    if (a.distance == undefined) {
-      return 1
+    else {
+      return 1;
     }
-    if (b.distance == undefined) {
-      return -1
-    }
-    if (a.distance > b.distance) {
-      return 1
-    }
-    if (a.distance < b.distance) {
-      return -1
-    }
-    return 0;
   })
 }
 
