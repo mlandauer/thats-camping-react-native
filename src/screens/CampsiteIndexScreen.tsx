@@ -11,7 +11,6 @@ import {
   Position
 } from '../libs/types'
 import { State } from '../ducks'
-import { toggleStarredCampsite } from '../ducks/starred'
 import shortenName from '../libs/shortenName'
 import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
 
@@ -19,7 +18,6 @@ interface Props {
   navigator?: Navigator;
   campsites: {[index: number]: CampsiteWithStarred};
   position: Position | null;
-  onStarToggled: (id: number) => void;
 }
 
 export class CampsiteIndexScreen extends React.Component<Props, {}> {
@@ -77,10 +75,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),
         backButtonTitle: 'Back',
-        passProps: {
-          id: id,
-          onStarToggled: () => {this.props.onStarToggled(id)}
-        }
+        passProps: { id: id }
       })
     }
   }
@@ -115,11 +110,7 @@ function mapStateToProps(state: State, ownProps: {}) {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
-  return {
-    onStarToggled: (id: number) => {
-      dispatch(toggleStarredCampsite(id))
-    }
-  }
+  return { }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CampsiteIndexScreen)
