@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-export default function Star(props: {starred: boolean, onToggled: () => void}) {
+export default function Star(props: {starred: boolean, onToggled?: () => void}) {
   let name = props.starred ? "ios-star" : "ios-star-outline"
   return (
     <Button onPress={props.onToggled}>

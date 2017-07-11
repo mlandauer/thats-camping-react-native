@@ -5,12 +5,15 @@ import {
   View,
   TouchableHighlight
 } from 'react-native'
+
 import shortenName from '../libs/shortenName'
 import * as TextFormatter from '../libs/TextFormatter'
+import Star from '../components/Star'
 
 interface Props {
   campsiteName: string;
   parkName: string;
+  starred: boolean;
   distance: number | undefined;
   bearing: number | undefined;
   onPress: () => void;
@@ -24,7 +27,10 @@ function CampsiteListItem(props: Props) {
           <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
           <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
         </View>
-        <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
+          <Star starred={props.starred}/>
+        </View>
       </View>
     </TouchableHighlight>
   )

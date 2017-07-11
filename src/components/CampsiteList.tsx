@@ -42,7 +42,7 @@ export default function CampsiteList(props: Props) {
 
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: number) => void) {
   return (
-    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite.id) }}/>
+    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite.id) }}/>
   )
 }
 
