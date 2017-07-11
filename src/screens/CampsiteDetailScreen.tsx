@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   ScrollView,
   Text,
+  TextStyle,
   StyleSheet,
   Linking,
   View
@@ -9,7 +10,7 @@ import {
 import { connect, Dispatch } from 'react-redux'
 import Button from 'react-native-button'
 
-import { Campsite, CampsiteWithStarred, Position } from '../libs/types'
+import { Campsite, CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
 import { State } from '../ducks'
 import { toggleStarredCampsite } from '../ducks/starred'
 import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
@@ -38,10 +39,8 @@ export class CampsiteDetailScreen extends React.Component<Props, {}> {
             </Button>
           </View>
           <DescriptionText description={this.props.campsite.description}/>
-          <Text style={styles.facilities}>Facilities</Text>
-          <Text style={styles.description}>{TextFormatter.facilitiesText(this.props.campsite.facilities)}</Text>
-          <Text style={styles.access}>Access</Text>
-          <Text style={styles.description}>{TextFormatter.accessText(this.props.campsite.access)}</Text>
+          <FacilitiesSection facilities={this.props.campsite.facilities} />
+          <AccessSection access={this.props.campsite.access} />
           <Button
             containerStyle={styles.buttonContainer}
             style={styles.buttonText}
@@ -62,12 +61,88 @@ export class CampsiteDetailScreen extends React.Component<Props, {}> {
   }
 }
 
+function AccessSection(props: {access: Access}) {
+  let fields = TextFormatter.accessFields(props.access)
+  let haveText = TextFormatter.listAsText(fields.have)
+  let notHaveText = TextFormatter.listAsText(fields.notHave)
+  if (haveText) {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>For {haveText}</Text>
+          <Text style={styles.description}>But not for {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>For {haveText}</Text>
+        </View>
+      )
+    }
+  } else {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.access}>Access</Text>
+          <Text style={styles.description}>Not for {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return null
+    }
+  }
+}
+
+function FacilitiesSection(props: {facilities: Facilities}) {
+  let fields = TextFormatter.facilitiesFields(props.facilities)
+  let haveText = TextFormatter.listAsText(fields.have)
+  let notHaveText = TextFormatter.listAsText(fields.notHave)
+  if (haveText) {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>Has {haveText}</Text>
+          <Text style={styles.description}>But no {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>Has {haveText}</Text>
+        </View>
+      )
+    }
+  } else {
+    if (notHaveText) {
+      return (
+        <View>
+          <Text style={styles.facilities}>Facilities</Text>
+          <Text style={styles.description}>No {notHaveText}</Text>
+        </View>
+      )
+    } else {
+      return null
+    }
+  }
+}
+
 function DescriptionText(props: {description: string}) {
-  if (props.description == "") {
+  return (
+    <HideText style={styles.description} text={props.description} />
+  )
+}
+
+function HideText(props: {text: string, style: TextStyle}) {
+  if (props.text == "") {
     return null
   } else {
     return (
-      <Text style={styles.description}>{props.description}</Text>
+      <Text style={props.style}>{props.text}</Text>
     )
   }
 }

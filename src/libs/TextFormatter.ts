@@ -27,15 +27,6 @@ export function bearingText(bearing: number | undefined): string {
   return sectorNames[sector];
 }
 
-export function facilitiesText(facilities: Facilities): string {
-  return sentenceFromFields(facilitiesFields(facilities), "has", "no")
-}
-
-export function accessText(access: Access): string {
-  return sentenceFromFields(accessFields(access), "for", "not for")
-}
-
-
 interface Fields {
   have: string[];
   notHave: string[];
@@ -46,24 +37,7 @@ interface Field {
   notHave?: string;
 }
 
-function sentenceFromFields(fields: Fields, haveWord: string, notHaveWord: string): string {
-  var have = fields.have;
-  var notHave = fields.notHave;
-
-  var r = "";
-  if (have.length > 0) {
-    r = r + haveWord + " " + listAsText(have);
-  }
-  if (notHave.length > 0) {
-    if (have.length > 0) {
-      r = r + " but "
-    }
-    r = r + notHaveWord + " " + listAsText(notHave);
-  }
-  return capitaliseFirstLetter(r)
-}
-
-function listAsText(list: string[]): string | null {
+export function listAsText(list: string[]): string | null {
   if (list.length == 0) {
     return null;
   }
@@ -75,11 +49,7 @@ function listAsText(list: string[]): string | null {
   }
 }
 
-export function capitaliseFirstLetter(text: string): string {
-  return text.charAt(0).toUpperCase() + text.slice(1)
-}
-
-function facilitiesFields(facilities: Facilities): Fields {
+export function facilitiesFields(facilities: Facilities): Fields {
   let r : Fields = {"have": [], "notHave": []}
   merge(r, toilets(facilities.toilets))
   merge(r, picnicTables(facilities.picnicTables))
@@ -146,7 +116,7 @@ export function drinkingWater(drinkingWater: boolean | undefined) {
   }
 }
 
-function accessFields(access: Access): Fields {
+export function accessFields(access: Access): Fields {
   var r: Fields = {"have": [], "notHave": []}
   merge(r, caravans(access.caravans))
   merge(r, trailers(access.trailers))
