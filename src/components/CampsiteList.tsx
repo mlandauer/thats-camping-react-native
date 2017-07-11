@@ -31,7 +31,7 @@ export default function CampsiteList(props: Props) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={sortCampsitesArrayByDistance(campsites2, props.position)}
+        data={campsites2.sort(orderCampsites)}
         renderItem={({item}) => renderItem(item, props.onPress)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={Separator}
@@ -56,34 +56,30 @@ class Separator extends React.Component<any, any> {
   }
 }
 
-function sortCampsitesArrayByDistance(campsites: CampsiteWithDistanceAndBearing[], position: Position | null): CampsiteWithDistanceAndBearing[] {
-  // TODO: Put starred campsites at the top
-  // Sort campsites by distance
-  return campsites.sort(function(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing) {
-    if (a.starred == b.starred) {
-      if (a.distance == undefined && b.distance == undefined) {
-        return a.name.localeCompare(b.name)
-      }
-      if (a.distance == undefined) {
-        return 1
-      }
-      if (b.distance == undefined) {
-        return -1
-      }
-      if (a.distance > b.distance) {
-        return 1
-      }
-      if (a.distance < b.distance) {
-        return -1
-      }
-      return 0;
-    } else if (a.starred && !b.starred) {
-      return -1;
+function orderCampsites(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistanceAndBearing): number {
+  if (a.starred == b.starred) {
+    if (a.distance == undefined && b.distance == undefined) {
+      return a.name.localeCompare(b.name)
     }
-    else {
-      return 1;
+    if (a.distance == undefined) {
+      return 1
     }
-  })
+    if (b.distance == undefined) {
+      return -1
+    }
+    if (a.distance > b.distance) {
+      return 1
+    }
+    if (a.distance < b.distance) {
+      return -1
+    }
+    return 0;
+  } else if (a.starred && !b.starred) {
+    return -1;
+  }
+  else {
+    return 1;
+  }
 }
 
 const styles = StyleSheet.create({
