@@ -7,10 +7,10 @@ import {
   View
 } from 'react-native'
 import Button from 'react-native-button'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
 import * as TextFormatter from '../libs/TextFormatter'
+import Star from './Star'
 
 interface Props {
   campsite: CampsiteWithStarred;
@@ -54,15 +54,6 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
   }
 }
 
-function Star(props: {starred: boolean, onToggled: () => void}) {
-  let name = props.starred ? "ios-star" : "ios-star-outline"
-  return (
-    <Button onPress={props.onToggled}>
-      <Icon style={styles.star} name={name} />
-    </Button>
-  )
-}
-
 interface DescriptionTextProps {
   description: string;
 }
@@ -100,10 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#aaa',
     marginBottom: 20
-  },
-  star: {
-    fontSize: 30,
-    marginLeft: 15
   },
   description: {
     fontSize: 20,
