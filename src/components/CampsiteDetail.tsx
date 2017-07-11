@@ -54,11 +54,7 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
   }
 }
 
-interface DescriptionTextProps {
-  description: string;
-}
-
-function DescriptionText(props: DescriptionTextProps) {
+function DescriptionText(props: {description: string}) {
   if (props.description == "") {
     return null
   } else {
