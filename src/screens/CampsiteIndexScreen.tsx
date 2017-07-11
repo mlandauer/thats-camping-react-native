@@ -68,6 +68,10 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
   }
 
+  onStarToggled(id: number) {
+    Alert.alert(`Star on campsite ${id} toggled`)
+  }
+
   onPress(id: number) {
     if (this.props.navigator) {
       var campsite: CampsiteWithStarred = this.props.campsites[id]
@@ -76,7 +80,8 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
         title: shortenName(campsite.name),
         backButtonTitle: 'Back',
         passProps: {
-          campsite: campsite
+          campsite: campsite,
+          onStarToggled: () => {this.onStarToggled(id)}
         }
       })
     }
