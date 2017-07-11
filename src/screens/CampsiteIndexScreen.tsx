@@ -98,16 +98,20 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   }
 }
 
+function convertToCampsiteWithStarred(campsite: Campsite, starredList: number[]): CampsiteWithStarred {
+  // Don't want to use strict equality (with indexOf) as a workaround
+  let i = starredList.findIndex((v) => {return v == campsite.id})
+  let starred = i != -1
+  return Object.assign({}, campsite, {starred: starred})
+}
+
 function mapStateToProps(state: State, ownProps: {}) {
   // Put the star state directly into each campsite object to make things easier
   // elsewhere
-  // Ugh. This is all fairly horrible
   let campsitesWithStarred : {[index:number]: CampsiteWithStarred} = {}
   for (var id in state.campsites) {
-    // Don't want to use strict equality (with indexOf) as a workaround
-    let i = state.starred.findIndex((v) => {return v.toString() == id})
-    let starred = i != -1
-    campsitesWithStarred[id] = Object.assign({}, state.campsites[id], {starred: starred})
+    campsitesWithStarred[id] = convertToCampsiteWithStarred(state.campsites[id],
+      state.starred)
   }
 
   return {
