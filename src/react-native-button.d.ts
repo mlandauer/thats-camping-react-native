@@ -3,8 +3,8 @@ declare module "react-native-button" {
 
   // TODO: Add all of the supported props
   interface Props {
-    containerStyle: ViewStyle;
-    style: TextStyle;
+    containerStyle?: ViewStyle;
+    style?: TextStyle;
     onPress: () => void;
   }
 

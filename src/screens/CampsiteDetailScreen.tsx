@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   Linking,
-  View
+  View,
+  Alert
 } from 'react-native'
 import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -26,7 +27,7 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
               <Text style={styles.heading}>{this.props.campsite.name}</Text>
               <Text style={styles.park}>{this.props.campsite.parkName}</Text>
             </View>
-            <Icon style={styles.star} name="ios-star-outline" />
+            <Star starred={this.props.campsite.starred} onToggled={onToggled}/>
           </View>
           <DescriptionText description={this.props.campsite.description}/>
           <Text style={styles.facilities}>Facilities</Text>
@@ -51,6 +52,19 @@ export default class CampsiteDetailScreen extends React.Component<Props, {}> {
       Linking.openURL(url)
     }
   }
+}
+
+function onToggled() {
+  Alert.alert('Star toggled')
+}
+
+function Star(props: {starred: boolean, onToggled: () => void}) {
+  let name = props.starred ? "ios-star" : "ios-star-outline"
+  return (
+    <Button onPress={props.onToggled}>
+      <Icon style={styles.star} name={name} />
+    </Button>
+  )
 }
 
 interface DescriptionTextProps {
