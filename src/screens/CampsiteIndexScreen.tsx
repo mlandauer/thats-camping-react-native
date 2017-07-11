@@ -13,6 +13,7 @@ import {
 import { State } from '../ducks'
 import { toggleStarredCampsite } from '../ducks/starred'
 import shortenName from '../libs/shortenName'
+import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
 
 interface Props {
   navigator?: Navigator;
@@ -77,7 +78,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
         title: shortenName(campsite.name),
         backButtonTitle: 'Back',
         passProps: {
-          campsite: campsite,
+          id: id,
           onStarToggled: () => {this.props.onStarToggled(id)}
         }
       })
@@ -96,13 +97,6 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
       </View>
     );
   }
-}
-
-function convertToCampsiteWithStarred(campsite: Campsite, starredList: number[]): CampsiteWithStarred {
-  // Don't want to use strict equality (with indexOf) as a workaround
-  let i = starredList.findIndex((v) => {return v == campsite.id})
-  let starred = i != -1
-  return Object.assign({}, campsite, {starred: starred})
 }
 
 function mapStateToProps(state: State, ownProps: {}) {
