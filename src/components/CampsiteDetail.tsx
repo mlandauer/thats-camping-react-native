@@ -27,7 +27,9 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
               <Text style={styles.heading}>{this.props.campsite.name}</Text>
               <Text style={styles.park}>{this.props.campsite.parkName}</Text>
             </View>
-            <Star starred={this.props.campsite.starred} onToggled={this.props.onStarToggled}/>
+            <Button onPress={this.props.onStarToggled}>
+              <Star starred={this.props.campsite.starred} />
+            </Button>
           </View>
           <DescriptionText description={this.props.campsite.description}/>
           <Text style={styles.facilities}>Facilities</Text>
