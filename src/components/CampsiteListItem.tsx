@@ -23,7 +23,7 @@ export default function CampsiteListItem(props: Props) {
   return (
     <TouchableHighlight onPress={props.onPress}>
       <View style={styles.container}>
-        <View>
+        <View style={{flex: 1}}>
           <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
           <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
         </View>
