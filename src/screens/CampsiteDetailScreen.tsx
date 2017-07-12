@@ -35,7 +35,7 @@ export class CampsiteDetailScreen extends React.Component<Props, {}> {
               <Text style={styles.park}>{this.props.campsite.parkName}</Text>
             </View>
             <Button onPress={this.props.onStarToggled}>
-              <Star starred={this.props.campsite.starred} />
+              <Star starred={this.props.campsite.starred} size={34}/>
             </Button>
           </View>
           <DescriptionText description={this.props.campsite.description}/>
