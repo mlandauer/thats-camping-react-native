@@ -13,7 +13,7 @@ before_all do
 end
 
 lane :beta do
-  match(git_url: 'https://github.com/mlandauer/certificates',
+  match(git_url: 'https://github.com/mlandauer/certificates.git',
         type: 'development')
 
   increment_build_number(
