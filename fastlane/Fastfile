@@ -13,8 +13,8 @@ before_all do
 end
 
 lane :beta do
-  #match(git_url: 'https://github.com/mlandauer/certificates.git',
-  #      type: 'appstore')
+  match(git_url: 'https://github.com/mlandauer/certificates.git',
+        type: 'appstore')
 
   increment_build_number(
     build_number: latest_testflight_build_number + 1,
