@@ -41,15 +41,15 @@
   version "20.0.2"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.2.tgz#86c751121fb53dbd39bb1a08c45083da13f2dc67"
 
-"@types/react-native@^0.44.15":
-  version "0.44.15"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.44.15.tgz#57045618edf58d16d4b2afc9a5b3fd36d4f4658c"
+"@types/react-native@^0.46.2":
+  version "0.46.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.46.2.tgz#9d0a5b90b82949dbf0a7503866533210b3e6f3e6"
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@^4.4.45":
-  version "4.4.45"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-4.4.45.tgz#afad851d8592119225aa6bcc402c7f6b9c7e4106"
+"@types/react-redux@^4.4.46":
+  version "4.4.46"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-4.4.46.tgz#83b78c8783f31fc890d9a4d1e2acf9c4665fa913"
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
