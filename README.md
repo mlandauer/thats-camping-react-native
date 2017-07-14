@@ -37,26 +37,22 @@ fastlane beta
 
 ## Continuous deployment
 
-To get continuous deployment all working on travis-ci there's already a `.travis.yml` file ready configured. However, travis needs the ability to access the iTunes Connect account. So, you need to give it the credentials via the following environment variables:
+To get continuous deployment all working on travis-ci there's already a `.travis.yml` file ready configured. However, travis needs the ability to access the iTunes Connect account.
+
+So far I haven't been able to get things working with two-factor authentication. So,
+that needs to be switched off for the time being.
+
+You need to give fastlane credentials via the following environment variables:
 * `FASTLANE_PASSWORD`
-* `FASTLANE_SESSION`
-* `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD`
+* `MATCH_PASSWORD`
 
 ### `FASTLANE_PASSWORD`
 
 This is simply the password for my Apple ID `mlandauer@gmail.com`.
 
-### `FASTLANE_SESSION`
-This is required because I have two factor authentication switched on. To generate the value for this run the following locally:
-```
-fastlane spaceauth -u mlandauer@gmail.com
-```
+### `MATCH_PASSWORD`
 
-Ensure that when you set the value on travis it is surrounded by single quotes.
-
-### `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD`
-To generate the value for this visit [appleid.apple.com/account/manage](https://appleid.apple.com/account/manage) and generate a new application specific password.
-
+This is the password used to encrypt the certificates at https://github.com/mlandauer/certificates.
 
 ## Copyright & License
 
