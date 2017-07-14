@@ -10,6 +10,9 @@ opt_out_crash_reporting
 before_all do
   # Ensure that your git status is not dirty
   ensure_git_status_clean
+end
+
+lane :beta do
   create_keychain(
     name: 'thatscamping',
     default_keychain: true,
@@ -18,9 +21,7 @@ before_all do
     # lock_when_sleeps: true,
     password: 'thatscamping'
   )
-end
 
-lane :beta do
   match(git_url: 'https://github.com/mlandauer/certificates.git',
         type: 'appstore',
         keychain_name: 'thatscamping',
