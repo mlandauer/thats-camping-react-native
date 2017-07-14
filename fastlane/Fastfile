@@ -13,19 +13,20 @@ before_all do
 end
 
 lane :beta do
-  create_keychain(
-    name: 'thatscamping',
-    default_keychain: true,
-    unlock: true,
-    timeout: 3600,
-    # lock_when_sleeps: true,
-    password: 'thatscamping'
-  )
+  # create_keychain(
+  #   name: 'thatscamping',
+  #   default_keychain: true,
+  #   unlock: true,
+  #   timeout: 3600,
+  #   # lock_when_sleeps: true,
+  #   password: 'thatscamping'
+  # )
 
   match(git_url: 'https://github.com/mlandauer/certificates.git',
         type: 'appstore',
-        keychain_name: 'thatscamping',
-        keychain_password: 'thatscamping')
+        # keychain_name: 'thatscamping',
+        # keychain_password: 'thatscamping'
+  )
 
   increment_build_number(
     build_number: latest_testflight_build_number + 1,
