@@ -11,10 +11,10 @@
     "react-native": "0.46.3",
     "react-native-button": "^2.0.0",
     "react-native-maps": "^0.15.3",
-    "react-native-navigation": "^1.1.134",
+    "react-native-navigation": "^1.1.136",
     "react-native-vector-icons": "^4.2.0",
     "react-redux": "^5.0.5",
-    "redux": "^3.7.1",
+    "redux": "^3.7.2",
     "redux-persist": "^4.8.2",
     "redux-thunk": "^2.2.0"
   },
@@ -29,7 +29,7 @@
     "expect": "^1.20.2",
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12",
-    "ts-jest": "^20.0.6",
+    "ts-jest": "^20.0.7",
     "typescript": "^2.4.1"
   },
   "jest": {
