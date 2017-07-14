@@ -38,7 +38,7 @@ lane :beta do
     scheme: 'ThatsCamping',
     export_method: 'app-store',
     project: 'ios/ThatsCamping.xcodeproj',
-    clean: true
+    # clean: true
   )
 
   # upload to Testflight
