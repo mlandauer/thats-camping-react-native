@@ -36,7 +36,8 @@ lane :beta do
   gym(
     scheme: 'ThatsCamping',
     export_method: 'app-store',
-    project: 'ios/ThatsCamping.xcodeproj'
+    project: 'ios/ThatsCamping.xcodeproj',
+    clean: true
   )
 
   # upload to Testflight
