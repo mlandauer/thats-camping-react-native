@@ -1,7 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 import { AsyncStorage } from 'react-native'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import {persistStore, autoRehydrate} from 'redux-persist'
 
@@ -10,18 +10,22 @@ import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 
+let enhancer = compose(
+  applyMiddleware(thunk),
+  autoRehydrate()
+) as StoreEnhancer<State>
+
+let initialState = {
+  campsites: {},
+  // TODO: Would be better if this could be undefined
+  position: null,
+  starred: []
+}
+
 const store = createStore(
   reducer,
-  {
-    campsites: {},
-    // TODO: Would be better if this could be undefined
-    position: null,
-    starred: []
-  },
-  compose(
-    applyMiddleware(thunk),
-    autoRehydrate()
-  )
+  initialState,
+  enhancer
 )
 
 // begin periodically persisting part of the store (just the starred campsites)
