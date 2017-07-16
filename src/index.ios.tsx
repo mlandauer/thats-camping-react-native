@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
-import {persistStore, autoRehydrate} from 'redux-persist'
+import {persistStore, autoRehydrate, Storage} from 'redux-persist'
 
 import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
@@ -12,7 +12,7 @@ import * as PositionActions from './ducks/position'
 
 let enhancer = compose(
   applyMiddleware(thunk),
-  autoRehydrate()
+  autoRehydrate<State>()
 ) as StoreEnhancer<State>
 
 let initialState = {
@@ -29,7 +29,7 @@ const store = createStore(
 )
 
 // begin periodically persisting part of the store (just the starred campsites)
-persistStore(store, {storage: AsyncStorage, whitelist: ['starred']})
+persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 
 // Immediately start getting the campsites data and location
 var json = require('../data_simplified.json')
