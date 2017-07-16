@@ -1,7 +1,7 @@
 import * as expect from 'expect'
 import * as actions from '../../ducks/campsites'
 import reducer from '../../ducks/campsites'
-import { Position, Facilities } from '../../libs/types'
+import { Facilities } from '../../libs/types'
 
 describe('campsites', () => {
   describe('actions', () => {

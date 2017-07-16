@@ -39,10 +39,6 @@ export default function reducer(state: CampsitesState = {}, action: CampsitesAct
   }
 }
 
-function positionIsSet(position: Position | {}): position is Position {
-  return (position !== {});
-}
-
 function convertPosition(position: Position | {}): (Position | null) {
   if ((<Position>position).lat && (<Position>position).lng) {
     return <Position>position

@@ -51,7 +51,7 @@ function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: numb
   )
 }
 
-let keyExtractor = (campsite: CampsiteWithStarred, index: number) => String(campsite.id);
+let keyExtractor = (campsite: CampsiteWithStarred, _index: number) => String(campsite.id);
 
 class Separator extends React.Component<any, any> {
   render() {

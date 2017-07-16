@@ -1,10 +1,7 @@
 import * as React from 'react'
 import {
   View,
-  FlatList,
-  StyleSheet,
   TabBarIOS,
-  Alert
 } from 'react-native'
 
 import { CampsiteWithStarred, Position } from '../libs/types'

@@ -10,7 +10,7 @@ import {
 import { connect, Dispatch } from 'react-redux'
 import Button from 'react-native-button'
 
-import { Campsite, CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
+import { CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
 import { State } from '../ducks'
 import { toggleStarredCampsite } from '../ducks/starred'
 import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'

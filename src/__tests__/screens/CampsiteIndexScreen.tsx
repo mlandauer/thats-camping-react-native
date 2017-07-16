@@ -15,7 +15,7 @@ import * as renderer from 'react-test-renderer';
 
 // TODO: Figure out why this test fails
 xit('renders correctly', () => {
-  const tree = renderer.create(
+  renderer.create(
     <CampsiteIndexScreen campsites={{}} position={null} />
   );
 });

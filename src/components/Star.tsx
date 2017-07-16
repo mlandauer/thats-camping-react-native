@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
-import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default function Star(props: {starred: boolean, size: number}) {

@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import CampsiteIndex from '../components/CampsiteIndex'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import {
-  Campsite,
   CampsiteWithStarred,
   Position
 } from '../libs/types'
@@ -94,7 +93,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
   }
 }
 
-function mapStateToProps(state: State, ownProps: {}) {
+function mapStateToProps(state: State, _ownProps: {}) {
   // Put the star state directly into each campsite object to make things easier
   // elsewhere
   let campsitesWithStarred : {[index:number]: CampsiteWithStarred} = {}
@@ -109,7 +108,7 @@ function mapStateToProps(state: State, ownProps: {}) {
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+const mapDispatchToProps = (_dispatch: Dispatch<State>) => {
   return { }
 }
 
