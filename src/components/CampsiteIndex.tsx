@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   View,
   TabBarIOS,
+  Platform
 } from 'react-native'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
@@ -27,21 +28,29 @@ export default class CampsiteIndex extends React.Component<Props, State> {
   }
 
   render() {
-    return (
-      <View style={{flex: 1}}>
-        <TabBarIOS barTintColor="#97b13d" tintColor='white' unselectedItemTintColor='white'>
-          <Icon.TabBarItemIOS title="List" iconName="ios-list-box-outline" selectedIconName="ios-list-box" selected={this.state.selectedTab === 'list'} onPress={() => {this.setState({selectedTab: 'list'})}}>
-            <View style={{flex: 1}}>
-              <CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/>
-            </View>
-          </Icon.TabBarItemIOS>
-          <Icon.TabBarItemIOS title="Map" iconName="ios-map-outline" selectedIconName="ios-map" selected={this.state.selectedTab === 'map'} onPress={() => {this.setState({selectedTab: 'map'})}}>
-            <View style={{flex: 1}}>
-              <CampsiteMap campsites={this.props.campsites} onPress={this.props.onPress}/>
-            </View>
-          </Icon.TabBarItemIOS>
-        </TabBarIOS>
-      </View>
-    )
+    if (Platform.OS == 'ios') {
+      return (
+        <View style={{flex: 1}}>
+          <TabBarIOS barTintColor="#97b13d" tintColor='white' unselectedItemTintColor='white'>
+            <Icon.TabBarItemIOS title="List" iconName="ios-list-box-outline" selectedIconName="ios-list-box" selected={this.state.selectedTab === 'list'} onPress={() => {this.setState({selectedTab: 'list'})}}>
+              <View style={{flex: 1}}>
+                <CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/>
+              </View>
+            </Icon.TabBarItemIOS>
+            <Icon.TabBarItemIOS title="Map" iconName="ios-map-outline" selectedIconName="ios-map" selected={this.state.selectedTab === 'map'} onPress={() => {this.setState({selectedTab: 'map'})}}>
+              <View style={{flex: 1}}>
+                <CampsiteMap campsites={this.props.campsites} onPress={this.props.onPress}/>
+              </View>
+            </Icon.TabBarItemIOS>
+          </TabBarIOS>
+        </View>
+      )
+    } else {
+      return (
+        <View style={{flex: 1}}>
+          <CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/>
+        </View>
+      )
+    }
   }
 }

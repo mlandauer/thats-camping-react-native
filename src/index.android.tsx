@@ -1,60 +1,46 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import { Navigation } from 'react-native-navigation';
+import { AsyncStorage } from 'react-native'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
+import thunk from 'redux-thunk'
+import {persistStore, autoRehydrate, Storage} from 'redux-persist'
 
-import * as React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import { Navigation } from 'react-native-navigation'
+import { registerScreens } from './screens';
+import { reducer, State } from './ducks'
+import * as CampsitesActions from './ducks/campsites'
+//import * as PositionActions from './ducks/position'
 
-export default class ThatsCamping extends React.Component<object, object> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
+let enhancer = compose(
+  applyMiddleware(thunk),
+  autoRehydrate<State>()
+) as StoreEnhancer<State>
+
+let initialState = {
+  campsites: {},
+  // TODO: Would be better if this could be undefined
+  position: null,
+  starred: []
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const store = createStore(
+  reducer,
+  initialState,
+  enhancer
+)
 
-Navigation.registerComponent('thatscamping.Test', (() => ThatsCamping))
+// begin periodically persisting part of the store (just the starred campsites)
+persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
+
+// Immediately start getting the campsites data and location
+var json = require('../data_simplified.json')
+store.dispatch(CampsitesActions.addCampsitesJson(json))
+//store.dispatch(PositionActions.startUpdatePosition())
+
+registerScreens(store, Provider) // this is where you register all of your app's screens
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'thatscamping.Test',
-    title: 'A test screen'
+    screen: 'thatscamping.CampsiteIndexScreen',
+    title: 'Camping near you'
   }
 });
