@@ -13,6 +13,7 @@
     "react-native-button": "^2.0.0",
     "react-native-maps": "^0.15.3",
     "react-native-navigation": "^1.1.136",
+    "react-native-tab-view": "^0.0.67",
     "react-native-vector-icons": "^4.2.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",

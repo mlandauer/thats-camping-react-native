@@ -4,6 +4,7 @@ import {
   TabBarIOS,
   Platform
 } from 'react-native'
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
 import CampsiteList from './CampsiteList'
@@ -18,14 +19,29 @@ interface Props {
 
 interface State {
   selectedTab: 'list' | 'map';
+  index: number;
+  routes: {key: string, title: string}[]
 }
+
 
 // State is whether list is currently shown
 export default class CampsiteIndex extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = {selectedTab: 'list'}
+    this.state = {
+      selectedTab: 'list',
+      index: 0,
+      routes: [
+        { key: '1', title: 'List' },
+        { key: '2', title: 'Map' },
+      ]
+    }
+
   }
+
+  ListRoute = () => <View style={{flex: 1}}><CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/></View>
+
+  MapRoute = () => <View style={{flex: 1}}><CampsiteMap campsites={this.props.campsites} onPress={this.props.onPress}/></View>
 
   render() {
     if (Platform.OS == 'ios') {
@@ -48,9 +64,23 @@ export default class CampsiteIndex extends React.Component<Props, State> {
     } else {
       return (
         <View style={{flex: 1}}>
-          <CampsiteList campsites={this.props.campsites} position={this.props.position} onPress={this.props.onPress}/>
+          <TabViewAnimated
+            navigationState={this.state}
+            renderScene={this._renderScene}
+            renderHeader={this._renderHeader}
+            onRequestChangeTab={this._handleChangeTab}
+          />
         </View>
       )
     }
   }
+
+  _handleChangeTab = (index: number) => this.setState({ index })
+
+  _renderHeader = (props: Props) => <TabBar style={{backgroundColor: '#97b13d'}} {...props} />
+
+  _renderScene = SceneMap({
+      '1': this.ListRoute,
+      '2': this.MapRoute,
+    })
 }
