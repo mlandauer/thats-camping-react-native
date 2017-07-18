@@ -6,11 +6,11 @@
 
 import * as React from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import { Navigation } from 'react-native-navigation'
 
 export default class ThatsCamping extends React.Component<object, object> {
   render() {
@@ -50,4 +50,11 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ThatsCamping', () => ThatsCamping);
+Navigation.registerComponent('thatscamping.Test', (() => ThatsCamping))
+
+Navigation.startSingleScreenApp({
+  screen: {
+    screen: 'thatscamping.Test',
+    title: 'A test screen'
+  }
+});
