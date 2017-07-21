@@ -44,7 +44,7 @@ export default class CampsiteIndexAndroid extends React.Component<Props, State> 
         <TabViewAnimated
           navigationState={this.state}
           renderScene={this._renderScene}
-          renderHeader={this._renderHeader}
+          renderFooter={this._renderFooter}
           onRequestChangeTab={this._handleChangeTab}
         />
       </View>
@@ -53,7 +53,7 @@ export default class CampsiteIndexAndroid extends React.Component<Props, State> 
 
   _handleChangeTab = (index: number) => this.setState({ index })
 
-  _renderHeader = (props: Props) => <TabBar style={{backgroundColor: '#97b13d'}} {...props} />
+  _renderFooter = (props: Props) => <TabBar style={{backgroundColor: '#97b13d'}} {...props} />
 
   _renderScene = SceneMap({
       '1': this.ListRoute,
