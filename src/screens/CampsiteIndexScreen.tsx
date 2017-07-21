@@ -34,13 +34,15 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     navBarButtonColor: '#fff',
     statusBarTextColorScheme: 'light',
     navBarTextFontSize: 22,
-    navBarButtonFontSize: 22
+    navBarButtonFontSize: 22,
+    navBarTitleTextCentered: true
   }
 
   componentDidMount() {
     // HACK HACK Temporary workaround for not figuring out how to mock out Icon for testing
     // Just set it to undefined for the time being during testing
     if (Icon) {
+      // TODO: Use a different icon on Android
       Icon.getImageSource('ios-help-circle-outline', 22).then((about: any) => {
         if (this.props.navigator) {
           this.props.navigator.setButtons({
