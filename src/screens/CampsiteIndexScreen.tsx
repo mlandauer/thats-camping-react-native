@@ -34,8 +34,13 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     navBarButtonColor: '#fff',
     statusBarTextColorScheme: 'light',
     navBarTextFontSize: 22,
+
+    // iOS only
     navBarButtonFontSize: 22,
-    navBarTitleTextCentered: true
+
+    // Android only
+    navBarTitleTextCentered: true,
+    statusBarColor: '#97b13d',
   }
 
   componentDidMount() {
