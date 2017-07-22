@@ -19,6 +19,8 @@ declare module 'react-native-navigation' {
     statusBarHideWithNavBar?: boolean;
     statusBarHidden?: boolean;
     statusBarTextColorScheme?: string;
+    navBarTextFontSize?: number;
+    navBarButtonFontSize?: number;
   }
 
   export interface NavigatorButtons {

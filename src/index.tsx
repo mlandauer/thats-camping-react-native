@@ -84,7 +84,7 @@ function startApp() {
         screen: 'thatscamping.CampsiteMapScreen',
         title: 'Camping near you',
         icon: mapIcon,
-        selectedIcon: selectedMapIcon
+        selectedIcon: selectedMapIcon,
         // TODO: No idea why these styles aren't being set via appStyle below for iOS
         navigatorStyle: {
           navBarBackgroundColor: '#97b13d',
