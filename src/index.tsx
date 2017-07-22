@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import {persistStore, autoRehydrate, Storage} from 'redux-persist'
+import * as Icon from 'react-native-vector-icons/Ionicons'
 
 import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
@@ -38,17 +39,36 @@ store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
 
-Navigation.startTabBasedApp({
-  tabs: [
-    {
-      label: "List",
-      screen: 'thatscamping.CampsiteListScreen',
-      title: 'Camping near you'
-    },
-    {
-      label: "Map",
-      screen: 'thatscamping.CampsiteMapScreen',
-      title: 'Camping near you'
-    }
-  ]
-});
+var listIcon: any
+var mapIcon: any
+
+Promise.all(
+        [
+          Icon.getImageSource('ios-list-box-outline', 30),
+          Icon.getImageSource('ios-map-outline', 30)
+        ]
+      ).then((values) => {
+        listIcon = values[0]
+        mapIcon = values[1]
+        startApp()
+        // TODO: Handle error
+      })
+
+function startApp() {
+  Navigation.startTabBasedApp({
+    tabs: [
+      {
+        label: "List",
+        screen: 'thatscamping.CampsiteListScreen',
+        title: 'Camping near you',
+        icon: listIcon
+      },
+      {
+        label: "Map",
+        screen: 'thatscamping.CampsiteMapScreen',
+        title: 'Camping near you',
+        icon: mapIcon
+      }
+    ]
+  })
+}
