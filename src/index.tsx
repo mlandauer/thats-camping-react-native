@@ -38,9 +38,17 @@ store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
 
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: 'thatscamping.CampsiteIndexScreen',
-    title: 'Camping near you'
-  }
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label: "List",
+      screen: 'thatscamping.CampsiteListScreen',
+      title: 'Camping near you'
+    },
+    {
+      label: "Map",
+      screen: 'thatscamping.CampsiteMapScreen',
+      title: 'Camping near you'
+    }
+  ]
 });

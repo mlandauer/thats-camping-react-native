@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { View } from 'react-native'
-import CampsiteIndex from '../components/CampsiteIndex'
+import CampsiteList from '../components/CampsiteList'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -19,7 +19,7 @@ interface Props {
   position: Position | null;
 }
 
-export class CampsiteIndexScreen extends React.Component<Props, {}> {
+export class CampsiteListScreen extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
     // The navigator prop isn't necessarily set when we run tests
@@ -94,7 +94,7 @@ export class CampsiteIndexScreen extends React.Component<Props, {}> {
     }
     return (
       <View style={{flex: 1}}>
-        <CampsiteIndex campsites={campsites} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
+        <CampsiteList campsites={campsites} position={this.props.position} onPress={(id) => {this.onPress(id)}}/>
       </View>
     );
   }
@@ -119,4 +119,4 @@ const mapDispatchToProps = (_dispatch: Dispatch<State>) => {
   return { }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampsiteIndexScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteListScreen)

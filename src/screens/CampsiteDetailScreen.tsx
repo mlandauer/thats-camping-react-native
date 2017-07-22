@@ -25,6 +25,10 @@ interface Props {
 }
 
 export class CampsiteDetailScreen extends React.Component<Props, {}> {
+  static navigatorStyle = {
+    tabBarHidden: true
+  }
+
   render() {
     return (
       <ScrollView>

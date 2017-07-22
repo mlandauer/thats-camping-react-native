@@ -9,6 +9,10 @@ import {
 import Button from 'react-native-button'
 
 export default class About extends React.Component<{},{}> {
+  static navigatorStyle = {
+    tabBarHidden: true
+  }
+
   render() {
     return (
       <ScrollView>
