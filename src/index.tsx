@@ -68,7 +68,16 @@ function startApp() {
         screen: 'thatscamping.CampsiteListScreen',
         title: 'Camping near you',
         icon: listIcon,
-        selectedIcon: selectedListIcon
+        selectedIcon: selectedListIcon,
+        // TODO: No idea why these styles aren't being set via appStyle below for iOS
+        navigatorStyle: {
+          navBarBackgroundColor: '#97b13d',
+          navBarTextColor: '#fff',
+          navBarButtonColor: '#fff',
+          statusBarTextColorScheme: 'light',
+          navBarTextFontSize: 22,
+          navBarButtonFontSize: 22
+        }
       },
       {
         label: "Map",
@@ -76,14 +85,52 @@ function startApp() {
         title: 'Camping near you',
         icon: mapIcon,
         selectedIcon: selectedMapIcon
+        // TODO: No idea why these styles aren't being set via appStyle below for iOS
+        navigatorStyle: {
+          navBarBackgroundColor: '#97b13d',
+          navBarTextColor: '#fff',
+          navBarButtonColor: '#fff',
+          statusBarTextColorScheme: 'light',
+          navBarTextFontSize: 22,
+          navBarButtonFontSize: 22
+        }
       }
     ],
-    tabsStyle: {
+    appStyle: {
+      navBarBackgroundColor: '#97b13d',
+      navBarTextColor: '#ffffff',
+      navBarButtonColor: '#ffffff',
+      statusBarTextColorScheme: 'light',
+      navBarTextFontSize: 22,
       tabBarButtonColor: 'white',
       // The line below doesn't appear to currently be working
       // TODO: fix this
-      tabBarSelectedButtonColor: 'white',
-      tabBarBackgroundColor: '#97b13d'
+      //tabBarSelectedButtonColor: 'white',
+      tabBarBackgroundColor: '#97b13d',
+
+      // iOS only
+      navBarButtonFontSize: 22,
+
+      // Android only
+      statusBarColor: '#97b13d',
+    },
+    tabsStyle: {
+      navBarBackgroundColor: '#97b13d',
+      navBarTextColor: '#ffffff',
+      navBarButtonColor: '#ffffff',
+      statusBarTextColorScheme: 'light',
+      navBarTextFontSize: 22,
+      tabBarButtonColor: 'white',
+      // The line below doesn't appear to currently be working
+      // TODO: fix this
+      //tabBarSelectedButtonColor: 'white',
+      tabBarBackgroundColor: '#97b13d',
+
+      // iOS only
+      navBarButtonFontSize: 22,
+
+      // Android only
+      statusBarColor: '#97b13d',
     },
   })
 }

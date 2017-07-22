@@ -28,21 +28,6 @@ export class CampsiteMapScreen extends React.Component<Props, {}> {
     }
   }
 
-  static navigatorStyle = {
-    navBarBackgroundColor: '#97b13d',
-    navBarTextColor: '#fff',
-    navBarButtonColor: '#fff',
-    statusBarTextColorScheme: 'light',
-    navBarTextFontSize: 22,
-
-    // iOS only
-    navBarButtonFontSize: 22,
-
-    // Android only
-    navBarTitleTextCentered: true,
-    statusBarColor: '#97b13d',
-  }
-
   componentDidMount() {
     // HACK HACK Temporary workaround for not figuring out how to mock out Icon for testing
     // Just set it to undefined for the time being during testing
