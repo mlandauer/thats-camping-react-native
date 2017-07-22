@@ -41,15 +41,21 @@ registerScreens(store, Provider) // this is where you register all of your app's
 
 var listIcon: any
 var mapIcon: any
+var selectedListIcon: any
+var selectedMapIcon: any
 
 Promise.all(
         [
           Icon.getImageSource('ios-list-box-outline', 30),
-          Icon.getImageSource('ios-map-outline', 30)
+          Icon.getImageSource('ios-map-outline', 30),
+          Icon.getImageSource('ios-list-box', 30),
+          Icon.getImageSource('ios-map', 30)
         ]
       ).then((values) => {
         listIcon = values[0]
         mapIcon = values[1]
+        selectedListIcon = values[2]
+        selectedMapIcon = values[3]
         startApp()
         // TODO: Handle error
       })
@@ -61,14 +67,23 @@ function startApp() {
         label: "List",
         screen: 'thatscamping.CampsiteListScreen',
         title: 'Camping near you',
-        icon: listIcon
+        icon: listIcon,
+        selectedIcon: selectedListIcon
       },
       {
         label: "Map",
         screen: 'thatscamping.CampsiteMapScreen',
         title: 'Camping near you',
-        icon: mapIcon
+        icon: mapIcon,
+        selectedIcon: selectedMapIcon
       }
-    ]
+    ],
+    tabsStyle: {
+      tabBarButtonColor: 'white',
+      // The line below doesn't appear to currently be working
+      // TODO: fix this
+      tabBarSelectedButtonColor: 'white',
+      tabBarBackgroundColor: '#97b13d'
+    },
   })
 }

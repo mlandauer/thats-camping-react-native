@@ -1,6 +1,6 @@
 import 'react-native';
 import * as React from 'react';
-import { CampsiteIndexScreen } from '../../screens/CampsiteIndexScreen';
+import { CampsiteListScreen } from '../../screens/CampsiteListScreen';
 
 // CampsiteIndexScreen uses a native library for rendering icons
 // So, let's mock this
@@ -16,6 +16,6 @@ import * as renderer from 'react-test-renderer';
 // TODO: Figure out why this test fails
 xit('renders correctly', () => {
   renderer.create(
-    <CampsiteIndexScreen campsites={{}} position={null} />
+    <CampsiteListScreen campsites={{}} position={null} />
   );
 });
