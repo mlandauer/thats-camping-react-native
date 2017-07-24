@@ -102,10 +102,8 @@ function startApp() {
       navBarButtonColor: '#ffffff',
       statusBarTextColorScheme: 'light',
       navBarTextFontSize: 22,
+      tabBarLabelColor: 'white',
       tabBarButtonColor: 'white',
-      // The line below doesn't appear to currently be working
-      // TODO: fix this
-      //tabBarSelectedButtonColor: 'white',
       tabBarBackgroundColor: '#97b13d',
 
       // iOS only
@@ -120,10 +118,8 @@ function startApp() {
       navBarButtonColor: '#ffffff',
       statusBarTextColorScheme: 'light',
       navBarTextFontSize: 22,
+      tabBarLabelColor: 'white',
       tabBarButtonColor: 'white',
-      // The line below doesn't appear to currently be working
-      // TODO: fix this
-      //tabBarSelectedButtonColor: 'white',
       tabBarBackgroundColor: '#97b13d',
 
       // iOS only

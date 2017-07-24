@@ -49,9 +49,10 @@ declare module 'react-native-navigation' {
   export interface TabBasedApp {
     tabs: TabScreen[],
     appStyle?: {
-      tabBarButtonColor: string;
+      tabBarButtonColor?: string;
       tabBarSelectedButtonColor?: string;
-      tabBarBackgroundColor: string;
+      tabBarBackgroundColor?: string;
+      tabBarLabelColor?: string;
       navBarBackgroundColor: string;
       navBarTextColor: string;
       navBarButtonColor: string;
@@ -62,9 +63,10 @@ declare module 'react-native-navigation' {
       statusBarColor: string;
     }
     tabsStyle?: {
-      tabBarButtonColor: string;
+      tabBarButtonColor?: string;
       tabBarSelectedButtonColor?: string;
-      tabBarBackgroundColor: string;
+      tabBarBackgroundColor?: string;
+      tabBarLabelColor?: string;
       navBarBackgroundColor: string;
       navBarTextColor: string;
       navBarButtonColor: string;
