@@ -3352,12 +3352,6 @@ react-native-navigation@^1.1.143:
   dependencies:
     lodash "4.x.x"
 
-react-native-tab-view@^0.0.67:
-  version "0.0.67"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.67.tgz#cdd146fe5e5d4baff6c89f2d5d0b15fa23db39d0"
-  dependencies:
-    prop-types "^15.5.8"
-
 react-native-vector-icons@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.2.0.tgz#0594b68debdd758dce4c565bf02e2d64d7004d82"
