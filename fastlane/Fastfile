@@ -28,6 +28,9 @@ lane :beta do
         # keychain_password: 'thatscamping'
   )
 
+  # TODO: Ensure a clean build typescript build by deleting /lib
+  # TODO: Run typescript
+
   increment_build_number(
     build_number: latest_testflight_build_number + 1,
     xcodeproj: 'ios/ThatsCamping.xcodeproj'
