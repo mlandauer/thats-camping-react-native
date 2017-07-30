@@ -60,7 +60,18 @@ Promise.all(
         // TODO: Handle error
       })
 
-import PouchDB from 'pouchdb-react-native'
+// Directly using the core pouchdb libraries rather than pouchdb-react-native
+// so that type definitions are a bit more obvious
+import * as PouchDB from 'pouchdb-core'
+import AsyncStoragePouch from 'pouchdb-adapter-asyncstorage'
+import * as HttpPouch from 'pouchdb-adapter-http'
+import * as replication from 'pouchdb-replication'
+
+PouchDB
+  .plugin(AsyncStoragePouch)
+  .plugin(HttpPouch)
+  .plugin(replication)
+
 const db = new PouchDB('thatscamping')
 
 var doc = {
