@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
@@ -59,6 +59,20 @@ Promise.all(
         startApp()
         // TODO: Handle error
       })
+
+import PouchDB from 'pouchdb-react-native'
+const db = new PouchDB('thatscamping')
+
+var doc = {
+  _id: 'mydoc',
+  title: 'Heroes'
+}
+db.put(doc)
+  // Ignore conflicts because that means the document already exists
+  .catch((_response: any) => {})
+
+db.get('mydoc')
+  .then((doc: any) => Alert.alert(JSON.stringify(doc)))
 
 function startApp() {
   Navigation.startTabBasedApp({
