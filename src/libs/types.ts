@@ -1,12 +1,15 @@
-// This is the how campsites are stored in the state
-export interface Campsite {
-  id: number;
+export interface CampsiteNoId {
   name: string;
   description: string;
   position: Position | null;
   facilities: Facilities;
   access: Access;
   parkName: string;
+}
+
+// This is the how campsites are stored in the state
+export interface Campsite extends CampsiteNoId {
+  id: number;
 }
 
 // This is how campsites are in the props

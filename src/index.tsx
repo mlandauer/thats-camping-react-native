@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { AsyncStorage, Alert } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
@@ -17,6 +17,7 @@ import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as CampsitesJson from './libs/CampsitesJson'
+import { CampsiteNoId } from './libs/types'
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -48,13 +49,17 @@ PouchDB
   .plugin(HttpPouch)
   .plugin(replication)
 
+interface PouchCampsite extends CampsiteNoId {
+  _id: string,
+}
+
 // First delete the pouchdb database so we're starting afresh
 let db = new PouchDB('thatscamping')
 db.destroy().then(() => {
   let db = new PouchDB('thatscamping')
 
   // Dump all the campsites into the local pouchdb database
-  let campsites2 = []
+  let campsites2: PouchCampsite[] = []
   campsites.forEach(campsite => {
     let campsite2 = {
       _id: campsite.id.toString(),
