@@ -68,6 +68,7 @@ var doc = {
   title: 'Heroes'
 }
 db.put(doc)
+  .then((_response: any) => Alert.alert("doc written"))
   // Ignore conflicts because that means the document already exists
   .catch((_response: any) => {})
 
