@@ -51,7 +51,6 @@ describe('campsites', () => {
       ).toEqual({})
     })
 
-    // TODO: Add test for Position {} getting converted to undefined
     it('should convert empty position for campsite to undefined', () => {
       let park = {
         id: 1,
