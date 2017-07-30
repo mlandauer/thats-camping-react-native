@@ -17,7 +17,7 @@ import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as CampsitesJson from './libs/CampsitesJson'
-import { CampsiteNoId } from './libs/types'
+import { Campsite, CampsiteNoId } from './libs/types'
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -53,36 +53,56 @@ interface PouchCampsite extends CampsiteNoId {
   _id: string,
 }
 
+function convertToPouch(campsite: Campsite): PouchCampsite {
+  return {
+    _id: campsite.id.toString(),
+    name: campsite.name,
+    description: campsite.description,
+    position: campsite.position,
+    facilities: campsite.facilities,
+    access: campsite.access,
+    parkName: campsite.parkName
+  }
+}
+
+function convertFromPouch(campsite: PouchCampsite): Campsite {
+  return {
+    id: parseInt(campsite._id),
+    name: campsite.name,
+    description: campsite.description,
+    position: campsite.position,
+    facilities: campsite.facilities,
+    access: campsite.access,
+    parkName: campsite.parkName
+  }
+}
+
 // First delete the pouchdb database so we're starting afresh
 let db = new PouchDB('thatscamping')
 db.destroy().then(() => {
-  let db = new PouchDB('thatscamping')
+  let db = new PouchDB<PouchCampsite>('thatscamping')
 
   // Dump all the campsites into the local pouchdb database
   let campsites2: PouchCampsite[] = []
   campsites.forEach(campsite => {
-    let campsite2 = {
-      _id: campsite.id.toString(),
-      name: campsite.name,
-      description: campsite.description,
-      position: campsite.position,
-      facilities: campsite.facilities,
-      access: campsite.access,
-      parkName: campsite.parkName
-    }
-    campsites2.push(campsite2)
+    campsites2.push(convertToPouch(campsite))
   })
 
   db.bulkDocs(campsites2).then(() => {
     console.log("Written campsites")
     // Now get all the campsites out of the local pouchdb database
-    db.allDocs({include_docs: true}).then(response =>
-      console.log("response:", response)
-    )
+    db.allDocs({include_docs: true}).then(response => {
+      let campsites3: Campsite[] = []
+      response.rows.forEach(row => {
+        if (row.doc) {
+          campsites3.push(convertFromPouch(row.doc))
+        }
+      })
+      store.dispatch(CampsitesActions.addCampsites(campsites3))
+    })
   })
 })
 
-store.dispatch(CampsitesActions.addCampsites(campsites))
 store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
