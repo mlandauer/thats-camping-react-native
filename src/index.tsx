@@ -79,12 +79,12 @@ var doc = {
   title: 'Heroes'
 }
 db.put(doc)
-  .then((_response: any) => Alert.alert("doc written"))
+  .then(_response => Alert.alert("doc written"))
   // Ignore conflicts because that means the document already exists
-  .catch((_response: any) => {})
+  .catch(_response => {})
 
 db.get('mydoc')
-  .then((doc: any) => Alert.alert(JSON.stringify(doc)))
+  .then(doc => Alert.alert(JSON.stringify(doc)))
 
 function startApp() {
   Navigation.startTabBasedApp({
