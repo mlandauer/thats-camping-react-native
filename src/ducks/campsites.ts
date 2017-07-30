@@ -1,17 +1,16 @@
 import { Campsite } from '../libs/types'
-import { CampsitesJson, convertJson } from '../libs/CampsitesJson'
 
 // Actions
 interface NoopAction {
   type: 'NOOP'
 }
 
-interface AddCampsitesJsonAction {
-  type: 'ADD_CAMPSITES_JSON';
-  json: CampsitesJson;
+interface AddCampsitesAction {
+  type: 'ADD_CAMPSITES';
+  campsites: Campsite[];
 }
 
-export type CampsitesAction = AddCampsitesJsonAction | NoopAction;
+export type CampsitesAction = AddCampsitesAction | NoopAction;
 
 // Reducer
 export interface CampsitesState {
@@ -20,10 +19,9 @@ export interface CampsitesState {
 
 export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
   switch(action.type) {
-    case 'ADD_CAMPSITES_JSON':
-      let c2 = convertJson(action.json)
+    case 'ADD_CAMPSITES':
       let c: {[index: number]: Campsite} = {}
-      c2.forEach(campsite => {
+      action.campsites.forEach(campsite => {
         c[campsite.id] = campsite
       })
       return Object.assign({}, state, c)
@@ -33,9 +31,9 @@ export default function reducer(state: CampsitesState = {}, action: CampsitesAct
 }
 
 // Action Creators
-export function addCampsitesJson(json: CampsitesJson): CampsitesAction {
+export function addCampsites(campsites: Campsite[]): CampsitesAction {
   return {
-    type: 'ADD_CAMPSITES_JSON',
-    json: json
+    type: 'ADD_CAMPSITES',
+    campsites: campsites
   }
 }

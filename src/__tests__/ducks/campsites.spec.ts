@@ -5,7 +5,7 @@ import { Facilities } from '../../libs/types'
 
 describe('campsites', () => {
   describe('actions', () => {
-    it('addCampsitesJson', () => {
+    it('addCampsites', () => {
       const facilities: Facilities = {
         toilets: "none",
         picnicTables: false,
@@ -17,30 +17,21 @@ describe('campsites', () => {
         id: 1,
         name: "A campsite",
         description: "A nice campsite",
-        position: {},
+        position: null,
         facilities: facilities,
         access: {
           caravans: false,
           trailers: false,
           car: false
         },
-        park_id: 1
+        parkName: 'A park'
       }
-      const park = {
-        id: 1,
-        name: "A park",
-        description: "A nice park",
-        campsite_ids: [1]
-      }
-      const json = {
-        campsites: [campsite],
-        parks: [park]
-      }
+      const campsites = [campsite]
       const expectedAction = {
-        type: 'ADD_CAMPSITES_JSON',
-        json: json
+        type: 'ADD_CAMPSITES',
+        campsites: campsites
       }
-      expect(actions.addCampsitesJson(json)).toEqual(expectedAction)
+      expect(actions.addCampsites(campsites)).toEqual(expectedAction)
     })
   }),
 
@@ -52,17 +43,11 @@ describe('campsites', () => {
     })
 
     it('should convert empty position for campsite to undefined', () => {
-      let park = {
-        id: 1,
-        name: "A park",
-        description: "A nice park",
-        campsite_ids: []
-      }
       let campsite = {
         id: 1,
         name: "A campsite",
         description: "A nice campsite",
-        position: {},
+        position: null,
         facilities: {
           toilets: 'none' as 'none',
           picnicTables: false,
@@ -75,14 +60,11 @@ describe('campsites', () => {
           trailers: false,
           car: false
         },
-        park_id: 1
+        parkName: "A park"
       }
       expect(reducer(undefined, {
-        type: 'ADD_CAMPSITES_JSON',
-        json: {
-          campsites: [campsite],
-          parks: [park]
-        }
+        type: 'ADD_CAMPSITES',
+        campsites: [campsite]
       })).toEqual({1: {
         id: 1,
         name: "A campsite",
@@ -100,7 +82,6 @@ describe('campsites', () => {
           trailers: false,
           car: false
         },
-        park_id: 1,
         parkName: "A park"
       }})
     })
@@ -115,7 +96,7 @@ describe('campsites', () => {
       }
       const templateCampsite = {
         description: "",
-        park_id: 1,
+        parkName: 'A park',
         access: {
           caravans: false,
           trailers: false,
@@ -137,24 +118,12 @@ describe('campsites', () => {
         id: 3,
         name: "And another"
       })
-      const park = {
-        id: 1,
-        name: "A park",
-        description: "A nice park",
-        campsite_ids: [1]
-      }
-      const campsiteInState1 = Object.assign({}, campsite1, {parkName: park.name})
-      const campsiteInState2 = Object.assign({}, campsite2, {parkName: park.name})
-      const campsiteInState3 = Object.assign({}, campsite3, {parkName: park.name})
       expect(
-        reducer({1: campsiteInState1}, {
-          type: 'ADD_CAMPSITES_JSON',
-          json: {
-            campsites: [campsite2, campsite3],
-            parks: [park]
-          }
+        reducer({1: campsite1}, {
+          type: 'ADD_CAMPSITES',
+          campsites: [campsite2, campsite3]
         })
-      ).toEqual({1: campsiteInState1, 2: campsiteInState2, 3: campsiteInState3})
+      ).toEqual({1: campsite1, 2: campsite2, 3: campsite3})
     })
   })
 })

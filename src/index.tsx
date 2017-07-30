@@ -10,6 +10,7 @@ import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
+import * as CampsitesJson from './libs/CampsitesJson'
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -34,7 +35,9 @@ persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 
 // Immediately start getting the campsites data and location
 var json = require('../data_simplified.json')
-store.dispatch(CampsitesActions.addCampsitesJson(json))
+var campsites = CampsitesJson.convertJson(json)
+
+store.dispatch(CampsitesActions.addCampsites(campsites))
 store.dispatch(PositionActions.startUpdatePosition())
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
