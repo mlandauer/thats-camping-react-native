@@ -5,6 +5,12 @@ import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import {persistStore, autoRehydrate, Storage} from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
+// Directly using the core pouchdb libraries rather than pouchdb-react-native
+// so that type definitions are a bit more obvious
+import * as PouchDB from 'pouchdb-core'
+import AsyncStoragePouch from 'pouchdb-adapter-asyncstorage'
+import * as HttpPouch from 'pouchdb-adapter-http'
+import * as replication from 'pouchdb-replication'
 
 import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
@@ -37,6 +43,40 @@ persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 var json = require('../data_simplified.json')
 var campsites = CampsitesJson.convertJson(json)
 
+PouchDB
+  .plugin(AsyncStoragePouch)
+  .plugin(HttpPouch)
+  .plugin(replication)
+
+// First delete the pouchdb database so we're starting afresh
+let db = new PouchDB('thatscamping')
+db.destroy().then(() => {
+  let db = new PouchDB('thatscamping')
+
+  // Dump all the campsites into the local pouchdb database
+  let campsites2 = []
+  campsites.forEach(campsite => {
+    let campsite2 = {
+      _id: campsite.id.toString(),
+      name: campsite.name,
+      description: campsite.description,
+      position: campsite.position,
+      facilities: campsite.facilities,
+      access: campsite.access,
+      parkName: campsite.parkName
+    }
+    campsites2.push(campsite2)
+  })
+
+  db.bulkDocs(campsites2).then(() => {
+    console.log("Written campsites")
+    // Now get all the campsites out of the local pouchdb database
+    db.allDocs({include_docs: true}).then(response =>
+      console.log("response:", response)
+    )
+  })
+})
+
 store.dispatch(CampsitesActions.addCampsites(campsites))
 store.dispatch(PositionActions.startUpdatePosition())
 
@@ -62,32 +102,6 @@ Promise.all(
         startApp()
         // TODO: Handle error
       })
-
-// Directly using the core pouchdb libraries rather than pouchdb-react-native
-// so that type definitions are a bit more obvious
-import * as PouchDB from 'pouchdb-core'
-import AsyncStoragePouch from 'pouchdb-adapter-asyncstorage'
-import * as HttpPouch from 'pouchdb-adapter-http'
-import * as replication from 'pouchdb-replication'
-
-PouchDB
-  .plugin(AsyncStoragePouch)
-  .plugin(HttpPouch)
-  .plugin(replication)
-
-const db = new PouchDB('thatscamping')
-
-var doc = {
-  _id: 'mydoc',
-  title: 'Heroes'
-}
-db.put(doc)
-  .then(_response => Alert.alert("doc written"))
-  // Ignore conflicts because that means the document already exists
-  .catch(_response => {})
-
-db.get('mydoc')
-  .then(doc => Alert.alert(JSON.stringify(doc)))
 
 function startApp() {
   Navigation.startTabBasedApp({
