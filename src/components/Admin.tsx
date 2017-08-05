@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {
-  Text,
-  TextInput
+  TextInput,
+  StyleSheet
 } from 'react-native'
+import Button from 'react-native-button'
 
 interface State {
   locked: boolean;
@@ -15,6 +16,10 @@ export default class Admin extends React.Component<{}, State> {
     this.state = {locked: true}
   }
 
+  onPress() {
+
+  }
+
   render() {
     if (this.state.locked) {
       return (
@@ -22,7 +27,12 @@ export default class Admin extends React.Component<{}, State> {
       )
     } else {
       return (
-        <Text>Unlocked!</Text>
+        <Button
+          containerStyle={styles.buttonContainer}
+          style={styles.buttonText}
+          onPress={this.onPress} >
+          Reset campsite data
+        </Button>
       )
     }
   }
@@ -33,3 +43,17 @@ export default class Admin extends React.Component<{}, State> {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    padding: 10,
+    height: 45,
+    overflow: 'hidden',
+    borderRadius: 4,
+    borderWidth: 0.5
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#777'
+  }
+})
