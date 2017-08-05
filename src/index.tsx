@@ -88,19 +88,29 @@ db.destroy().then(() => {
     campsites2.push(convertToPouch(campsite))
   })
 
-  db.bulkDocs(campsites2).then(() => {
-    console.log("Written campsites")
-    // Now get all the campsites out of the local pouchdb database
-    db.allDocs({include_docs: true}).then(response => {
+  db.bulkDocs(campsites2)
+
+  // Collecting changes doesn't appear to work if it's done on
+  // a completely new database. So wait until after the bulk document
+  // add has started
+  let changes = db.changes({include_docs: true})
+  changes
+    // .on('change', function(change) {
+    //   console.log("change", change)
+    // })
+    .on('complete', function(response) {
+      console.log("complete", response.results[0].doc)
       let campsites3: Campsite[] = []
-      response.rows.forEach(row => {
-        if (row.doc) {
-          campsites3.push(convertFromPouch(row.doc))
+      response.results.forEach(result => {
+        if (result.doc) {
+          campsites3.push(convertFromPouch(result.doc))
         }
       })
       store.dispatch(CampsitesActions.addCampsites(campsites3))
     })
-  })
+    .on('error', function(err) {
+      console.log("error", err)
+    })
 })
 
 store.dispatch(PositionActions.startUpdatePosition())
