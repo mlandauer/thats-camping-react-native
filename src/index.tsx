@@ -77,10 +77,12 @@ function convertFromPouch(campsite: PouchCampsite): Campsite {
   }
 }
 
-// First delete the pouchdb database so we're starting afresh
-let db = new PouchDB('thatscamping')
-db.destroy().then(() => {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+async function initialiseData() {
+  // First delete the pouchdb database so we're starting afresh
+  let db = new PouchDB('thatscamping')
+  await db.destroy()
+
+  db = new PouchDB<PouchCampsite>('thatscamping')
 
   // Dump all the campsites into the local pouchdb database
   let campsites2: PouchCampsite[] = []
@@ -111,7 +113,9 @@ db.destroy().then(() => {
     .on('error', function(err) {
       console.log("error", err)
     })
-})
+}
+
+initialiseData()
 
 store.dispatch(PositionActions.startUpdatePosition())
 
