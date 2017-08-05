@@ -77,6 +77,13 @@ function convertFromPouch(campsite: PouchCampsite): Campsite {
   }
 }
 
+// TODO: In case the campsites have been edited should reset them
+function resetCampsites(db: PouchDB.Database<PouchCampsite>) {
+  // Dump all the campsites into the local pouchdb database
+  // This will cause a conflict if the campsites already exist
+  db.bulkDocs(campsites.map(c => convertToPouch(c)))
+}
+
 async function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
   let db = new PouchDB<PouchCampsite>('thatscamping')
@@ -84,8 +91,7 @@ async function initialiseData() {
 
   db = new PouchDB<PouchCampsite>('thatscamping')
 
-  // Dump all the campsites into the local pouchdb database
-  db.bulkDocs(campsites.map(c => convertToPouch(c)))
+  resetCampsites(db)
 
   // Collecting changes doesn't appear to work if it's done on
   // a completely new database. So wait until after the bulk document
