@@ -8,7 +8,7 @@ import shortenName from '../libs/shortenName'
 
 interface Props {
   campsites: CampsiteWithStarred[];
-  onPress: (id: number) => void;
+  onPress: (id: string) => void;
 }
 
 export default function CampsiteMap(props: Props) {

@@ -11,7 +11,7 @@ interface Props {
   campsite: CampsiteWithStarred;
   onStarToggled: () => void;
   // Passed by the parent screen
-  id: number;
+  id: string;
 }
 
 export class CampsiteDetailScreen extends React.Component<Props, {}> {
@@ -26,14 +26,14 @@ export class CampsiteDetailScreen extends React.Component<Props, {}> {
   }
 }
 
-function mapStateToProps(state: State, ownProps: {id: number}) {
+function mapStateToProps(state: State, ownProps: {id: string}) {
   let campsite = convertToCampsiteWithStarred(state.campsites[ownProps.id], state.starred)
   return {
     campsite: campsite
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<State>, ownProps: {id: number}) => {
+const mapDispatchToProps = (dispatch: Dispatch<State>, ownProps: {id: string}) => {
   return {
     onStarToggled: () => {
       dispatch(toggleStarredCampsite(ownProps.id))

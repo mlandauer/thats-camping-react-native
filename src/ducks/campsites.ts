@@ -14,13 +14,13 @@ export type CampsitesAction = AddCampsitesAction | NoopAction;
 
 // Reducer
 export interface CampsitesState {
-  readonly [index: number]: Campsite
+  readonly [index: string]: Campsite
 };
 
 export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
   switch(action.type) {
     case 'ADD_CAMPSITES':
-      let c: {[index: number]: Campsite} = {}
+      let c: {[index: string]: Campsite} = {}
       action.campsites.forEach(campsite => {
         c[campsite._id] = campsite
       })

@@ -67,7 +67,7 @@ function convertToPouch(campsite: Campsite): PouchCampsite {
 
 function convertFromPouch(campsite: PouchCampsite): Campsite {
   return {
-    _id: parseInt(campsite._id),
+    _id: campsite._id,
     name: campsite.name,
     description: campsite.description,
     position: campsite.position,

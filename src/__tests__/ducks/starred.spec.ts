@@ -7,9 +7,9 @@ describe('starred', () => {
     it('toggleStarredCampsite', () => {
       const expectedAction = {
         type: 'TOGGLE_STARRED',
-        campsite_id: 3
+        campsite_id: '3'
       }
-      expect(actions.toggleStarredCampsite(3)).toEqual(expectedAction)
+      expect(actions.toggleStarredCampsite('3')).toEqual(expectedAction)
     })
   }),
 
@@ -22,20 +22,20 @@ describe('starred', () => {
 
     it('should handle TOGGLE_STARRED', () => {
       expect(
-        reducer([1, 5], {
+        reducer(['1', '5'], {
           type: 'TOGGLE_STARRED',
-          campsite_id: 3
+          campsite_id: '3'
         })
-      ).toEqual([1, 5, 3])
+      ).toEqual(['1', '5', '3'])
     })
 
     it('should handle TOGGLE_STARRED', () => {
       expect(
-        reducer([1, 5], {
+        reducer(['1', '5'], {
           type: 'TOGGLE_STARRED',
-          campsite_id: 1
+          campsite_id: '1'
         })
-      ).toEqual([5])
+      ).toEqual(['5'])
     })
   })
 })

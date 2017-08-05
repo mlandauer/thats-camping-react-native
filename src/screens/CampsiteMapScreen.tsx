@@ -15,12 +15,12 @@ import ScreenWithAbout from './ScreenWithAbout'
 
 interface Props {
   navigator?: Navigator;
-  campsites: {[index: number]: CampsiteWithStarred};
+  campsites: {[index: string]: CampsiteWithStarred};
   position: Position | null;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
-  onPress(id: number) {
+  onPress(id: string) {
     if (this.props.navigator) {
       var campsite: CampsiteWithStarred = this.props.campsites[id]
       this.props.navigator.push({
@@ -49,7 +49,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
 function mapStateToProps(state: State, _ownProps: {}) {
   // Put the star state directly into each campsite object to make things easier
   // elsewhere
-  let campsitesWithStarred : {[index:number]: CampsiteWithStarred} = {}
+  let campsitesWithStarred : {[index:string]: CampsiteWithStarred} = {}
   for (var id in state.campsites) {
     campsitesWithStarred[id] = convertToCampsiteWithStarred(state.campsites[id],
       state.starred)

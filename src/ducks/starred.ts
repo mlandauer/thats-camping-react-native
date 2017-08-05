@@ -7,11 +7,11 @@ interface NoopAction {
 
 interface ToggleStarredAction {
   type: 'TOGGLE_STARRED';
-  campsite_id: number;
+  campsite_id: string;
 }
 
 // Reducer
-export type StarredState = number[]
+export type StarredState = string[]
 
 export default function reducer(state: StarredState = [], action: StarredAction): StarredState {
   switch(action.type) {
@@ -29,7 +29,7 @@ export default function reducer(state: StarredState = [], action: StarredAction)
 }
 
 // Action Creators
-export function toggleStarredCampsite(campsite_id: number): StarredAction {
+export function toggleStarredCampsite(campsite_id: string): StarredAction {
   return {
     type: 'TOGGLE_STARRED',
     campsite_id: campsite_id

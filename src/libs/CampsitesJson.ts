@@ -33,7 +33,7 @@ export function convertJson(json: CampsitesJson): Campsite[] {
     // Convert weird representation of undefined position in json to how we should do it
     let position : (Position | null) = convertPosition(campsite.position)
     c.push({
-      _id: campsite.id,
+      _id: campsite.id.toString(),
       name: campsite.name,
       description: campsite.description,
       facilities: campsite.facilities,

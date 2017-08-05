@@ -17,7 +17,7 @@ interface CampsiteWithDistanceAndBearing extends CampsiteWithStarred {
 interface Props {
   campsites: CampsiteWithStarred[];
   position: Position | null;
-  onPress: (id: number) => void;
+  onPress: (id: string) => void;
 }
 
 export default function CampsiteList(props: Props) {
@@ -45,7 +45,7 @@ function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Posi
   })
 }
 
-function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: number) => void) {
+function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: string) => void) {
   return (
     <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite._id) }}/>
   )
