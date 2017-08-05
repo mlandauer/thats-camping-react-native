@@ -32,7 +32,15 @@ export function convertJson(json: CampsitesJson): Campsite[] {
     let park = parksHash[campsite.park_id]
     // Convert weird representation of undefined position in json to how we should do it
     let position : (Position | null) = convertPosition(campsite.position)
-    c.push(Object.assign({}, campsite, {parkName: park.name, position: position}))
+    c.push({
+      _id: campsite.id,
+      name: campsite.name,
+      description: campsite.description,
+      facilities: campsite.facilities,
+      access: campsite.access,
+      parkName: park.name,
+      position: position
+    })
   })
   return c
 }

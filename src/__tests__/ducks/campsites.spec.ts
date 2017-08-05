@@ -14,7 +14,7 @@ describe('campsites', () => {
         drinkingWater: false
       }
       const campsite = {
-        id: 1,
+        _id: 1,
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -44,7 +44,7 @@ describe('campsites', () => {
 
     it('should convert empty position for campsite to undefined', () => {
       let campsite = {
-        id: 1,
+        _id: 1,
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -66,7 +66,7 @@ describe('campsites', () => {
         type: 'ADD_CAMPSITES',
         campsites: [campsite]
       })).toEqual({1: {
-        id: 1,
+        _id: 1,
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -107,15 +107,15 @@ describe('campsites', () => {
       }
 
       const campsite1 = Object.assign({}, templateCampsite, {
-        id: 1,
+        _id: 1,
         name: "A campsite"
       })
       const campsite2 = Object.assign({}, templateCampsite, {
-        id: 2,
+        _id: 2,
         name: "Another campsite"
       })
       const campsite3 = Object.assign({}, templateCampsite, {
-        id: 3,
+        _id: 3,
         name: "And another"
       })
       expect(

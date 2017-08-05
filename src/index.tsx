@@ -55,7 +55,7 @@ interface PouchCampsite extends CampsiteNoId {
 
 function convertToPouch(campsite: Campsite): PouchCampsite {
   return {
-    _id: campsite.id.toString(),
+    _id: campsite._id.toString(),
     name: campsite.name,
     description: campsite.description,
     position: campsite.position,
@@ -67,7 +67,7 @@ function convertToPouch(campsite: Campsite): PouchCampsite {
 
 function convertFromPouch(campsite: PouchCampsite): Campsite {
   return {
-    id: parseInt(campsite._id),
+    _id: parseInt(campsite._id),
     name: campsite.name,
     description: campsite.description,
     position: campsite.position,

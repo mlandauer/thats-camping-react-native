@@ -24,7 +24,7 @@ export default function CampsiteMap(props: Props) {
   return (
     <MapView style={{flex: 1}} showsUserLocation={true} rotateEnabled={false} initialRegion={initialRegion}>
       {props.campsites.map(campsite => (
-        <CampsiteMarker campsite={campsite} key={campsite.id} onPress={() => {props.onPress(campsite.id)}} />
+        <CampsiteMarker campsite={campsite} key={campsite._id} onPress={() => {props.onPress(campsite._id)}} />
       ))}
     </MapView>
   )

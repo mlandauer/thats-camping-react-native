@@ -9,7 +9,7 @@ export interface CampsiteNoId {
 
 // This is the how campsites are stored in the state
 export interface Campsite extends CampsiteNoId {
-  id: number;
+  _id: number;
 }
 
 // This is how campsites are in the props

@@ -47,11 +47,11 @@ function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Posi
 
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: number) => void) {
   return (
-    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite.id) }}/>
+    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite._id) }}/>
   )
 }
 
-let keyExtractor = (campsite: CampsiteWithStarred, _index: number) => String(campsite.id);
+let keyExtractor = (campsite: CampsiteWithStarred, _index: number) => String(campsite._id);
 
 class Separator extends React.Component<any, any> {
   render() {

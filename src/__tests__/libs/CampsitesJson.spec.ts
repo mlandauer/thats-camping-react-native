@@ -34,7 +34,7 @@ describe('CampsitesJson', () => {
         parks: [park]
       }
       let expected = [{
-        id: 1,
+        _id: 1,
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -50,7 +50,6 @@ describe('CampsitesJson', () => {
           trailers: false,
           car: false
         },
-        park_id: 1,
         parkName: "A park"
       }]
 

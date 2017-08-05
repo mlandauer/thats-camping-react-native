@@ -22,7 +22,7 @@ export default function reducer(state: CampsitesState = {}, action: CampsitesAct
     case 'ADD_CAMPSITES':
       let c: {[index: number]: Campsite} = {}
       action.campsites.forEach(campsite => {
-        c[campsite.id] = campsite
+        c[campsite._id] = campsite
       })
       return Object.assign({}, state, c)
     default:
