@@ -4,11 +4,13 @@ import {
   View,
   Text,
   StyleSheet,
-  Linking
+  Linking,
 } from 'react-native'
 import Button from 'react-native-button'
 
-export default class About extends React.Component<{},{}> {
+import Admin from './Admin'
+
+export default class About extends React.Component<{}, {}> {
   render() {
     return (
       <ScrollView>
@@ -33,6 +35,9 @@ export default class About extends React.Component<{},{}> {
             onPress={onPress} >
             Suggest a feature or report an issue
           </Button>
+          <View style={{marginTop: 20}}>
+            <Admin />
+          </View>
         </View>
       </ScrollView>
     )
