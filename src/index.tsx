@@ -95,24 +95,14 @@ async function initialiseData() {
   // Collecting changes doesn't appear to work if it's done on
   // a completely new database. So wait until after the bulk document
   // add has started
-  let changes = db.changes({include_docs: true})
-  changes
-    // .on('change', function(change) {
-    //   console.log("change", change)
-    // })
-    .on('complete', function(response) {
-      console.log("complete", response.results[0].doc)
-      let campsites3: Campsite[] = []
-      response.results.forEach(result => {
-        if (result.doc) {
-          campsites3.push(convertFromPouch(result.doc))
-        }
-      })
-      store.dispatch(CampsitesActions.addCampsites(campsites3))
-    })
-    .on('error', function(err) {
-      console.log("error", err)
-    })
+  let response = await db.changes({include_docs: true})
+  let campsites3: Campsite[] = []
+  response.results.forEach(result => {
+    if (result.doc) {
+      campsites3.push(convertFromPouch(result.doc))
+    }
+  })
+  store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
 
 initialiseData()
