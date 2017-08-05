@@ -85,12 +85,7 @@ async function initialiseData() {
   db = new PouchDB<PouchCampsite>('thatscamping')
 
   // Dump all the campsites into the local pouchdb database
-  let campsites2: PouchCampsite[] = []
-  campsites.forEach(campsite => {
-    campsites2.push(convertToPouch(campsite))
-  })
-
-  db.bulkDocs(campsites2)
+  db.bulkDocs(campsites.map(c => convertToPouch(c)))
 
   // Collecting changes doesn't appear to work if it's done on
   // a completely new database. So wait until after the bulk document
