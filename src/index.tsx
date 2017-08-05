@@ -79,7 +79,7 @@ function convertFromPouch(campsite: PouchCampsite): Campsite {
 
 async function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
-  let db = new PouchDB('thatscamping')
+  let db = new PouchDB<PouchCampsite>('thatscamping')
   await db.destroy()
 
   db = new PouchDB<PouchCampsite>('thatscamping')
