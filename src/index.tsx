@@ -84,26 +84,27 @@ function resetCampsites(db: PouchDB.Database<PouchCampsite>) {
   db.bulkDocs(campsites.map(c => convertToPouch(c)))
 }
 
-async function initialiseData() {
+function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
   let db = new PouchDB<PouchCampsite>('thatscamping')
-  await db.destroy()
+  db.destroy().then(() => {
+    db = new PouchDB<PouchCampsite>('thatscamping')
 
-  db = new PouchDB<PouchCampsite>('thatscamping')
+    resetCampsites(db)
 
-  resetCampsites(db)
-
-  // Collecting changes doesn't appear to work if it's done on
-  // a completely new database. So wait until after the bulk document
-  // add has started
-  let response = await db.changes({include_docs: true})
-  let campsites3: Campsite[] = []
-  response.results.forEach(result => {
-    if (result.doc) {
-      campsites3.push(convertFromPouch(result.doc))
-    }
+    // Collecting changes doesn't appear to work if it's done on
+    // a completely new database. So wait until after the bulk document
+    // add has started
+    db.changes({include_docs: true}).then((response) => {
+      let campsites3: Campsite[] = []
+      response.results.forEach(result => {
+        if (result.doc) {
+          campsites3.push(convertFromPouch(result.doc))
+        }
+      })
+      store.dispatch(CampsitesActions.addCampsites(campsites3))
+    })
   })
-  store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
 
 initialiseData()
