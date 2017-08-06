@@ -34,7 +34,7 @@ export default class Admin extends React.Component<{}, State> {
   render() {
     if (this.state.locked) {
       return (
-        <TextInput style={{padding: 10, borderColor: '#eee', borderWidth: 1}} onChangeText={(text) => this.onChangeText(text)}/>
+        <TextInput secureTextEntry={true} style={{padding: 10}} onChangeText={(text) => this.onChangeText(text)}/>
       )
     } else {
       return (
