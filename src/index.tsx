@@ -95,24 +95,21 @@ function changes() {
   return db.changes({include_docs: true})
 }
 
-function initialiseData() {
+async function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
-  destroy().then(() => {
-    resetCampsites().then(() => {
-      // Collecting changes doesn't appear to work if it's done on
-      // a completely new database. So wait until after the bulk document
-      // add has started
-      changes().then((response) => {
-        let campsites3: Campsite[] = []
-        response.results.forEach(result => {
-          if (result.doc) {
-            campsites3.push(convertFromPouch(result.doc))
-          }
-        })
-        store.dispatch(CampsitesActions.addCampsites(campsites3))
-      })
-    })
+  await destroy()
+  await resetCampsites()
+  // Collecting changes doesn't appear to work if it's done on
+  // a completely new database. So wait until after the bulk document
+  // add has started
+  let response = await changes()
+  let campsites3: Campsite[] = []
+  response.results.forEach(result => {
+    if (result.doc) {
+      campsites3.push(convertFromPouch(result.doc))
+    }
   })
+  store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
 
 initialiseData()
