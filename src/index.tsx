@@ -5,19 +5,12 @@ import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import {persistStore, autoRehydrate, Storage} from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
-// Directly using the core pouchdb libraries rather than pouchdb-react-native
-// so that type definitions are a bit more obvious
-import * as PouchDB from 'pouchdb-core'
-import AsyncStoragePouch from 'pouchdb-adapter-asyncstorage'
-import * as HttpPouch from 'pouchdb-adapter-http'
-import * as replication from 'pouchdb-replication'
 
 import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
-import * as CampsitesJson from './libs/CampsitesJson'
-import { Campsite, CampsiteNoId } from './libs/types'
+import * as Database from './libs/Database'
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -40,76 +33,14 @@ const store = createStore(
 // begin periodically persisting part of the store (just the starred campsites)
 persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 
-// Immediately start getting the campsites data and location
-var json = require('../data_simplified.json')
-var campsites = CampsitesJson.convertJson(json)
-
-PouchDB
-  .plugin(AsyncStoragePouch)
-  .plugin(HttpPouch)
-  .plugin(replication)
-
-interface PouchCampsite extends CampsiteNoId {
-  _id: string,
-}
-
-function convertToPouch(campsite: Campsite): PouchCampsite {
-  return {
-    _id: campsite._id.toString(),
-    name: campsite.name,
-    description: campsite.description,
-    position: campsite.position,
-    facilities: campsite.facilities,
-    access: campsite.access,
-    parkName: campsite.parkName
-  }
-}
-
-function convertFromPouch(campsite: PouchCampsite): Campsite {
-  return {
-    _id: campsite._id,
-    name: campsite.name,
-    description: campsite.description,
-    position: campsite.position,
-    facilities: campsite.facilities,
-    access: campsite.access,
-    parkName: campsite.parkName
-  }
-}
-
-// TODO: In case the campsites have been edited should reset them
-function resetCampsites() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
-  // Dump all the campsites into the local pouchdb database
-  // This will cause a conflict if the campsites already exist
-  return db.bulkDocs(campsites.map(c => convertToPouch(c)))
-}
-
-function destroy() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
-  return db.destroy()
-}
-
-async function allChanges() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
-  let response = await db.changes({include_docs: true})
-  let campsites3: Campsite[] = []
-  response.results.forEach(result => {
-    if (result.doc) {
-      campsites3.push(convertFromPouch(result.doc))
-    }
-  })
-  return campsites3
-}
-
 async function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
-  await destroy()
-  await resetCampsites()
+  await Database.destroy()
+  await Database.resetCampsites()
   // Collecting changes doesn't appear to work if it's done on
   // a completely new database. So wait until after the bulk document
   // add has started
-  let campsites3 = await allChanges()
+  let campsites3 = await Database.allChanges()
   store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
 
