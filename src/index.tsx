@@ -95,13 +95,7 @@ function changes() {
   return db.changes({include_docs: true})
 }
 
-async function initialiseData() {
-  // First delete the pouchdb database so we're starting afresh
-  await destroy()
-  await resetCampsites()
-  // Collecting changes doesn't appear to work if it's done on
-  // a completely new database. So wait until after the bulk document
-  // add has started
+async function allChanges() {
   let response = await changes()
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
@@ -109,6 +103,17 @@ async function initialiseData() {
       campsites3.push(convertFromPouch(result.doc))
     }
   })
+  return campsites3
+}
+
+async function initialiseData() {
+  // First delete the pouchdb database so we're starting afresh
+  await destroy()
+  await resetCampsites()
+  // Collecting changes doesn't appear to work if it's done on
+  // a completely new database. So wait until after the bulk document
+  // add has started
+  let campsites3 = await allChanges()
   store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
 
