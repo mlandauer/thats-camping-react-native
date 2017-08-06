@@ -78,31 +78,39 @@ function convertFromPouch(campsite: PouchCampsite): Campsite {
 }
 
 // TODO: In case the campsites have been edited should reset them
-function resetCampsites(db: PouchDB.Database<PouchCampsite>) {
+function resetCampsites() {
+  let db = new PouchDB<PouchCampsite>('thatscamping')
   // Dump all the campsites into the local pouchdb database
   // This will cause a conflict if the campsites already exist
-  db.bulkDocs(campsites.map(c => convertToPouch(c)))
+  return db.bulkDocs(campsites.map(c => convertToPouch(c)))
+}
+
+function destroy() {
+  let db = new PouchDB<PouchCampsite>('thatscamping')
+  return db.destroy()
+}
+
+function changes() {
+  let db = new PouchDB<PouchCampsite>('thatscamping')
+  return db.changes({include_docs: true})
 }
 
 function initialiseData() {
   // First delete the pouchdb database so we're starting afresh
-  let db = new PouchDB<PouchCampsite>('thatscamping')
-  db.destroy().then(() => {
-    db = new PouchDB<PouchCampsite>('thatscamping')
-
-    resetCampsites(db)
-
-    // Collecting changes doesn't appear to work if it's done on
-    // a completely new database. So wait until after the bulk document
-    // add has started
-    db.changes({include_docs: true}).then((response) => {
-      let campsites3: Campsite[] = []
-      response.results.forEach(result => {
-        if (result.doc) {
-          campsites3.push(convertFromPouch(result.doc))
-        }
+  destroy().then(() => {
+    resetCampsites().then(() => {
+      // Collecting changes doesn't appear to work if it's done on
+      // a completely new database. So wait until after the bulk document
+      // add has started
+      changes().then((response) => {
+        let campsites3: Campsite[] = []
+        response.results.forEach(result => {
+          if (result.doc) {
+            campsites3.push(convertFromPouch(result.doc))
+          }
+        })
+        store.dispatch(CampsitesActions.addCampsites(campsites3))
       })
-      store.dispatch(CampsitesActions.addCampsites(campsites3))
     })
   })
 }
