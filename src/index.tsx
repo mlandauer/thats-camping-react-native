@@ -90,13 +90,9 @@ function destroy() {
   return db.destroy()
 }
 
-function changes() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
-  return db.changes({include_docs: true})
-}
-
 async function allChanges() {
-  let response = await changes()
+  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let response = await db.changes({include_docs: true})
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
     if (result.doc) {
