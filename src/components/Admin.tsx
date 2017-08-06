@@ -2,7 +2,6 @@ import * as React from 'react'
 import {
   TextInput,
   StyleSheet,
-  Text,
   View,
   Alert
 } from 'react-native'
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 4,
     borderWidth: 0.5,
-    marginTop: 10
+    marginBottom: 10
   },
   buttonText: {
     fontSize: 18,
