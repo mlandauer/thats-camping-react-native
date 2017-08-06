@@ -4,7 +4,12 @@
 
 ## Development
 
-First install nvm. Then,
+```
+cp env.example .env
+```
+Then edit values in .env
+
+Install nvm. Then,
 
 ```
 nvm use

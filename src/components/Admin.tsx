@@ -6,6 +6,7 @@ import {
   Alert
 } from 'react-native'
 import Button from 'react-native-button'
+import Config from 'react-native-config'
 
 import * as Database from '../libs/Database'
 
@@ -56,7 +57,7 @@ export default class Admin extends React.Component<{}, State> {
   }
 
   onChangeText(text: string) {
-    if (text === "1234") {
+    if (text === Config.ADMIN_PASSWORD) {
       this.setState({locked: false})
     }
   }
