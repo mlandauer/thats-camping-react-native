@@ -34,12 +34,6 @@ const store = createStore(
 persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 
 async function initialiseData() {
-  // First delete the pouchdb database so we're starting afresh
-  await Database.destroy()
-  await Database.resetCampsites()
-  // Collecting changes doesn't appear to work if it's done on
-  // a completely new database. So wait until after the bulk document
-  // add has started
   let campsites3 = await Database.allChanges()
   store.dispatch(CampsitesActions.addCampsites(campsites3))
 }

@@ -1,9 +1,14 @@
 import * as React from 'react'
 import {
   TextInput,
-  StyleSheet
+  StyleSheet,
+  Text,
+  View,
+  Alert
 } from 'react-native'
 import Button from 'react-native-button'
+
+import * as Database from '../libs/Database'
 
 interface State {
   locked: boolean;
@@ -16,8 +21,14 @@ export default class Admin extends React.Component<{}, State> {
     this.state = {locked: true}
   }
 
-  onPress() {
+  async resetCampsites() {
+    await Database.resetCampsites()
+    Alert.alert("Campsites reset")
+  }
 
+  async destroyDatabase() {
+    await Database.destroy()
+    Alert.alert("Database destroyed")
   }
 
   render() {
@@ -27,12 +38,20 @@ export default class Admin extends React.Component<{}, State> {
       )
     } else {
       return (
-        <Button
-          containerStyle={styles.buttonContainer}
-          style={styles.buttonText}
-          onPress={this.onPress} >
-          Reset campsite data
-        </Button>
+        <View>
+          <Button
+            containerStyle={styles.buttonContainer}
+            style={styles.buttonText}
+            onPress={() => this.resetCampsites()} >
+            Reset campsites
+          </Button>
+          <Button
+            containerStyle={styles.buttonContainer}
+            style={styles.buttonText}
+            onPress={() => this.destroyDatabase()} >
+            Destroy database
+          </Button>
+        </View>
       )
     }
   }
@@ -50,7 +69,8 @@ const styles = StyleSheet.create({
     height: 45,
     overflow: 'hidden',
     borderRadius: 4,
-    borderWidth: 0.5
+    borderWidth: 0.5,
+    marginTop: 10
   },
   buttonText: {
     fontSize: 18,
