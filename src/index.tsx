@@ -34,6 +34,7 @@ const store = createStore(
 persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 
 async function initialiseData() {
+  Database.sync()
   let campsites3 = await Database.allChanges()
   store.dispatch(CampsitesActions.addCampsites(campsites3))
 }
