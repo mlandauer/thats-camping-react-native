@@ -52,7 +52,20 @@ export async function allChanges() {
       campsites3.push(convertFromPouch(result.doc))
     }
   })
-  return campsites3
+  return {
+    campsites: campsites3,
+    last_seq: response.last_seq
+  }
+}
+
+export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
+  let db = new PouchDB<PouchCampsite>('thatscamping')
+  db.changes({live: true, include_docs: true, since: since})
+    .on('change', (response) => {
+      if (response.doc) {
+        onChange(convertFromPouch(response.doc))
+      }
+    })
 }
 
 // TODO: In case the campsites have been edited should reset them
