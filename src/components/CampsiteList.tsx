@@ -39,10 +39,10 @@ export default function CampsiteList(props: Props) {
 
 function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
   let positions = new PositionRelationship(campsite.position, position)
-  return Object.assign({}, campsite, {
+  return {...campsite,
     distance: positions.distanceInMetres(),
     bearing: positions.bearingInDegrees()
-  })
+  }
 }
 
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: string) => void) {

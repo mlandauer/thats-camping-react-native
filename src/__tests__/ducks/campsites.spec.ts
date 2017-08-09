@@ -106,18 +106,18 @@ describe('campsites', () => {
         position: {lat: 1.0, lng: 2.0}
       }
 
-      const campsite1 = Object.assign({}, templateCampsite, {
+      const campsite1 = {...templateCampsite,
         _id: '1',
         name: "A campsite"
-      })
-      const campsite2 = Object.assign({}, templateCampsite, {
+      }
+      const campsite2 = {...templateCampsite,
         _id: '2',
         name: "Another campsite"
-      })
-      const campsite3 = Object.assign({}, templateCampsite, {
+      }
+      const campsite3 = {...templateCampsite,
         _id: '3',
         name: "And another"
-      })
+      }
       expect(
         reducer({1: campsite1}, {
           type: 'ADD_CAMPSITES',

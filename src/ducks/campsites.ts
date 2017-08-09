@@ -24,7 +24,7 @@ export default function reducer(state: CampsitesState = {}, action: CampsitesAct
       action.campsites.forEach(campsite => {
         c[campsite._id] = campsite
       })
-      return Object.assign({}, state, c)
+      return {...state, ...c}
     default:
       return state
   }
