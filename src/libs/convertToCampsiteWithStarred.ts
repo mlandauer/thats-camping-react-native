@@ -10,7 +10,13 @@ export function convertToCampsiteWithStarred(campsite: Campsite, starredList: st
 export function convertToCampsitesWithStarred(campsites: {[index: string]: Campsite}, starredList: string[]): {[index:string]: CampsiteWithStarred} {
   let campsitesWithStarred : {[index:string]: CampsiteWithStarred} = {}
   for (var id in campsites) {
-    campsitesWithStarred[id] = convertToCampsiteWithStarred(campsites[id], starredList)
+    campsitesWithStarred[id] = {...campsites[id], starred: false}
   }
+  starredList.forEach((id: string) => {
+    let c = campsitesWithStarred[id]
+    if (c) {
+      c.starred = true
+    }
+  })
   return campsitesWithStarred
 }
