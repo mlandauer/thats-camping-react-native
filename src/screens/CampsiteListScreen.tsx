@@ -10,7 +10,7 @@ import {
 } from '../libs/types'
 import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
-import convertToCampsiteWithStarred from '../libs/convertToCampsiteWithStarred'
+import { convertToCampsitesWithStarred } from '../libs/convertToCampsiteWithStarred'
 import ScreenWithAbout from './ScreenWithAbout'
 
 interface Props {
@@ -47,16 +47,10 @@ export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
 }
 
 function mapStateToProps(state: State, _ownProps: {}) {
-  // Put the star state directly into each campsite object to make things easier
-  // elsewhere
-  let campsitesWithStarred : {[index:string]: CampsiteWithStarred} = {}
-  for (var id in state.campsites) {
-    campsitesWithStarred[id] = convertToCampsiteWithStarred(state.campsites[id],
-      state.starred)
-  }
-
   return {
-    campsites: campsitesWithStarred,
+    // Put the star state directly into each campsite object to make things easier
+    // elsewhere
+    campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
     position: state.position
   };
 }
