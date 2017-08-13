@@ -37,3 +37,7 @@ export function updateCampsites(campsites: Campsite[]): CampsitesAction {
     campsites: campsites
   }
 }
+
+export function updateCampsite(campsite: Campsite): CampsitesAction {
+  return updateCampsites([campsite])
+}

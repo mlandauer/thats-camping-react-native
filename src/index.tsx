@@ -41,7 +41,7 @@ async function initialiseData() {
   Database.sync()
   // And get all the changes live
   Database.changes(result.last_seq, (campsite) => {
-    store.dispatch(CampsitesActions.updateCampsites([campsite]))
+    store.dispatch(CampsitesActions.updateCampsite(campsite))
   })
 }
 
