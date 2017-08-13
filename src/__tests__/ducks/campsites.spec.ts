@@ -5,7 +5,7 @@ import { Facilities } from '../../libs/types'
 
 describe('campsites', () => {
   describe('actions', () => {
-    it('addCampsites', () => {
+    it('updateCampsites', () => {
       const facilities: Facilities = {
         toilets: "none",
         picnicTables: false,
@@ -28,10 +28,10 @@ describe('campsites', () => {
       }
       const campsites = [campsite]
       const expectedAction = {
-        type: 'ADD_CAMPSITES',
+        type: 'UPDATE_CAMPSITES',
         campsites: campsites
       }
-      expect(actions.addCampsites(campsites)).toEqual(expectedAction)
+      expect(actions.updateCampsites(campsites)).toEqual(expectedAction)
     })
   }),
 
@@ -63,7 +63,7 @@ describe('campsites', () => {
         parkName: "A park"
       }
       expect(reducer(undefined, {
-        type: 'ADD_CAMPSITES',
+        type: 'UPDATE_CAMPSITES',
         campsites: [campsite]
       })).toEqual({'1': {
         _id: '1',
@@ -120,7 +120,7 @@ describe('campsites', () => {
       }
       expect(
         reducer({1: campsite1}, {
-          type: 'ADD_CAMPSITES',
+          type: 'UPDATE_CAMPSITES',
           campsites: [campsite2, campsite3]
         })
       ).toEqual({1: campsite1, 2: campsite2, 3: campsite3})
