@@ -5,12 +5,12 @@ interface NoopAction {
   type: 'NOOP'
 }
 
-interface AddCampsitesAction {
-  type: 'ADD_CAMPSITES';
+interface UpdateCampsitesAction {
+  type: 'UPDATE_CAMPSITES';
   campsites: Campsite[];
 }
 
-export type CampsitesAction = AddCampsitesAction | NoopAction;
+export type CampsitesAction = UpdateCampsitesAction | NoopAction;
 
 // Reducer
 export interface CampsitesState {
@@ -19,7 +19,7 @@ export interface CampsitesState {
 
 export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
   switch(action.type) {
-    case 'ADD_CAMPSITES':
+    case 'UPDATE_CAMPSITES':
       let c: {[index: string]: Campsite} = {}
       action.campsites.forEach(campsite => {
         c[campsite._id] = campsite
@@ -31,9 +31,9 @@ export default function reducer(state: CampsitesState = {}, action: CampsitesAct
 }
 
 // Action Creators
-export function addCampsites(campsites: Campsite[]): CampsitesAction {
+export function updateCampsites(campsites: Campsite[]): CampsitesAction {
   return {
-    type: 'ADD_CAMPSITES',
+    type: 'UPDATE_CAMPSITES',
     campsites: campsites
   }
 }

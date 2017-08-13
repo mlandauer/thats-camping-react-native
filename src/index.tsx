@@ -36,12 +36,12 @@ persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
 async function initialiseData() {
   // First get all the changes from the local database
   let result = await Database.allChanges()
-  store.dispatch(CampsitesActions.addCampsites(result.campsites))
+  store.dispatch(CampsitesActions.updateCampsites(result.campsites))
   // Then start synching with the remote database
   Database.sync()
   // And get all the changes live
   Database.changes(result.last_seq, (campsite) => {
-    store.dispatch(CampsitesActions.addCampsites([campsite]))
+    store.dispatch(CampsitesActions.updateCampsites([campsite]))
   })
 }
 
