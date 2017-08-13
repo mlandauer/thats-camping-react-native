@@ -32,15 +32,15 @@
   dependencies:
     "@types/pouchdb-core" "*"
 
-"@types/react-native@^0.46.2":
-  version "0.46.11"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.46.11.tgz#e16013b6a99bb5dd24873f16b7d959daff66cb62"
+"@types/react-native@^0.47.2":
+  version "0.47.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.47.2.tgz#7d30ff2d61fe6772f75924f651d37db56b70b138"
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@^4.4.46":
-  version "4.4.47"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-4.4.47.tgz#12af1677116e08d413fe2620d0a85560c8a0536e"
+"@types/react-redux@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.1.tgz#7fb482e44645b650e335afa633d0f1349e124002"
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
@@ -3807,9 +3807,9 @@ react-native-config@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.6.0.tgz#0f71631ab5ac4b568637dcb8e9f6ab85ffb380ed"
 
-react-native-maps@^0.15.3:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.15.3.tgz#5d9e0a8e30ecc51dc755b7a3b9d6b6ed5e2dd08c"
+react-native-maps@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.0.tgz#e5fada6ef1e3304e94c509fa7b4a43e88152c24f"
 
 react-native-navigation@^1.1.143:
   version "1.1.193"
