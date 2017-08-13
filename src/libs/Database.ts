@@ -23,7 +23,7 @@ var campsites = CampsitesJson.convertJson(json)
 
 export let remoteDb = new PouchDB('https://mlandauer.cloudant.com/thats-camping-react-native', {
   auth: {
-    username: 'thadyingleditheaustonven',
+    username: 'chookeementootworsenters',
     // Obviously anyone who really wants to get access to the password below
     // can just decompile the binary. Not including the password in the source
     // code provides a minimal level of security.
