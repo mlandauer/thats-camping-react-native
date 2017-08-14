@@ -5,12 +5,16 @@ import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import {persistStore, autoRehydrate, Storage} from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
+import * as Mapbox from 'react-native-mapbox-gl'
+import Config from 'react-native-config'
 
 import { registerScreens } from './screens';
 import { reducer, State } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as Database from './libs/Database'
+
+Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
 
 let enhancer = compose(
   applyMiddleware(thunk),

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
-import { View, Dimensions } from 'react-native'
+import { View } from 'react-native'
 import CampsiteMap from '../components/CampsiteMap'
 import { Navigator } from 'react-native-navigation'
 
@@ -39,7 +39,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
       campsites.push(this.props.campsites[id])
     }
     return (
-      <View style={{height: Dimensions.get('window').height - 100}}>
+      <View style={{flex: 1}}>
         <CampsiteMap campsites={campsites} onPress={(id) => {this.onPress(id)}}/>
       </View>
     );

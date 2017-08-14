@@ -1,3 +1,3 @@
 // Just ignoring the issue around types here for the moment
 // TODO: Fix this
-declare module "react-native-maps";
+declare module 'react-native-mapbox-gl';
