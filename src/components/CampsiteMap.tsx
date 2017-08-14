@@ -7,7 +7,7 @@ import * as React from 'react'
 // import Icon from 'react-native-vector-icons/Ionicons'
 import { MapView } from 'react-native-mapbox-gl'
 
-import { CampsiteWithStarred } from '../libs/types'
+import { Campsite, CampsiteWithStarred } from '../libs/types'
 // import shortenName from '../libs/shortenName'
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
   onPress: (id: string) => void;
 }
 
-export default function CampsiteMap(_props: Props) {
+export default function CampsiteMap(props: Props) {
   // Centering on the "Heartbreak Hill camping area"
   // to start with
   let initialCenterCoordinate = {
@@ -31,6 +31,7 @@ export default function CampsiteMap(_props: Props) {
       initialCenterCoordinate={initialCenterCoordinate}
       initialZoomLevel={5}
       logoIsHidden={true}
+      annotations={annotations(props.campsites)}
     />
     // <MapView style={{flex: 1}} showsUserLocation={true} rotateEnabled={false} initialRegion={initialRegion}>
     //   {props.campsites.map(campsite => (
@@ -38,6 +39,25 @@ export default function CampsiteMap(_props: Props) {
     //   ))}
     // </MapView>
   )
+}
+
+function annotations(campsites: Campsite[]) {
+  return campsites
+    .filter(campsite => annotation(campsite))
+    .map(campsite => annotation(campsite))
+}
+
+function annotation(campsite: Campsite) {
+  if (campsite.position) {
+    return {
+      coordinates: [campsite.position.lat, campsite.position.lng],
+      type: 'point',
+      title: campsite.name,
+      id: campsite._id
+    }
+  } else {
+    return null
+  }
 }
 
 // interface CampsiteMarkerProps {
