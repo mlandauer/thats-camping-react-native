@@ -2,7 +2,8 @@ import * as React from 'react'
 import {
   View,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
@@ -25,16 +26,22 @@ export default function CampsiteList(props: Props) {
     return includeDistanceAndBearing(campsite, props.position)
   }).sort(orderCampsites)
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={campsites}
-        renderItem={({item}) => renderItem(item, props.onPress)}
-        keyExtractor={keyExtractor}
-        ItemSeparatorComponent={Separator}
-      />
-    </View>
-  )
+  if (props.campsites.length == 0) {
+    return (
+      <ActivityIndicator animating={true} style={{marginTop: 10}}/>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={campsites}
+          renderItem={({item}) => renderItem(item, props.onPress)}
+          keyExtractor={keyExtractor}
+          ItemSeparatorComponent={Separator}
+        />
+      </View>
+    )
+  }
 }
 
 function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
