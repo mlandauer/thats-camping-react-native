@@ -1,6 +1,5 @@
 package com.thatscamping;
 
-import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.modules.network.ReactCookieJarContainer;
