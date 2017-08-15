@@ -1,18 +1,26 @@
 import * as React from 'react'
-// import {
-//   View,
-//   // Text,
-//   // StyleSheet
-// } from 'react-native'
+import {
+  // View,
+  // Text,
+  // StyleSheet
+  Alert
+} from 'react-native'
 // import Icon from 'react-native-vector-icons/Ionicons'
-import { MapView } from 'react-native-mapbox-gl'
+import {
+  MapView,
+  // Annotation
+} from 'react-native-mapbox-gl'
 
-import { Campsite, CampsiteWithStarred } from '../libs/types'
-// import shortenName from '../libs/shortenName'
+import { CampsiteWithStarred } from '../libs/types'
+import shortenName from '../libs/shortenName'
 
 interface Props {
   campsites: CampsiteWithStarred[];
   onPress: (id: string) => void;
+}
+
+function onRightAnnotationTapped() {
+  Alert.alert('tapped')
 }
 
 export default function CampsiteMap(props: Props) {
@@ -32,6 +40,7 @@ export default function CampsiteMap(props: Props) {
       initialZoomLevel={5}
       logoIsHidden={true}
       annotations={annotations(props.campsites)}
+      onRightAnnotationTapped={onRightAnnotationTapped}
     />
     // <MapView style={{flex: 1}} showsUserLocation={true} rotateEnabled={false} initialRegion={initialRegion}>
     //   {props.campsites.map(campsite => (
@@ -41,24 +50,59 @@ export default function CampsiteMap(props: Props) {
   )
 }
 
-function annotations(campsites: Campsite[]) {
+function annotations(campsites: CampsiteWithStarred[]) {
   return campsites
     .filter(campsite => annotation(campsite))
     .map(campsite => annotation(campsite))
 }
 
-function annotation(campsite: Campsite) {
+function annotation(campsite: CampsiteWithStarred) {
   if (campsite.position) {
     return {
       coordinates: [campsite.position.lat, campsite.position.lng],
       type: 'point',
-      title: campsite.name,
-      id: campsite._id
+      title: shortenName(campsite.name),
+      subtitle: shortenName(campsite.parkName),
+      id: campsite._id,
+      rightCalloutAccessory: {
+        source: {
+          uri: 'ion-ios-arrow-forward'
+        },
+        height: 20,
+        width: 20,
+      }
     }
   } else {
     return null
   }
 }
+
+// interface CampsiteAnnotationProps {
+//   campsite: CampsiteWithStarred;
+// }
+
+// function CampsiteAnnotation(props: CampsiteAnnotationProps) {
+//   if (props.campsite.position == undefined) {
+//     return null
+//   }
+//   return (
+//     <Annotation
+//         id={props.campsite._id}
+//         coordinate={{latitude: props.campsite.position.lat, longitude: props.campsite.position.lng}}
+//         style={{alignItems: 'center', justifyContent: 'center', position: 'absolute'}}
+//       >
+//         <View style={{flexDirection: 'row'}} >
+//           <View>
+//             <Text style={styles.heading}>{shortenName(props.campsite.name)}</Text>
+//             <Text style={styles.park}>{shortenName(props.campsite.parkName)}</Text>
+//           </View>
+//           <View style={{justifyContent: 'center'}}>
+//             <Icon style={styles.arrow} name="ios-arrow-forward"/>
+//           </View>
+//         </View>
+//     </Annotation>
+//   )
+// }
 
 // interface CampsiteMarkerProps {
 //   campsite: CampsiteWithStarred;
