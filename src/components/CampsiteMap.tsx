@@ -12,8 +12,12 @@ interface Props {
   onPress: (id: string) => void;
 }
 
-function onRightAnnotationTapped() {
-  Alert.alert('tapped')
+interface RightAnnotationTappedInfo {
+  id: string;
+  title: null | string;
+  subtitle: null | string;
+  latitude: number;
+  longitude: number;
 }
 
 export default function CampsiteMap(props: Props) {
@@ -33,7 +37,7 @@ export default function CampsiteMap(props: Props) {
       initialZoomLevel={5}
       logoIsHidden={true}
       annotations={annotations(props.campsites)}
-      onRightAnnotationTapped={onRightAnnotationTapped}
+      onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => props.onPress(info.id)}
     />
   )
 }
