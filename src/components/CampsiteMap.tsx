@@ -1,15 +1,8 @@
 import * as React from 'react'
 import {
-  // View,
-  // Text,
-  // StyleSheet
   Alert
 } from 'react-native'
-// import Icon from 'react-native-vector-icons/Ionicons'
-import {
-  MapView,
-  // Annotation
-} from 'react-native-mapbox-gl'
+import { MapView } from 'react-native-mapbox-gl'
 
 import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
@@ -42,11 +35,6 @@ export default function CampsiteMap(props: Props) {
       annotations={annotations(props.campsites)}
       onRightAnnotationTapped={onRightAnnotationTapped}
     />
-    // <MapView style={{flex: 1}} showsUserLocation={true} rotateEnabled={false} initialRegion={initialRegion}>
-    //   {props.campsites.map(campsite => (
-    //     <CampsiteMarker campsite={campsite} key={campsite._id} onPress={() => {props.onPress(campsite._id)}} />
-    //   ))}
-    // </MapView>
   )
 }
 
@@ -76,79 +64,3 @@ function annotation(campsite: CampsiteWithStarred) {
     return null
   }
 }
-
-// interface CampsiteAnnotationProps {
-//   campsite: CampsiteWithStarred;
-// }
-
-// function CampsiteAnnotation(props: CampsiteAnnotationProps) {
-//   if (props.campsite.position == undefined) {
-//     return null
-//   }
-//   return (
-//     <Annotation
-//         id={props.campsite._id}
-//         coordinate={{latitude: props.campsite.position.lat, longitude: props.campsite.position.lng}}
-//         style={{alignItems: 'center', justifyContent: 'center', position: 'absolute'}}
-//       >
-//         <View style={{flexDirection: 'row'}} >
-//           <View>
-//             <Text style={styles.heading}>{shortenName(props.campsite.name)}</Text>
-//             <Text style={styles.park}>{shortenName(props.campsite.parkName)}</Text>
-//           </View>
-//           <View style={{justifyContent: 'center'}}>
-//             <Icon style={styles.arrow} name="ios-arrow-forward"/>
-//           </View>
-//         </View>
-//     </Annotation>
-//   )
-// }
-
-// interface CampsiteMarkerProps {
-//   campsite: CampsiteWithStarred;
-//   onPress: () => void;
-// }
-
-// function CampsiteMarker(props: CampsiteMarkerProps) {
-//   if (props.campsite.position == undefined) {
-//     return null
-//   }
-//   let coordinate = {
-//     latitude: props.campsite.position.lat,
-//     longitude: props.campsite.position.lng
-//   }
-//   return (
-//     <MapView.Marker
-//       coordinate={coordinate}
-//       title={props.campsite.name}
-//       description={props.campsite.description}>
-//       <MapView.Callout onPress={props.onPress}>
-//         <View style={{flexDirection: 'row'}} >
-//           <View>
-//             <Text style={styles.heading}>{shortenName(props.campsite.name)}</Text>
-//             <Text style={styles.park}>{shortenName(props.campsite.parkName)}</Text>
-//           </View>
-//           <View style={{justifyContent: 'center'}}>
-//             <Icon style={styles.arrow} name="ios-arrow-forward"/>
-//           </View>
-//         </View>
-//       </MapView.Callout>
-//     </MapView.Marker>
-//   )
-// }
-
-// const styles = StyleSheet.create({
-//   heading: {
-//     fontWeight: 'bold' as 'bold',
-//     fontSize: 20
-//   },
-//   park: {
-//     fontSize: 20,
-//     color: '#aaa'
-//   },
-//   arrow: {
-//     marginLeft: 20,
-//     fontSize: 20,
-//     color: '#aaa'
-//   }
-// })
