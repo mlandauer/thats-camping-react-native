@@ -31,6 +31,10 @@ export default class Admin extends React.Component<{}, State> {
     Alert.alert("Database destroyed")
   }
 
+  offlineMaps() {
+    Alert.alert("Open offline maps page")
+  }
+
   render() {
     if (this.state.locked) {
       return (
@@ -50,6 +54,12 @@ export default class Admin extends React.Component<{}, State> {
             style={styles.buttonText}
             onPress={() => this.destroyDatabase()} >
             Destroy database
+          </Button>
+          <Button
+            containerStyle={styles.buttonContainer}
+            style={styles.buttonText}
+            onPress={() => this.offlineMaps()} >
+            Offline maps
           </Button>
         </View>
       )
