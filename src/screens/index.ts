@@ -5,6 +5,7 @@ import AboutScreen from './AboutScreen'
 import CampsiteListScreen from './CampsiteListScreen'
 import CampsiteMapScreen from './CampsiteMapScreen'
 import CampsiteDetailScreen from './CampsiteDetailScreen'
+import OfflineMapScreen from './OfflineMapScreen'
 import { State } from '../ducks'
 
 // register all screens of the app (including internal ones)
@@ -13,4 +14,5 @@ export function registerScreens(store: Store<State>, provider: any) {
   Navigation.registerComponent('thatscamping.CampsiteListScreen', (() => CampsiteListScreen), store, provider)
   Navigation.registerComponent('thatscamping.CampsiteMapScreen', (() => CampsiteMapScreen), store, provider)
   Navigation.registerComponent('thatscamping.CampsiteDetailScreen', (() => CampsiteDetailScreen), store, provider)
+  Navigation.registerComponent('thatscamping.OfflineMapScreen', (() => OfflineMapScreen), store, provider)
 }
