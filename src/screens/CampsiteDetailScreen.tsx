@@ -26,14 +26,14 @@ export class CampsiteDetailScreen extends React.Component<Props, {}> {
   }
 }
 
-function mapStateToProps(state: State, ownProps: {id: string}) {
+function mapStateToProps(state: State, ownProps: { id: string }) {
   let campsite = convertToCampsiteWithStarred(state.campsites[ownProps.id], state.starred)
   return {
     campsite: campsite
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<State>, ownProps: {id: string}) => {
+const mapDispatchToProps = (dispatch: Dispatch<State>, ownProps: { id: string }) => {
   return {
     onStarToggled: () => {
       dispatch(toggleStarredCampsite(ownProps.id))

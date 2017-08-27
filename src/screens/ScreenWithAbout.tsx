@@ -6,7 +6,7 @@ interface NProps {
   navigator?: Navigator;
 }
 
-export default class ScreenWithAbout<U,V> extends React.Component<U & NProps,V> {
+export default class ScreenWithAbout<U, V> extends React.Component<U & NProps, V> {
   constructor(props: U & NProps) {
     super(props);
     // The navigator prop isn't necessarily set when we run tests

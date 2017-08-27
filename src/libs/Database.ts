@@ -34,7 +34,7 @@ export let remoteDb = new PouchDB('https://mlandauer.cloudant.com/thats-camping-
 // Starts two-way sync between local and remote database
 export function sync() {
   let db = new PouchDB<PouchCampsite>('thatscamping')
-  let sync = PouchDB.sync(remoteDb, db, {live: true})
+  let sync = PouchDB.sync(remoteDb, db, { live: true })
   return sync
 }
 
@@ -45,7 +45,7 @@ export function destroy() {
 
 export async function allChanges() {
   let db = new PouchDB<PouchCampsite>('thatscamping')
-  let response = await db.changes({include_docs: true})
+  let response = await db.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
     if (result.doc) {
@@ -60,7 +60,7 @@ export async function allChanges() {
 
 export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
   let db = new PouchDB<PouchCampsite>('thatscamping')
-  db.changes({live: true, include_docs: true, since: since})
+  db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       if (response.doc) {
         onChange(convertFromPouch(response.doc))

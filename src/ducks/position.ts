@@ -13,8 +13,8 @@ interface UpdatePositionAction {
 }
 
 interface Coords {
-    latitude: number;
-    longitude: number;
+  latitude: number;
+  longitude: number;
 }
 
 interface Location {
@@ -25,7 +25,7 @@ interface Location {
 export type PositionState = Position | null
 
 export default function reducer(state: PositionState = null, action: PositionAction): PositionState {
-  switch(action.type) {
+  switch (action.type) {
     case 'UPDATE_POSITION':
       return action.position;
     default:
@@ -37,7 +37,7 @@ export default function reducer(state: PositionState = null, action: PositionAct
 export function updatePosition(lat: number, lng: number): PositionAction {
   return {
     type: 'UPDATE_POSITION',
-    position: {lat: lat, lng: lng}
+    position: { lat: lat, lng: lng }
   }
 }
 
@@ -45,13 +45,13 @@ export function startUpdatePosition() {
   return (dispatch: (action: {}) => void) => {
     // TODO Also dispatch something immediately to let the user know something is going on
     let locator = new Promise((resolve, reject) => {
-			navigator.geolocation.watchPosition(resolve, reject, {enableHighAccuracy: true});
-		})
+      navigator.geolocation.watchPosition(resolve, reject, { enableHighAccuracy: true });
+    })
     locator.then((location: Location) => {
       dispatch(updatePosition(location.coords.latitude, location.coords.longitude))
     })
-    .catch((err) => {
-      console.warn('Error getting location (' + err.code + '): ' + err.message)
-    })
+      .catch((err) => {
+        console.warn('Error getting location (' + err.code + '): ' + err.message)
+      })
   }
 }

@@ -18,13 +18,13 @@ export interface CampsitesState {
 };
 
 export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
-  switch(action.type) {
+  switch (action.type) {
     case 'UPDATE_CAMPSITES':
-      let c: {[index: string]: Campsite} = {}
+      let c: { [index: string]: Campsite } = {}
       action.campsites.forEach(campsite => {
         c[campsite._id] = campsite
       })
-      return {...state, ...c}
+      return { ...state, ...c }
     default:
       return state
   }

@@ -27,7 +27,7 @@ export default function CampsiteMap(props: Props) {
 
   return (
     <MapView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       styleURL="mapbox://styles/mapbox/outdoors-v10"
       showsUserLocation={true}
       rotateEnabled={false}

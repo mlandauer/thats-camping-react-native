@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
-import {persistStore, autoRehydrate, Storage} from 'redux-persist'
+import { persistStore, autoRehydrate, Storage } from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
 import * as Mapbox from 'react-native-mapbox-gl'
 import Config from 'react-native-config'
@@ -35,7 +35,7 @@ const store = createStore(
 )
 
 // begin periodically persisting part of the store (just the starred campsites)
-persistStore(store, {storage: AsyncStorage as Storage, whitelist: ['starred']})
+persistStore(store, { storage: AsyncStorage as Storage, whitelist: ['starred'] })
 
 async function initialiseData() {
   // First get all the changes from the local database
@@ -61,20 +61,20 @@ var selectedListIcon: any
 var selectedMapIcon: any
 
 Promise.all(
-        [
-          Icon.getImageSource('ios-list-box-outline', 30),
-          Icon.getImageSource('ios-map-outline', 30),
-          Icon.getImageSource('ios-list-box', 30),
-          Icon.getImageSource('ios-map', 30)
-        ]
-      ).then((values) => {
-        listIcon = values[0]
-        mapIcon = values[1]
-        selectedListIcon = values[2]
-        selectedMapIcon = values[3]
-        startApp()
-        // TODO: Handle error
-      })
+  [
+    Icon.getImageSource('ios-list-box-outline', 30),
+    Icon.getImageSource('ios-map-outline', 30),
+    Icon.getImageSource('ios-list-box', 30),
+    Icon.getImageSource('ios-map', 30)
+  ]
+).then((values) => {
+  listIcon = values[0]
+  mapIcon = values[1]
+  selectedListIcon = values[2]
+  selectedMapIcon = values[3]
+  startApp()
+  // TODO: Handle error
+})
 
 function startApp() {
   Navigation.startTabBasedApp({

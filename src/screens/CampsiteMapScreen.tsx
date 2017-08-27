@@ -15,7 +15,7 @@ import ScreenWithAbout from './ScreenWithAbout'
 
 interface Props {
   navigator?: Navigator;
-  campsites: {[index: string]: CampsiteWithStarred};
+  campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
 }
 
@@ -39,8 +39,8 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
       campsites.push(this.props.campsites[id])
     }
     return (
-      <View style={{flex: 1}}>
-        <CampsiteMap campsites={campsites} onPress={(id) => {this.onPress(id)}}/>
+      <View style={{ flex: 1 }}>
+        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} />
       </View>
     );
   }
@@ -56,7 +56,7 @@ function mapStateToProps(state: State, _ownProps: {}) {
 }
 
 const mapDispatchToProps = (_dispatch: Dispatch<State>) => {
-  return { }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CampsiteMapScreen)

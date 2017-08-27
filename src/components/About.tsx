@@ -18,7 +18,7 @@ export default class About extends React.Component<Props, {}> {
   render() {
     return (
       <ScrollView>
-        <View style={{padding: 20}}>
+        <View style={{ padding: 20 }}>
           <Text style={styles.heading}>About That's Camping</Text>
           <Text style={styles.paragraph}>
             Find campsites near you in New South Wales, Australia.
@@ -26,7 +26,7 @@ export default class About extends React.Component<Props, {}> {
             State Forests and Local Council land.
           </Text>
           <Text style={styles.paragraph}>
-            It works <Text style={{fontWeight: 'bold'}}>completely offline</Text>, even when you're
+            It works <Text style={{ fontWeight: 'bold' }}>completely offline</Text>, even when you're
             far far away from a mobile phone tower. When does that ever happen
             while camping?
           </Text>
@@ -39,8 +39,8 @@ export default class About extends React.Component<Props, {}> {
             onPress={onPress} >
             Suggest a feature or report an issue
           </Button>
-          <View style={{marginTop: 20}}>
-            <Admin onOfflineMaps={this.props.onOfflineMaps}/>
+          <View style={{ marginTop: 20 }}>
+            <Admin onOfflineMaps={this.props.onOfflineMaps} />
           </View>
         </View>
       </ScrollView>

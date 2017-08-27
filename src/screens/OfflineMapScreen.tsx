@@ -3,7 +3,7 @@ import {
   Text,
 } from 'react-native'
 
-export default class OfflineMapScreen extends React.Component<{},{}> {
+export default class OfflineMapScreen extends React.Component<{}, {}> {
   static navigatorStyle = {
     tabBarHidden: true
   }

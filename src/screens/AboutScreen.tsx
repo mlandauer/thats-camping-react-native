@@ -22,7 +22,7 @@ export default class AboutScreen extends React.Component<Props, {}> {
 
   render() {
     return (
-      <About onOfflineMaps={() => this.onOfflineMaps()}/>
+      <About onOfflineMaps={() => this.onOfflineMaps()} />
     )
   }
 }

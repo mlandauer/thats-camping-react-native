@@ -28,14 +28,14 @@ export default function CampsiteList(props: Props) {
 
   if (props.campsites.length == 0) {
     return (
-      <ActivityIndicator animating={true} style={{marginTop: 10}}/>
+      <ActivityIndicator animating={true} style={{ marginTop: 10 }} />
     )
   } else {
     return (
       <View style={styles.container}>
         <FlatList
           data={campsites}
-          renderItem={({item}) => renderItem(item, props.onPress)}
+          renderItem={({ item }) => renderItem(item, props.onPress)}
           keyExtractor={keyExtractor}
           ItemSeparatorComponent={Separator}
         />
@@ -46,7 +46,8 @@ export default function CampsiteList(props: Props) {
 
 function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
   let positions = new PositionRelationship(campsite.position, position)
-  return {...campsite,
+  return {
+    ...campsite,
     distance: positions.distanceInMetres(),
     bearing: positions.bearingInDegrees()
   }
@@ -54,7 +55,7 @@ function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Posi
 
 function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: string) => void) {
   return (
-    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite._id) }}/>
+    <CampsiteListItem campsiteName={campsite.name} parkName={campsite.parkName} starred={campsite.starred} distance={campsite.distance} bearing={campsite.bearing} onPress={() => { onPress(campsite._id) }} />
   )
 }
 
@@ -96,7 +97,7 @@ function orderCampsites(a: CampsiteWithDistanceAndBearing, b: CampsiteWithDistan
 
 const styles = StyleSheet.create({
   container: {
-   flex: 1
+    flex: 1
   },
   separator: {
     height: 0.5,

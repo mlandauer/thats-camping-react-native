@@ -38,7 +38,7 @@ describe('campsites', () => {
   describe('reducer', () => {
     it('should return the initial state', () => {
       expect(
-        reducer(undefined, {type: "NOOP"})
+        reducer(undefined, { type: "NOOP" })
       ).toEqual({})
     })
 
@@ -65,25 +65,27 @@ describe('campsites', () => {
       expect(reducer(undefined, {
         type: 'UPDATE_CAMPSITES',
         campsites: [campsite]
-      })).toEqual({'1': {
-        _id: '1',
-        name: "A campsite",
-        description: "A nice campsite",
-        position: null,
-        facilities: {
-          toilets: 'none' as 'none',
-          picnicTables: false,
-          barbecues: 'none' as 'none',
-          showers: 'none' as 'none',
-          drinkingWater: false
-        },
-        access: {
-          caravans: false,
-          trailers: false,
-          car: false
-        },
-        parkName: "A park"
-      }})
+      })).toEqual({
+        '1': {
+          _id: '1',
+          name: "A campsite",
+          description: "A nice campsite",
+          position: null,
+          facilities: {
+            toilets: 'none' as 'none',
+            picnicTables: false,
+            barbecues: 'none' as 'none',
+            showers: 'none' as 'none',
+            drinkingWater: false
+          },
+          access: {
+            caravans: false,
+            trailers: false,
+            car: false
+          },
+          parkName: "A park"
+        }
+      })
     })
 
     it('should handle ADD_CAMPSITES with existing campsites', () => {
@@ -103,27 +105,30 @@ describe('campsites', () => {
           car: false
         },
         facilities: facilities,
-        position: {lat: 1.0, lng: 2.0}
+        position: { lat: 1.0, lng: 2.0 }
       }
 
-      const campsite1 = {...templateCampsite,
+      const campsite1 = {
+        ...templateCampsite,
         _id: '1',
         name: "A campsite"
       }
-      const campsite2 = {...templateCampsite,
+      const campsite2 = {
+        ...templateCampsite,
         _id: '2',
         name: "Another campsite"
       }
-      const campsite3 = {...templateCampsite,
+      const campsite3 = {
+        ...templateCampsite,
         _id: '3',
         name: "And another"
       }
       expect(
-        reducer({1: campsite1}, {
+        reducer({ 1: campsite1 }, {
           type: 'UPDATE_CAMPSITES',
           campsites: [campsite2, campsite3]
         })
-      ).toEqual({1: campsite1, 2: campsite2, 3: campsite3})
+      ).toEqual({ 1: campsite1, 2: campsite2, 3: campsite3 })
     })
   })
 })

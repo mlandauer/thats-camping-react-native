@@ -22,7 +22,7 @@ export interface CampsitesJson {
 // Convert the json as stored in data_simplified.json to a list of campsites
 export function convertJson(json: CampsitesJson): Campsite[] {
   // Turn parks array into hash
-  let parksHash: {[index: number]: any} = {}
+  let parksHash: { [index: number]: any } = {}
   json.parks.forEach((park) => {
     parksHash[park.id] = park
   })
@@ -31,7 +31,7 @@ export function convertJson(json: CampsitesJson): Campsite[] {
   json.campsites.forEach((campsite) => {
     let park = parksHash[campsite.park_id]
     // Convert weird representation of undefined position in json to how we should do it
-    let position : (Position | null) = convertPosition(campsite.position)
+    let position: (Position | null) = convertPosition(campsite.position)
     c.push({
       _id: campsite.id.toString(),
       name: campsite.name,
