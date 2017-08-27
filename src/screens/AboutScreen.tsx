@@ -1,4 +1,7 @@
 import * as React from 'react'
+import {
+  Alert
+} from 'react-native'
 
 import About from '../components/About'
 
@@ -7,9 +10,13 @@ export default class AboutScreen extends React.Component<{},{}> {
     tabBarHidden: true
   }
 
+  onOfflineMaps() {
+    Alert.alert("onOfflineMaps")
+  }
+
   render() {
     return (
-      <About />
+      <About onOfflineMaps={() => this.onOfflineMaps()}/>
     )
   }
 }

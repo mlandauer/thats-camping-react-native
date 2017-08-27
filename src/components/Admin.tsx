@@ -14,9 +14,13 @@ interface State {
   locked: boolean;
 }
 
+interface Props {
+  onOfflineMaps: () => void;
+}
+
 // Really dumb little thing that protects a thing with a password
-export default class Admin extends React.Component<{}, State> {
-  constructor(props: {}) {
+export default class Admin extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = {locked: true}
   }
@@ -29,10 +33,6 @@ export default class Admin extends React.Component<{}, State> {
   async destroyDatabase() {
     await Database.destroy()
     Alert.alert("Database destroyed")
-  }
-
-  offlineMaps() {
-    Alert.alert("Open offline maps page")
   }
 
   render() {
@@ -58,7 +58,7 @@ export default class Admin extends React.Component<{}, State> {
           <Button
             containerStyle={styles.buttonContainer}
             style={styles.buttonText}
-            onPress={() => this.offlineMaps()} >
+            onPress={this.props.onOfflineMaps} >
             Offline maps
           </Button>
         </View>

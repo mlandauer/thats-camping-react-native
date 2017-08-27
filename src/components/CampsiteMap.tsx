@@ -1,7 +1,4 @@
 import * as React from 'react'
-import {
-  Alert
-} from 'react-native'
 import { MapView } from 'react-native-mapbox-gl'
 
 import { CampsiteWithStarred } from '../libs/types'
