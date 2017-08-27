@@ -1,7 +1,6 @@
 import * as React from 'react'
-import {
-  Text,
-} from 'react-native'
+
+import OfflineMapControls from '../components/OfflineMapControls'
 
 export default class OfflineMapScreen extends React.Component<{}, {}> {
   static navigatorStyle = {
@@ -10,7 +9,7 @@ export default class OfflineMapScreen extends React.Component<{}, {}> {
 
   render() {
     return (
-      <Text>Hello! This is the OfflineMapScreen</Text>
+      <OfflineMapControls />
     )
   }
 }
