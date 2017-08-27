@@ -1,17 +1,23 @@
 import * as React from 'react'
-import {
-  Alert
-} from 'react-native'
+import { Navigator } from 'react-native-navigation'
 
 import About from '../components/About'
 
-export default class AboutScreen extends React.Component<{},{}> {
+interface Props {
+  navigator: Navigator;
+}
+
+export default class AboutScreen extends React.Component<Props, {}> {
   static navigatorStyle = {
     tabBarHidden: true
   }
 
   onOfflineMaps() {
-    Alert.alert("onOfflineMaps")
+    this.props.navigator.push({
+      screen: 'thatscamping.OfflineMapScreen',
+      title: 'Offline Maps',
+      backButtonTitle: 'Back'
+    })
   }
 
   render() {
