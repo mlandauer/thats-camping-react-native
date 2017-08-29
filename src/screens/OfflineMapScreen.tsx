@@ -9,7 +9,7 @@ export default class OfflineMapScreen extends React.Component<{}, {}> {
 
   render() {
     return (
-      <OfflineMapControls />
+      <OfflineMapControls downloading={true}/>
     )
   }
 }
