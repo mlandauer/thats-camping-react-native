@@ -8,6 +8,7 @@ import {
 
 interface Props {
   downloading: boolean;
+  onDownloadingChange: (downloading: boolean) => void;
 }
 
 export default function OfflineMapControls(props: Props) {
@@ -15,7 +16,7 @@ export default function OfflineMapControls(props: Props) {
     <View style={{ padding: 20 }}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
         <Text style={styles.labelText}>Download Offline Maps</Text>
-        <Switch value={props.downloading}/>
+        <Switch value={props.downloading} onValueChange={props.onDownloadingChange}/>
       </View>
     </View>
   )
