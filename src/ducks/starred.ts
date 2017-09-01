@@ -1,4 +1,4 @@
-export type StarredAction = ToggleStarredAction | NoopAction;
+type Action = ToggleStarredAction | NoopAction;
 
 // Actions
 interface NoopAction {
@@ -13,7 +13,7 @@ interface ToggleStarredAction {
 // Reducer
 export type State = string[]
 
-export default function reducer(state: State = [], action: StarredAction): State {
+export default function reducer(state: State = [], action: Action): State {
   switch (action.type) {
     case 'TOGGLE_STARRED':
       // TODO This all is very long winded. No doubt there is a more elegant way
@@ -29,7 +29,7 @@ export default function reducer(state: State = [], action: StarredAction): State
 }
 
 // Action Creators
-export function toggleStarredCampsite(campsite_id: string): StarredAction {
+export function toggleStarredCampsite(campsite_id: string): Action {
   return {
     type: 'TOGGLE_STARRED',
     campsite_id: campsite_id

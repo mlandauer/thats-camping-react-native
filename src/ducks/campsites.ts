@@ -10,14 +10,14 @@ interface UpdateCampsitesAction {
   campsites: Campsite[];
 }
 
-export type CampsitesAction = UpdateCampsitesAction | NoopAction;
+type Action = UpdateCampsitesAction | NoopAction;
 
 // Reducer
 export interface State {
   readonly [index: string]: Campsite
 };
 
-export default function reducer(state: State = {}, action: CampsitesAction): State {
+export default function reducer(state: State = {}, action: Action): State {
   switch (action.type) {
     case 'UPDATE_CAMPSITES':
       let c: { [index: string]: Campsite } = {}
@@ -31,13 +31,13 @@ export default function reducer(state: State = {}, action: CampsitesAction): Sta
 }
 
 // Action Creators
-export function updateCampsites(campsites: Campsite[]): CampsitesAction {
+export function updateCampsites(campsites: Campsite[]): Action {
   return {
     type: 'UPDATE_CAMPSITES',
     campsites: campsites
   }
 }
 
-export function updateCampsite(campsite: Campsite): CampsitesAction {
+export function updateCampsite(campsite: Campsite): Action {
   return updateCampsites([campsite])
 }

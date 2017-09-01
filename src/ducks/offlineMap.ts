@@ -1,5 +1,5 @@
 // Actions
-export type OfflineMapAction = UpdateDownloadingAction | NoopAction;
+type Action = UpdateDownloadingAction | NoopAction;
 
 interface UpdateDownloadingAction {
   type: 'UPDATE_DOWNLOADING';
@@ -19,7 +19,7 @@ const initialState = {
   downloading: false
 }
 
-export default function reducer(state: State | undefined = initialState, action: OfflineMapAction): State {
+export default function reducer(state: State | undefined = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_DOWNLOADING':
       return {...state, downloading: action.downloading};
@@ -29,7 +29,7 @@ export default function reducer(state: State | undefined = initialState, action:
 }
 
 // Action Creators
-export function updateDownloading(downloading: boolean): OfflineMapAction {
+export function updateDownloading(downloading: boolean): Action {
   return {
     type: 'UPDATE_DOWNLOADING',
     downloading: downloading

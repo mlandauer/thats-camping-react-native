@@ -1,7 +1,7 @@
 import { Position } from '../libs/types'
 
 // Actions
-export type PositionAction = UpdatePositionAction | NoopAction;
+type Action = UpdatePositionAction | NoopAction;
 
 interface NoopAction {
   type: 'NOOP';
@@ -24,7 +24,7 @@ interface Location {
 // Reducer
 export type State = Position | null
 
-export default function reducer(state: State = null, action: PositionAction): State {
+export default function reducer(state: State = null, action: Action): State {
   switch (action.type) {
     case 'UPDATE_POSITION':
       return action.position;
@@ -34,7 +34,7 @@ export default function reducer(state: State = null, action: PositionAction): St
 }
 
 // Action Creators
-export function updatePosition(lat: number, lng: number): PositionAction {
+export function updatePosition(lat: number, lng: number): Action {
   return {
     type: 'UPDATE_POSITION',
     position: { lat: lat, lng: lng }
