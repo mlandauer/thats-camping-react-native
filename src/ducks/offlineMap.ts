@@ -1,14 +1,10 @@
 // Actions
-type Action = UpdateDownloadingAction | NoopAction;
-
-interface UpdateDownloadingAction {
+type Action = {
   type: 'UPDATE_DOWNLOADING';
   downloading: boolean;
-}
-
-interface NoopAction {
+} | {
   type: 'NOOP';
-}
+};
 
 // Reducer
 export interface State {

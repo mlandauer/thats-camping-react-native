@@ -1,16 +1,12 @@
 import { Campsite } from '../libs/types'
 
 // Actions
-interface NoopAction {
-  type: 'NOOP'
-}
-
-interface UpdateCampsitesAction {
+type Action = {
   type: 'UPDATE_CAMPSITES';
   campsites: Campsite[];
-}
-
-type Action = UpdateCampsitesAction | NoopAction;
+} | {
+  type: 'NOOP'
+};
 
 // Reducer
 export interface State {

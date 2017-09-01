@@ -1,25 +1,12 @@
 import { Position } from '../libs/types'
 
 // Actions
-type Action = UpdatePositionAction | NoopAction;
-
-interface NoopAction {
-  type: 'NOOP';
-}
-
-interface UpdatePositionAction {
+type Action = {
   type: 'UPDATE_POSITION';
   position: Position;
-}
-
-interface Coords {
-  latitude: number;
-  longitude: number;
-}
-
-interface Location {
-  coords: Coords;
-}
+} | {
+  type: 'NOOP';
+};
 
 // Reducer
 export type State = Position | null
@@ -39,6 +26,13 @@ export function updatePosition(lat: number, lng: number): Action {
     type: 'UPDATE_POSITION',
     position: { lat: lat, lng: lng }
   }
+}
+
+interface Location {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export function startUpdatePosition() {

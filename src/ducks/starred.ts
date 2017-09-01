@@ -1,14 +1,10 @@
-type Action = ToggleStarredAction | NoopAction;
-
 // Actions
-interface NoopAction {
-  type: 'NOOP'
-}
-
-interface ToggleStarredAction {
+type Action = {
   type: 'TOGGLE_STARRED';
   campsite_id: string;
-}
+} | {
+  type: 'NOOP'
+};
 
 // Reducer
 export type State = string[]
