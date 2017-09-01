@@ -11,9 +11,9 @@ interface ToggleStarredAction {
 }
 
 // Reducer
-export type StarredState = string[]
+export type State = string[]
 
-export default function reducer(state: StarredState = [], action: StarredAction): StarredState {
+export default function reducer(state: State = [], action: StarredAction): State {
   switch (action.type) {
     case 'TOGGLE_STARRED':
       // TODO This all is very long winded. No doubt there is a more elegant way

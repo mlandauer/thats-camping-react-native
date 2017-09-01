@@ -11,7 +11,7 @@ interface NoopAction {
 }
 
 // Reducer
-export interface OfflineMapState {
+export interface State {
   readonly downloading: boolean;
 }
 
@@ -19,7 +19,7 @@ const initialState = {
   downloading: false
 }
 
-export default function reducer(state: OfflineMapState | undefined = initialState, action: OfflineMapAction): OfflineMapState {
+export default function reducer(state: State | undefined = initialState, action: OfflineMapAction): State {
   switch (action.type) {
     case 'UPDATE_DOWNLOADING':
       return {...state, downloading: action.downloading};

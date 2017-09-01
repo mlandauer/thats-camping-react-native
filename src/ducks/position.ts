@@ -22,9 +22,9 @@ interface Location {
 }
 
 // Reducer
-export type PositionState = Position | null
+export type State = Position | null
 
-export default function reducer(state: PositionState = null, action: PositionAction): PositionState {
+export default function reducer(state: State = null, action: PositionAction): State {
   switch (action.type) {
     case 'UPDATE_POSITION':
       return action.position;

@@ -13,11 +13,11 @@ interface UpdateCampsitesAction {
 export type CampsitesAction = UpdateCampsitesAction | NoopAction;
 
 // Reducer
-export interface CampsitesState {
+export interface State {
   readonly [index: string]: Campsite
 };
 
-export default function reducer(state: CampsitesState = {}, action: CampsitesAction): CampsitesState {
+export default function reducer(state: State = {}, action: CampsitesAction): State {
   switch (action.type) {
     case 'UPDATE_CAMPSITES':
       let c: { [index: string]: Campsite } = {}
