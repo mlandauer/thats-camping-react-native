@@ -12,7 +12,7 @@ interface NoopAction {
 
 // Reducer
 interface OfflineMapState {
-  downloading: boolean;
+  readonly downloading: boolean;
 }
 
 const initialState = {
