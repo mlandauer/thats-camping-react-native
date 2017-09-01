@@ -25,7 +25,8 @@ let initialState = {
   campsites: {},
   // TODO: Would be better if this could be undefined
   position: null,
-  starred: []
+  starred: [],
+  offlineMap: { downloading: false }
 }
 
 const store = createStore(

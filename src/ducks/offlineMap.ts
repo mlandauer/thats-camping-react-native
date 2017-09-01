@@ -11,7 +11,7 @@ interface NoopAction {
 }
 
 // Reducer
-interface OfflineMapState {
+export interface OfflineMapState {
   readonly downloading: boolean;
 }
 
