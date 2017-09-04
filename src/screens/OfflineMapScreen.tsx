@@ -1,9 +1,15 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
+import { connect, Dispatch } from 'react-redux'
 
+import { State } from '../ducks'
 import OfflineMapControls from '../components/OfflineMapControls'
 
-export default class OfflineMapScreen extends React.Component<{}, {}> {
+interface Props {
+  downloading: boolean;
+}
+
+export class OfflineMapScreen extends React.Component<Props, {}> {
   static navigatorStyle = {
     tabBarHidden: true
   }
@@ -15,9 +21,21 @@ export default class OfflineMapScreen extends React.Component<{}, {}> {
   render() {
     return (
       <OfflineMapControls
-        downloading={true}
+        downloading={this.props.downloading}
         onDownloadingChange={(a) => this.onDownloadingChange(a)}
       />
     )
   }
 }
+
+function mapStateToProps(state: State, _ownProps: {}) {
+  return {
+    downloading: state.offlineMap.downloading
+  };
+}
+
+const mapDispatchToProps = (_dispatch: Dispatch<State>) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfflineMapScreen)
