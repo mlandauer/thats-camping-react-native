@@ -23,3 +23,11 @@ export let reducer = combineReducers<State>({
   starred,
   offlineMap
 })
+
+export let initialState = {
+  campsites: {},
+  // TODO: Would be better if this could be undefined
+  position: null,
+  starred: [],
+  offlineMap: { downloading: false }
+}

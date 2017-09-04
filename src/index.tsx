@@ -9,7 +9,7 @@ import * as Mapbox from 'react-native-mapbox-gl'
 import Config from 'react-native-config'
 
 import { registerScreens } from './screens';
-import { reducer, State } from './ducks'
+import { reducer, State, initialState } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as Database from './libs/Database'
@@ -20,14 +20,6 @@ let enhancer = compose(
   applyMiddleware(thunk),
   autoRehydrate<State>()
 ) as StoreEnhancer<State>
-
-let initialState = {
-  campsites: {},
-  // TODO: Would be better if this could be undefined
-  position: null,
-  starred: [],
-  offlineMap: { downloading: false }
-}
 
 const store = createStore(
   reducer,
