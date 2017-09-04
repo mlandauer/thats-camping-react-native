@@ -13,7 +13,9 @@ export interface State {
   readonly [index: string]: Campsite
 };
 
-export default function reducer(state: State = {}, action: Action): State {
+export const initialState = {}
+
+export default function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_CAMPSITES':
       let c: { [index: string]: Campsite } = {}

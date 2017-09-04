@@ -24,10 +24,9 @@ export let reducer = combineReducers<State>({
   offlineMap
 })
 
-export let initialState = {
-  campsites: {},
-  // TODO: Would be better if this could be undefined
-  position: null,
-  starred: [],
-  offlineMap: { downloading: false }
+export const initialState = {
+  campsites: Campsites.initialState,
+  position: Position.initialState,
+  starred: Starred.initialState,
+  offlineMap: OfflineMap.initialState
 }

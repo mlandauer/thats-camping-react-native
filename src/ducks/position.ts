@@ -11,7 +11,10 @@ type Action = {
 // Reducer
 export type State = Position | null
 
-export default function reducer(state: State = null, action: Action): State {
+// TODO: Would be better if this could be undefined
+export const initialState = null
+
+export default function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_POSITION':
       return action.position;

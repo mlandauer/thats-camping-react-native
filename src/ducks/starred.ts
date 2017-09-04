@@ -9,7 +9,9 @@ type Action = {
 // Reducer
 export type State = string[]
 
-export default function reducer(state: State = [], action: Action): State {
+export const initialState = []
+
+export default function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'TOGGLE_STARRED':
       // TODO This all is very long winded. No doubt there is a more elegant way

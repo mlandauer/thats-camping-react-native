@@ -11,7 +11,7 @@ export interface State {
   readonly downloading: boolean;
 }
 
-const initialState = {
+export const initialState = {
   downloading: false
 }
 
