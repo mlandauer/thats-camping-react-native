@@ -20,7 +20,7 @@ export default function OfflineMapControls(props: Props) {
         <Text style={styles.labelText}>Download Offline Maps</Text>
         <Switch value={props.downloading} onValueChange={props.onDownloadingChange}/>
       </View>
-      <Text style={styles.progressLabelText}>{props.progress * 100}% Complete</Text>
+      <Text style={styles.progressLabelText}>{Math.round(props.progress * 100)}% Complete</Text>
       <ProgressViewIOS progress={props.progress} progressViewStyle="bar" />
     </View>
   )

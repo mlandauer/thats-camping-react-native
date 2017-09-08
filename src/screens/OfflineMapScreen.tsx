@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 
 import { State } from '../ducks'
-import { updateDownloading } from '../ducks/offlineMap'
+import { updateDownloadingAsync } from '../ducks/offlineMap'
 import OfflineMapControls from '../components/OfflineMapControls'
 
 interface Props {
@@ -37,7 +37,7 @@ function mapStateToProps(state: State, _ownProps: {}) {
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
   return {
     onDownloadingChange: (downloading: boolean) => {
-      dispatch(updateDownloading(downloading))
+      dispatch(updateDownloadingAsync(downloading))
     }
   }
 }
