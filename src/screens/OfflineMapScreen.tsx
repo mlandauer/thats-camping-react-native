@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import { Alert } from 'react-native'
 import { connect, Dispatch } from 'react-redux'
 
 import { State } from '../ducks'
@@ -15,10 +14,6 @@ export class OfflineMapScreen extends React.Component<Props, {}> {
   static navigatorStyle = {
     tabBarHidden: true
   }
-
-  // onDownloadingChange(_downloading: boolean) {
-  //   Alert.alert("changed")
-  // }
 
   render() {
     return (
