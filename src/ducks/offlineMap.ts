@@ -10,6 +10,9 @@ type Action = {
   type: 'UPDATE_PROGRESS';
   progress: number;
 } | {
+  type: 'UPDATE_MESSAGE';
+  message: string | null;
+} | {
   type: 'NOOP';
 };
 
@@ -17,11 +20,13 @@ type Action = {
 export interface State {
   readonly downloading: boolean;
   readonly progress: number; // between 0 and 1
+  readonly message: string | null;
 }
 
 export const initialState = {
   downloading: false,
-  progress: 0
+  progress: 0,
+  message: null
 }
 
 export default function reducer(state: State | undefined = initialState, action: Action): State {
@@ -30,6 +35,8 @@ export default function reducer(state: State | undefined = initialState, action:
       return {...state, downloading: action.downloading}
     case 'UPDATE_PROGRESS':
       return {...state, progress: action.progress}
+    case 'UPDATE_MESSAGE':
+      return {...state, message: action.message}
     default:
       return state
   }
@@ -60,5 +67,12 @@ export function updateProgress(progress: number): Action {
   return {
     type: 'UPDATE_PROGRESS',
     progress: progress
+  }
+}
+
+export function updateMessage(message: string): Action {
+  return {
+    type: 'UPDATE_MESSAGE',
+    message: message
   }
 }
