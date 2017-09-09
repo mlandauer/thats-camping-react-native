@@ -8,6 +8,7 @@ import OfflineMapControls from '../components/OfflineMapControls'
 interface Props {
   downloading: boolean;
   progress: number;
+  message: string | null;
   onDownloadingChange: (downloading: boolean) => void;
 }
 
@@ -21,6 +22,7 @@ export class OfflineMapScreen extends React.Component<Props, {}> {
       <OfflineMapControls
         downloading={this.props.downloading}
         progress={this.props.progress}
+        message={this.props.message}
         onDownloadingChange={this.props.onDownloadingChange}
       />
     )
@@ -28,10 +30,7 @@ export class OfflineMapScreen extends React.Component<Props, {}> {
 }
 
 function mapStateToProps(state: State, _ownProps: {}) {
-  return {
-    downloading: state.offlineMap.downloading,
-    progress: state.offlineMap.progress
-  };
+  return state.offlineMap
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {

@@ -10,6 +10,7 @@ import {
 interface Props {
   downloading: boolean;
   progress: number;
+  message: string | null;
   onDownloadingChange: (downloading: boolean) => void;
 }
 
@@ -22,6 +23,7 @@ export default function OfflineMapControls(props: Props) {
       </View>
       <Text style={styles.progressLabelText}>{Math.round(props.progress * 100)}% Complete</Text>
       <ProgressViewIOS progress={props.progress} progressViewStyle="bar" />
+      <Text style={styles.messageText}>{props.message}</Text>
     </View>
   )
 }
@@ -36,5 +38,10 @@ const styles = StyleSheet.create({
     color: '#777',
     paddingTop: 18,
     paddingBottom: 9
+  },
+  messageText: {
+    fontSize: 18,
+    color: '#a77',
+    paddingTop: 18
   }
 })
