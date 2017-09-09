@@ -36,6 +36,7 @@ export default function reducer(state: State | undefined = initialState, action:
 }
 
 // Action Creators
+// TODO: Move the async function to a different module
 export function updateDownloadingAsync(downloading: boolean) {
   // Icky that we have to use the application state type here
   return (dispatch: Dispatch<AppState>) => {
