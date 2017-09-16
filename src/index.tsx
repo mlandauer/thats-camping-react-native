@@ -14,7 +14,21 @@ import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as Database from './libs/Database'
 
+interface DownloadProgress {
+    metadata: any;
+	  countOfResourcesCompleted: number;
+	  maximumResourcesExpected: number;
+	  countOfResourcesExpected: number;
+	  countOfBytesCompleted: number;
+	  name: string;
+}
+
 Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
+// TODO: Below doesn't work. Figure out why.
+// Mapbox.initializeOfflinePacks()
+Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
+  console.log("progressObject", progressObject)
+});
 
 let enhancer = compose(
   applyMiddleware(thunk),
