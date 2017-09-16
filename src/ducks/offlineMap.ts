@@ -1,7 +1,3 @@
-import { Dispatch } from 'react-redux'
-
-import { State as AppState } from '../ducks'
-
 // Actions
 type Action = {
   type: 'UPDATE_DOWNLOADING';
@@ -43,19 +39,6 @@ export default function reducer(state: State | undefined = initialState, action:
 }
 
 // Action Creators
-// TODO: Move the async function to a different module
-export function updateDownloadingAsync(downloading: boolean) {
-  // Icky that we have to use the application state type here
-  return (dispatch: Dispatch<AppState>) => {
-    dispatch(updateDownloading(downloading))
-    if (downloading) {
-      setTimeout(() => {
-        dispatch(updateProgress(Math.random()))
-      }, 1000)
-    }
-  }
-}
-
 export function updateDownloading(downloading: boolean): Action {
   return {
     type: 'UPDATE_DOWNLOADING',
@@ -70,7 +53,7 @@ export function updateProgress(progress: number): Action {
   }
 }
 
-export function updateMessage(message: string): Action {
+export function updateMessage(message: string | null): Action {
   return {
     type: 'UPDATE_MESSAGE',
     message: message
