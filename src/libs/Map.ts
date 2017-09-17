@@ -39,9 +39,34 @@ export function initialise(updateProgress: (progress: number) => void) {
   Mapbox.getOfflinePacks()
   .then((packs: DownloadProgress[]) => {
     console.log("packs", packs)
+    if (packs.length > 0) {
+      console.log("Already a download pack setup so we don't need to set one up")
+    } else {
+      console.log("Need to setup a download pack")
+      setupDownloadPack()
+    }
     // packs is an array of progress objects
   })
   .catch((err: string) => {
     console.error(err)
   })
+}
+
+function setupDownloadPack() {
+  // Start downloading offline maps
+  Mapbox.addOfflinePack({
+    name: 'base',
+    type: 'bbox',
+    bounds: [
+      -37.845485, 140.913340, -28.126389, 153.402606
+    ],
+    minZoomLevel: 5,
+    maxZoomLevel: 10,
+    // TODO: Get styleURL from configuration
+    styleURL: "mapbox://styles/mapbox/outdoors-v10"
+  }).then(() => {
+    console.log("added offline pack")
+  }).catch((err: string) => {
+    console.log("err", err)
+  });
 }
