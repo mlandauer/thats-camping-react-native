@@ -2,12 +2,12 @@ import * as Mapbox from 'react-native-mapbox-gl'
 import Config from 'react-native-config'
 
 interface DownloadProgress {
-    metadata: any;
-	  countOfResourcesCompleted: number;
-	  maximumResourcesExpected: number;
-	  countOfResourcesExpected: number;
-	  countOfBytesCompleted: number;
-	  name: string;
+  name: string;
+  metadata: any;
+  countOfResourcesCompleted: number;
+  maximumResourcesExpected: number;
+  countOfResourcesExpected: number;
+  countOfBytesCompleted: number;
 }
 
 interface ErrorListenerPayload {
@@ -34,5 +34,14 @@ export function initialise(updateProgress: (progress: number) => void) {
   })
   Mapbox.addOfflineMaxAllowedTilesListener((payload: MaxAllowedTilesPayload) => {
     console.log(`Offline pack named ${payload.name} reached max tiles quota of ${payload.maxTiles} tiles`);
+  })
+  // Get information about all the offline packs currently defined
+  Mapbox.getOfflinePacks()
+  .then((packs: DownloadProgress[]) => {
+    console.log("packs", packs)
+    // packs is an array of progress objects
+  })
+  .catch((err: string) => {
+    console.error(err)
   })
 }
