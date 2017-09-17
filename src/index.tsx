@@ -5,8 +5,6 @@ import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import { persistStore, autoRehydrate, Storage } from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
-import * as Mapbox from 'react-native-mapbox-gl'
-import Config from 'react-native-config'
 
 import { registerScreens } from './screens';
 import { reducer, State, initialState } from './ducks'
@@ -14,6 +12,7 @@ import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as OfflineMapActions from './ducks/offlineMap'
 import * as Database from './libs/Database'
+import * as Map from './libs/Map'
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -26,41 +25,7 @@ const store = createStore(
   enhancer
 )
 
-interface DownloadProgress {
-    metadata: any;
-	  countOfResourcesCompleted: number;
-	  maximumResourcesExpected: number;
-	  countOfResourcesExpected: number;
-	  countOfBytesCompleted: number;
-	  name: string;
-}
-
-Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
-// TODO: Below doesn't work. Figure out why.
-// Mapbox.initializeOfflinePacks()
-Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
-  console.log("progressObject", progressObject)
-  var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
-  store.dispatch(OfflineMapActions.updateProgress(progress))
-});
-
-interface ErrorListenerPayload {
-  name: string;
-  error: string;
-}
-
-Mapbox.addOfflineErrorListener((payload: ErrorListenerPayload) => {
-  console.log(`Offline pack named ${payload.name} experienced an error: ${payload.error}`);
-})
-
-interface MaxAllowedTilesPayload {
-  name: string;
-  maxTiles: number;
-}
-
-Mapbox.addOfflineMaxAllowedTilesListener((payload: MaxAllowedTilesPayload) => {
-  console.log(`Offline pack named ${payload.name} reached max tiles quota of ${payload.maxTiles} tiles`);
-})
+Map.initialise(progress => store.dispatch(OfflineMapActions.updateProgress(progress)))
 
 // begin periodically persisting part of the store (just the starred campsites)
 persistStore(store, { storage: AsyncStorage as Storage, whitelist: ['starred'] })
