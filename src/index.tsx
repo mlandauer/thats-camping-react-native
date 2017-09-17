@@ -12,7 +12,19 @@ import { registerScreens } from './screens';
 import { reducer, State, initialState } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
+import * as OfflineMapActions from './ducks/offlineMap'
 import * as Database from './libs/Database'
+
+let enhancer = compose(
+  applyMiddleware(thunk),
+  autoRehydrate<State>()
+) as StoreEnhancer<State>
+
+const store = createStore(
+  reducer,
+  initialState,
+  enhancer
+)
 
 interface DownloadProgress {
     metadata: any;
@@ -28,18 +40,27 @@ Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
 // Mapbox.initializeOfflinePacks()
 Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
   console.log("progressObject", progressObject)
+  var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
+  store.dispatch(OfflineMapActions.updateProgress(progress))
 });
 
-let enhancer = compose(
-  applyMiddleware(thunk),
-  autoRehydrate<State>()
-) as StoreEnhancer<State>
+interface ErrorListenerPayload {
+  name: string;
+  error: string;
+}
 
-const store = createStore(
-  reducer,
-  initialState,
-  enhancer
-)
+Mapbox.addOfflineErrorListener((payload: ErrorListenerPayload) => {
+  console.log(`Offline pack named ${payload.name} experienced an error: ${payload.error}`);
+})
+
+interface MaxAllowedTilesPayload {
+  name: string;
+  maxTiles: number;
+}
+
+Mapbox.addOfflineMaxAllowedTilesListener((payload: MaxAllowedTilesPayload) => {
+  console.log(`Offline pack named ${payload.name} reached max tiles quota of ${payload.maxTiles} tiles`);
+})
 
 // begin periodically persisting part of the store (just the starred campsites)
 persistStore(store, { storage: AsyncStorage as Storage, whitelist: ['starred'] })

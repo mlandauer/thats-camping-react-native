@@ -18,8 +18,8 @@ export function updateDownloadingAsync(downloading: boolean) {
         bounds: [
           -37.845485, 140.913340, -28.126389, 153.402606
         ],
-        minZoomLevel: 10,
-        maxZoomLevel: 13,
+        minZoomLevel: 5,
+        maxZoomLevel: 10,
         // TODO: Get styleURL from configuration
         styleURL: "mapbox://styles/mapbox/outdoors-v10"
       }).then(() => {
