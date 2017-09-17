@@ -30,3 +30,9 @@ export const initialState = {
   starred: Starred.initialState,
   offlineMap: OfflineMap.initialState
 }
+
+// Parts of the state to save away
+export const stateToSave = [
+  'starred',
+  'offlineMap'
+]

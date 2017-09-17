@@ -7,7 +7,7 @@ import { persistStore, autoRehydrate, Storage } from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
 
 import { registerScreens } from './screens';
-import { reducer, State, initialState } from './ducks'
+import { reducer, State, initialState, stateToSave } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
 import * as OfflineMapActions from './ducks/offlineMap'
@@ -27,8 +27,8 @@ const store = createStore(
 
 Map.initialise(progress => store.dispatch(OfflineMapActions.updateProgress(progress)))
 
-// begin periodically persisting part of the store (just the starred campsites)
-persistStore(store, { storage: AsyncStorage as Storage, whitelist: ['starred'] })
+// begin periodically persisting part of the store
+persistStore(store, { storage: AsyncStorage as Storage, whitelist: stateToSave })
 
 async function initialiseData() {
   // First get all the changes from the local database
