@@ -11,23 +11,22 @@ interface Props {
 }
 
 export default function OfflineMapControls(props: Props) {
-  return (
-    <View style={{ padding: 20 }}>
-      <Text style={styles.progressLabelText}>Downloading: {Math.round(props.progress * 100)}% Complete</Text>
-      <ProgressViewIOS progress={props.progress} progressViewStyle="bar" />
-    </View>
-  )
+  if (props.progress < 1) {
+    return (
+      <View style={{ padding: 14}}>
+        <Text style={styles.progressLabelText}>Downloading Offline: {Math.round(props.progress * 100)}% Complete</Text>
+        <ProgressViewIOS progress={props.progress} progressViewStyle="bar" />
+      </View>
+    )
+  } else {
+    return null
+  }
 }
 
 const styles = StyleSheet.create({
-  labelText: {
-    fontSize: 18,
-    color: '#777'
-  },
   progressLabelText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#777',
-    paddingTop: 18,
     paddingBottom: 9
   }
 })

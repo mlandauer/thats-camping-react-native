@@ -17,6 +17,7 @@ interface Props {
   navigator?: Navigator;
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
+  downloadProgress: number;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -40,7 +41,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
     }
     return (
       <View style={{ flex: 1 }}>
-        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} />
+        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} downloadProgress={this.props.downloadProgress}/>
       </View>
     );
   }
@@ -51,7 +52,8 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // Put the star state directly into each campsite object to make things easier
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
-    position: state.position
+    position: state.position,
+    downloadProgress: state.offlineMap.progress
   };
 }
 

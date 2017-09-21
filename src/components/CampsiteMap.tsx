@@ -1,12 +1,17 @@
 import * as React from 'react'
+import {
+  View
+} from 'react-native'
 import { MapView } from 'react-native-mapbox-gl'
 
 import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
+import OfflineMapControls from './OfflineMapControls'
 
 interface Props {
   campsites: CampsiteWithStarred[];
   onPress: (id: string) => void;
+  downloadProgress: number;
 }
 
 interface RightAnnotationTappedInfo {
@@ -26,17 +31,20 @@ export default function CampsiteMap(props: Props) {
   }
 
   return (
-    <MapView
-      style={{ flex: 1 }}
-      styleURL="mapbox://styles/mapbox/outdoors-v10"
-      showsUserLocation={true}
-      rotateEnabled={false}
-      initialCenterCoordinate={initialCenterCoordinate}
-      initialZoomLevel={5}
-      logoIsHidden={true}
-      annotations={annotations(props.campsites)}
-      onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => props.onPress(info.id)}
-    />
+    <View style={{flex: 1}}>
+      <MapView
+        style={{ flex: 1 }}
+        styleURL="mapbox://styles/mapbox/outdoors-v10"
+        showsUserLocation={true}
+        rotateEnabled={false}
+        initialCenterCoordinate={initialCenterCoordinate}
+        initialZoomLevel={5}
+        logoIsHidden={true}
+        annotations={annotations(props.campsites)}
+        onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => props.onPress(info.id)}
+      />
+      <OfflineMapControls progress={props.downloadProgress}/>
+    </View>
   )
 }
 
