@@ -10,11 +10,7 @@ import Button from 'react-native-button'
 
 import Admin from './Admin'
 
-interface Props {
-  onOfflineMaps: () => void;
-}
-
-export default class About extends React.Component<Props, {}> {
+export default class About extends React.Component<{}, {}> {
   render() {
     return (
       <ScrollView>
@@ -40,7 +36,7 @@ export default class About extends React.Component<Props, {}> {
             Suggest a feature or report an issue
           </Button>
           <View style={{ marginTop: 20 }}>
-            <Admin onOfflineMaps={this.props.onOfflineMaps} />
+            <Admin />
           </View>
         </View>
       </ScrollView>

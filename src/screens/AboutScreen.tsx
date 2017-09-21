@@ -12,17 +12,9 @@ export default class AboutScreen extends React.Component<Props, {}> {
     tabBarHidden: true
   }
 
-  onOfflineMaps() {
-    this.props.navigator.push({
-      screen: 'thatscamping.OfflineMapScreen',
-      title: 'Offline Maps',
-      backButtonTitle: 'Back'
-    })
-  }
-
   render() {
     return (
-      <About onOfflineMaps={() => this.onOfflineMaps()} />
+      <About />
     )
   }
 }
