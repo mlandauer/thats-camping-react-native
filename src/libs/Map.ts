@@ -22,7 +22,7 @@ interface MaxAllowedTilesPayload {
 
 export function initialise(updateProgress: (progress: number) => void) {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
-  // TODO: Below doesn't work. Figure out why.
+  // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
   // Mapbox.initializeOfflinePacks()
   Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
     console.log("progressObject", progressObject)
@@ -50,6 +50,9 @@ export function initialise(updateProgress: (progress: number) => void) {
   .catch((err: string) => {
     console.error(err)
   })
+  // TODO: In react-native-mapbox-gl 5.2.1 we'll be able to control whether
+  // individual offline packs are being downloaded or not. So, we'll be able
+  // to pause and restart downloads.
 }
 
 function setupDownloadPack() {
