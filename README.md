@@ -37,7 +37,7 @@ bundle install
 To deploy a new version of the beta for iOS
 
 ```
-fastlane beta
+bundle exec fastlane beta
 ```
 
 ## Continuous deployment
