@@ -81,6 +81,7 @@ function AccessSection(props: { access: Access }) {
     }
   } else {
     if (notHaveText) {
+      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
         <View>
           <Text style={styles.access}>Access</Text>
@@ -120,28 +121,31 @@ function FacilitiesSection(props: { facilities: Facilities }) {
   let haveText = TextFormatter.listAsText(fields.have)
   let notHaveText = TextFormatter.listAsText(fields.notHave)
   if (haveText) {
+    haveText = TextFormatter.capitalizeFirstLetter(haveText)
     if (notHaveText) {
+      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
         <View>
           <Text style={styles.facilities}>Facilities</Text>
-          <Text style={styles.description}>Has {haveText}</Text>
-          <Text style={styles.description}>But no {notHaveText}</Text>
+          <Have text={haveText} />
+          <NotHave text={notHaveText} />
         </View>
       )
     } else {
       return (
         <View>
           <Text style={styles.facilities}>Facilities</Text>
-          <Text style={styles.description}>Has {haveText}</Text>
+          <Have text={haveText} />
         </View>
       )
     }
   } else {
     if (notHaveText) {
+      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
         <View>
           <Text style={styles.facilities}>Facilities</Text>
-          <Text style={styles.description}>No {notHaveText}</Text>
+          <NotHave text={notHaveText} />
         </View>
       )
     } else {
