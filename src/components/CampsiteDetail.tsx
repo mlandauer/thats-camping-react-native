@@ -10,7 +10,7 @@ import {
 import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import { CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
+import { CampsiteWithStarred, Position } from '../libs/types'
 import Star from '../components/Star'
 import * as TextFormatter from '../libs/TextFormatter'
 
@@ -21,6 +21,9 @@ interface Props {
 
 export default class CampsiteDetail extends React.Component<Props, {}> {
   render() {
+    let facilitiesFields = TextFormatter.facilitiesFields(this.props.campsite.facilities)
+    let accessFields = TextFormatter.accessFields(this.props.campsite.access)
+
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -34,8 +37,8 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
             </Button>
           </View>
           <DescriptionText description={this.props.campsite.description} />
-          <FacilitiesSection facilities={this.props.campsite.facilities} />
-          <AccessSection access={this.props.campsite.access} />
+          <Section heading="Facilities" fields={facilitiesFields} />
+          <Section heading="Access" fields={accessFields} />
           <Button
             containerStyle={styles.buttonContainer}
             style={styles.buttonText}
@@ -54,20 +57,6 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
       Linking.openURL(url)
     }
   }
-}
-
-function FacilitiesSection(props: { facilities: Facilities }) {
-  let fields = TextFormatter.facilitiesFields(props.facilities)
-  return (
-    <Section heading="Facilities" fields={fields} />
-  )
-}
-
-function AccessSection(props: { access: Access }) {
-  let fields = TextFormatter.accessFields(props.access)
-  return (
-    <Section heading="Access" fields={fields}/>
-  )
 }
 
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
