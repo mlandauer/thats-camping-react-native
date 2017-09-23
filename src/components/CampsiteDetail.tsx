@@ -67,8 +67,8 @@ function Section(props: {fields: TextFormatter.Fields, heading: string}) {
     return (
       <View style={{marginBottom: 10}}>
         <Text style={styles.sectionHeading}>{props.heading}</Text>
-        <Have text={haveText} />
-        <NotHave text={notHaveText} />
+        <Description icon="ios-checkmark" text={haveText} />
+        <Description icon="ios-close" text={notHaveText} />
       </View>
     )
   } else {
@@ -76,24 +76,11 @@ function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   }
 }
 
-function Have(props: {text: string | null}) {
-  return (
-    <Description tick={true} text={props.text} />
-  )
-}
-
-function NotHave(props: {text: string | null}) {
-  return (
-    <Description tick={false} text={props.text} />
-  )
-}
-
-function Description(props: {tick: boolean, text: string | null}) {
-  let name = props.tick ? "ios-checkmark" : "ios-close"
+function Description(props: {icon: string, text: string | null}) {
   if (props.text) {
     return (
       <View style={{flexDirection: 'row'}}>
-        <Icon style={styles.icon} name={name} />
+        <Icon style={styles.icon} name={props.icon} />
         <Text style={styles.list}>{props.text}</Text>
       </View>
     )
