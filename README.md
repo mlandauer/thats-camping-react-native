@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mlandauer/thats-camping-react-native.svg?branch=master)](https://travis-ci.org/mlandauer/thats-camping-react-native)
+[![Stories in Ready](https://badge.waffle.io/mlandauer/thats-camping-react-native.png?label=ready&title=Ready)](http://waffle.io/mlandauer/thats-camping-react-native)
 
 # That's Camping
 
