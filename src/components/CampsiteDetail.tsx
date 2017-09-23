@@ -62,18 +62,16 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   let haveText = TextFormatter.listAsTextCapitalized(props.fields.have)
   let notHaveText = TextFormatter.listAsTextCapitalized(props.fields.notHave)
+  let unknownText = TextFormatter.listAsTextCapitalized(props.fields.unknown)
 
-  if (haveText || notHaveText) {
-    return (
-      <View style={{marginBottom: 10}}>
-        <Text style={styles.sectionHeading}>{props.heading}</Text>
-        <Description icon="ios-checkmark" text={haveText} />
-        <Description icon="ios-close" text={notHaveText} />
-      </View>
-    )
-  } else {
-    return null
-  }
+  return (
+    <View style={{marginBottom: 10}}>
+      <Text style={styles.sectionHeading}>{props.heading}</Text>
+      <Description icon="ios-checkmark" text={haveText} />
+      <Description icon="ios-close" text={notHaveText} />
+      <Description icon="ios-help" text={unknownText} />
+    </View>
+  )
 }
 
 function Description(props: {icon: string, text: string | null}) {
