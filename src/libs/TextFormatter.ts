@@ -27,7 +27,7 @@ export function bearingText(bearing: number | undefined): string {
   return sectorNames[sector];
 }
 
-interface Fields {
+export interface Fields {
   have: string[];
   notHave: string[];
 }

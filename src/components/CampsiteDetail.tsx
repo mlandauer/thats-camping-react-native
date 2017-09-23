@@ -56,14 +56,27 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
   }
 }
 
+function FacilitiesSection(props: { facilities: Facilities }) {
+  let fields = TextFormatter.facilitiesFields(props.facilities)
+  return (
+    <Section heading="Facilities" fields={fields} />
+  )
+}
+
 function AccessSection(props: { access: Access }) {
   let fields = TextFormatter.accessFields(props.access)
-  let haveText = TextFormatter.listAsTextCapitalized(fields.have)
-  let notHaveText = TextFormatter.listAsTextCapitalized(fields.notHave)
+  return (
+    <Section heading="Access" fields={fields}/>
+  )
+}
+
+function Section(props: {fields: TextFormatter.Fields, heading: string}) {
+  let haveText = TextFormatter.listAsTextCapitalized(props.fields.have)
+  let notHaveText = TextFormatter.listAsTextCapitalized(props.fields.notHave)
   if (haveText || notHaveText) {
     return (
       <View style={{marginBottom: 10}}>
-        <Text style={styles.access}>Access</Text>
+        <Text style={styles.sectionHeading}>{props.heading}</Text>
         <Have text={haveText} />
         <NotHave text={notHaveText} />
       </View>
@@ -92,23 +105,6 @@ function Description(props: {tick: boolean, text: string | null}) {
       <View style={{flexDirection: 'row'}}>
         <Icon style={styles.icon} name={name} />
         <Text style={styles.list}>{props.text}</Text>
-      </View>
-    )
-  } else {
-    return null
-  }
-}
-
-function FacilitiesSection(props: { facilities: Facilities }) {
-  let fields = TextFormatter.facilitiesFields(props.facilities)
-  let haveText = TextFormatter.listAsTextCapitalized(fields.have)
-  let notHaveText = TextFormatter.listAsTextCapitalized(fields.notHave)
-  if (haveText || notHaveText) {
-    return (
-      <View style={{marginBottom: 10}}>
-        <Text style={styles.facilities}>Facilities</Text>
-        <Have text={haveText} />
-        <NotHave text={notHaveText} />
       </View>
     )
   } else {
@@ -169,15 +165,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flex: 1
   },
-  facilities: {
+  sectionHeading: {
     fontWeight: 'bold' as 'bold',
     fontSize: 20,
     marginBottom: 10,
-  },
-  access: {
-    fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginBottom: 10
   },
   buttonContainer: {
     padding: 10,
