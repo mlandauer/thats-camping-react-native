@@ -62,6 +62,7 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   let haveText = TextFormatter.listAsTextCapitalized(props.fields.have)
   let notHaveText = TextFormatter.listAsTextCapitalized(props.fields.notHave)
+
   if (haveText || notHaveText) {
     return (
       <View style={{marginBottom: 10}}>

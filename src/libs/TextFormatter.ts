@@ -30,11 +30,13 @@ export function bearingText(bearing: number | undefined): string {
 export interface Fields {
   have: string[];
   notHave: string[];
+  unknown: string[];
 }
 
 interface Field {
   have?: string;
   notHave?: string;
+  unknown?: string;
 }
 
 function listAsText(list: string[]): string | null {
@@ -62,7 +64,7 @@ function capitalizeFirstLetter(string: string) {
 }
 
 export function facilitiesFields(facilities: Facilities): Fields {
-  let r: Fields = { "have": [], "notHave": [] }
+  let r: Fields = { "have": [], "notHave": [], "unknown": [] }
   merge(r, toilets(facilities.toilets))
   merge(r, picnicTables(facilities.picnicTables))
   merge(r, barbecues(facilities.barbecues))
@@ -80,6 +82,9 @@ export function merge(r: Fields, t: Field): Fields {
   if (t.notHave) {
     r.notHave.push(t.notHave)
   }
+  if (t.unknown) {
+    r.unknown.push(t.unknown)
+  }
   return r
 }
 
@@ -92,7 +97,7 @@ export function toilets(toilets: string | undefined) {
     case "none":
       return { "notHave": "toilets" }
     default:
-      return {}
+      return { "unknown": "toilets"}
   }
 }
 
@@ -103,7 +108,7 @@ export function picnicTables(picnicTables: boolean | undefined) {
     case false:
       return { "notHave": "picnic tables" }
     default:
-      return {}
+      return { "unknown": "picnic tables" }
   }
 }
 
@@ -118,7 +123,7 @@ export function barbecues(barbecues: string | undefined) {
     case "none":
       return { "notHave": "BBQs" }
     default:
-      return {}
+      return { "unknown": "BBQs" }
   }
 }
 
@@ -131,7 +136,7 @@ export function showers(showers: string | undefined) {
     case "none":
       return { "notHave": "showers" }
     default:
-      return {}
+      return { "unknown": "showers" }
   }
 }
 
@@ -142,12 +147,12 @@ export function drinkingWater(drinkingWater: boolean | undefined) {
     case false:
       return { "notHave": "drinking water" }
     default:
-      return {}
+      return { "unknown": "drinking water" }
   }
 }
 
 export function accessFields(access: Access): Fields {
-  var r: Fields = { "have": [], "notHave": [] }
+  var r: Fields = { "have": [], "notHave": [], "unknown": [] }
   merge(r, caravans(access.caravans))
   merge(r, trailers(access.trailers))
   merge(r, car(access.car))
@@ -161,7 +166,7 @@ export function caravans(caravans: boolean | undefined) {
     case false:
       return { "notHave": "caravans" }
     default:
-      return {}
+      return { "unknown": "caravans" }
   }
 }
 
@@ -172,7 +177,7 @@ export function trailers(trailers: boolean | undefined) {
     case false:
       return { "notHave": "trailers" }
     default:
-      return {}
+      return { "unknown": "trailers" }
   }
 }
 
@@ -183,6 +188,6 @@ export function car(car: boolean | undefined) {
     case false:
       return { "notHave": "car camping" }
     default:
-      return {}
+      return { "unknown": "car camping" }
   }
 }
