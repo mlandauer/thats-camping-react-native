@@ -65,7 +65,7 @@ function AccessSection(props: { access: Access }) {
     if (notHaveText) {
       notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.access}>Access</Text>
           <Have text={haveText} />
           <NotHave text={notHaveText} />
@@ -73,7 +73,7 @@ function AccessSection(props: { access: Access }) {
       )
     } else {
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.access}>Access</Text>
           <Have text={haveText} />
         </View>
@@ -83,7 +83,7 @@ function AccessSection(props: { access: Access }) {
     if (notHaveText) {
       notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.access}>Access</Text>
           <NotHave text={notHaveText} />
         </View>
@@ -111,7 +111,7 @@ function Description(props: {tick: boolean, text: string}) {
   return (
     <View style={{flexDirection: 'row'}}>
       <Icon style={styles.icon} name={name} />
-      <Text style={styles.description}>{props.text}</Text>
+      <Text style={styles.list}>{props.text}</Text>
     </View>
   )
 }
@@ -125,7 +125,7 @@ function FacilitiesSection(props: { facilities: Facilities }) {
     if (notHaveText) {
       notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.facilities}>Facilities</Text>
           <Have text={haveText} />
           <NotHave text={notHaveText} />
@@ -133,7 +133,7 @@ function FacilitiesSection(props: { facilities: Facilities }) {
       )
     } else {
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.facilities}>Facilities</Text>
           <Have text={haveText} />
         </View>
@@ -143,7 +143,7 @@ function FacilitiesSection(props: { facilities: Facilities }) {
     if (notHaveText) {
       notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
-        <View>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.facilities}>Facilities</Text>
           <NotHave text={notHaveText} />
         </View>
@@ -202,6 +202,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20
   },
+  list: {
+    fontSize: 20,
+    marginBottom: 10
+  },
   facilities: {
     fontWeight: 'bold' as 'bold',
     fontSize: 20,
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 10,
-    marginTop: 20,
+    marginTop: 10,
     height: 45,
     overflow: 'hidden',
     borderRadius: 4,
