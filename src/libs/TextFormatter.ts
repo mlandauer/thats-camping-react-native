@@ -49,6 +49,10 @@ export function listAsText(list: string[]): string | null {
   }
 }
 
+export function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export function facilitiesFields(facilities: Facilities): Fields {
   let r: Fields = { "have": [], "notHave": [] }
   merge(r, toilets(facilities.toilets))

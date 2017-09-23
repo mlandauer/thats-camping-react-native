@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native'
 import Button from 'react-native-button'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position, Facilities, Access } from '../libs/types'
 import Star from '../components/Star'
@@ -60,19 +61,21 @@ function AccessSection(props: { access: Access }) {
   let haveText = TextFormatter.listAsText(fields.have)
   let notHaveText = TextFormatter.listAsText(fields.notHave)
   if (haveText) {
+    haveText = TextFormatter.capitalizeFirstLetter(haveText)
     if (notHaveText) {
+      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
       return (
         <View>
           <Text style={styles.access}>Access</Text>
-          <Text style={styles.description}>For {haveText}</Text>
-          <Text style={styles.description}>But not for {notHaveText}</Text>
+          <Have text={haveText} />
+          <NotHave text={notHaveText} />
         </View>
       )
     } else {
       return (
         <View>
           <Text style={styles.access}>Access</Text>
-          <Text style={styles.description}>For {haveText}</Text>
+          <Have text={haveText} />
         </View>
       )
     }
@@ -81,13 +84,35 @@ function AccessSection(props: { access: Access }) {
       return (
         <View>
           <Text style={styles.access}>Access</Text>
-          <Text style={styles.description}>Not for {notHaveText}</Text>
+          <NotHave text={notHaveText} />
         </View>
       )
     } else {
       return null
     }
   }
+}
+
+function Have(props: {text: string}) {
+  return (
+    <Description tick={true} text={props.text} />
+  )
+}
+
+function NotHave(props: {text: string}) {
+  return (
+    <Description tick={false} text={props.text} />
+  )
+}
+
+function Description(props: {tick: boolean, text: string}) {
+  let name = props.tick ? "ios-checkmark" : "ios-close"
+  return (
+    <View style={{flexDirection: 'row'}}>
+      <Icon style={styles.icon} name={name} />
+      <Text style={styles.description}>{props.text}</Text>
+    </View>
+  )
 }
 
 function FacilitiesSection(props: { facilities: Facilities }) {
@@ -164,6 +189,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#aaa',
     marginBottom: 20
+  },
+  icon: {
+    fontSize: 26,
+    marginRight: 10
   },
   description: {
     fontSize: 20,
