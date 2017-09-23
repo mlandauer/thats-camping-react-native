@@ -58,14 +58,8 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
 
 function AccessSection(props: { access: Access }) {
   let fields = TextFormatter.accessFields(props.access)
-  let haveText = TextFormatter.listAsText(fields.have)
-  let notHaveText = TextFormatter.listAsText(fields.notHave)
-  if (haveText) {
-    haveText = TextFormatter.capitalizeFirstLetter(haveText)
-  }
-  if (notHaveText) {
-    notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-  }
+  let haveText = TextFormatter.listAsTextCapitalized(fields.have)
+  let notHaveText = TextFormatter.listAsTextCapitalized(fields.notHave)
   if (haveText || notHaveText) {
     return (
       <View style={{marginBottom: 10}}>
@@ -107,14 +101,8 @@ function Description(props: {tick: boolean, text: string | null}) {
 
 function FacilitiesSection(props: { facilities: Facilities }) {
   let fields = TextFormatter.facilitiesFields(props.facilities)
-  let haveText = TextFormatter.listAsText(fields.have)
-  let notHaveText = TextFormatter.listAsText(fields.notHave)
-  if (haveText) {
-    haveText = TextFormatter.capitalizeFirstLetter(haveText)
-  }
-  if (notHaveText) {
-    notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-  }
+  let haveText = TextFormatter.listAsTextCapitalized(fields.have)
+  let notHaveText = TextFormatter.listAsTextCapitalized(fields.notHave)
   if (haveText || notHaveText) {
     return (
       <View style={{marginBottom: 10}}>

@@ -37,7 +37,7 @@ interface Field {
   notHave?: string;
 }
 
-export function listAsText(list: string[]): string | null {
+function listAsText(list: string[]): string | null {
   if (list.length == 0) {
     return null;
   }
@@ -49,7 +49,15 @@ export function listAsText(list: string[]): string | null {
   }
 }
 
-export function capitalizeFirstLetter(string: string) {
+export function listAsTextCapitalized(list: string[]): string | null {
+  let text = listAsText(list)
+  if (text) {
+    text = capitalizeFirstLetter(text)
+  }
+  return text
+}
+
+function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
