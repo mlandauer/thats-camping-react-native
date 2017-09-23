@@ -62,58 +62,47 @@ function AccessSection(props: { access: Access }) {
   let notHaveText = TextFormatter.listAsText(fields.notHave)
   if (haveText) {
     haveText = TextFormatter.capitalizeFirstLetter(haveText)
-    if (notHaveText) {
-      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.access}>Access</Text>
-          <Have text={haveText} />
-          <NotHave text={notHaveText} />
-        </View>
-      )
-    } else {
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.access}>Access</Text>
-          <Have text={haveText} />
-        </View>
-      )
-    }
+  }
+  if (notHaveText) {
+    notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
+  }
+  if (haveText || notHaveText) {
+    return (
+      <View style={{marginBottom: 10}}>
+        <Text style={styles.access}>Access</Text>
+        <Have text={haveText} />
+        <NotHave text={notHaveText} />
+      </View>
+    )
   } else {
-    if (notHaveText) {
-      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.access}>Access</Text>
-          <NotHave text={notHaveText} />
-        </View>
-      )
-    } else {
-      return null
-    }
+    return null
   }
 }
 
-function Have(props: {text: string}) {
+function Have(props: {text: string | null}) {
   return (
     <Description tick={true} text={props.text} />
   )
 }
 
-function NotHave(props: {text: string}) {
+function NotHave(props: {text: string | null}) {
   return (
     <Description tick={false} text={props.text} />
   )
 }
 
-function Description(props: {tick: boolean, text: string}) {
+function Description(props: {tick: boolean, text: string | null}) {
   let name = props.tick ? "ios-checkmark" : "ios-close"
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <Icon style={styles.icon} name={name} />
-      <Text style={styles.list}>{props.text}</Text>
-    </View>
-  )
+  if (props.text) {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <Icon style={styles.icon} name={name} />
+        <Text style={styles.list}>{props.text}</Text>
+      </View>
+    )
+  } else {
+    return null
+  }
 }
 
 function FacilitiesSection(props: { facilities: Facilities }) {
@@ -122,35 +111,20 @@ function FacilitiesSection(props: { facilities: Facilities }) {
   let notHaveText = TextFormatter.listAsText(fields.notHave)
   if (haveText) {
     haveText = TextFormatter.capitalizeFirstLetter(haveText)
-    if (notHaveText) {
-      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.facilities}>Facilities</Text>
-          <Have text={haveText} />
-          <NotHave text={notHaveText} />
-        </View>
-      )
-    } else {
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.facilities}>Facilities</Text>
-          <Have text={haveText} />
-        </View>
-      )
-    }
+  }
+  if (notHaveText) {
+    notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
+  }
+  if (haveText || notHaveText) {
+    return (
+      <View style={{marginBottom: 10}}>
+        <Text style={styles.facilities}>Facilities</Text>
+        <Have text={haveText} />
+        <NotHave text={notHaveText} />
+      </View>
+    )
   } else {
-    if (notHaveText) {
-      notHaveText = TextFormatter.capitalizeFirstLetter(notHaveText)
-      return (
-        <View style={{marginBottom: 10}}>
-          <Text style={styles.facilities}>Facilities</Text>
-          <NotHave text={notHaveText} />
-        </View>
-      )
-    } else {
-      return null
-    }
+    return null
   }
 }
 
