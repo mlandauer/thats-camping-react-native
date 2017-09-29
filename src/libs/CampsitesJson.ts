@@ -5,7 +5,7 @@ interface CampsiteJson {
   name: string;
   parkName: string;
   description: string;
-  position: Position | {};
+  position: Position | null;
   facilities: Facilities;
   access: Access;
 }
@@ -19,7 +19,7 @@ export function convertJson(json: CampsitesJson): Campsite[] {
   let c: Campsite[] = []
   json.forEach((campsite) => {
     // Convert weird representation of undefined position in json to how we should do it
-    let position: (Position | null) = convertPosition(campsite.position)
+    let position: (Position | null) = campsite.position
     c.push({
       _id: campsite.id.toString(),
       name: campsite.name,
@@ -31,12 +31,4 @@ export function convertJson(json: CampsitesJson): Campsite[] {
     })
   })
   return c
-}
-
-function convertPosition(position: Position | {}): (Position | null) {
-  if ((<Position>position).lat && (<Position>position).lng) {
-    return <Position>position
-  } else {
-    return null
-  }
 }

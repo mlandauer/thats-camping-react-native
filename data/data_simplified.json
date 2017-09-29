@@ -26,7 +26,7 @@
     "name": "Alexanders Hut",
     "parkName": "South East Forest National Park",
     "description": "An historic timber slab hut that was occupied until the 1980s. Today it provides shelter and very basic facilities for bushwalkers and visitors. Camping on the grounds of the hut is also permitted.\n\nNunnock Swamp walking trail is nearby and there are opportunities for bird-watching and seeing wildflowers. It's an important site for early European cultural heritage.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -199,7 +199,7 @@
     "name": "Behrs Flat campground",
     "parkName": "Kosciuszko National Park",
     "description": "There are no set campsites at this campground.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -438,7 +438,7 @@
     "name": "Blue Gums large group campground",
     "parkName": "Yengo National Park",
     "description": "This is a unique camping area, catering for large groups (up to 100 people) or small vehicle-based bush camping. This area is suitable for 4WD touring, cycling, horseriding and wilderness walks - or just simply relaxing in a remote location.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -501,7 +501,7 @@
     "name": "Boolambayte Lake",
     "parkName": "Myall Lakes National Park",
     "description": "The following camping areas are located around the Two-mile and Boolambayte Lakes:\n\nKorsmans Landing (26 sites) Bungaree Bay (7 sites) Violet Hill (40 sites).",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -608,7 +608,7 @@
     "name": "Bradley's/O'Brien's Hut",
     "parkName": "Kosciuszko National Park",
     "description": "There are no set campsites at this campground.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -671,7 +671,7 @@
     "name": "Brou Lake",
     "parkName": "Eurobodalla National Park",
     "description": "Campers at Brou Lake can enjoy beach and lake fishing, surfing and beach walking. Batemans Marine Park is adjacent to Brou Lake camping area, and there is a sanctuary zone where fishing is prohibited from immediately north of the entrance to Brou Lake to Jemisons Point. Parts of Brou Lake are also located within this sanctuary zone. Signs show those areas where fishing is not permitted. Fires are allowed but firewood is not supplied. Campers must bring their own drinking/washing water with them and remove all garbage from the site. The camping area is suitable for small caravans and campervans capable of travelling on unsealed roads.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -756,7 +756,7 @@
     "name": "Bullocks Hill campground",
     "parkName": "Kosciuszko National Park",
     "description": "Vehicle based camping with horses is permitted at this campground. A horse yard is provided on site.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -951,7 +951,7 @@
     "name": "Camp Wambelong",
     "parkName": "Warrumbungle National Park",
     "description": "The campground is close to walking tracks that lead to Split Rock, the Grand High Tops and Mount Exmouth.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -1366,7 +1366,7 @@
     "name": "Dawsons Spring campground",
     "parkName": "Mount Kaputar National Park",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "flush",
       "picnicTables": true,
@@ -1605,7 +1605,7 @@
     "name": "Double Wharf campground",
     "parkName": "Karuah Nature Reserve",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "none",
       "picnicTables": false,
@@ -1690,7 +1690,7 @@
     "name": "Euroka campground",
     "parkName": "Blue Mountains National Park",
     "description": "This grassy area near the beautiful Nepean River gorge is well known for its population of eastern grey kangaroos. There are five camping areas: Appletree Flat, Redgum, Nioka, Bennets Ridge and Daruk. Each area is suitable for 20 people.\n\nThere are picnic tables and fireplaces; bring your own gas/fuel stove or firewood. It is forbidden to collect firewood from the bush at Euroka.\n\nFlush toilets are available at the rangers station while pit toilets are provided at Euroka campground.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -2039,7 +2039,7 @@
     "name": "Green Gully campground",
     "parkName": "Oxley Wild Rivers National Park",
     "description": "You'll find walking tracks and lookouts overlooking the spectacular Chandler and Wollomombi Rivers here.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -2080,7 +2080,7 @@
     "name": "Group campground",
     "parkName": "Willandra National Park",
     "description": "Here you can enjoy Willandra Creek and a walking track. The homestead precinct is nearby.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "flush",
       "picnicTables": false,
@@ -2121,7 +2121,7 @@
     "name": "Gunneemooroo campground",
     "parkName": "Warrumbungle National Park",
     "description": "Gunneemooroo is located in the southern side of the Warrumbungle National Park.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -2602,7 +2602,7 @@
     "name": "Kosciuszko camping grounds",
     "parkName": "Kosciuszko National Park",
     "description": "There are many camping grounds throughout the park, though most have only basic facilities such as pit toilets and fireplaces.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -2665,7 +2665,7 @@
     "name": "Lake Cawndilla camping ground",
     "parkName": "Kinchega National Park",
     "description": "From this campground you can enjoy a walk along the shores of the lake - especially recommended in the early morning and towards sunset. The campground is ideal for large groups. You'll need to bring drinking water and firewood with you. Hot showers and bore water are available at the Shearer's Quarters at the historic woolshed.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -2684,7 +2684,7 @@
     "name": "Lake Creek camping ground",
     "parkName": "Wadbilliga National Park",
     "description": "This campground is in a bushland setting, next to Lake Creek. You'll need to bring drinking water.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -2923,7 +2923,7 @@
     "name": "Main camp",
     "parkName": "Mungo National Park",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -3448,7 +3448,7 @@
     "name": "Old Snowy campground",
     "parkName": "Kosciuszko National Park",
     "description": "Vehicle based camping with horses is permitted at this campground. Horse yards are provided on site.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -3709,7 +3709,7 @@
     "name": "Postman's camping area",
     "parkName": "South East Forest National Park",
     "description": "Camp or picnic near a wide sandy bend of the Tantawangalo Creek. Campsites with fireplaces are provided. The campsite is on the track that was used by the postman delivering mail between the tablelands to Kameruka during the 1800s.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -4014,7 +4014,7 @@
     "name": "Shelley Head campground",
     "parkName": "Yuraygir National Park",
     "description": "Campsites are close to Shelley Caves, Little Shelley Beach and Caves Beach, where you can swim and fish. Bring your own water and fuel stove.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "none",
       "picnicTables": true,
@@ -4187,7 +4187,7 @@
     "name": "Sunnyside camping area",
     "parkName": "Myall Lakes National Park",
     "description": "This boat-based camping area is located on the narrow stretch of water between Two Mile and Boolambayte Lakes. It is at the site of the former Sunnyside Guesthouse.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "none",
       "picnicTables": false,
@@ -4426,7 +4426,7 @@
     "name": "The Pines camping ground",
     "parkName": "Coolah Tops National Park",
     "description": "This is a large and open campground near to Norfolk Island Swamp. You'll need to bring drinking water and firewood.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -4533,7 +4533,7 @@
     "name": "Three Mile Dam East campground",
     "parkName": "Kosciuszko National Park",
     "description": "The eastern side of Three Mile Dam has several clear areas for camping. The most sheltered place is within the tree line, near the public facilities. There are no designated sites at this campground.\n\nThree Mile Dam and the surrounding plains provide a spectacular wildflower display during early to mid-summer.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": false,
@@ -4552,7 +4552,7 @@
     "name": "Three Mile Dam West campground",
     "parkName": "Kosciuszko National Park",
     "description": "This campground is located along the peninsular of Three Mile Dam, sheltered amongst the snow gums. There are basic public facilities and no designated campsites.\n\nThe surrounding plains provide a spectacular wildflower display during early to mid-summer. Take Gold Seekers Walk to enjoy the scenery of the snow gums, heath and wildflowers as well as relics of the mining era. Gold Seekers Walk starts adjacent to the carpark next to the Three Mile Dam peninsular access road.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -4725,7 +4725,7 @@
     "name": "Village campground",
     "parkName": "Hill End Historic Site",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "flush",
       "picnicTables": true,
@@ -4832,7 +4832,7 @@
     "name": "Wards Glen camping ground",
     "parkName": "The Glen Nature Reserve",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "none",
       "picnicTables": false,
@@ -5071,7 +5071,7 @@
     "name": "Woolshed Flat campground",
     "parkName": "Cocoparra National Park",
     "description": "",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,
@@ -5112,7 +5112,7 @@
     "name": "Wyanbene Cave campground",
     "parkName": "Deua National Park",
     "description": "The campground offers caving and bushwalking. There are 5 to 10 unmarked sites.",
-    "position": {},
+    "position": null,
     "facilities": {
       "toilets": "non_flush",
       "picnicTables": true,

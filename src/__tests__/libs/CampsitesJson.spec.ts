@@ -3,13 +3,13 @@ import * as CampsitesJson from '../../libs/CampsitesJson'
 
 describe('CampsitesJson', () => {
   describe('convertJson', () => {
-    it('should convert empty position for campsite to undefined', () => {
+    it('should keep null position for campsite as null', () => {
       let campsite = {
         id: 1,
         name: "A campsite",
         parkName: "A park",
         description: "A nice campsite",
-        position: {},
+        position: null,
         facilities: {
           toilets: 'none' as 'none',
           picnicTables: false,

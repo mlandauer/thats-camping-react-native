@@ -25,12 +25,17 @@ data.campsites = data.campsites.map(function(campsite) {
     barbecues = "wood"
   }
 
+  var position = null;
+  if (lat && lng) {
+    position = { lat: lat, lng: lng }
+  }
+
   return ({
     id: campsite.id,
     name: campsite.longName,
     parkName: mapping[campsite.park],
     description: campsite.description,
-    position: { lat: lat, lng: lng },
+    position: position,
     facilities: {
       toilets: campsite.toilets,
       picnicTables: campsite.picnicTables,
