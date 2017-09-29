@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "tsc": "tsc --watch"
+    "tsc": "tsc --watch",
+    "transform_data": "node transform_data.js"
   },
   "dependencies": {
     "@types/pouchdb-adapter-http": "^6.1.1",
