@@ -1,35 +1,23 @@
 import { Campsite, Position, Facilities, Access } from '../libs/types'
 
-// This is the form of the data as it is in data_simplified.json
-export interface CampsitesJson {
-  campsites: {
-    id: number;
-    name: string;
-    description: string;
-    position: Position | {};
-    facilities: Facilities;
-    access: Access;
-    park_id: number;
-  }[];
-  parks: {
-    id: number;
-    name: string;
-    description: string;
-    campsite_ids: number[];
-  }[];
+interface CampsiteJson {
+  id: number;
+  name: string;
+  parkName: string;
+  description: string;
+  position: Position | {};
+  facilities: Facilities;
+  access: Access;
 }
+
+// This is the form of the data as it is in data_simplified.json
+export type CampsitesJson = CampsiteJson[]
 
 // Convert the json as stored in data_simplified.json to a list of campsites
 export function convertJson(json: CampsitesJson): Campsite[] {
-  // Turn parks array into hash
-  let parksHash: { [index: number]: any } = {}
-  json.parks.forEach((park) => {
-    parksHash[park.id] = park
-  })
   // Turn array in campsites into hash
   let c: Campsite[] = []
-  json.campsites.forEach((campsite) => {
-    let park = parksHash[campsite.park_id]
+  json.forEach((campsite) => {
     // Convert weird representation of undefined position in json to how we should do it
     let position: (Position | null) = convertPosition(campsite.position)
     c.push({
@@ -38,7 +26,7 @@ export function convertJson(json: CampsitesJson): Campsite[] {
       description: campsite.description,
       facilities: campsite.facilities,
       access: campsite.access,
-      parkName: park.name,
+      parkName: campsite.parkName,
       position: position
     })
   })

@@ -2,6 +2,12 @@
 // need so that there is less processing required in the app itself
 var data = require('./data.json');
 
+// First make a mapping of park ids to park names
+var mapping = {}
+data.parks.forEach(function(park) {
+  mapping[park.id] = park.longName
+});
+
 data.campsites = data.campsites.map(function(campsite) {
   var lat = campsite.latitude
   var lng = campsite.longitude
@@ -21,8 +27,8 @@ data.campsites = data.campsites.map(function(campsite) {
 
   return ({
     id: campsite.id,
-    park_id: campsite.park,
     name: campsite.longName,
+    parkName: mapping[campsite.park],
     description: campsite.description,
     position: { lat: lat, lng: lng },
     facilities: {
@@ -40,14 +46,5 @@ data.campsites = data.campsites.map(function(campsite) {
   });
 });
 
-data.parks = data.parks.map(function(park) {
-  return ({
-    id: park.id,
-    name: park.longName,
-    description: park.description,
-    campsite_ids: park.campsites
-  });
-});
-
 var fs = require('fs');
-fs.writeFileSync('data/data_simplified.json', JSON.stringify(data, null, 2));
+fs.writeFileSync('data/data_simplified.json', JSON.stringify(data.campsites, null, 2));
