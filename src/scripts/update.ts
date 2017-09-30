@@ -115,30 +115,18 @@ async function campsitesFromMorph() {
   return json.map((c) => convertMorphRecordToCampsite(c))
 }
 
-// a - b
-function difference<T>(a: Set<T>, b: Set<T>) {
-  return new Set([...a].filter(x => !b.has(x)))
-}
-
 Promise.all([
   campsitesFromSource('nationalparks.nsw.gov.au'),
   campsitesFromMorph()
 ]).then((results) => {
   let campsitesSource = results[0]
   let campsitesMorph = results[1]
-  console.log("from database", campsitesSource)
-  console.log("from morph", campsitesMorph)
-  let sourceIds = new Set(campsitesSource.map((c) => {return c.sourceId}))
-  let morphIds = new Set(campsitesMorph.map((c) => {return c.sourceId}))
-  // First let's figure out the new campsites (in morph. not in database)
-  let removedIds = difference(sourceIds, morphIds)
-
-  let removedCampsites = campsitesSource.filter(c => removedIds.has(c.sourceId))
-  removedCampsites.forEach(c => db.remove(c))
 
   let docs: (Campsite | CampsiteNoId)[] = []
+
+  // This bit creates new campsites and updates existing ones
   campsitesMorph.forEach((c) => {
-    let source = campsitesSource.find(campsite => campsite.sourceId == c.sourceId)
+    let source = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
     if (source) {
       // This is a campsite that might need updating
       // Need to add the _id and _rev (from source) into the morph data
@@ -149,6 +137,15 @@ Promise.all([
     } else {
       // This is a new campsite
       docs.push(c)
+    }
+  })
+
+  // This removes campsites
+  campsitesSource.forEach((c) => {
+    let morph = campsitesMorph.find(campsite => campsite.sourceId === c.sourceId)
+    if (!morph) {
+      let updated = {...c, _deleted: true}
+      docs.push(updated)
     }
   })
   db.bulkDocs(docs)
