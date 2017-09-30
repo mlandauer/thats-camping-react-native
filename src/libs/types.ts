@@ -11,17 +11,17 @@ export interface CampsiteNoId {
   sourceId?: string;
 }
 
-// This is the how campsites are stored in the state
-export interface Campsite extends CampsiteNoId {
+export interface CampsiteNoRev extends CampsiteNoId {
   _id: string;
 }
 
-export interface CampsiteWithRev extends Campsite {
+// This is the how campsites are stored in the state
+export interface Campsite extends CampsiteNoRev {
   _rev: string;
 }
 
 // This is how campsites are in the props
-export interface CampsiteWithStarredRev extends CampsiteWithRev {
+export interface CampsiteWithStarred extends Campsite {
   starred: boolean;
 }
 

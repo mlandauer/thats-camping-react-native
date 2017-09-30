@@ -8,7 +8,7 @@ import * as Dotenv from 'dotenv'
 import fetch from 'node-fetch'
 import * as querystring from 'querystring'
 
-import { CampsiteNoId, CampsiteWithRev, Position } from '../libs/types'
+import { CampsiteNoId, Campsite, Position } from '../libs/types'
 // import { remoteDbCreate } from '../libs/DatabaseGeneric'
 
 // Loads the environment variables from .env
@@ -103,7 +103,7 @@ async function campsitesFromSource(source: string) {
   // First get all campsites in the database with the same source
   let docs = await db.allDocs({include_docs: true})
   let campsites = docs.rows.map((row) => {
-    return (row.doc as CampsiteWithRev)
+    return (row.doc as Campsite)
   })
   return campsites.filter((campsite) => {
     return campsite.source == source

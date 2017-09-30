@@ -1,4 +1,4 @@
-import { Campsite, Position, Facilities, Access } from '../libs/types'
+import { CampsiteNoRev, Position, Facilities, Access } from '../libs/types'
 
 interface CampsiteJson {
   id: number;
@@ -14,9 +14,9 @@ interface CampsiteJson {
 export type CampsitesJson = CampsiteJson[]
 
 // Convert the json as stored in data_simplified.json to a list of campsites
-export function convertJson(json: CampsitesJson): Campsite[] {
+export function convertJson(json: CampsitesJson): CampsiteNoRev[] {
   // Turn array in campsites into hash
-  let c: Campsite[] = []
+  let c: CampsiteNoRev[] = []
   json.forEach((campsite) => {
     // Convert weird representation of undefined position in json to how we should do it
     let position: (Position | null) = campsite.position

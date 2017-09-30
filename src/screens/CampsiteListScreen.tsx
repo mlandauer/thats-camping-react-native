@@ -5,7 +5,7 @@ import CampsiteList from '../components/CampsiteList'
 import { Navigator } from 'react-native-navigation'
 
 import {
-  CampsiteWithStarredRev,
+  CampsiteWithStarred,
   Position
 } from '../libs/types'
 import { State } from '../ducks'
@@ -15,7 +15,7 @@ import ScreenWithAbout from './ScreenWithAbout'
 
 interface Props {
   navigator?: Navigator;
-  campsites: { [index: string]: CampsiteWithStarredRev };
+  campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
 }
 
