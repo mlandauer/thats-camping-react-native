@@ -116,11 +116,11 @@ async function campsitesFromMorph() {
 }
 
 // a - b
-function difference(a: Set, b: Set) {
+function difference<T>(a: Set<T>, b: Set<T>) {
   return new Set([...a].filter(x => !b.has(x)))
 }
 
-function intersection(a: Set, b: Set) {
+function intersection<T>(a: Set<T>, b: Set<T>) {
   return new Set([...a].filter(x => b.has(x)))
 }
 
