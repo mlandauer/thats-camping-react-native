@@ -25,7 +25,7 @@ var campsites = CampsitesJson.convertJson(json)
 // Obviously anyone who really wants to get access to the password below
 // can just decompile the binary. Not including the password in the source
 // code provides a minimal level of security.
-let remoteDb = remoteDbCreate(Config.COUCHDB_REMOTE_PASSWORD)
+let remoteDb = remoteDbCreate(PouchDB, Config.COUCHDB_REMOTE_PASSWORD)
 
 // Starts two-way sync between local and remote database
 export function sync() {
