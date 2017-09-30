@@ -8,6 +8,7 @@ import Config from 'react-native-config'
 
 import { Campsite, CampsiteNoId } from '../libs/types'
 import * as CampsitesJson from '../libs/CampsitesJson'
+import { remoteDbCreate } from '../libs/DatabaseGeneric'
 
 PouchDB
   .plugin(AsyncStoragePouch)
@@ -21,15 +22,10 @@ interface PouchCampsite extends CampsiteNoId {
 var json = require('../../data_simplified.json')
 var campsites = CampsitesJson.convertJson(json)
 
-export let remoteDb = new PouchDB('https://mlandauer.cloudant.com/thats-camping-react-native', {
-  auth: {
-    username: 'chookeementootworsenters',
-    // Obviously anyone who really wants to get access to the password below
-    // can just decompile the binary. Not including the password in the source
-    // code provides a minimal level of security.
-    password: Config.COUCHDB_REMOTE_PASSWORD
-  }
-});
+// Obviously anyone who really wants to get access to the password below
+// can just decompile the binary. Not including the password in the source
+// code provides a minimal level of security.
+let remoteDb = remoteDbCreate(Config.COUCHDB_REMOTE_PASSWORD)
 
 // Starts two-way sync between local and remote database
 export function sync() {
