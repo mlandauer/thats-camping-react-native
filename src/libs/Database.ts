@@ -6,7 +6,7 @@ import * as HttpPouch from 'pouchdb-adapter-http'
 import * as replication from 'pouchdb-replication'
 import Config from 'react-native-config'
 
-import { Campsite, CampsiteNoId } from '../libs/types'
+import { Campsite } from '../libs/types'
 import * as CampsitesJson from '../libs/CampsitesJson'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
 
@@ -14,10 +14,6 @@ PouchDB
   .plugin(AsyncStoragePouch)
   .plugin(HttpPouch)
   .plugin(replication)
-
-interface PouchCampsite extends CampsiteNoId {
-  _id: string,
-}
 
 var json = require('../../data_simplified.json')
 var campsites = CampsitesJson.convertJson(json)
@@ -29,18 +25,18 @@ let remoteDb = remoteDbCreate(PouchDB, Config.COUCHDB_REMOTE_PASSWORD)
 
 // Starts two-way sync between local and remote database
 export function sync() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let db = new PouchDB<Campsite>('thatscamping')
   let sync = PouchDB.sync(remoteDb, db, { live: true })
   return sync
 }
 
 export function destroy() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let db = new PouchDB<Campsite>('thatscamping')
   return db.destroy()
 }
 
 export async function allChanges() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let db = new PouchDB<Campsite>('thatscamping')
   let response = await db.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
@@ -55,7 +51,7 @@ export async function allChanges() {
 }
 
 export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let db = new PouchDB<Campsite>('thatscamping')
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       if (response.doc) {
@@ -66,13 +62,13 @@ export function changes(since: number | string, onChange: (campsite: Campsite) =
 
 // TODO: In case the campsites have been edited should reset them
 export function resetCampsites() {
-  let db = new PouchDB<PouchCampsite>('thatscamping')
+  let db = new PouchDB<Campsite>('thatscamping')
   // Dump all the campsites into the local pouchdb database
   // This will cause a conflict if the campsites already exist
   return db.bulkDocs(campsites.map(c => convertToPouch(c)))
 }
 
-function convertToPouch(campsite: Campsite): PouchCampsite {
+function convertToPouch(campsite: Campsite): Campsite {
   return {
     _id: campsite._id.toString(),
     name: campsite.name,
@@ -84,7 +80,7 @@ function convertToPouch(campsite: Campsite): PouchCampsite {
   }
 }
 
-function convertFromPouch(campsite: PouchCampsite): Campsite {
+function convertFromPouch(campsite: Campsite): Campsite {
   return {
     _id: campsite._id,
     name: campsite.name,
