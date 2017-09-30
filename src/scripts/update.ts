@@ -112,12 +112,13 @@ async function campsitesFromMorph() {
   return json.map((c) => convertMorphRecordToCampsite(c))
 }
 
-// First get all campsites in the database with the same source
-campsitesFromSource('nationalparks.nsw.gov.au').then((campsites) => {
-  console.log("from database", campsites)
-})
-
-// First let's get data from morph.io using the API
-campsitesFromMorph().then((campsites) => {
-  console.log("from morph", campsites)
+Promise.all([
+  campsitesFromSource('nationalparks.nsw.gov.au'),
+  campsitesFromMorph()
+]).then((results) => {
+  let campsitesSource = results[0]
+  let campsitesMorph = results[1]
+  console.log("from database", campsitesSource)
+  console.log("from morph", campsitesMorph)
+  // First let's figure out the new campsites (in morph. not in database)
 })
