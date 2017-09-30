@@ -40,7 +40,7 @@ export async function allChanges() {
   let response = await db.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
-    if (result.doc) {
+    if (result.doc && !result.doc._deleted) {
       campsites3.push(result.doc)
     }
   })
@@ -54,7 +54,8 @@ export function changes(since: number | string, onChange: (campsite: Campsite) =
   let db = new PouchDB<CampsiteNoId>('thatscamping')
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
-      if (response.doc) {
+      // TODO: Actually propogate deletes rather than just ignoring them
+      if (response.doc && !response.doc._deleted) {
         onChange(response.doc)
       }
     })
