@@ -29,9 +29,9 @@ export interface Access {
 }
 
 export interface Facilities {
-  toilets: "flush" | "non_flush" | "none" | undefined;
+  toilets: "flush" | "non_flush" | "none" | boolean | undefined;
   picnicTables: boolean | undefined;
-  barbecues: "wood" | "gas_electric" | "none" | undefined;
-  showers: "hot" | "cold" | "none" | undefined;
+  barbecues: "wood" | "gas_electric" | "none" | boolean | undefined;
+  showers: "hot" | "cold" | "none" | boolean | undefined;
   drinkingWater: boolean | undefined;
 }

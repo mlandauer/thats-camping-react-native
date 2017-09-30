@@ -88,13 +88,16 @@ export function merge(r: Fields, t: Field): Fields {
   return r
 }
 
-export function toilets(toilets: string | undefined) {
+export function toilets(toilets: string | boolean | undefined) {
   switch (toilets) {
+    case true:
+      return { "have": "toilets" }
     case "flush":
       return { "have": "flush toilets" }
     case "non_flush":
       return { "have": "non-flush toilets" }
     case "none":
+    case false:
       return { "notHave": "toilets" }
     default:
       return { "unknown": "toilets"}
@@ -112,27 +115,33 @@ export function picnicTables(picnicTables: boolean | undefined) {
   }
 }
 
-export function barbecues(barbecues: string | undefined) {
+export function barbecues(barbecues: string | boolean | undefined) {
   switch (barbecues) {
     // TODO: show whether you need to bring your own firewood elsewhere
     // Like "You will need to bring firewood (if you want to use the wood BBQs) and drinking water"
+    case true:
+      return { "have": "BBQs" }
     case "wood":
       return { "have": "wood BBQs" }
     case "gas_electric":
       return { "have": "gas/electric BBQs" }
     case "none":
+    case false:
       return { "notHave": "BBQs" }
     default:
       return { "unknown": "BBQs" }
   }
 }
 
-export function showers(showers: string | undefined) {
+export function showers(showers: string | boolean | undefined) {
   switch (showers) {
+    case true:
+      return { "have": "showers" }
     case "hot":
       return { "have": "hot showers" }
     case "cold":
       return { "have": "cold showers" }
+    case false:
     case "none":
       return { "notHave": "showers" }
     default:

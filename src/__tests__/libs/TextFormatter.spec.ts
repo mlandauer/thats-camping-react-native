@@ -26,6 +26,8 @@ describe('TextFormatter', () => {
       expect(TextFormatter.toilets("flush")).toEqual({ "have": "flush toilets" })
       expect(TextFormatter.toilets("non_flush")).toEqual({ "have": "non-flush toilets" })
       expect(TextFormatter.toilets("none")).toEqual({ "notHave": "toilets" })
+      expect(TextFormatter.toilets(true)).toEqual({ "have": "toilets" })
+      expect(TextFormatter.toilets(false)).toEqual({ "notHave": "toilets" })
       expect(TextFormatter.toilets(undefined)).toEqual({"unknown": "toilets" })
     })
 
@@ -39,6 +41,8 @@ describe('TextFormatter', () => {
       expect(TextFormatter.barbecues("wood")).toEqual({ "have": "wood BBQs" })
       expect(TextFormatter.barbecues("gas_electric")).toEqual({ "have": "gas/electric BBQs" })
       expect(TextFormatter.barbecues("none")).toEqual({ "notHave": "BBQs" })
+      expect(TextFormatter.barbecues(true)).toEqual({ "have": "BBQs" })
+      expect(TextFormatter.barbecues(false)).toEqual({ "notHave": "BBQs" })
       expect(TextFormatter.barbecues(undefined)).toEqual({ "unknown": "BBQs" })
     })
 
@@ -46,6 +50,8 @@ describe('TextFormatter', () => {
       expect(TextFormatter.showers("hot")).toEqual({ "have": "hot showers" })
       expect(TextFormatter.showers("cold")).toEqual({ "have": "cold showers" })
       expect(TextFormatter.showers("none")).toEqual({ "notHave": "showers" })
+      expect(TextFormatter.showers(true)).toEqual({ "have": "showers" })
+      expect(TextFormatter.showers(false)).toEqual({ "notHave": "showers" })
       expect(TextFormatter.showers(undefined)).toEqual({ "unknown": "showers" })
     })
 
