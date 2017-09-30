@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "tsc": "tsc --watch",
-    "transform_data": "node data/transform_data.js"
+    "transform_data": "node data/transform_data.js",
+    "update": "node lib/scripts/update.js"
   },
   "dependencies": {
     "@types/pouchdb-adapter-http": "^6.1.1",
@@ -29,15 +30,19 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^4.0.1",
     "@types/expect": "^1.20.1",
     "@types/jest": "^20.0.2",
+    "@types/pouchdb-node": "^6.1.1",
     "@types/react-native": "^0.47.2",
     "@types/react-redux": "^5.0.1",
     "@types/react-test-renderer": "^15.5.1",
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "^2.0.0",
+    "dotenv": "^4.0.0",
     "expect": "^1.20.2",
     "jest": "20.0.4",
+    "pouchdb-node": "^6.3.4",
     "react-test-renderer": "16.0.0-alpha.12",
     "ts-jest": "^20.0.7",
     "typescript": "^2.4.1"
