@@ -8,7 +8,7 @@ export interface CampsiteNoId {
   // Use the following two fields to capture where this data is coming from
   // This defines a namespace in which the source_ids are unique
   source?: string;
-  source_id?: string;
+  sourceId?: string;
 }
 
 // This is the how campsites are stored in the state

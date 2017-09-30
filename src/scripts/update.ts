@@ -94,7 +94,7 @@ function convertMorphRecordToCampsite(morph: MorphRecord): CampsiteNoId {
       car: (morph.car == "true")
     },
     source: 'nationalparks.nsw.gov.au',
-    source_id: morph.id
+    sourceId: morph.id
   }
 }
 
@@ -102,8 +102,11 @@ function convertMorphRecordToCampsite(morph: MorphRecord): CampsiteNoId {
 async function campsitesFromSource(source: string) {
   // First get all campsites in the database with the same source
   let docs = await db.allDocs({include_docs: true})
-  return docs.rows.filter((row) => {
-    return row.doc.source == source
+  let campsites = docs.rows.map((row) => {
+    return row.doc
+  })
+  return campsites.filter((campsite) => {
+    return campsite.source == source
   })
 }
 
@@ -120,5 +123,10 @@ Promise.all([
   let campsitesMorph = results[1]
   console.log("from database", campsitesSource)
   console.log("from morph", campsitesMorph)
+  let sourceIds = campsitesSource.map((c) => {return c.sourceId})
+  let morphIds = campsitesMorph.map((c) => {return c.sourceId})
+  console.log("sourceIds", sourceIds)
+  console.log("morphIds", morphIds)
   // First let's figure out the new campsites (in morph. not in database)
+
 })
