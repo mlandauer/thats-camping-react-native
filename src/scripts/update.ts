@@ -146,4 +146,7 @@ Promise.all([
     return addedIds.has(campsite.sourceId)
   })
   db.bulkDocs(addedCampsites)
+
+  let removedCampsites = campsitesSource.filter(c => removedIds.has(c.sourceId))
+  removedCampsites.forEach(c => db.remove(c))
 })
