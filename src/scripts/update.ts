@@ -35,13 +35,16 @@ Dotenv.config()
 //   console.error("environment variable COUCHDB_REMOTE_PASSWORD not set")
 // }
 
-// First let's get data from morph.io using the API
-let s = querystring.stringify({
-  key: process.env.MORPH_API_KEY,
-  query: 'select * from "data" limit 10'
-})
-fetch('https://api.morph.io/mlandauer/scraper-campsites-nsw-nationalparks/data.json?' + s).then((r) => {
+async function getMorphData(scraper: string) {
+  let s = querystring.stringify({
+    key: process.env.MORPH_API_KEY,
+    query: 'select * from "data" limit 10'
+  })
+  let r = await fetch('https://api.morph.io/' + scraper + '/data.json?' + s)
   return r.json()
-}).then((json) => {
+}
+
+// First let's get data from morph.io using the API
+getMorphData('mlandauer/scraper-campsites-nsw-nationalparks').then((json) => {
   console.log(json)
 })
