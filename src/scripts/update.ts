@@ -41,7 +41,7 @@ async function getMorphData(scraper: string) {
   let s = querystring.stringify({
     key: process.env.MORPH_API_KEY,
     // TODO: Don't limit the number returned
-    query: 'select * from "data" limit 10'
+    query: 'select * from "data" limit 2'
   })
   let r = await fetch('https://api.morph.io/' + scraper + '/data.json?' + s)
   return r.json()
@@ -114,13 +114,10 @@ async function campsitesFromMorph() {
 
 // First get all campsites in the database with the same source
 campsitesFromSource('nationalparks.nsw.gov.au').then((campsites) => {
-  console.log(campsites)
+  console.log("from database", campsites)
 })
 
 // First let's get data from morph.io using the API
 campsitesFromMorph().then((campsites) => {
-    campsites.forEach((campsite) => {
-      // Initially just dump all the data into the database
-      db.post(campsite)
-    })
+  console.log("from morph", campsites)
 })
