@@ -141,4 +141,9 @@ Promise.all([
   console.log("sharedIds", sharedIds)
   console.log("addedIds", addedIds)
   console.log("removedIds", removedIds)
+
+  let addedCampsites = campsitesMorph.filter((campsite) => {
+    return addedIds.has(campsite.sourceId)
+  })
+  db.bulkDocs(addedCampsites)
 })
