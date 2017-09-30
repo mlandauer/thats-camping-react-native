@@ -37,11 +37,6 @@ let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
 //   console.error("environment variable COUCHDB_REMOTE_PASSWORD not set")
 // }
 
-// // Just spit out the contents of the database to the standard output
-db.allDocs({include_docs: true}).then((docs) => {
-  console.log(docs.rows.length)
-})
-
 async function getMorphData(scraper: string) {
   let s = querystring.stringify({
     key: process.env.MORPH_API_KEY,
@@ -102,6 +97,20 @@ function convertMorphRecordToCampsite(morph: MorphRecord): CampsiteNoId {
     source_id: morph.id
   }
 }
+
+// Returns all campsites from a particular source
+async function campsitesFromSource(source: string) {
+  // First get all campsites in the database with the same source
+  let docs = await db.allDocs({include_docs: true})
+  return docs.rows.filter((row) => {
+    return row.doc.source == source
+  })
+}
+
+// First get all campsites in the database with the same source
+campsitesFromSource('nationalparks.nsw.gov.au').then((campsites) => {
+  console.log(campsites)
+})
 
 // First let's get data from morph.io using the API
 getMorphData('mlandauer/scraper-campsites-nsw-nationalparks').then((json: MorphRecord[]) => {
