@@ -150,16 +150,19 @@ Promise.all([
   let removedCampsites = campsitesSource.filter(c => removedIds.has(c.sourceId))
   removedCampsites.forEach(c => db.remove(c))
 
+  let docs: (Campsite | CampsiteNoId)[] = []
   // Need to add the _id and _rev (from source) into the morph data
-  let sharedCampsites = campsitesMorph.filter(c => sharedIds.has(c.sourceId))
-    .map((c) => {
+  campsitesMorph.filter(c => sharedIds.has(c.sourceId))
+    .forEach((c) => {
       let source = campsitesSource.find(campsite => campsite.sourceId == c.sourceId)
       if (source) {
-        return {...c, _id: source._id, _rev: source._rev}
+        let updated = {...c, _id: source._id, _rev: source._rev}
+        if (JSON.stringify(source) !== JSON.stringify(updated)) {
+          docs.push(updated)
+        }
       } else {
-        return c
+        docs.push(c)
       }
     })
-  console.log("sharedCampsites", sharedCampsites)
-  db.bulkDocs(sharedCampsites)
+  db.bulkDocs(docs)
 })
