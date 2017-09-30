@@ -15,6 +15,7 @@ describe('campsites', () => {
       }
       const campsite = {
         _id: '1',
+        _rev: '1',
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -45,6 +46,7 @@ describe('campsites', () => {
     it('should convert empty position for campsite to undefined', () => {
       let campsite = {
         _id: '1',
+        _rev: 'a',
         name: "A campsite",
         description: "A nice campsite",
         position: null,
@@ -68,6 +70,7 @@ describe('campsites', () => {
       })).toEqual({
         '1': {
           _id: '1',
+          _rev: 'a',
           name: "A campsite",
           description: "A nice campsite",
           position: null,
@@ -111,16 +114,19 @@ describe('campsites', () => {
       const campsite1 = {
         ...templateCampsite,
         _id: '1',
+        _rev: 'a',
         name: "A campsite"
       }
       const campsite2 = {
         ...templateCampsite,
         _id: '2',
+        _rev: 'a',
         name: "Another campsite"
       }
       const campsite3 = {
         ...templateCampsite,
         _id: '3',
+        _rev: 'a',
         name: "And another"
       }
       expect(

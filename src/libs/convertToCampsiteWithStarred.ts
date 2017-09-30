@@ -1,14 +1,14 @@
-import { Campsite, CampsiteWithStarred } from './types'
+import { CampsiteWithRev, CampsiteWithStarred, CampsiteWithStarredRev } from './types'
 
-export function convertToCampsiteWithStarred(campsite: Campsite, starredList: string[]): CampsiteWithStarred {
+export function convertToCampsiteWithStarred(campsite: CampsiteWithRev, starredList: string[]): CampsiteWithStarredRev {
   // Don't want to use strict equality (with indexOf) as a workaround
   let i = starredList.findIndex((v) => { return v == campsite._id })
   let starred = i != -1
   return { ...campsite, starred: starred }
 }
 
-export function convertToCampsitesWithStarred(campsites: { [index: string]: Campsite }, starredList: string[]): { [index: string]: CampsiteWithStarred } {
-  let campsitesWithStarred: { [index: string]: CampsiteWithStarred } = {}
+export function convertToCampsitesWithStarred(campsites: { [index: string]: CampsiteWithRev }, starredList: string[]): { [index: string]: CampsiteWithStarred } {
+  let campsitesWithStarred: { [index: string]: CampsiteWithStarredRev } = {}
   for (var id in campsites) {
     campsitesWithStarred[id] = { ...campsites[id], starred: false }
   }

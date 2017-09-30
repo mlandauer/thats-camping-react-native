@@ -1,16 +1,16 @@
-import { Campsite } from '../libs/types'
+import { CampsiteWithRev } from '../libs/types'
 
 // Actions
 type Action = {
   type: 'UPDATE_CAMPSITES';
-  campsites: Campsite[];
+  campsites: CampsiteWithRev[];
 } | {
   type: 'NOOP'
 };
 
 // Reducer
 export interface State {
-  readonly [index: string]: Campsite
+  readonly [index: string]: CampsiteWithRev
 };
 
 export const initialState = {}
@@ -18,7 +18,7 @@ export const initialState = {}
 export default function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_CAMPSITES':
-      let c: { [index: string]: Campsite } = {}
+      let c: { [index: string]: CampsiteWithRev } = {}
       action.campsites.forEach(campsite => {
         c[campsite._id] = campsite
       })
@@ -29,13 +29,13 @@ export default function reducer(state: State = initialState, action: Action): St
 }
 
 // Action Creators
-export function updateCampsites(campsites: Campsite[]): Action {
+export function updateCampsites(campsites: CampsiteWithRev[]): Action {
   return {
     type: 'UPDATE_CAMPSITES',
     campsites: campsites
   }
 }
 
-export function updateCampsite(campsite: Campsite): Action {
+export function updateCampsite(campsite: CampsiteWithRev): Action {
   return updateCampsites([campsite])
 }

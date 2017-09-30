@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 
-import { CampsiteWithStarred } from '../libs/types'
+import { CampsiteWithStarredRev } from '../libs/types'
 import { State } from '../ducks'
 import { toggleStarredCampsite } from '../ducks/starred'
 import { convertToCampsiteWithStarred } from '../libs/convertToCampsiteWithStarred'
 import CampsiteDetail from '../components/CampsiteDetail'
 
 interface Props {
-  campsite: CampsiteWithStarred;
+  campsite: CampsiteWithStarredRev;
   onStarToggled: () => void;
   // Passed by the parent screen
   id: string;

@@ -6,7 +6,7 @@ import * as HttpPouch from 'pouchdb-adapter-http'
 import * as replication from 'pouchdb-replication'
 import Config from 'react-native-config'
 
-import { Campsite, CampsiteNoId } from '../libs/types'
+import { CampsiteNoId, CampsiteWithRev } from '../libs/types'
 import * as CampsitesJson from '../libs/CampsitesJson'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
 
@@ -38,7 +38,7 @@ export function destroy() {
 export async function allChanges() {
   let db = new PouchDB<CampsiteNoId>('thatscamping')
   let response = await db.changes({ include_docs: true })
-  let campsites3: Campsite[] = []
+  let campsites3: CampsiteWithRev[] = []
   response.results.forEach(result => {
     if (result.doc) {
       campsites3.push(result.doc)
@@ -50,7 +50,7 @@ export async function allChanges() {
   }
 }
 
-export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
+export function changes(since: number | string, onChange: (campsite: CampsiteWithRev) => void) {
   let db = new PouchDB<CampsiteNoId>('thatscamping')
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {

@@ -16,8 +16,16 @@ export interface Campsite extends CampsiteNoId {
   _id: string;
 }
 
+export interface CampsiteWithRev extends Campsite {
+  _rev: string;
+}
+
 // This is how campsites are in the props
 export interface CampsiteWithStarred extends Campsite {
+  starred: boolean;
+}
+
+export interface CampsiteWithStarredRev extends CampsiteWithRev {
   starred: boolean;
 }
 
