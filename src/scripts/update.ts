@@ -115,6 +115,15 @@ async function campsitesFromMorph() {
   return json.map((c) => convertMorphRecordToCampsite(c))
 }
 
+// a - b
+function difference(a: Set, b: Set) {
+  return new Set([...a].filter(x => !b.has(x)))
+}
+
+function intersection(a: Set, b: Set) {
+  return new Set([...a].filter(x => b.has(x)))
+}
+
 Promise.all([
   campsitesFromSource('nationalparks.nsw.gov.au'),
   campsitesFromMorph()
@@ -123,10 +132,13 @@ Promise.all([
   let campsitesMorph = results[1]
   console.log("from database", campsitesSource)
   console.log("from morph", campsitesMorph)
-  let sourceIds = campsitesSource.map((c) => {return c.sourceId})
-  let morphIds = campsitesMorph.map((c) => {return c.sourceId})
-  console.log("sourceIds", sourceIds)
-  console.log("morphIds", morphIds)
+  let sourceIds = new Set(campsitesSource.map((c) => {return c.sourceId}))
+  let morphIds = new Set(campsitesMorph.map((c) => {return c.sourceId}))
   // First let's figure out the new campsites (in morph. not in database)
-
+  let addedIds = difference(morphIds, sourceIds)
+  let removedIds = difference(sourceIds, morphIds)
+  let sharedIds = intersection(sourceIds, morphIds)
+  console.log("sharedIds", sharedIds)
+  console.log("addedIds", addedIds)
+  console.log("removedIds", removedIds)
 })
