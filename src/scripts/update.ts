@@ -120,10 +120,6 @@ function difference<T>(a: Set<T>, b: Set<T>) {
   return new Set([...a].filter(x => !b.has(x)))
 }
 
-function intersection<T>(a: Set<T>, b: Set<T>) {
-  return new Set([...a].filter(x => b.has(x)))
-}
-
 Promise.all([
   campsitesFromSource('nationalparks.nsw.gov.au'),
   campsitesFromMorph()
@@ -135,34 +131,25 @@ Promise.all([
   let sourceIds = new Set(campsitesSource.map((c) => {return c.sourceId}))
   let morphIds = new Set(campsitesMorph.map((c) => {return c.sourceId}))
   // First let's figure out the new campsites (in morph. not in database)
-  let addedIds = difference(morphIds, sourceIds)
   let removedIds = difference(sourceIds, morphIds)
-  let sharedIds = intersection(sourceIds, morphIds)
-  console.log("sharedIds", sharedIds)
-  console.log("addedIds", addedIds)
-  console.log("removedIds", removedIds)
-
-  let addedCampsites = campsitesMorph.filter((campsite) => {
-    return addedIds.has(campsite.sourceId)
-  })
-  db.bulkDocs(addedCampsites)
 
   let removedCampsites = campsitesSource.filter(c => removedIds.has(c.sourceId))
   removedCampsites.forEach(c => db.remove(c))
 
   let docs: (Campsite | CampsiteNoId)[] = []
-  // Need to add the _id and _rev (from source) into the morph data
-  campsitesMorph.filter(c => sharedIds.has(c.sourceId))
-    .forEach((c) => {
-      let source = campsitesSource.find(campsite => campsite.sourceId == c.sourceId)
-      if (source) {
-        let updated = {...c, _id: source._id, _rev: source._rev}
-        if (JSON.stringify(source) !== JSON.stringify(updated)) {
-          docs.push(updated)
-        }
-      } else {
-        docs.push(c)
+  campsitesMorph.forEach((c) => {
+    let source = campsitesSource.find(campsite => campsite.sourceId == c.sourceId)
+    if (source) {
+      // This is a campsite that might need updating
+      // Need to add the _id and _rev (from source) into the morph data
+      let updated = {...c, _id: source._id, _rev: source._rev}
+      if (JSON.stringify(source) !== JSON.stringify(updated)) {
+        docs.push(updated)
       }
-    })
+    } else {
+      // This is a new campsite
+      docs.push(c)
+    }
+  })
   db.bulkDocs(docs)
 })
