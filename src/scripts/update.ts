@@ -17,7 +17,7 @@ Dotenv.config()
 async function getMorphData(scraper: string) {
   let s = querystring.stringify({
     key: process.env.MORPH_API_KEY,
-    query: 'select * from "data"'
+    query: 'select * from "data" limit 2'
   })
   let r = await fetch('https://api.morph.io/' + scraper + '/data.json?' + s)
   return r.json()
