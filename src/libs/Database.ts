@@ -15,7 +15,7 @@ PouchDB
   .plugin(HttpPouch)
   .plugin(replication)
 
-var json = require('../../data_simplified.json')
+var json = require('../../data/data_simplified.json')
 var campsites = CampsitesJson.convertJson(json)
 
 // Obviously anyone who really wants to get access to the password below
