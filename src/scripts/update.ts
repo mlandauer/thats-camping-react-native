@@ -107,16 +107,20 @@ async function campsitesFromSource(source: string) {
   })
 }
 
+async function campsitesFromMorph() {
+  let json: MorphRecord[] = await getMorphData('mlandauer/scraper-campsites-nsw-nationalparks')
+  return json.map((c) => convertMorphRecordToCampsite(c))
+}
+
 // First get all campsites in the database with the same source
 campsitesFromSource('nationalparks.nsw.gov.au').then((campsites) => {
   console.log(campsites)
 })
 
 // First let's get data from morph.io using the API
-getMorphData('mlandauer/scraper-campsites-nsw-nationalparks').then((json: MorphRecord[]) => {
-  json.forEach((campsite) => {
-    let c = convertMorphRecordToCampsite(campsite)
-    // Initially just dump all the data into the database
-    db.post(c)
-  })
+campsitesFromMorph().then((campsites) => {
+    campsites.forEach((campsite) => {
+      // Initially just dump all the data into the database
+      db.post(campsite)
+    })
 })
