@@ -40,8 +40,7 @@ let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
 async function getMorphData(scraper: string) {
   let s = querystring.stringify({
     key: process.env.MORPH_API_KEY,
-    // TODO: Don't limit the number returned
-    query: 'select * from "data" limit 2'
+    query: 'select * from "data"'
   })
   let r = await fetch('https://api.morph.io/' + scraper + '/data.json?' + s)
   return r.json()
@@ -148,5 +147,8 @@ Promise.all([
       docs.push(updated)
     }
   })
+  console.log("Updating", docs.length, "campsites")
   db.bulkDocs(docs)
+}).then(() => {
+  console.log("Database updated")
 })
