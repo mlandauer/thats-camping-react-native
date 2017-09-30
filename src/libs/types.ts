@@ -21,10 +21,6 @@ export interface CampsiteWithRev extends Campsite {
 }
 
 // This is how campsites are in the props
-export interface CampsiteWithStarred extends Campsite {
-  starred: boolean;
-}
-
 export interface CampsiteWithStarredRev extends CampsiteWithRev {
   starred: boolean;
 }

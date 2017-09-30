@@ -5,7 +5,7 @@ import CampsiteList from '../components/CampsiteList'
 import { Navigator } from 'react-native-navigation'
 
 import {
-  CampsiteWithStarred,
+  CampsiteWithStarredRev,
   Position
 } from '../libs/types'
 import { State } from '../ducks'
@@ -15,14 +15,14 @@ import ScreenWithAbout from './ScreenWithAbout'
 
 interface Props {
   navigator?: Navigator;
-  campsites: { [index: string]: CampsiteWithStarred };
+  campsites: { [index: string]: CampsiteWithStarredRev };
   position: Position | null;
 }
 
 export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
   onPress(id: string) {
     if (this.props.navigator) {
-      var campsite: CampsiteWithStarred = this.props.campsites[id]
+      var campsite = this.props.campsites[id]
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),

@@ -6,17 +6,17 @@ import {
   ActivityIndicator
 } from 'react-native'
 
-import { CampsiteWithStarred, Position } from '../libs/types'
+import { CampsiteWithStarredRev, Position } from '../libs/types'
 import CampsiteListItem from './CampsiteListItem'
 import PositionRelationship from '../libs/PositionRelationship'
 
-interface CampsiteWithDistanceAndBearing extends CampsiteWithStarred {
+interface CampsiteWithDistanceAndBearing extends CampsiteWithStarredRev {
   distance: number | undefined;
   bearing: number | undefined;
 }
 
 interface Props {
-  campsites: CampsiteWithStarred[];
+  campsites: CampsiteWithStarredRev[];
   position: Position | null;
   onPress: (id: string) => void;
 }
@@ -44,7 +44,7 @@ export default function CampsiteList(props: Props) {
   }
 }
 
-function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
+function includeDistanceAndBearing(campsite: CampsiteWithStarredRev, position: Position | null): CampsiteWithDistanceAndBearing {
   let positions = new PositionRelationship(campsite.position, position)
   return {
     ...campsite,
@@ -59,7 +59,7 @@ function renderItem(campsite: CampsiteWithDistanceAndBearing, onPress: (id: stri
   )
 }
 
-let keyExtractor = (campsite: CampsiteWithStarred, _index: number) => String(campsite._id);
+let keyExtractor = (campsite: CampsiteWithStarredRev, _index: number) => String(campsite._id);
 
 class Separator extends React.Component<any, any> {
   render() {

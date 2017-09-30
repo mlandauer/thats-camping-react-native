@@ -10,12 +10,12 @@ import {
 import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import { CampsiteWithStarred, Position } from '../libs/types'
+import { CampsiteWithStarredRev, Position } from '../libs/types'
 import Star from '../components/Star'
 import * as TextFormatter from '../libs/TextFormatter'
 
 interface Props {
-  campsite: CampsiteWithStarred;
+  campsite: CampsiteWithStarredRev;
   onStarToggled: () => void;
 }
 

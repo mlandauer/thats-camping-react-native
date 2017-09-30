@@ -4,12 +4,12 @@ import {
 } from 'react-native'
 import { MapView } from 'react-native-mapbox-gl'
 
-import { CampsiteWithStarred } from '../libs/types'
+import { CampsiteWithStarredRev } from '../libs/types'
 import shortenName from '../libs/shortenName'
 import OfflineMapControls from './OfflineMapControls'
 
 interface Props {
-  campsites: CampsiteWithStarred[];
+  campsites: CampsiteWithStarredRev[];
   onPress: (id: string) => void;
   downloadProgress: number;
 }
@@ -48,13 +48,13 @@ export default function CampsiteMap(props: Props) {
   )
 }
 
-function annotations(campsites: CampsiteWithStarred[]) {
+function annotations(campsites: CampsiteWithStarredRev[]) {
   return campsites
     .filter(campsite => annotation(campsite))
     .map(campsite => annotation(campsite))
 }
 
-function annotation(campsite: CampsiteWithStarred) {
+function annotation(campsite: CampsiteWithStarredRev) {
   if (campsite.position) {
     return {
       coordinates: [campsite.position.lat, campsite.position.lng],
