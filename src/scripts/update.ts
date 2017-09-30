@@ -138,10 +138,13 @@ if (password) {
           docs.push(updated)
         }
       })
-      console.log("Updating", docs.length, "campsites")
+      console.log("Updating", docs.length, "campsites...")
       db.bulkDocs(docs)
     }).then(() => {
-      console.log("Database updated")
+      console.log("Replicating from local to remote database...")
+      PouchDB.replicate(db, remoteDb)
+    }).then(() => {
+      console.log("Done.")
     })
   })
 } else {
