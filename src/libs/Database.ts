@@ -41,7 +41,7 @@ export async function allChanges() {
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
     if (result.doc) {
-      campsites3.push(convertFromPouch(result.doc))
+      campsites3.push(result.doc)
     }
   })
   return {
@@ -55,7 +55,7 @@ export function changes(since: number | string, onChange: (campsite: Campsite) =
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       if (response.doc) {
-        onChange(convertFromPouch(response.doc))
+        onChange(response.doc)
       }
     })
 }
@@ -65,29 +65,5 @@ export function resetCampsites() {
   let db = new PouchDB<CampsiteNoId>('thatscamping')
   // Dump all the campsites into the local pouchdb database
   // This will cause a conflict if the campsites already exist
-  return db.bulkDocs(campsites.map(c => convertToPouch(c)))
-}
-
-function convertToPouch(campsite: Campsite): Campsite {
-  return {
-    _id: campsite._id.toString(),
-    name: campsite.name,
-    description: campsite.description,
-    position: campsite.position,
-    facilities: campsite.facilities,
-    access: campsite.access,
-    parkName: campsite.parkName
-  }
-}
-
-function convertFromPouch(campsite: Campsite): Campsite {
-  return {
-    _id: campsite._id,
-    name: campsite.name,
-    description: campsite.description,
-    position: campsite.position,
-    facilities: campsite.facilities,
-    access: campsite.access,
-    parkName: campsite.parkName
-  }
+  return db.bulkDocs(campsites)
 }
