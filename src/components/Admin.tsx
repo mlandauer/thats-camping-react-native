@@ -21,11 +21,6 @@ export default class Admin extends React.Component<{}, State> {
     this.state = { locked: true }
   }
 
-  async resetCampsites() {
-    await Database.resetCampsites()
-    Alert.alert("Campsites reset")
-  }
-
   async destroyDatabase() {
     await Database.destroy()
     Alert.alert("Database destroyed")
@@ -39,12 +34,6 @@ export default class Admin extends React.Component<{}, State> {
     } else {
       return (
         <View>
-          <Button
-            containerStyle={styles.buttonContainer}
-            style={styles.buttonText}
-            onPress={() => this.resetCampsites()} >
-            Reset campsites
-          </Button>
           <Button
             containerStyle={styles.buttonContainer}
             style={styles.buttonText}

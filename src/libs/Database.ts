@@ -7,16 +7,12 @@ import * as replication from 'pouchdb-replication'
 import Config from 'react-native-config'
 
 import { CampsiteNoId, Campsite } from '../libs/types'
-import * as CampsitesJson from '../libs/CampsitesJson'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
 
 PouchDB
   .plugin(AsyncStoragePouch)
   .plugin(HttpPouch)
   .plugin(replication)
-
-var json = require('../../data/data_simplified.json')
-var campsites = CampsitesJson.convertJson(json)
 
 // Obviously anyone who really wants to get access to the password below
 // can just decompile the binary. Not including the password in the source
@@ -59,12 +55,4 @@ export function changes(since: number | string, onChange: (campsite: Campsite) =
         onChange(response.doc)
       }
     })
-}
-
-// TODO: In case the campsites have been edited should reset them
-export function resetCampsites() {
-  let db = new PouchDB<CampsiteNoId>('thatscamping')
-  // Dump all the campsites into the local pouchdb database
-  // This will cause a conflict if the campsites already exist
-  return db.bulkDocs(campsites)
 }
