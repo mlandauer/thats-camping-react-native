@@ -15,6 +15,7 @@ describe('shortenName', () => {
     expect(shortenName("O'Hares rest area")).toEqual("O'Hares")
     // Not actually sure that this is a sensible shortening to be making
     expect(shortenName("Lane Cove River tourist park")).toEqual("Lane Cove River")
+    expect(shortenName("Lane Cove River Tourist Park - caravan park")).toEqual("Lane Cove River")
     expect(shortenName("Lake Arragan and Red Cliff campgrounds")).toEqual("Lake Arragan and Red Cliff")
     expect(shortenName("Kosciuszko camping grounds")).toEqual("Kosciuszko")
     expect(shortenName("Berlang Camping Area")).toEqual("Berlang")
