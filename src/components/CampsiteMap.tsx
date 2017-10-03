@@ -60,7 +60,7 @@ function annotation(campsite: CampsiteWithStarred) {
       coordinates: [campsite.position.lat, campsite.position.lng],
       type: 'point',
       title: shortenName(campsite.name),
-      subtitle: campsite.parkName,
+      subtitle: shortenName(campsite.parkName),
       id: campsite._id,
       rightCalloutAccessory: {
         source: {

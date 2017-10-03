@@ -12,10 +12,5 @@ export default function shortenName(name: string): string {
     .replace(" rest area", "")
     .replace(" tourist park", "")
     .replace(" Tourist Park - caravan park", "")
-    .replace("Karst Conservation Reserve", "KCR")
-    .replace("National Park", "NP")
-    .replace("Nature Reserve", "NR")
-    .replace("State Conservation Area", "SCA")
-    .replace(" Historic Site", "")
     .replace(" campervan and camper trailer area", "")
 }
