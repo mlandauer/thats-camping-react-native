@@ -51,7 +51,7 @@ export function changes(since: number | string, onChange: (campsite: Campsite) =
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       // TODO: Actually propogate deletes rather than just ignoring them
-      if (response.doc && !response.doc._deleted) {
+      if (response.doc && !response.deleted) {
         onChange(response.doc)
       }
     })
