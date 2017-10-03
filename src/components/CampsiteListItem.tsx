@@ -25,7 +25,7 @@ export default function CampsiteListItem(props: Props) {
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
-          <Text style={styles.parkName}>{shortenName(props.parkName)}</Text>
+          <Text numberOfLines={1} style={styles.parkName}>{props.parkName}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.distanceAndBearing}>{TextFormatter.distanceText(props.distance)} {TextFormatter.bearingText(props.bearing)}</Text>
