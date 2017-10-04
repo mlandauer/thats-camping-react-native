@@ -37,6 +37,7 @@ export default function CampsiteMap(props: Props) {
         styleURL="mapbox://styles/mapbox/outdoors-v10"
         showsUserLocation={true}
         rotateEnabled={false}
+        pitchEnabled={false}
         initialCenterCoordinate={initialCenterCoordinate}
         initialZoomLevel={5}
         logoIsHidden={true}
