@@ -60,9 +60,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 10,
+    paddingBottom: 12,
     marginTop: 20,
-    height: 45,
-    overflow: 'hidden',
     borderRadius: 4,
     borderWidth: 0.5
   },
