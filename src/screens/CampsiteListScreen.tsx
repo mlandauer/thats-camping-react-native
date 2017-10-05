@@ -18,7 +18,7 @@ interface Props {
   navigator?: Navigator;
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
-  tracker: GoogleAnalyticsTracker;
+  tracker?: GoogleAnalyticsTracker;
 }
 
 export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
@@ -32,7 +32,9 @@ export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
 
   onNavigatorEvent(event: any) {
     if (event.id === 'bottomTabSelected') {
-      this.props.tracker.trackScreenView('List')
+      if (this.props.tracker) {
+        this.props.tracker.trackScreenView('List')
+      }
     }
   }
 

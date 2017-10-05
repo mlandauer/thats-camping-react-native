@@ -19,7 +19,7 @@ interface Props {
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
   downloadProgress: number;
-  tracker: GoogleAnalyticsTracker;
+  tracker?: GoogleAnalyticsTracker;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -32,7 +32,9 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
 
   onNavigatorEvent(event: any) {
     if (event.id === 'bottomTabSelected') {
-      this.props.tracker.trackScreenView('Map')
+      if (this.props.tracker) {
+        this.props.tracker.trackScreenView('Map')
+      }
     }
   }
 
