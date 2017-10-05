@@ -5,6 +5,8 @@ import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
 import { persistStore, autoRehydrate, Storage } from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
+import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
+import Config from 'react-native-config'
 
 import { registerScreens } from './screens';
 import { reducer, State, initialState, stateToSave } from './ducks'
@@ -13,6 +15,8 @@ import * as PositionActions from './ducks/position'
 import * as OfflineMapActions from './ducks/offlineMap'
 import * as Database from './libs/Database'
 import * as Map from './libs/Map'
+
+let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
 
 let enhancer = compose(
   applyMiddleware(thunk),
@@ -70,6 +74,7 @@ Promise.all(
 })
 
 function startApp() {
+  tracker.trackScreenView('List')
   Navigation.startTabBasedApp({
     tabs: [
       {
@@ -137,5 +142,8 @@ function startApp() {
       // Android only
       statusBarColor: '#97b13d',
     },
+    passProps: {
+      tracker: tracker
+    }
   })
 }
