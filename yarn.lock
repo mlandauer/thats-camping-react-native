@@ -4290,6 +4290,10 @@ react-native-config@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.6.0.tgz#0f71631ab5ac4b568637dcb8e9f6ab85ffb380ed"
 
+react-native-google-analytics-bridge@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.3.3.tgz#4a91e1fca5cf5d87b3211a301f851cfbadb16785"
+
 react-native-mapbox-gl@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-native-mapbox-gl/-/react-native-mapbox-gl-5.2.0.tgz#1fcaf72922d34060b012e487751ab14b69c2e1af"
