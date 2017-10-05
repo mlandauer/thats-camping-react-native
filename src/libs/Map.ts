@@ -25,7 +25,6 @@ export function initialise(updateProgress: (progress: number) => void) {
   // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
   // Mapbox.initializeOfflinePacks()
   Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
-    console.log("progressObject", progressObject)
     var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
     updateProgress(progress)
   })
