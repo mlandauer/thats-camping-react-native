@@ -3,7 +3,6 @@ import { connect, Dispatch } from 'react-redux'
 import { View } from 'react-native'
 import CampsiteMap from '../components/CampsiteMap'
 import { Navigator } from 'react-native-navigation'
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
 
 import {
   CampsiteWithStarred,
@@ -19,7 +18,6 @@ interface Props {
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
   downloadProgress: number;
-  tracker?: GoogleAnalyticsTracker;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -31,7 +29,8 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
   }
 
   onNavigatorEvent(event: any) {
-    if (event.id === 'bottomTabSelected') {
+    super.onNavigatorEvent(event)
+    if (event.id === 'didAppear') {
       if (this.props.tracker) {
         this.props.tracker.trackScreenView('Map')
       }
@@ -41,6 +40,9 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
   onPress(id: string) {
     if (this.props.navigator) {
       var campsite = this.props.campsites[id]
+      if (this.props.tracker) {
+        this.props.tracker.trackScreenView("Detail")
+      }
       this.props.navigator.push({
         screen: 'thatscamping.CampsiteDetailScreen',
         title: shortenName(campsite.name),

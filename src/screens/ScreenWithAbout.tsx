@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { Event, Navigator } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
 
 interface NProps {
   navigator?: Navigator;
+  tracker?: GoogleAnalyticsTracker;
 }
 
 export default class ScreenWithAbout<U, V> extends React.Component<U & NProps, V> {
@@ -36,6 +38,9 @@ export default class ScreenWithAbout<U, V> extends React.Component<U & NProps, V
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'about') {
         if (this.props.navigator) {
+          if (this.props.tracker) {
+            this.props.tracker.trackScreenView("About")
+          }
           this.props.navigator.push({
             screen: 'thatscamping.AboutScreen',
             title: 'About',
