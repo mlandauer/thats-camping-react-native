@@ -22,31 +22,33 @@ interface RightAnnotationTappedInfo {
   longitude: number;
 }
 
-export default function CampsiteMap(props: Props) {
-  // Centering on the "Heartbreak Hill camping area"
-  // to start with
-  let initialCenterCoordinate = {
-    latitude: -33.2709845533332,
-    longitude: 150.897112779999
-  }
+export default class CampsiteMap extends React.Component<Props, {}> {
+  render() {
+    // Centering on the "Heartbreak Hill camping area"
+    // to start with
+    let initialCenterCoordinate = {
+      latitude: -33.2709845533332,
+      longitude: 150.897112779999
+    }
 
-  return (
-    <View style={{flex: 1}}>
-      <MapView
-        style={{ flex: 1 }}
-        styleURL="mapbox://styles/mapbox/outdoors-v10"
-        showsUserLocation={true}
-        rotateEnabled={false}
-        pitchEnabled={false}
-        initialCenterCoordinate={initialCenterCoordinate}
-        initialZoomLevel={5}
-        logoIsHidden={true}
-        annotations={annotations(props.campsites)}
-        onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => props.onPress(info.id)}
-      />
-      <OfflineMapControls progress={props.downloadProgress}/>
-    </View>
-  )
+    return (
+      <View style={{flex: 1}}>
+        <MapView
+          style={{ flex: 1 }}
+          styleURL="mapbox://styles/mapbox/outdoors-v10"
+          showsUserLocation={true}
+          rotateEnabled={false}
+          pitchEnabled={false}
+          initialCenterCoordinate={initialCenterCoordinate}
+          initialZoomLevel={5}
+          logoIsHidden={true}
+          annotations={annotations(this.props.campsites)}
+          onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
+        />
+        <OfflineMapControls progress={this.props.downloadProgress}/>
+      </View>
+    )
+  }
 }
 
 function annotations(campsites: CampsiteWithStarred[]) {
