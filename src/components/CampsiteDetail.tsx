@@ -5,9 +5,9 @@ import {
   TextStyle,
   StyleSheet,
   Linking,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native'
-import Button from 'react-native-button'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
@@ -33,9 +33,9 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
               <Text style={styles.heading}>{this.props.campsite.name}</Text>
               <Text style={styles.park}>{this.props.campsite.parkName}</Text>
             </View>
-            <Button onPress={this.props.onStarToggled}>
+            <TouchableOpacity onPress={this.props.onStarToggled}>
               <Star starred={this.props.campsite.starred} size={34} />
-            </Button>
+            </TouchableOpacity>
           </View>
           <DescriptionText description={this.props.campsite.description} />
           <Section heading="Facilities" fields={facilitiesFields} />
