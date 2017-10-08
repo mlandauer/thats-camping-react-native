@@ -27,7 +27,7 @@ export default class About extends React.Component<{}, {}> {
             while camping?
           </Text>
           <Text style={styles.paragraph}>
-            Made by Matthew Landauer. It's free and open source because that's the way it ought to be.
+            Made by Matthew Landauer.
           </Text>
           <View style={{marginTop: 20}}>
             <Button onPress={onPress}>
