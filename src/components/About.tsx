@@ -6,9 +6,9 @@ import {
   StyleSheet,
   Linking,
 } from 'react-native'
-import Button from 'react-native-button'
 
 import Admin from './Admin'
+import Button from './StandardButton'
 
 export default class About extends React.Component<{}, {}> {
   render() {
@@ -29,10 +29,7 @@ export default class About extends React.Component<{}, {}> {
           <Text style={styles.paragraph}>
             Made by Matthew Landauer. It's free and open source because that's the way it ought to be.
           </Text>
-          <Button
-            containerStyle={styles.buttonContainer}
-            style={styles.buttonText}
-            onPress={onPress} >
+          <Button onPress={onPress}>
             Suggest a feature or report an issue
           </Button>
           <View style={{ marginTop: 20 }}>
@@ -57,16 +54,5 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 20,
     marginBottom: 10
-  },
-  buttonContainer: {
-    padding: 10,
-    paddingBottom: 12,
-    marginTop: 20,
-    borderRadius: 4,
-    borderWidth: 0.5
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#777'
   }
 })
