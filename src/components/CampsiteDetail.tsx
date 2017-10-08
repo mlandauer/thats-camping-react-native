@@ -40,9 +40,11 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <DescriptionText description={this.props.campsite.description} />
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
-          <Button onPress={() => { this.onPress() }}>
-            Directions to campsite
-          </Button>
+          <View style={{marginTop: 10}}>
+            <Button onPress={() => { this.onPress() }}>
+              Directions to campsite
+            </Button>
+          </View>
         </View>
       </ScrollView>
     )

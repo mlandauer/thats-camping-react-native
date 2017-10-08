@@ -29,9 +29,11 @@ export default class About extends React.Component<{}, {}> {
           <Text style={styles.paragraph}>
             Made by Matthew Landauer. It's free and open source because that's the way it ought to be.
           </Text>
-          <Button onPress={onPress}>
-            Suggest a feature or report an issue
-          </Button>
+          <View style={{marginTop: 20}}>
+            <Button onPress={onPress}>
+              Suggest a feature or report an issue
+            </Button>
+          </View>
           <View style={{ marginTop: 20 }}>
             <Admin />
           </View>
