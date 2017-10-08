@@ -40,6 +40,7 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <DescriptionText description={this.props.campsite.description} />
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
+          <Booking />
           <View style={{marginTop: 10}}>
             <Button onPress={() => { this.onPress() }}>
               Directions to campsite
@@ -57,6 +58,21 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
       Linking.openURL(url)
     }
   }
+}
+
+function Booking() {
+  // return (
+  //   <View>
+  //     <Text style={styles.sectionHeading}>Bookings</Text>
+  //     <Text style={styles.list}>You can't book. Just turn up.</Text>
+  //   </View>
+  // )
+  return (
+    <View>
+      <Text style={styles.sectionHeading}>Bookings</Text>
+      <Text style={styles.list}>You can't book. Just turn up.</Text>
+    </View>
+  )
 }
 
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
@@ -120,6 +136,10 @@ const styles = StyleSheet.create({
   },
   sectionHeading: {
     fontWeight: 'bold' as 'bold',
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  list: {
     fontSize: 20,
     marginBottom: 10,
   }
