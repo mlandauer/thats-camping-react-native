@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { CampsiteWithStarred, Position } from '../libs/types'
 import Star from '../components/Star'
 import * as TextFormatter from '../libs/TextFormatter'
-import StandardButton from './StandardButton'
+import Button from './StandardButton'
 
 interface Props {
   campsite: CampsiteWithStarred;
@@ -40,9 +40,9 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <DescriptionText description={this.props.campsite.description} />
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
-          <StandardButton onPress={() => { this.onPress() }}>
+          <Button onPress={() => { this.onPress() }}>
             Directions to campsite
-          </StandardButton>
+          </Button>
         </View>
       </ScrollView>
     )
