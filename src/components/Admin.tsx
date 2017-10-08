@@ -1,14 +1,13 @@
 import * as React from 'react'
 import {
   TextInput,
-  StyleSheet,
   View,
   Alert
 } from 'react-native'
-import Button from 'react-native-button'
 import Config from 'react-native-config'
 
 import * as Database from '../libs/Database'
+import Button from './StandardButton'
 
 interface State {
   locked: boolean;
@@ -34,10 +33,7 @@ export default class Admin extends React.Component<{}, State> {
     } else {
       return (
         <View>
-          <Button
-            containerStyle={styles.buttonContainer}
-            style={styles.buttonText}
-            onPress={() => this.destroyDatabase()} >
+          <Button onPress={() => this.destroyDatabase()} >
             Destroy database
           </Button>
         </View>
@@ -51,18 +47,3 @@ export default class Admin extends React.Component<{}, State> {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    padding: 10,
-    height: 45,
-    overflow: 'hidden',
-    borderRadius: 4,
-    borderWidth: 0.5,
-    marginBottom: 10
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#777'
-  }
-})
