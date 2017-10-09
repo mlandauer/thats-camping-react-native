@@ -20,9 +20,9 @@ PouchDB
 let remoteDb = remoteDbCreate(PouchDB, Config.COUCHDB_REMOTE_PASSWORD)
 let db = new PouchDB<CampsiteNoId>('thatscamping')
 
-// Starts two-way sync between local and remote database
-export function sync() {
-  return PouchDB.sync(remoteDb, db, { live: true })
+// Starts live replication of remote to local database
+export function replicate() {
+  PouchDB.replicate(remoteDb, db, { live: true })
 }
 
 export function destroy() {
