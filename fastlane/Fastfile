@@ -55,6 +55,7 @@ end
 lane :screenshots do
   snapshot(
     project: 'ios/ThatsCamping.xcodeproj',
-    clear_previous_screenshots: true
+    clear_previous_screenshots: true,
+    reinstall_app: true
   )
 end

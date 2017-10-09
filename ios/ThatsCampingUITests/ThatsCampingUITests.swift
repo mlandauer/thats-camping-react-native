@@ -13,15 +13,8 @@ class ThatsCampingUITests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    // In UI tests it is usually best to stop immediately when a failure occurs.
-    continueAfterFailure = false
-    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-    setupSnapshot(app)
-    app.launch()
 
+    // Put setup code here. This method is called before the invocation of each test method in the class.
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
   }
 
@@ -31,10 +24,17 @@ class ThatsCampingUITests: XCTestCase {
   }
 
   func testExample() {
+    // In UI tests it is usually best to stop immediately when a failure occurs.
+    continueAfterFailure = false
+    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+    setupSnapshot(app)
+
     addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in
       alert.buttons["Allow"].tap()
       return true
     }
+
+    app.launch()
 
     // We need to tap something to trigger the interruption monitor above
     app.tabBars.buttons["List"].tap()
