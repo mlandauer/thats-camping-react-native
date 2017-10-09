@@ -48,4 +48,21 @@ public class MainApplication extends NavigationApplication {
       .build();
       OkHttpClientProvider.replaceOkHttpClient(client);
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
+  };
+
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
 }
