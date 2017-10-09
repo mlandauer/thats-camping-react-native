@@ -9,7 +9,8 @@
 import XCTest
 
 class ThatsCampingUITests: XCTestCase {
-        
+    let app = XCUIApplication()
+
     override func setUp() {
         super.setUp()
         
@@ -18,7 +19,6 @@ class ThatsCampingUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
 
@@ -31,8 +31,12 @@ class ThatsCampingUITests: XCTestCase {
     }
     
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Wait for data to load
+        let laneCove = app.otherElements["Lane Cove River"]
+        let exists = NSPredicate(format: "exists == true")
+        expectation(for: exists, evaluatedWith: laneCove, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
+
         snapshot("0Launch")
     }
     

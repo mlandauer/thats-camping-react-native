@@ -21,7 +21,7 @@ interface Props {
 
 export default function CampsiteListItem(props: Props) {
   return (
-    <TouchableHighlight onPress={props.onPress}>
+    <TouchableHighlight onPress={props.onPress} testID={shortenName(props.campsiteName)}>
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <Text style={styles.campsiteName}>{shortenName(props.campsiteName)}</Text>
