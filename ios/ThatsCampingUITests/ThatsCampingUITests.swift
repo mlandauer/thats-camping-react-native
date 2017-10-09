@@ -31,11 +31,19 @@ class ThatsCampingUITests: XCTestCase {
     }
     
     func testExample() {
+        addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in
+          alert.buttons["Allow"].tap()
+          return true
+        }
+
+        // We need to tap something to trigger the interruption monitor above
+        app.tabBars.buttons["List"].tap()
+
         // Wait for data to load
         let laneCove = app.otherElements["Lane Cove River"]
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: laneCove, handler: nil)
-        waitForExpectations(timeout: 60, handler: nil)
+        waitForExpectations(timeout: 120, handler: nil)
 
         snapshot("0Launch")
     }
