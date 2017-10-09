@@ -39,6 +39,11 @@ fastlane beta
 fastlane check_metadata
 ```
 
+### screenshots
+```
+fastlane screenshots
+```
+
 
 ----
 

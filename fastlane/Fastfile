@@ -51,3 +51,10 @@ end
 lane :check_metadata do
   precheck
 end
+
+lane :screenshots do
+  snapshot(
+    project: 'ios/ThatsCamping.xcodeproj',
+    clear_previous_screenshots: true
+  )
+end
