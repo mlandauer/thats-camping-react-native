@@ -9,43 +9,42 @@
 import XCTest
 
 class ThatsCampingUITests: XCTestCase {
-    let app = XCUIApplication()
+  let app = XCUIApplication()
 
-    override func setUp() {
-        super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        setupSnapshot(app)
-        app.launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
+  override func setUp() {
+    super.setUp()
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    // Put setup code here. This method is called before the invocation of each test method in the class.
     
-    func testExample() {
-        addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in
-          alert.buttons["Allow"].tap()
-          return true
-        }
+    // In UI tests it is usually best to stop immediately when a failure occurs.
+    continueAfterFailure = false
+    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+    setupSnapshot(app)
+    app.launch()
 
-        // We need to tap something to trigger the interruption monitor above
-        app.tabBars.buttons["List"].tap()
+    // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+  }
 
-        // Wait for data to load
-        let laneCove = app.otherElements["Lane Cove River"]
-        let exists = NSPredicate(format: "exists == true")
-        expectation(for: exists, evaluatedWith: laneCove, handler: nil)
-        waitForExpectations(timeout: 120, handler: nil)
+  override func tearDown() {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    super.tearDown()
+  }
 
-        snapshot("0Launch")
+  func testExample() {
+    addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in
+      alert.buttons["Allow"].tap()
+      return true
     }
-    
+
+    // We need to tap something to trigger the interruption monitor above
+    app.tabBars.buttons["List"].tap()
+
+    // Wait for data to load
+    let laneCove = app.otherElements["Lane Cove River"]
+    let exists = NSPredicate(format: "exists == true")
+    expectation(for: exists, evaluatedWith: laneCove, handler: nil)
+    waitForExpectations(timeout: 120, handler: nil)
+
+    snapshot("0Launch")
+  }
 }
