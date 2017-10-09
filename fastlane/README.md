@@ -34,6 +34,11 @@ xcode-select --install
 fastlane beta
 ```
 
+### check_metadata
+```
+fastlane check_metadata
+```
+
 
 ----
 

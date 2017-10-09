@@ -47,3 +47,7 @@ lane :beta do
   # upload to Testflight
   pilot
 end
+
+lane :check_metadata do
+  precheck
+end
