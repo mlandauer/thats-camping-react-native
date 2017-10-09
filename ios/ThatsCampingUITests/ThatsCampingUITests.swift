@@ -43,8 +43,17 @@ class ThatsCampingUITests: XCTestCase {
     let laneCove = app.otherElements["Lane Cove River"]
     let exists = NSPredicate(format: "exists == true")
     expectation(for: exists, evaluatedWith: laneCove, handler: nil)
-    waitForExpectations(timeout: 120, handler: nil)
+    waitForExpectations(timeout: 200, handler: nil)
 
     snapshot("0Launch")
+
+    app.otherElements["Lane Cove River"].tap()
+    snapshot("1LaneCoveRiver")
+
+    // Go back
+    XCUIApplication().navigationBars["The Basin"].buttons["Back"].tap()
+    // Tap about page button
+    XCUIApplication().navigationBars.children(matching: .button).element.tap()
+    snapshot("2About")
   }
 }
