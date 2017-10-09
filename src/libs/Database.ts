@@ -4,7 +4,6 @@ import * as PouchDB from 'pouchdb-core'
 import AsyncStoragePouch from 'pouchdb-adapter-asyncstorage'
 import * as HttpPouch from 'pouchdb-adapter-http'
 import * as replication from 'pouchdb-replication'
-import Config from 'react-native-config'
 
 import { CampsiteNoId, Campsite } from '../libs/types'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
@@ -14,10 +13,8 @@ PouchDB
   .plugin(HttpPouch)
   .plugin(replication)
 
-// Obviously anyone who really wants to get access to the password below
-// can just decompile the binary. Not including the password in the source
-// code provides a minimal level of security.
-let remoteDb = remoteDbCreate(PouchDB, Config.COUCHDB_REMOTE_PASSWORD)
+// Just get read-only access to the remote database
+let remoteDb = remoteDbCreate(PouchDB)
 let db = new PouchDB<CampsiteNoId>('thatscamping')
 
 // Starts live replication of remote to local database
