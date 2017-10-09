@@ -37,6 +37,8 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* ThatsCampingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ThatsCampingTests.m */; };
 		32493EC86740428BA40D7D2F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5902DE5504E5F8F68D27F /* libz.tbd */; };
+		345F9CF41F8BCF07000430A0 /* ThatsCampingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345F9CF31F8BCF07000430A0 /* ThatsCampingUITests.swift */; };
+		345F9D1F1F8BCF26000430A0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345F9D1E1F8BCF26000430A0 /* SnapshotHelper.swift */; };
 		3468E9271EEE4F5100C13286 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3468E9261EEE4F2B00C13286 /* libReactNativeNavigation.a */; };
 		34C4E3351F41857400A12F65 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C4E3341F41857400A12F65 /* Mapbox.framework */; };
 		34C4E3361F41857400A12F65 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34C4E3341F41857400A12F65 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -129,6 +131,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "ThatsCamping-tvOS";
+		};
+		345F9CF61F8BCF07000430A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = ThatsCamping;
 		};
 		3468E9201EEE4F2B00C13286 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -362,6 +371,10 @@
 		20D1B75F934D4CB585DF7314 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ThatsCamping-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThatsCamping-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ThatsCamping-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ThatsCamping-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		345F9CF11F8BCF07000430A0 /* ThatsCampingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThatsCampingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		345F9CF31F8BCF07000430A0 /* ThatsCampingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThatsCampingUITests.swift; sourceTree = "<group>"; };
+		345F9CF51F8BCF07000430A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		345F9D1E1F8BCF26000430A0 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../../fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 		3468E9021EEE4F2A00C13286 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		34C4E32B1F41851500A12F65 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMapboxGL.xcodeproj; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; };
 		34C4E3341F41857400A12F65 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
@@ -438,6 +451,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		345F9CEE1F8BCF07000430A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -584,6 +604,16 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		345F9CF21F8BCF07000430A0 /* ThatsCampingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				345F9D1E1F8BCF26000430A0 /* SnapshotHelper.swift */,
+				345F9CF31F8BCF07000430A0 /* ThatsCampingUITests.swift */,
+				345F9CF51F8BCF07000430A0 /* Info.plist */,
+			);
+			path = ThatsCampingUITests;
+			sourceTree = "<group>";
+		};
 		3468E9031EEE4F2A00C13286 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +723,7 @@
 				13B07FAE1A68108700A75B9A /* ThatsCamping */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ThatsCampingTests */,
+				345F9CF21F8BCF07000430A0 /* ThatsCampingUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				21B189CED58F44D7BEDD443E /* Resources */,
 				3439D3A71F809A6A001852DE /* Recovered References */,
@@ -709,6 +740,7 @@
 				00E356EE1AD99517003FC87E /* ThatsCampingTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* ThatsCamping-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* ThatsCamping-tvOSTests.xctest */,
+				345F9CF11F8BCF07000430A0 /* ThatsCampingUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -790,12 +822,31 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* ThatsCamping-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		345F9CF01F8BCF07000430A0 /* ThatsCampingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 345F9D1D1F8BCF07000430A0 /* Build configuration list for PBXNativeTarget "ThatsCampingUITests" */;
+			buildPhases = (
+				345F9CED1F8BCF07000430A0 /* Sources */,
+				345F9CEE1F8BCF07000430A0 /* Frameworks */,
+				345F9CEF1F8BCF07000430A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				345F9CF71F8BCF07000430A0 /* PBXTargetDependency */,
+			);
+			name = ThatsCampingUITests;
+			productName = ThatsCampingUITests;
+			productReference = 345F9CF11F8BCF07000430A0 /* ThatsCampingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 830;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -816,6 +867,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					345F9CF01F8BCF07000430A0 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
 			};
@@ -902,6 +958,7 @@
 				00E356ED1AD99517003FC87E /* ThatsCampingTests */,
 				2D02E47A1E0B4A5D006451C7 /* ThatsCamping-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* ThatsCamping-tvOSTests */,
+				345F9CF01F8BCF07000430A0 /* ThatsCampingUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1196,6 +1253,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		345F9CEF1F8BCF07000430A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1277,6 +1341,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		345F9CED1F8BCF07000430A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				345F9CF41F8BCF07000430A0 /* ThatsCampingUITests.swift in Sources */,
+				345F9D1F1F8BCF26000430A0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1289,6 +1362,11 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* ThatsCamping-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+		345F9CF71F8BCF07000430A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* ThatsCamping */;
+			targetProxy = 345F9CF61F8BCF07000430A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1556,6 +1634,70 @@
 			};
 			name = Release;
 		};
+		345F9CF81F8BCF07000430A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ThatsCampingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.thatscamping.ThatsCampingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1d7b0fba-dce0-427a-b169-93131d30a794";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ThatsCamping;
+			};
+			name = Debug;
+		};
+		345F9CF91F8BCF07000430A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ThatsCampingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.thatscamping.ThatsCampingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1d7b0fba-dce0-427a-b169-93131d30a794";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ThatsCamping;
+			};
+			name = Release;
+		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1674,6 +1816,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		345F9D1D1F8BCF07000430A0 /* Build configuration list for PBXNativeTarget "ThatsCampingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				345F9CF81F8BCF07000430A0 /* Debug */,
+				345F9CF91F8BCF07000430A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
