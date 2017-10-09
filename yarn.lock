@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@mapbox/react-native-mapbox-gl@^5.2.1":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@mapbox/react-native-mapbox-gl/-/react-native-mapbox-gl-5.2.2.tgz#1614cf990585787754e6a207fa1e3ec887d135b3"
+  dependencies:
+    babel-eslint "^6.1.2"
+    lodash "^4.13.1"
+
 "@types/debug@*":
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
@@ -4217,13 +4224,6 @@ react-native-config@^0.6.0:
 react-native-google-analytics-bridge@^5.3.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.3.3.tgz#4a91e1fca5cf5d87b3211a301f851cfbadb16785"
-
-react-native-mapbox-gl@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-mapbox-gl/-/react-native-mapbox-gl-5.2.0.tgz#1fcaf72922d34060b012e487751ab14b69c2e1af"
-  dependencies:
-    babel-eslint "^6.1.2"
-    lodash "^4.13.1"
 
 react-native-navigation@^1.1.143:
   version "1.1.193"
