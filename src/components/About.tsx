@@ -44,7 +44,7 @@ export default class About extends React.Component<{}, {}> {
 }
 
 function onPress() {
-  Linking.openURL('https://github.com/mlandauer/thats-camping-react-native/issues')
+  Linking.openURL('https://github.com/mlandauer/thats-camping-react-native/wiki/Suggest-a-feature-or-report-an-issue')
 }
 
 const styles = StyleSheet.create({
