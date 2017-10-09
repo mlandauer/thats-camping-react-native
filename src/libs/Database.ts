@@ -18,21 +18,18 @@ PouchDB
 // can just decompile the binary. Not including the password in the source
 // code provides a minimal level of security.
 let remoteDb = remoteDbCreate(PouchDB, Config.COUCHDB_REMOTE_PASSWORD)
+let db = new PouchDB<CampsiteNoId>('thatscamping')
 
 // Starts two-way sync between local and remote database
 export function sync() {
-  let db = new PouchDB<CampsiteNoId>('thatscamping')
-  let sync = PouchDB.sync(remoteDb, db, { live: true })
-  return sync
+  return PouchDB.sync(remoteDb, db, { live: true })
 }
 
 export function destroy() {
-  let db = new PouchDB<CampsiteNoId>('thatscamping')
   return db.destroy()
 }
 
 export async function allChanges() {
-  let db = new PouchDB<CampsiteNoId>('thatscamping')
   let response = await db.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
@@ -47,7 +44,6 @@ export async function allChanges() {
 }
 
 export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
-  let db = new PouchDB<CampsiteNoId>('thatscamping')
   db.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       // TODO: Actually propogate deletes rather than just ignoring them
