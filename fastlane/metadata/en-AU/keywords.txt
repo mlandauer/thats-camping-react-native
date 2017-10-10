@@ -1,1 +1,1 @@
-camping,camp,australia,nsw,new south wales,offline,national parks
+camping,camp,Australia,nsw,NSW,New South Wales,offline,national parks
