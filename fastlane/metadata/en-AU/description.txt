@@ -1,1 +1,10 @@
+Find campsites near you in New South Wales, Australia.
+With over 250 campsites it covers camping on public, common land such as National Parks,
+State Forests and Local Council land.
 
+It's beautifully simple. Gives you just the information that you need when
+you need it.
+
+It works completely offline, even when you're in the middle of nowhere far
+far away from a mobile phone tower. All the campsite information is on your phone.
+Even the map works offline.
