@@ -10,7 +10,8 @@ interface DownloadProgress {
   countOfBytesCompleted: number;
 }
 
-export function initialise(updateProgress: (progress: number) => void) {
+export function initialise(updateProgress: (progress: number) => void,
+  reloadProgress: (progress: number) => void) {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
   // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
   // Mapbox.initializeOfflinePacks()
@@ -20,6 +21,7 @@ export function initialise(updateProgress: (progress: number) => void) {
     console.log("packs", packs)
     if (packs.length > 0) {
       console.log("Already a download pack setup so we don't need to set one up")
+      setupReloadProgressCallback(reloadProgress)
     } else {
       console.log("Need to setup a download pack")
       setupDownloadPack()
@@ -58,5 +60,12 @@ function setupUpdateProgressCallback(updateProgress: (progress: number) => void)
   Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
     var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
     updateProgress(progress)
+  })
+}
+
+function setupReloadProgressCallback(reloadProgress: (progress: number) => void) {
+  Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
+    var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
+    reloadProgress(progress)
   })
 }

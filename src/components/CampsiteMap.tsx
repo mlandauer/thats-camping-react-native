@@ -12,6 +12,7 @@ interface Props {
   campsites: CampsiteWithStarred[];
   onPress: (id: string) => void;
   downloadProgress: number;
+  reloadProgress: number;
 }
 
 interface RightAnnotationTappedInfo {
@@ -45,7 +46,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           annotations={annotations(this.props.campsites)}
           onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
         />
-        <OfflineMapControls progress={this.props.downloadProgress}/>
+        <OfflineMapControls progress={this.props.downloadProgress} reloadProgress={this.props.reloadProgress}/>
       </View>
     )
   }

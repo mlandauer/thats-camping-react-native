@@ -29,7 +29,10 @@ const store = createStore(
   enhancer
 )
 
-Map.initialise(progress => store.dispatch(OfflineMapActions.updateProgress(progress)))
+Map.initialise(
+  progress => store.dispatch(OfflineMapActions.updateProgress(progress)),
+  progress => store.dispatch(OfflineMapActions.updateReloadProgress(progress))
+)
 
 // begin periodically persisting part of the store
 persistStore(store, { storage: AsyncStorage as Storage, whitelist: stateToSave })

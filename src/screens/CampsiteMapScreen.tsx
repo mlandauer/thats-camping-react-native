@@ -18,6 +18,7 @@ interface Props {
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
   downloadProgress: number;
+  reloadProgress: number;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -60,7 +61,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
     }
     return (
       <View style={{ flex: 1 }}>
-        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} downloadProgress={this.props.downloadProgress}/>
+        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} downloadProgress={this.props.downloadProgress} reloadProgress={this.props.reloadProgress}/>
       </View>
     );
   }
@@ -72,7 +73,8 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
     position: state.position,
-    downloadProgress: state.offlineMap.progress
+    downloadProgress: state.offlineMap.progress,
+    reloadProgress: state.offlineMap.reloadProgress
   };
 }
 
