@@ -10,16 +10,6 @@ interface DownloadProgress {
   countOfBytesCompleted: number;
 }
 
-interface ErrorListenerPayload {
-  name: string;
-  error: string;
-}
-
-interface MaxAllowedTilesPayload {
-  name: string;
-  maxTiles: number;
-}
-
 export function initialise(updateProgress: (progress: number) => void) {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
   // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
@@ -64,11 +54,5 @@ function setupDownloadPack(updateProgress: (progress: number) => void) {
   Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
     var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
     updateProgress(progress)
-  })
-  Mapbox.addOfflineErrorListener((payload: ErrorListenerPayload) => {
-    console.log(`Offline pack named ${payload.name} experienced an error: ${payload.error}`);
-  })
-  Mapbox.addOfflineMaxAllowedTilesListener((payload: MaxAllowedTilesPayload) => {
-    console.log(`Offline pack named ${payload.name} reached max tiles quota of ${payload.maxTiles} tiles`);
   })
 }
