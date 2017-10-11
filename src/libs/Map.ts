@@ -51,6 +51,10 @@ function setupDownloadPack(updateProgress: (progress: number) => void) {
   }).catch((err: string) => {
     console.log("err", err)
   });
+  setupUpdateProgressCallback(updateProgress)
+}
+
+function setupUpdateProgressCallback(updateProgress: (progress: number) => void) {
   Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
     var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
     updateProgress(progress)
