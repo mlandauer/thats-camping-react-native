@@ -22,7 +22,8 @@ export function initialise(updateProgress: (progress: number) => void) {
       console.log("Already a download pack setup so we don't need to set one up")
     } else {
       console.log("Need to setup a download pack")
-      setupDownloadPack(updateProgress)
+      setupDownloadPack()
+      setupUpdateProgressCallback(updateProgress)
     }
     // packs is an array of progress objects
   })
@@ -34,7 +35,7 @@ export function initialise(updateProgress: (progress: number) => void) {
   // to pause and restart downloads.
 }
 
-function setupDownloadPack(updateProgress: (progress: number) => void) {
+function setupDownloadPack() {
   // Start downloading offline maps
   Mapbox.addOfflinePack({
     name: 'base',
@@ -51,7 +52,6 @@ function setupDownloadPack(updateProgress: (progress: number) => void) {
   }).catch((err: string) => {
     console.log("err", err)
   });
-  setupUpdateProgressCallback(updateProgress)
 }
 
 function setupUpdateProgressCallback(updateProgress: (progress: number) => void) {
