@@ -1,7 +1,25 @@
 [![Build Status](https://travis-ci.org/mlandauer/thats-camping-react-native.svg?branch=master)](https://travis-ci.org/mlandauer/thats-camping-react-native)
 [![Stories in Ready](https://badge.waffle.io/mlandauer/thats-camping-react-native.png?label=ready&title=Ready)](http://waffle.io/mlandauer/thats-camping-react-native)
 
-# That's Camping
+# It's raining and my Weet-Bix is wet. That's Camping!
+
+Find campsites near you in New South Wales, Australia. It covers camping on
+public, common land such as National Parks, State Forests and Local Councils.
+
+This is a [React Native](https://facebook.github.io/react-native/) application
+written in [Typescript](http://www.typescriptlang.org/). It's currently only
+really been worked on for iOS though adding Android support shouldn't be too
+much trouble.
+
+The app also uses [PouchDB](https://pouchdb.com/)/[CouchDB](http://couchdb.apache.org/)
+to work offline.
+
+When a network is available any updates from the main database are automatically
+synched back to the local database and are reflected in the user interface in
+real time.
+
+The next step is to add the ability for the user to edit and add new campsites!
+This will again even work when offline.
 
 ## Development
 
@@ -59,6 +77,11 @@ This is simply the password for my Apple ID `mlandauer@gmail.com`.
 ### `MATCH_PASSWORD`
 
 This is the password used to encrypt the certificates at https://github.com/mlandauer/certificates.
+
+## Thank you
+
+The "That's Camping!" icon design by [Gabriel Clark](http://www.gabrielclark.com.au/)
+and [Joanna Hill](https://twitter.com/jojohill).
 
 ## Copyright & License
 
