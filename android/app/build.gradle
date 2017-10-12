@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':bugsnag-react-native')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-mapbox-gl')
     compile project(':react-native-config')
