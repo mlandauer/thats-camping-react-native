@@ -59,24 +59,16 @@ To deploy a new version of the beta for iOS
 bundle exec fastlane beta
 ```
 
-## Continuous deployment
+## Production
 
-To get continuous deployment all working on travis-ci there's already a `.travis.yml` file ready configured. However, travis needs the ability to access the iTunes Connect account.
+I'm moving rapidly towards releasing this on the Apple app store. I will be
+charging a small amount of money for this app. This is to support future
+development of this app.
 
-So far I haven't been able to get things working with two-factor authentication. So,
-that needs to be switched off for the time being.
-
-You need to give fastlane credentials via the following environment variables:
-* `FASTLANE_PASSWORD`
-* `MATCH_PASSWORD`
-
-### `FASTLANE_PASSWORD`
-
-This is simply the password for my Apple ID `mlandauer@gmail.com`.
-
-### `MATCH_PASSWORD`
-
-This is the password used to encrypt the certificates at https://github.com/mlandauer/certificates.
+Please be decent. Don't just fork the app and re-release on the app store.
+As long as you abide by the terms of the open-source license, yes, you can do
+this perfectly legally. However, I'm asking you not to, to respect the spirit
+in which this code was open-sourced.
 
 ## Thank you
 
