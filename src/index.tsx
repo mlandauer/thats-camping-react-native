@@ -15,9 +15,12 @@ import * as PositionActions from './ducks/position'
 import * as OfflineMapActions from './ducks/offlineMap'
 import * as Database from './libs/Database'
 import * as Map from './libs/Map'
-import { Client } from 'bugsnag-react-native'
+import { Client, Configuration } from 'bugsnag-react-native'
 
 // Initialise bugsnag
+const configuration = new Configuration()
+// We don't want to be notified of errors in development
+configuration.notifyReleaseStages = ['production']
 new Client()
 
 let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
