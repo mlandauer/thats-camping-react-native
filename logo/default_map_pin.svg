@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="30" height="85" viewBox="0 0 30 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+<clipPath id="c0_1"><path d="M15.3,48.9C7.7,48.9,1.5,45.5,1.5,41.3C1.5,37,7.7,33.6,15.3,33.6C22.9,33.6,29,37,29,41.3c0,4.2,-6.1,7.6,-13.7,7.6Z" /></clipPath>
+<clipPath id="c1_1"><path d="M15.3,42C15.3,42,0.8,25.4,0.8,15.9C0.8,7.5,7.3,0.8,15.3,0.8c7.9,0,14.5,6.7,14.5,15.1C29.8,25.5,15.3,42,15.3,42Z" /></clipPath>
+<clipPath id="c2_1"><path d="M15.3,21.1c-3.2,0,-5.8,-2.6,-5.8,-5.8c0,-3.2,2.6,-5.8,5.8,-5.8c3.2,0,5.8,2.6,5.8,5.8c0,3.2,-2.6,5.8,-5.8,5.8Z" /></clipPath>
+
+<style type="text/css"><![CDATA[
+
+.g1_1{
+fill: #262626;
+fill-opacity: 0.2;
+}
+.g2_1{
+fill: #F84D4D;
+}
+.g3_1{
+fill: none;
+stroke: #951212;
+stroke-width: 1.5627639;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.g4_1{
+fill: #FFFFFF;
+}
+.g5_1{
+fill: none;
+stroke: #7C2525;
+stroke-width: 1.5277778;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,85
+L30,85
+L30,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<g clip-path="url(#c0_1)">
+<path d="M-6,56.5l42.7,0L36.7,26L-6,26l0,30.5Z" class="g1_1" />
+</g>
+<g clip-path="url(#c1_1)">
+<path d="M-6.8,49.7l44.2,0l0,-56.5l-44.2,0l0,56.5Z" class="g2_1" />
+</g>
+<path d="M29.8,15.9C29.8,25.5,15.3,42,15.3,42C15.3,42,0.8,25.4,0.8,15.9C0.8,7.5,7.3,0.8,15.3,0.8c7.9,0,14.5,6.7,14.5,15.1Z" class="g3_1" />
+<g clip-path="url(#c2_1)">
+<path d="M1.8,28.7l26.9,0l0,-26.9L1.8,1.8l0,26.9Z" class="g4_1" />
+</g>
+<path d="M15.3,21.1c3.2,0,5.8,-2.6,5.8,-5.8c0,-3.2,-2.6,-5.8,-5.8,-5.8c-3.2,0,-5.8,2.6,-5.8,5.8c0,3.2,2.6,5.8,5.8,5.8Z" class="g5_1" />
+
+</svg>
