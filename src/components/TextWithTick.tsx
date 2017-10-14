@@ -12,6 +12,19 @@ interface Props {
 }
 
 export default function TextWithTick(props: Props) {
+  if (props.children) {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <TickIcon value={props.value} />
+        <Text style={styles.list}>{props.children}</Text>
+      </View>
+    )
+  } else {
+    return null
+  }
+}
+
+function TickIcon(props: {value: boolean | null}) {
   var icon: string
   switch (props.value) {
     case true:
@@ -24,16 +37,9 @@ export default function TextWithTick(props: Props) {
       icon = "ios-help"
       break
   }
-  if (props.children) {
-    return (
-      <View style={{flexDirection: 'row'}}>
-        <Icon style={styles.icon} name={icon} />
-        <Text style={styles.list}>{props.children}</Text>
-      </View>
-    )
-  } else {
-    return null
-  }
+  return (
+    <Icon style={styles.icon} name={icon} />
+  )
 }
 
 const styles = StyleSheet.create({
