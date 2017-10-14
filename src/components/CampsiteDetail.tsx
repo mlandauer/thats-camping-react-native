@@ -67,18 +67,30 @@ function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   return (
     <View style={{marginBottom: 10}}>
       <Text style={styles.sectionHeading}>{props.heading}</Text>
-      <Description icon="ios-checkmark" text={haveText} />
-      <Description icon="ios-close" text={notHaveText} />
-      <Description icon="ios-help" text={unknownText} />
+      <Description value={true} text={haveText} />
+      <Description value={false} text={notHaveText} />
+      <Description value={null} text={unknownText} />
     </View>
   )
 }
 
-function Description(props: {icon: string, text: string | null}) {
+function Description(props: {value: boolean | null, text: string | null}) {
+  var icon: string
+  switch (props.value) {
+    case true:
+      icon = "ios-checkmark"
+      break
+    case false:
+      icon = "ios-close"
+      break
+    default:
+      icon = "ios-help"
+      break
+  }
   if (props.text) {
     return (
       <View style={{flexDirection: 'row'}}>
-        <Icon style={styles.icon} name={props.icon} />
+        <Icon style={styles.icon} name={icon} />
         <Text style={styles.list}>{props.text}</Text>
       </View>
     )
