@@ -66,6 +66,13 @@ function annotation(campsite: CampsiteWithStarred) {
       title: shortenName(campsite.name),
       subtitle: shortenName(campsite.parkName),
       id: campsite._id,
+      annotationImage: {
+        source: {
+          uri: (campsite.starred ? 'starred_map_pin' : 'default_map_pin')
+        },
+        height: 55,
+        width: 19.73
+      },
       rightCalloutAccessory: {
         source: {
           uri: 'ion-ios-arrow-forward'
