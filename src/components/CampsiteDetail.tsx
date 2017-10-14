@@ -67,14 +67,14 @@ function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   return (
     <View style={{marginBottom: 10}}>
       <Text style={styles.sectionHeading}>{props.heading}</Text>
-      <Description value={true} text={haveText} />
-      <Description value={false} text={notHaveText} />
-      <Description value={null} text={unknownText} />
+      <Description value={true}>{haveText}</Description>
+      <Description value={false}>{notHaveText}</Description>
+      <Description value={null}>{unknownText}</Description>
     </View>
   )
 }
 
-function Description(props: {value: boolean | null, text: string | null}) {
+function Description(props: {value: boolean | null, children: string | null}) {
   var icon: string
   switch (props.value) {
     case true:
@@ -87,11 +87,11 @@ function Description(props: {value: boolean | null, text: string | null}) {
       icon = "ios-help"
       break
   }
-  if (props.text) {
+  if (props.children) {
     return (
       <View style={{flexDirection: 'row'}}>
         <Icon style={styles.icon} name={icon} />
-        <Text style={styles.list}>{props.text}</Text>
+        <Text style={styles.list}>{props.children}</Text>
       </View>
     )
   } else {
