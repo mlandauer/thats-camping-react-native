@@ -8,10 +8,10 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
 import Star from '../components/Star'
+import TextWithTick from '../components/TextWithTick'
 import * as TextFormatter from '../libs/TextFormatter'
 import Button from './StandardButton'
 
@@ -67,36 +67,11 @@ function Section(props: {fields: TextFormatter.Fields, heading: string}) {
   return (
     <View style={{marginBottom: 10}}>
       <Text style={styles.sectionHeading}>{props.heading}</Text>
-      <Description value={true}>{haveText}</Description>
-      <Description value={false}>{notHaveText}</Description>
-      <Description value={null}>{unknownText}</Description>
+      <TextWithTick value={true}>{haveText}</TextWithTick>
+      <TextWithTick value={false}>{notHaveText}</TextWithTick>
+      <TextWithTick value={null}>{unknownText}</TextWithTick>
     </View>
   )
-}
-
-function Description(props: {value: boolean | null, children: string | null}) {
-  var icon: string
-  switch (props.value) {
-    case true:
-      icon = "ios-checkmark"
-      break
-    case false:
-      icon = "ios-close"
-      break
-    default:
-      icon = "ios-help"
-      break
-  }
-  if (props.children) {
-    return (
-      <View style={{flexDirection: 'row'}}>
-        <Icon style={styles.icon} name={icon} />
-        <Text style={styles.list}>{props.children}</Text>
-      </View>
-    )
-  } else {
-    return null
-  }
 }
 
 function DescriptionText(props: { description: string }) {
@@ -139,18 +114,9 @@ const styles = StyleSheet.create({
     color: '#aaa',
     marginBottom: 20
   },
-  icon: {
-    fontSize: 26,
-    marginRight: 10
-  },
   description: {
     fontSize: 20,
     marginBottom: 20
-  },
-  list: {
-    fontSize: 20,
-    marginBottom: 10,
-    flex: 1
   },
   sectionHeading: {
     fontWeight: 'bold' as 'bold',
