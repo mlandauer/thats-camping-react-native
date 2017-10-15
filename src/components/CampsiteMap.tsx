@@ -70,8 +70,8 @@ function annotation(campsite: CampsiteWithStarred) {
         source: {
           uri: (campsite.starred ? 'starred_map_pin' : 'default_map_pin')
         },
-        height: 55,
-        width: 19.73
+        height: 82.5,
+        width: 29.6
       },
       rightCalloutAccessory: {
         source: {
