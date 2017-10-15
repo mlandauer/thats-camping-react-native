@@ -15,7 +15,6 @@ export default class About extends React.Component<{}, {}> {
     return (
       <ScrollView>
         <View style={{ padding: 20 }}>
-          <Text style={styles.heading}>About That's Camping</Text>
           <Text style={styles.paragraph}>
             Find campsites near you in New South Wales, Australia.
             It covers camping on public, common land such as National Parks,
@@ -27,9 +26,10 @@ export default class About extends React.Component<{}, {}> {
             while camping?
           </Text>
           <Text style={styles.paragraph}>
-            Made by Matthew Landauer.
+            Designed and developed by Matthew Landauer. Icon design by
+            Gabriel Clark and Joanna Hill.
           </Text>
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 10}}>
             <Button onPress={onPress}>
               Suggest a feature or report an issue
             </Button>
@@ -48,13 +48,8 @@ function onPress() {
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    fontWeight: 'bold' as 'bold',
-    fontSize: 20,
-    marginBottom: 10
-  },
   paragraph: {
     fontSize: 20,
-    marginBottom: 10
+    marginBottom: 20
   }
 })
