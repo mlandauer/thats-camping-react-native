@@ -91,9 +91,8 @@ async function campsitesFromMorph() {
   return json.map((c) => convertMorphRecordToCampsite(c))
 }
 
-async function updateDatabaseFromNationalParks() {
-  let campsitesMorph = await campsitesFromMorph()
-  let campsitesSource = await campsitesFromSource('nationalparks.nsw.gov.au')
+async function updateDatabase(campsitesMorph: CampsiteNoId[], source: string) {
+  let campsitesSource = await campsitesFromSource(source)
 
   let docs: (Campsite | CampsiteNoId)[] = []
 
@@ -121,8 +120,12 @@ async function updateDatabaseFromNationalParks() {
       docs.push(updated)
     }
   })
-  console.log("Updating", docs.length, "campsites...")
+  console.log(`Updating ${docs.length} campsites from source ${source}...`)
   return db.bulkDocs(docs)
+}
+
+async function updateDatabaseFromNationalParks() {
+  return updateDatabase(await campsitesFromMorph(), 'nationalparks.nsw.gov.au')
 }
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
