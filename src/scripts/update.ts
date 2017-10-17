@@ -91,43 +91,38 @@ async function campsitesFromMorph() {
   return json.map((c) => convertMorphRecordToCampsite(c))
 }
 
-function updateDatabaseFromNationalParks() {
-  return Promise.all([
-    campsitesFromSource('nationalparks.nsw.gov.au'),
-    campsitesFromMorph()
-  ]).then((results) => {
-    let campsitesSource = results[0]
-    let campsitesMorph = results[1]
+async function updateDatabaseFromNationalParks() {
+  let campsitesMorph = await campsitesFromMorph()
+  let campsitesSource = await campsitesFromSource('nationalparks.nsw.gov.au')
 
-    let docs: (Campsite | CampsiteNoId)[] = []
+  let docs: (Campsite | CampsiteNoId)[] = []
 
-    // This bit creates new campsites and updates existing ones
-    campsitesMorph.forEach((c) => {
-      let source = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
-      if (source) {
-        // This is a campsite that might need updating
-        // Need to add the _id and _rev (from source) into the morph data
-        let updated = {...c, _id: source._id, _rev: source._rev}
-        if (JSON.stringify(source) !== JSON.stringify(updated)) {
-          docs.push(updated)
-        }
-      } else {
-        // This is a new campsite
-        docs.push(c)
-      }
-    })
-
-    // This removes campsites
-    campsitesSource.forEach((c) => {
-      let morph = campsitesMorph.find(campsite => campsite.sourceId === c.sourceId)
-      if (!morph) {
-        let updated = {...c, _deleted: true}
+  // This bit creates new campsites and updates existing ones
+  campsitesMorph.forEach((c) => {
+    let source = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
+    if (source) {
+      // This is a campsite that might need updating
+      // Need to add the _id and _rev (from source) into the morph data
+      let updated = {...c, _id: source._id, _rev: source._rev}
+      if (JSON.stringify(source) !== JSON.stringify(updated)) {
         docs.push(updated)
       }
-    })
-    console.log("Updating", docs.length, "campsites...")
-    return db.bulkDocs(docs)
+    } else {
+      // This is a new campsite
+      docs.push(c)
+    }
   })
+
+  // This removes campsites
+  campsitesSource.forEach((c) => {
+    let morph = campsitesMorph.find(campsite => campsite.sourceId === c.sourceId)
+    if (!morph) {
+      let updated = {...c, _deleted: true}
+      docs.push(updated)
+    }
+  })
+  console.log("Updating", docs.length, "campsites...")
+  return db.bulkDocs(docs)
 }
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
