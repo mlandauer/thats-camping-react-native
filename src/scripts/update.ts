@@ -148,16 +148,80 @@ function getPublicGoogleSheetData(google_sheet_id: string) {
     .then(doc => parse(doc, {columns: true}))
 }
 
-function getGoogleData() {
+function getGoogleData(): Promise<GoogleRecord[]> {
   let googleSheetID = process.env.GOOGLE_SHEET_ID
   if (googleSheetID) {
-    return getPublicGoogleSheetData(googleSheetID)
+    // TODO: Dodgy as. We don't actually know that this data has the right form
+    // TODO: Do runtime check that it has the correct form
+    return getPublicGoogleSheetData(googleSheetID) as Promise<GoogleRecord[]>
   } else {
     return Promise.reject("Need to set GOOGLE_SHEET_ID in .env")
   }
 }
 
-getGoogleData().then(records => console.log("records from google", records))
+function convertGoogleBoolean(value: string): boolean | undefined {
+  if (value === "yes") {
+    return true
+  } else if (value === "no") {
+    return false
+  } else if (value === "") {
+    return undefined
+  } else {
+    console.error("Unexpected value")
+    return undefined
+  }
+}
+
+// TODO: Make these names better match the names we're using internally
+interface GoogleRecord {
+  name: string;
+  area_name: string;
+  description: string;
+  latitude: string;
+  longitude: string;
+  toilets: string;
+  picnic_tables: string;
+  bbq: string;
+  showers: string;
+  caravan: string;
+  trailer: string;
+  car: string;
+}
+
+function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
+  console.log("record", record)
+  return {
+    name: record.name,
+    parkName: record.area_name,
+    description: record.description,
+    position: {
+      lat: parseFloat(record.latitude),
+      lng: parseFloat(record.longitude)
+    },
+    facilities: {
+      toilets: convertGoogleBoolean(record.toilets),
+      picnicTables: convertGoogleBoolean(record.picnic_tables),
+      barbecues: convertGoogleBoolean(record.bbq),
+      showers: convertGoogleBoolean(record.showers),
+      // TODO: Add drinking water to the Google spreadsheet
+      drinkingWater: undefined
+    },
+    access: {
+      caravans: convertGoogleBoolean(record.caravan),
+      trailers: convertGoogleBoolean(record.trailer),
+      car: convertGoogleBoolean(record.car)
+    }
+  }
+}
+
+async function campsitesFromGoogle() {
+  let records = await getGoogleData()
+  return records.map(record => convertGoogleRecordToCampsite(record))
+}
+
+campsitesFromGoogle().then(campsites =>
+  console.log("Campsites", campsites)
+)
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
 //
