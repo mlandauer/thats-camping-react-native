@@ -41,7 +41,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           rotateEnabled={false}
           pitchEnabled={false}
           initialCenterCoordinate={initialCenterCoordinate}
-          initialZoomLevel={5}
+          initialZoomLevel={7}
           logoIsHidden={true}
           annotations={annotations(this.props.campsites)}
           onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
