@@ -7,8 +7,7 @@
     "test": "jest",
     "tsc": "tsc --watch",
     "transform_data": "node data/transform_data.js",
-    "update": "node lib/scripts/update.js",
-    "google": "node lib/scripts/google.js"
+    "update": "node lib/scripts/update.js"
   },
   "dependencies": {
     "@types/pouchdb-adapter-http": "^6.1.1",
