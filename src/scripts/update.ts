@@ -190,7 +190,6 @@ interface GoogleRecord {
 }
 
 function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
-  console.log("record", record)
   return {
     name: record.name,
     parkName: record.area_name,
@@ -212,6 +211,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       trailers: convertGoogleBoolean(record.trailer),
       car: convertGoogleBoolean(record.car)
     },
+    // TODO: The source string is duplicated in a couple of places. Fix this.
     source: 'manual',
     sourceId: record.id
   }
@@ -222,30 +222,33 @@ async function campsitesFromGoogle() {
   return records.map(record => convertGoogleRecordToCampsite(record))
 }
 
-campsitesFromGoogle().then(campsites =>
-  console.log("Campsites", campsites)
-)
+async function updateDatabaseFromGoogle() {
+  return updateDatabase(await campsitesFromGoogle(), 'manual')
+}
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
-//
-// // Obviously anyone who really wants to get access to the password below
-// // can just decompile the binary. Not including the password in the source
-// // code provides a minimal level of security.
-// let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
-// let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
-// if (staging_password && production_password) {
-//   let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
-//   // Do a one time of remote to local database
-//   console.log("Doing replication from remote to local database...")
-//   PouchDB.replicate(remoteDb, db).then(() => {
-//     console.log("Replication finished")
-//     return updateDatabaseFromNationalParks()
-//   }).then(() => {
-//     console.log("Replicating from local to remote database...")
-//     return PouchDB.replicate(db, remoteDb)
-//   }).then(() => {
-//     console.log("Done.")
-//   })
-// } else {
-//   console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
-// }
+
+// Obviously anyone who really wants to get access to the password below
+// can just decompile the binary. Not including the password in the source
+// code provides a minimal level of security.
+let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
+let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
+if (staging_password && production_password) {
+  let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
+  // Do a one time of remote to local database
+  console.log("Doing replication from remote to local database...")
+  PouchDB.replicate(remoteDb, db).then(() => {
+    console.log("Replication finished")
+  }).then(() => {
+    return updateDatabaseFromNationalParks()
+  }).then(() => {
+    return updateDatabaseFromGoogle()
+  }).then(() => {
+    console.log("Replicating from local to remote database...")
+    return PouchDB.replicate(db, remoteDb)
+  }).then(() => {
+    console.log("Done.")
+  })
+} else {
+  console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
+}
