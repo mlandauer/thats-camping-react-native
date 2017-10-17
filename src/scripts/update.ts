@@ -135,9 +135,10 @@ let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
 // Obviously anyone who really wants to get access to the password below
 // can just decompile the binary. Not including the password in the source
 // code provides a minimal level of security.
-let password = process.env.COUCHDB_REMOTE_PASSWORD
-if (password) {
-  let remoteDb = remoteDbCreate(PouchDB, password)
+let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
+let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
+if (staging_password && production_password) {
+  let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
   // Do a one time of remote to local database
   console.log("Doing replication from remote to local database...")
   PouchDB.replicate(remoteDb, db).then(() => {
@@ -150,5 +151,5 @@ if (password) {
     console.log("Done.")
   })
 } else {
-  console.error("environment variable COUCHDB_REMOTE_PASSWORD not set")
+  console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
 }
