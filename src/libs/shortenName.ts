@@ -13,6 +13,7 @@ export default function shortenName(name: string): string {
     .replace(" tourist park", "")
     .replace(" Tourist Park - caravan park", "")
     .replace(" campervan and camper trailer area", "")
+    .replace(" recreation park", "")
     .replace("High Plains area in ", "")
     .replace("Khancoban area in ", "")
     .replace("Lower Snowy River area in ", "")
