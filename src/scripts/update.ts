@@ -174,6 +174,7 @@ function convertGoogleBoolean(value: string): boolean | undefined {
 
 // TODO: Make these names better match the names we're using internally
 interface GoogleRecord {
+  id: string;
   name: string;
   area_name: string;
   description: string;
@@ -210,7 +211,9 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       caravans: convertGoogleBoolean(record.caravan),
       trailers: convertGoogleBoolean(record.trailer),
       car: convertGoogleBoolean(record.car)
-    }
+    },
+    source: 'manual',
+    sourceId: record.id
   }
 }
 
