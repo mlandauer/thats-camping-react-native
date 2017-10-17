@@ -7,6 +7,7 @@ import * as PouchDB from 'pouchdb-node'
 import * as Dotenv from 'dotenv'
 import fetch from 'node-fetch'
 import * as querystring from 'querystring'
+import * as csvParse from 'csv-parse'
 
 import { CampsiteNoId, Campsite, Position } from '../libs/types'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
@@ -128,26 +129,56 @@ async function updateDatabaseFromNationalParks() {
   return updateDatabase(await campsitesFromMorph(), 'nationalparks.nsw.gov.au')
 }
 
-let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
-
-// Obviously anyone who really wants to get access to the password below
-// can just decompile the binary. Not including the password in the source
-// code provides a minimal level of security.
-let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
-let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
-if (staging_password && production_password) {
-  let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
-  // Do a one time of remote to local database
-  console.log("Doing replication from remote to local database...")
-  PouchDB.replicate(remoteDb, db).then(() => {
-    console.log("Replication finished")
-    return updateDatabaseFromNationalParks()
-  }).then(() => {
-    console.log("Replicating from local to remote database...")
-    return PouchDB.replicate(db, remoteDb)
-  }).then(() => {
-    console.log("Done.")
+function parse(doc: string, options: any) {
+  return new Promise(function (fulfill, reject) {
+    csvParse(doc, options, function(err, output) {
+      if (err) {
+        reject(err)
+      } else {
+        fulfill(output)
+      }
+    })
   })
-} else {
-  console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
 }
+
+function getPublicGoogleSheetData(google_sheet_id: string) {
+  let url = `https://docs.google.com/spreadsheets/d/${google_sheet_id}/export?format=csv`
+  return fetch(url)
+    .then(doc => doc.text())
+    .then(doc => parse(doc, {columns: true}))
+}
+
+function getGoogleData() {
+  let googleSheetID = process.env.GOOGLE_SHEET_ID
+  if (googleSheetID) {
+    return getPublicGoogleSheetData(googleSheetID)
+  } else {
+    return Promise.reject("Need to set GOOGLE_SHEET_ID in .env")
+  }
+}
+
+getGoogleData().then(records => console.log("records from google", records))
+
+let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
+//
+// // Obviously anyone who really wants to get access to the password below
+// // can just decompile the binary. Not including the password in the source
+// // code provides a minimal level of security.
+// let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
+// let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
+// if (staging_password && production_password) {
+//   let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
+//   // Do a one time of remote to local database
+//   console.log("Doing replication from remote to local database...")
+//   PouchDB.replicate(remoteDb, db).then(() => {
+//     console.log("Replication finished")
+//     return updateDatabaseFromNationalParks()
+//   }).then(() => {
+//     console.log("Replicating from local to remote database...")
+//     return PouchDB.replicate(db, remoteDb)
+//   }).then(() => {
+//     console.log("Done.")
+//   })
+// } else {
+//   console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
+// }
