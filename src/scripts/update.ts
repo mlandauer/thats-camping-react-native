@@ -187,6 +187,7 @@ interface GoogleRecord {
   caravan: string;
   trailer: string;
   car: string;
+  drinking_water: string;
 }
 
 function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
@@ -203,8 +204,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       picnicTables: convertGoogleBoolean(record.picnic_tables),
       barbecues: convertGoogleBoolean(record.bbq),
       showers: convertGoogleBoolean(record.showers),
-      // TODO: Add drinking water to the Google spreadsheet
-      drinkingWater: undefined
+      drinkingWater: convertGoogleBoolean(record.drinking_water)
     },
     access: {
       caravans: convertGoogleBoolean(record.caravan),
