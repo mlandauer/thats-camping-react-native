@@ -49,7 +49,6 @@ function convertMorphRecordToCampsite(morph: MorphRecord): CampsiteNoId {
       trailers: (morph.trailers == "true"),
       car: (morph.car == "true")
     },
-    source: 'nationalparks.nsw.gov.au',
     sourceId: morph.id
   }
 }

@@ -85,8 +85,6 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       trailers: convertGoogleBoolean(record.trailer),
       car: convertGoogleBoolean(record.car)
     },
-    // TODO: The source string is duplicated in a couple of places. Fix this.
-    source: 'manual',
     sourceId: record.id
   }
 }
