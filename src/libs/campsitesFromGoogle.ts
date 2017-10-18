@@ -1,25 +1,28 @@
 import * as csvParse from 'csv-parse'
 import fetch from 'node-fetch'
+import { String, Array, Record, Static } from 'runtypes'
 
 import { CampsiteNoId } from '../libs/types'
 
-// TODO: Make these names better match the names we're using internally
-interface GoogleRecord {
-  id: string;
-  name: string;
-  area_name: string;
-  description: string;
-  latitude: string;
-  longitude: string;
-  toilets: string;
-  picnic_tables: string;
-  bbq: string;
-  showers: string;
-  caravan: string;
-  trailer: string;
-  car: string;
-  drinking_water: string;
-}
+// // TODO: Make these names better match the names we're using internally
+const GoogleRecord = Record({
+  id: String,
+  name: String,
+  area_name: String,
+  description: String,
+  latitude: String,
+  longitude: String,
+  toilets: String,
+  picnic_tables: String,
+  bbq: String,
+  showers: String,
+  caravan: String,
+  trailer: String,
+  car: String,
+  drinking_water: String
+})
+
+type GoogleRecord = Static<typeof GoogleRecord>
 
 function parse(doc: string, options: any) {
   return new Promise(function (fulfill, reject) {
@@ -40,12 +43,12 @@ function getPublicGoogleSheetData(google_sheet_id: string) {
     .then(doc => parse(doc, {columns: true}))
 }
 
-function getGoogleData(): Promise<GoogleRecord[]> {
+async function getGoogleData(): Promise<GoogleRecord[]> {
   let googleSheetID = process.env.GOOGLE_SHEET_ID
   if (googleSheetID) {
-    // TODO: Dodgy as. We don't actually know that this data has the right form
-    // TODO: Do runtime check that it has the correct form
-    return getPublicGoogleSheetData(googleSheetID) as Promise<GoogleRecord[]>
+    let v = await getPublicGoogleSheetData(googleSheetID)
+    // Runtime type check that record has the correct shape
+    return Array(GoogleRecord).check(v)
   } else {
     return Promise.reject("Need to set GOOGLE_SHEET_ID in .env")
   }
