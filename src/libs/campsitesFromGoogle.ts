@@ -1,4 +1,5 @@
 import * as csvParse from 'csv-parse'
+import fetch from 'node-fetch'
 
 import { CampsiteNoId } from '../libs/types'
 
