@@ -33,12 +33,12 @@ async function updateDatabase(campsites: CampsiteNoId[], source: string) {
 
   // This bit creates new campsites and updates existing ones
   campsites.forEach((c) => {
-    let source = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
-    if (source) {
+    let originalCampsite = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
+    if (originalCampsite) {
       // This is a campsite that might need updating
-      // Need to add the _id and _rev (from source) into the morph data
-      let updated = {...c, _id: source._id, _rev: source._rev}
-      if (JSON.stringify(source) !== JSON.stringify(updated)) {
+      // Need to add the _id and _rev (from originalCampsite) into the morph data
+      let updated = {...c, _id: originalCampsite._id, _rev: originalCampsite._rev}
+      if (JSON.stringify(originalCampsite) !== JSON.stringify(updated)) {
         docs.push(updated)
       }
     } else {
