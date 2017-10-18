@@ -26,13 +26,13 @@ async function campsitesFromSource(source: string) {
   })
 }
 
-async function updateDatabase(campsitesMorph: CampsiteNoId[], source: string) {
+async function updateDatabase(campsites: CampsiteNoId[], source: string) {
   let campsitesSource = await campsitesFromSource(source)
 
   let docs: (Campsite | CampsiteNoId)[] = []
 
   // This bit creates new campsites and updates existing ones
-  campsitesMorph.forEach((c) => {
+  campsites.forEach((c) => {
     let source = campsitesSource.find(campsite => campsite.sourceId === c.sourceId)
     if (source) {
       // This is a campsite that might need updating
@@ -49,7 +49,7 @@ async function updateDatabase(campsitesMorph: CampsiteNoId[], source: string) {
 
   // This removes campsites
   campsitesSource.forEach((c) => {
-    let morph = campsitesMorph.find(campsite => campsite.sourceId === c.sourceId)
+    let morph = campsites.find(campsite => campsite.sourceId === c.sourceId)
     if (!morph) {
       let updated = {...c, _deleted: true}
       docs.push(updated)
