@@ -1,8 +1,15 @@
 import * as csvParse from 'csv-parse'
 import fetch from 'node-fetch'
-import { String, Array, Record, Static } from 'runtypes'
+import { String, Array, Record, Static, Literal, Union } from 'runtypes'
 
 import { CampsiteNoId } from '../libs/types'
+
+const GoogleBoolean = Union(
+  Literal('yes'),
+  Literal('no'),
+)
+
+type GoogleBoolean = Static<typeof GoogleBoolean>
 
 // // TODO: Make these names better match the names we're using internally
 const GoogleRecord = Record({
@@ -12,14 +19,14 @@ const GoogleRecord = Record({
   description: String,
   latitude: String,
   longitude: String,
-  toilets: String,
-  picnic_tables: String,
-  bbq: String,
-  showers: String,
-  caravan: String,
-  trailer: String,
-  car: String,
-  drinking_water: String
+  toilets: GoogleBoolean,
+  picnic_tables: GoogleBoolean,
+  bbq: GoogleBoolean,
+  showers: GoogleBoolean,
+  caravan: GoogleBoolean,
+  trailer: GoogleBoolean,
+  car: GoogleBoolean,
+  drinking_water: GoogleBoolean
 })
 
 type GoogleRecord = Static<typeof GoogleRecord>
@@ -54,17 +61,8 @@ async function getGoogleData(): Promise<GoogleRecord[]> {
   }
 }
 
-function convertGoogleBoolean(value: string): boolean | undefined {
-  if (value === "yes") {
-    return true
-  } else if (value === "no") {
-    return false
-  } else if (value === "") {
-    return undefined
-  } else {
-    console.error("Unexpected value")
-    return undefined
-  }
+function convertGoogleBoolean(value: GoogleBoolean): boolean {
+  return (value === "yes")
 }
 
 function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
@@ -73,6 +71,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
     parkName: record.area_name,
     description: record.description,
     position: {
+      // TODO: Check that the number in a string is actually a number
       lat: parseFloat(record.latitude),
       lng: parseFloat(record.longitude)
     },
