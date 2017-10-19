@@ -29,10 +29,18 @@ const MorphRecord = Record({
   caravans: MorphBoolean,
 })
 
+const BookingRecord = Record({
+  id: String,
+  takes_bookings: Union(Literal('yes'), Literal('no')),
+  phone_name: String,
+  phone_number: String
+})
+
 type MorphBoolean = Static<typeof MorphBoolean>
 type MorphRecord = Static<typeof MorphRecord>
+type BookingRecord = Static<typeof BookingRecord>
 
-function convertMorphRecordToCampsite(morph: MorphRecord): CampsiteNoId {
+function convertMorphRecordToCampsite(morph: MorphRecord, _bookings: BookingRecord[]): CampsiteNoId {
   let position: (Position | null) = null
   if (morph.latitude && morph.longitude) {
     position = {
@@ -66,8 +74,10 @@ function convertMorphBoolean(value: MorphBoolean): boolean {
 }
 
 export default async function dataNSWNationalParks() {
-  let json = await DataApi.morph('mlandauer/scraper-campsites-nsw-nationalparks')
+  let data = await DataApi.morph('mlandauer/scraper-campsites-nsw-nationalparks')
+  let bookingData = await DataApi.googleSpreadsheet('1z__ChcriA_RmrN5W9Soz6rCeVU18p5pxG0d6qfmlpcU')
+  let bookingDataCoerced = Array(BookingRecord).check(bookingData)
   // Runtime type checking
-  let coerced = Array(MorphRecord).check(json)
-  return coerced.map((c) => convertMorphRecordToCampsite(c))
+  let coerced = Array(MorphRecord).check(data)
+  return coerced.map((c) => convertMorphRecordToCampsite(c, bookingDataCoerced))
 }
