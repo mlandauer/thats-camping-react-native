@@ -51,14 +51,9 @@ function getPublicGoogleSheetData(google_sheet_id: string) {
 }
 
 async function getGoogleData(): Promise<GoogleRecord[]> {
-  let googleSheetID = process.env.GOOGLE_SHEET_ID
-  if (googleSheetID) {
-    let v = await getPublicGoogleSheetData(googleSheetID)
-    // Runtime type check that record has the correct shape
-    return Array(GoogleRecord).check(v)
-  } else {
-    return Promise.reject("Need to set GOOGLE_SHEET_ID in .env")
-  }
+  let v = await getPublicGoogleSheetData('1lNLB2nFCnUIUQ8iHZ9zL9TsYCBn-rUFYQoekuugFqnA')
+  // Runtime type check that record has the correct shape
+  return Array(GoogleRecord).check(v)
 }
 
 function convertGoogleBoolean(value: GoogleBoolean): boolean {
