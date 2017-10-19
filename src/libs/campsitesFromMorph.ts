@@ -1,8 +1,7 @@
-import * as querystring from 'querystring'
-import fetch from 'node-fetch'
 import { String, Array, Record, Static, Literal, Union, Number } from 'runtypes'
 
 import { CampsiteNoId, Position } from '../libs/types'
+import * as DataApi from '../libs/DataApi'
 
 const MorphBoolean = Union(
   Literal("true"),
@@ -66,17 +65,8 @@ function convertMorphBoolean(value: MorphBoolean): boolean {
   return value === "true"
 }
 
-async function getMorphData(scraper: string) {
-  let s = querystring.stringify({
-    key: process.env.MORPH_API_KEY,
-    query: 'select * from "data"'
-  })
-  let r = await fetch('https://api.morph.io/' + scraper + '/data.json?' + s)
-  return r.json()
-}
-
 export default async function campsitesFromMorph() {
-  let json = await getMorphData('mlandauer/scraper-campsites-nsw-nationalparks')
+  let json = await DataApi.morph('mlandauer/scraper-campsites-nsw-nationalparks')
   // Runtime type checking
   let coerced = Array(MorphRecord).check(json)
   return coerced.map((c) => convertMorphRecordToCampsite(c))

@@ -1,8 +1,7 @@
-import * as csvParse from 'csv-parse'
-import fetch from 'node-fetch'
 import { String, Array, Record, Static, Literal, Union } from 'runtypes'
 
 import { CampsiteNoId } from '../libs/types'
+import * as DataApi from '../libs/DataApi'
 
 const GoogleBoolean = Union(
   Literal('yes'),
@@ -30,25 +29,6 @@ const GoogleRecord = Record({
 })
 
 type GoogleRecord = Static<typeof GoogleRecord>
-
-function parse(doc: string, options: any) {
-  return new Promise(function (fulfill, reject) {
-    csvParse(doc, options, function(err, output) {
-      if (err) {
-        reject(err)
-      } else {
-        fulfill(output)
-      }
-    })
-  })
-}
-
-function getPublicGoogleSheetData(google_sheet_id: string) {
-  let url = `https://docs.google.com/spreadsheets/d/${google_sheet_id}/export?format=csv`
-  return fetch(url)
-    .then(doc => doc.text())
-    .then(doc => parse(doc, {columns: true}))
-}
 
 function convertGoogleBoolean(value: GoogleBoolean): boolean {
   return (value === "yes")
@@ -81,7 +61,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
 }
 
 export default async function campsitesFromGoogle() {
-  let data = await getPublicGoogleSheetData('1lNLB2nFCnUIUQ8iHZ9zL9TsYCBn-rUFYQoekuugFqnA')
+  let data = await DataApi.googleSpreadsheet('1lNLB2nFCnUIUQ8iHZ9zL9TsYCBn-rUFYQoekuugFqnA')
   // Runtime type check that record has the correct shape
   let records = Array(GoogleRecord).check(data)
   return records.map(record => convertGoogleRecordToCampsite(record))
