@@ -8,8 +8,8 @@ import * as Dotenv from 'dotenv'
 
 import { CampsiteNoId, Campsite } from '../libs/types'
 import { remoteDbCreate } from '../libs/DatabaseGeneric'
-import campsitesFromMorph from '../libs/campsitesFromMorph'
-import campsitesFromGoogle from '../libs/campsitesFromGoogle'
+import dataNSWNationalParks from '../libs/dataNSWNationalParks'
+import dataManual from '../libs/dataManual'
 
 // Loads the environment variables from .env
 Dotenv.config()
@@ -61,11 +61,11 @@ async function updateDatabase(campsites: CampsiteNoId[], source: string) {
 }
 
 async function updateDatabaseFromNationalParks() {
-  return updateDatabase(await campsitesFromMorph(), 'nationalparks.nsw.gov.au')
+  return updateDatabase(await dataNSWNationalParks(), 'nationalparks.nsw.gov.au')
 }
 
 async function updateDatabaseFromGoogle() {
-  return updateDatabase(await campsitesFromGoogle(), 'manual')
+  return updateDatabase(await dataManual(), 'manual')
 }
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')

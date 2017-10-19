@@ -60,7 +60,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
   }
 }
 
-export default async function campsitesFromGoogle() {
+export default async function dataManual() {
   let data = await DataApi.googleSpreadsheet('1lNLB2nFCnUIUQ8iHZ9zL9TsYCBn-rUFYQoekuugFqnA')
   // Runtime type check that record has the correct shape
   let records = Array(GoogleRecord).check(data)

@@ -65,7 +65,7 @@ function convertMorphBoolean(value: MorphBoolean): boolean {
   return value === "true"
 }
 
-export default async function campsitesFromMorph() {
+export default async function dataNSWNationalParks() {
   let json = await DataApi.morph('mlandauer/scraper-campsites-nsw-nationalparks')
   // Runtime type checking
   let coerced = Array(MorphRecord).check(json)
