@@ -72,44 +72,46 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
     // TODO: Not sure this is the right thing to do and consistent with everything else
     return null
   } else {
-    if (props.booking.phone && props.booking.url) {
-      return (
-        <View>
-          <Text style={styles.sectionHeading}>Booking</Text>
-          <View style={{marginTop: 10}}>
-            <BookOnlineButton url={props.booking.url} />
-          </View>
-          <View style={{marginTop: 10, marginBottom: 20}}>
-            <PhoneButton info={props.booking.phone} />
-          </View>
+    return (
+      <View>
+        <Text style={styles.sectionHeading}>Booking</Text>
+        <BookingActions url={props.booking.url} phone={props.booking.phone}/>
+      </View>
+    )
+  }
+}
+
+function BookingActions(props: {
+  phone: {number: string, name?: string} | null | undefined,
+  url: string | null | undefined
+}) {
+  if (props.phone && props.url) {
+    return (
+      <View>
+        <View style={{marginTop: 10}}>
+          <BookOnlineButton url={props.url} />
         </View>
-      )
-    } else if (props.booking.phone) {
-      return (
-        <View>
-          <Text style={styles.sectionHeading}>Booking</Text>
-          <View style={{marginTop: 10, marginBottom: 20}}>
-            <PhoneButton info={props.booking.phone} />
-          </View>
+        <View style={{marginTop: 10, marginBottom: 20}}>
+          <PhoneButton info={props.phone} />
         </View>
-      )
-    } else if (props.booking.url) {
-      return (
-        <View>
-          <Text style={styles.sectionHeading}>Booking</Text>
-          <View style={{marginTop: 10, marginBottom: 20}}>
-            <BookOnlineButton url={props.booking.url} />
-          </View>
-        </View>
-      )
-    } else {
-      return (
-        <View>
-          <Text style={styles.sectionHeading}>Booking</Text>
-          <Text style={styles.list}>Booking is available but there is no contact information.</Text>
-        </View>
-      )
-    }
+      </View>
+    )
+  } else if (props.phone) {
+    return (
+      <View style={{marginTop: 10, marginBottom: 20}}>
+        <PhoneButton info={props.phone} />
+      </View>
+    )
+  } else if (props.url) {
+    return (
+      <View style={{marginTop: 10, marginBottom: 20}}>
+        <BookOnlineButton url={props.url} />
+      </View>
+    )
+  } else {
+    return (
+      <Text style={styles.list}>Booking is available but there is no contact information.</Text>
+    )
   }
 }
 
