@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import { CampsiteWithStarred, Position } from '../libs/types'
+import { CampsiteWithStarred, Position, BookingsInfo } from '../libs/types'
 import Star from '../components/Star'
 import TextWithTick from '../components/TextWithTick'
 import * as TextFormatter from '../libs/TextFormatter'
@@ -40,7 +40,7 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <DescriptionText description={this.props.campsite.description} />
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
-          <Booking />
+          <Booking booking={this.props.campsite.bookings}/>
           <View style={{marginTop: 10}}>
             <Button onPress={() => { this.onPress() }}>
               Directions to campsite
@@ -60,13 +60,25 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
   }
 }
 
-function Booking() {
-  return (
-    <View>
-      <Text style={styles.sectionHeading}>Bookings</Text>
-      <Text style={styles.list}>Booking is unavailable. It's first come, first served.</Text>
-    </View>
-  )
+function Booking(props: {booking: BookingsInfo | null | undefined}) {
+  if (props.booking === null) {
+    return (
+      <View>
+        <Text style={styles.sectionHeading}>Booking</Text>
+        <Text style={styles.list}>Booking is not available. It's first come, first served.</Text>
+      </View>
+    )
+  } else if (props.booking === undefined) {
+    // TODO: Not sure this is the right thing to do and consistent with everything else
+    return null
+  } else {
+    return (
+      <View>
+        <Text style={styles.sectionHeading}>Booking</Text>
+        <Text style={styles.list}>Booking is available.</Text>
+      </View>
+    )
+  }
 }
 
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
