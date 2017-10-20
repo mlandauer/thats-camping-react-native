@@ -69,7 +69,7 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
     return (
       <View>
         <Text style={styles.sectionHeading}>Booking</Text>
-        <Text style={styles.list}>Booking is not available. It's first come, first served.</Text>
+        <Text style={styles.list}>Booking not available. It's first come, first served.</Text>
       </View>
     )
   } else {
