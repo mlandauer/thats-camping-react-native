@@ -40,6 +40,20 @@ type MorphBoolean = Static<typeof MorphBoolean>
 type MorphRecord = Static<typeof MorphRecord>
 type BookingRecord = Static<typeof BookingRecord>
 
+function convertBookingRecord(booking: BookingRecord, url: string | null): (BookingsInfo | null) {
+  if (booking.takes_bookings === "no") {
+    return null
+  } else {
+    return {
+      phone: {
+        name: booking.phone_name,
+        number: booking.phone_number
+      },
+      url: url
+    }
+  }
+}
+
 function convertMorphRecordToCampsite(morph: MorphRecord, bookings: BookingRecord[]): CampsiteNoId {
   let position: (Position | null) = null
   if (morph.latitude && morph.longitude) {
@@ -50,20 +64,7 @@ function convertMorphRecordToCampsite(morph: MorphRecord, bookings: BookingRecor
   }
   // First find current booking record
   let b = bookings.find(b => b.id === morph.id)
-  let bookingsInfo: (BookingsInfo | null | undefined) = undefined
-  if (b) {
-    if (b.takes_bookings === "no") {
-      bookingsInfo = null
-    } else {
-      bookingsInfo = {
-        phone: {
-          name: b.phone_name,
-          number: b.phone_number
-        },
-        url: morph.bookingURL
-      }
-    }
-  }
+  let bookingsInfo = b ? convertBookingRecord(b, morph.bookingURL) : undefined
 
   return {
     name: morph.name,
