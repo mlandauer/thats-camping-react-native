@@ -25,7 +25,8 @@ describe('campsites', () => {
           trailers: false,
           car: false
         },
-        parkName: 'A park'
+        parkName: 'A park',
+        bookings: null
       }
       const campsites = [campsite]
       const expectedAction = {
@@ -62,7 +63,8 @@ describe('campsites', () => {
           trailers: false,
           car: false
         },
-        parkName: "A park"
+        parkName: "A park",
+        bookings: null
       }
       expect(reducer(undefined, {
         type: 'UPDATE_CAMPSITES',
@@ -86,7 +88,8 @@ describe('campsites', () => {
             trailers: false,
             car: false
           },
-          parkName: "A park"
+          parkName: "A park",
+          bookings: null
         }
       })
     })
@@ -108,7 +111,8 @@ describe('campsites', () => {
           car: false
         },
         facilities: facilities,
-        position: { lat: 1.0, lng: 2.0 }
+        position: { lat: 1.0, lng: 2.0 },
+        bookings: null
       }
 
       const campsite1 = {

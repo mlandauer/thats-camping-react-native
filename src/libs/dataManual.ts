@@ -56,6 +56,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       trailers: convertGoogleBoolean(record.trailer),
       car: convertGoogleBoolean(record.car)
     },
+    bookings: undefined,
     sourceId: record.id
   }
 }

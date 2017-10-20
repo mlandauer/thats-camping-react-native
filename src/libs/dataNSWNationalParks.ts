@@ -1,6 +1,6 @@
 import { String, Array, Record, Static, Literal, Union, Number } from 'runtypes'
 
-import { CampsiteNoId, Position } from '../libs/types'
+import { CampsiteNoId, Position, BookingsInfo } from '../libs/types'
 import * as DataApi from '../libs/DataApi'
 
 const MorphBoolean = Union(
@@ -40,7 +40,7 @@ type MorphBoolean = Static<typeof MorphBoolean>
 type MorphRecord = Static<typeof MorphRecord>
 type BookingRecord = Static<typeof BookingRecord>
 
-function convertMorphRecordToCampsite(morph: MorphRecord, _bookings: BookingRecord[]): CampsiteNoId {
+function convertMorphRecordToCampsite(morph: MorphRecord, bookings: BookingRecord[]): CampsiteNoId {
   let position: (Position | null) = null
   if (morph.latitude && morph.longitude) {
     position = {
@@ -48,6 +48,23 @@ function convertMorphRecordToCampsite(morph: MorphRecord, _bookings: BookingReco
       lng: morph.longitude
     }
   }
+  // First find current booking record
+  let b = bookings.find(b => b.id === morph.id)
+  let bookingsInfo: (BookingsInfo | null | undefined) = undefined
+  if (b) {
+    if (b.takes_bookings === "no") {
+      bookingsInfo = null
+    } else {
+      bookingsInfo = {
+        phone: {
+          name: b.phone_name,
+          number: b.phone_number
+        },
+        url: morph.bookingURL
+      }
+    }
+  }
+
   return {
     name: morph.name,
     parkName: morph.parkName,
@@ -65,6 +82,7 @@ function convertMorphRecordToCampsite(morph: MorphRecord, _bookings: BookingReco
       trailers: convertMorphBoolean(morph.trailers),
       car: convertMorphBoolean(morph.car)
     },
+    bookings: bookingsInfo,
     sourceId: morph.id
   }
 }

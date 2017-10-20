@@ -5,10 +5,25 @@ export interface CampsiteNoId {
   facilities: Facilities;
   access: Access;
   parkName: string;
+  // null means that bookings are not taken
+  // undefined means that we don't know whether bookings are taken
+  bookings: BookingsInfo | null | undefined;
   // Use the following two fields to capture where this data is coming from
   // This defines a namespace in which the source_ids are unique
   source?: string;
   sourceId?: string;
+}
+
+export interface BookingsInfo {
+  // null means there is no phone number
+  // undefined means that we don't know
+  phone: Phone | null | undefined;
+  url: string | null | undefined;
+}
+
+interface Phone {
+  name?: string;
+  number: string;
 }
 
 export interface CampsiteNoRev extends CampsiteNoId {
