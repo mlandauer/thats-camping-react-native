@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position, BookingsInfo } from '../libs/types'
 import Star from '../components/Star'
@@ -118,7 +119,10 @@ function BookingActions(props: {
 function BookOnlineButton(props: {url: string}) {
   return (
     <Button onPress={() => Linking.openURL(props.url)}>
-      Book online
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Icon style={styles.icon} name="ios-cart-outline" />
+        <Text style={styles.buttonText}>Book online</Text>
+      </View>
     </Button>
   )
 }
@@ -131,7 +135,10 @@ function PhoneButton(props: {info: {number: string, name?: string}}) {
   let label = props.info.name ? props.info.name : props.info.number
   return (
     <Button onPress={() => {startPhoneCall(props.info.number)}}>
-      Phone {label}
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Icon style={styles.icon} name="ios-call-outline" />
+        <Text numberOfLines={1} style={styles.buttonText}>Phone {label}</Text>
+      </View>
     </Button>
   )
 }
@@ -203,5 +210,15 @@ const styles = StyleSheet.create({
   list: {
     fontSize: 20,
     marginBottom: 10,
-  }
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#777',
+    flex: 1,
+    fontWeight: "500"
+  },
+  icon: {
+    fontSize: 26,
+    marginRight: 12
+  },
 })
