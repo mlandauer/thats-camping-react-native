@@ -61,16 +61,10 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
 }
 
 function Booking() {
-  // return (
-  //   <View>
-  //     <Text style={styles.sectionHeading}>Bookings</Text>
-  //     <Text style={styles.list}>You can't book. Just turn up.</Text>
-  //   </View>
-  // )
   return (
     <View>
       <Text style={styles.sectionHeading}>Bookings</Text>
-      <Text style={styles.list}>You can't book. Just turn up.</Text>
+      <Text style={styles.list}>Booking is unavailable. It's first come, first served.</Text>
     </View>
   )
 }
