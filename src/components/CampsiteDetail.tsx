@@ -76,8 +76,10 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
       return (
         <View>
           <Text style={styles.sectionHeading}>Booking</Text>
-          <Text style={styles.list}>Booking is available. Can book online and by phone.</Text>
           <View style={{marginTop: 10}}>
+            <BookOnlineButton url={props.booking.url} />
+          </View>
+          <View style={{marginTop: 10, marginBottom: 20}}>
             <PhoneButton info={props.booking.phone} />
           </View>
         </View>
@@ -86,8 +88,7 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
       return (
         <View>
           <Text style={styles.sectionHeading}>Booking</Text>
-          <Text style={styles.list}>Booking is available. Can book by phone.</Text>
-          <View style={{marginTop: 10}}>
+          <View style={{marginTop: 10, marginBottom: 20}}>
             <PhoneButton info={props.booking.phone} />
           </View>
         </View>
@@ -96,7 +97,9 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
       return (
         <View>
           <Text style={styles.sectionHeading}>Booking</Text>
-          <Text style={styles.list}>Booking is available. Can book online.</Text>
+          <View style={{marginTop: 10, marginBottom: 20}}>
+            <BookOnlineButton url={props.booking.url} />
+          </View>
         </View>
       )
     } else {
@@ -108,6 +111,14 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
       )
     }
   }
+}
+
+function BookOnlineButton(props: {url: string}) {
+  return (
+    <Button onPress={() => Linking.openURL(props.url)}>
+      Book online
+    </Button>
+  )
 }
 
 function startPhoneCall(number: string) {
