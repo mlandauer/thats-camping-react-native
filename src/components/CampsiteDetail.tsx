@@ -131,7 +131,7 @@ function PhoneButton(props: {info: {number: string, name?: string}}) {
   let label = props.info.name ? props.info.name : props.info.number
   return (
     <Button onPress={() => {startPhoneCall(props.info.number)}}>
-      Book by phoning {label}
+      Phone {label}
     </Button>
   )
 }
