@@ -77,6 +77,9 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
         <View>
           <Text style={styles.sectionHeading}>Booking</Text>
           <Text style={styles.list}>Booking is available. Can book online and by phone.</Text>
+          <View style={{marginTop: 10}}>
+            <PhoneButton info={props.booking.phone} />
+          </View>
         </View>
       )
     } else if (props.booking.phone) {
@@ -84,6 +87,9 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
         <View>
           <Text style={styles.sectionHeading}>Booking</Text>
           <Text style={styles.list}>Booking is available. Can book by phone.</Text>
+          <View style={{marginTop: 10}}>
+            <PhoneButton info={props.booking.phone} />
+          </View>
         </View>
       )
     } else if (props.booking.url) {
@@ -102,6 +108,19 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
       )
     }
   }
+}
+
+function startPhoneCall(number: string) {
+  Linking.openURL(`tel:${number}`)
+}
+
+function PhoneButton(props: {info: {number: string, name?: string}}) {
+  let label = props.info.name ? props.info.name : props.info.number
+  return (
+    <Button onPress={() => {startPhoneCall(props.info.number)}}>
+      Book by phoning {label}
+    </Button>
+  )
 }
 
 function Section(props: {fields: TextFormatter.Fields, heading: string}) {
