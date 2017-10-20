@@ -72,12 +72,35 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
     // TODO: Not sure this is the right thing to do and consistent with everything else
     return null
   } else {
-    return (
-      <View>
-        <Text style={styles.sectionHeading}>Booking</Text>
-        <Text style={styles.list}>Booking is available.</Text>
-      </View>
-    )
+    if (props.booking.phone && props.booking.url) {
+      return (
+        <View>
+          <Text style={styles.sectionHeading}>Booking</Text>
+          <Text style={styles.list}>Booking is available. Can book online and by phone.</Text>
+        </View>
+      )
+    } else if (props.booking.phone) {
+      return (
+        <View>
+          <Text style={styles.sectionHeading}>Booking</Text>
+          <Text style={styles.list}>Booking is available. Can book by phone.</Text>
+        </View>
+      )
+    } else if (props.booking.url) {
+      return (
+        <View>
+          <Text style={styles.sectionHeading}>Booking</Text>
+          <Text style={styles.list}>Booking is available. Can book online.</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.sectionHeading}>Booking</Text>
+          <Text style={styles.list}>Booking is available but there is no contact information.</Text>
+        </View>
+      )
+    }
   }
 }
 
