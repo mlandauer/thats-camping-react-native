@@ -61,16 +61,16 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
 }
 
 function Booking(props: {booking: BookingsInfo | null | undefined}) {
-  if (props.booking === null) {
+  if (props.booking === undefined) {
+    // TODO: Not sure this is the right thing to do and consistent with everything else
+    return null
+  } else if (props.booking === null) {
     return (
       <View>
         <Text style={styles.sectionHeading}>Booking</Text>
         <Text style={styles.list}>Booking is not available. It's first come, first served.</Text>
       </View>
     )
-  } else if (props.booking === undefined) {
-    // TODO: Not sure this is the right thing to do and consistent with everything else
-    return null
   } else {
     return (
       <View>
