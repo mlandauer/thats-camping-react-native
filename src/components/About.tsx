@@ -33,14 +33,12 @@ export default class About extends React.Component<Props, {}> {
             Designed and developed by Matthew Landauer. Icon design by
             Gabriel Clark and Joanna Hill.
           </Text>
-          <View style={{marginTop: 10}}>
+          <View style={{marginBottom: 20}}>
             <Button onPress={onPress}>
               Suggest a feature or report an issue
             </Button>
           </View>
-          <View style={{ marginTop: 20 }}>
-            <Admin onDestroyButtonPushed={this.props.onDestroyButtonPushed}/>
-          </View>
+          <Admin onDestroyButtonPushed={this.props.onDestroyButtonPushed}/>
         </View>
       </ScrollView>
     )

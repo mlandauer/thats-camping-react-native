@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "snapshot": "jest --updateSnapshot",
     "tsc": "tsc --watch",
     "transform_data": "node data/transform_data.js",
     "update": "node lib/scripts/update.js"

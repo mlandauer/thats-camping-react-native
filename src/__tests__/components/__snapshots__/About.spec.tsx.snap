@@ -69,7 +69,7 @@ exports[`renders correctly 1`] = `
       <View
         style={
           Object {
-            "marginTop": 10,
+            "marginBottom": 20,
           }
         }
       >
@@ -127,23 +127,15 @@ exports[`renders correctly 1`] = `
           </Text>
         </View>
       </View>
-      <View
+      <TextInput
+        onChangeText={[Function]}
+        secureTextEntry={true}
         style={
           Object {
-            "marginTop": 20,
+            "padding": 10,
           }
         }
-      >
-        <TextInput
-          onChangeText={[Function]}
-          secureTextEntry={true}
-          style={
-            Object {
-              "padding": 10,
-            }
-          }
-        />
-      </View>
+      />
     </View>
   </View>
 </RCTScrollView>
