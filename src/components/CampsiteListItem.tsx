@@ -16,7 +16,7 @@ interface Props {
   starred: boolean;
   distance: number | undefined;
   bearing: number | undefined;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 export default function CampsiteListItem(props: Props) {
