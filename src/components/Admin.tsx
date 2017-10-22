@@ -12,7 +12,7 @@ interface State {
 }
 
 interface Props {
-  onDestroyButtonPushed: () => void;
+  onDestroyButtonPushed?: () => void;
 }
 
 // Really dumb little thing that protects a thing with a password

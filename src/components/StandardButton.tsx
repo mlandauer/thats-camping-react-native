@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import Button from 'react-native-button'
 
 interface Props {
-  onPress: () => void;
+  onPress?: () => void;
   children: any;
 }
 

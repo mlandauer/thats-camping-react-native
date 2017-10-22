@@ -11,7 +11,7 @@ import Admin from './Admin'
 import Button from './StandardButton'
 
 interface Props {
-  onDestroyButtonPushed: () => void;
+  onDestroyButtonPushed?: () => void;
 }
 
 export default class About extends React.Component<Props, {}> {
