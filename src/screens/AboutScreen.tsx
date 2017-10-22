@@ -1,7 +1,9 @@
 import * as React from 'react'
+import { Alert } from 'react-native'
 import { Navigator } from 'react-native-navigation'
 
 import About from '../components/About'
+import * as Database from '../libs/Database'
 
 interface Props {
   navigator: Navigator;
@@ -12,9 +14,14 @@ export default class AboutScreen extends React.Component<Props, {}> {
     tabBarHidden: true
   }
 
+  async destroyDatabase() {
+    await Database.destroy()
+    Alert.alert("Database destroyed")
+  }
+
   render() {
     return (
-      <About />
+      <About onDestroyButtonPushed={() => this.destroyDatabase()}/>
     )
   }
 }

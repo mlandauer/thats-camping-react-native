@@ -2,27 +2,24 @@ import * as React from 'react'
 import {
   TextInput,
   View,
-  Alert
 } from 'react-native'
 import Config from 'react-native-config'
 
-import * as Database from '../libs/Database'
 import Button from './StandardButton'
 
 interface State {
   locked: boolean;
 }
 
+interface Props {
+  onDestroyButtonPushed: () => void;
+}
+
 // Really dumb little thing that protects a thing with a password
-export default class Admin extends React.Component<{}, State> {
-  constructor(props: {}) {
+export default class Admin extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = { locked: true }
-  }
-
-  async destroyDatabase() {
-    await Database.destroy()
-    Alert.alert("Database destroyed")
   }
 
   render() {
@@ -33,7 +30,7 @@ export default class Admin extends React.Component<{}, State> {
     } else {
       return (
         <View>
-          <Button onPress={() => this.destroyDatabase()} >
+          <Button onPress={this.props.onDestroyButtonPushed} >
             Destroy database
           </Button>
         </View>

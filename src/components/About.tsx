@@ -10,7 +10,11 @@ import {
 import Admin from './Admin'
 import Button from './StandardButton'
 
-export default class About extends React.Component<{}, {}> {
+interface Props {
+  onDestroyButtonPushed: () => void;
+}
+
+export default class About extends React.Component<Props, {}> {
   render() {
     return (
       <ScrollView>
@@ -35,7 +39,7 @@ export default class About extends React.Component<{}, {}> {
             </Button>
           </View>
           <View style={{ marginTop: 20 }}>
-            <Admin />
+            <Admin onDestroyButtonPushed={this.props.onDestroyButtonPushed}/>
           </View>
         </View>
       </ScrollView>
