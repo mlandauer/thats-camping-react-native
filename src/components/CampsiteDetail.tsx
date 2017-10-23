@@ -86,42 +86,20 @@ function BookingActions(props: {
   phone: {number: string} | null,
   url: string | null
 }) {
-  if (props.phone && props.url) {
+  if (props.phone === null && props.url === null) {
     return (
-      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flex: 1, paddingRight: 10}}>
-          <BookOnlineButton url={props.url} />
-        </View>
-        <View style={{flex: 1, paddingLeft: 10}}>
-          <PhoneButton info={props.phone} />
-        </View>
-      </View>
-    )
-  } else if (props.phone) {
-    return (
-      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flex: 1, paddingRight: 10}}>
-          <BookOnlineButton url={props.url} />
-        </View>
-        <View style={{flex: 1, paddingLeft: 10}}>
-          <PhoneButton info={props.phone} />
-        </View>
-      </View>
-    )
-  } else if (props.url) {
-    return (
-      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flex: 1, paddingRight: 10}}>
-          <BookOnlineButton url={props.url} />
-        </View>
-        <View style={{flex: 1, paddingLeft: 10}}>
-          <PhoneButton info={props.phone} />
-        </View>
-      </View>
+      <Text style={styles.list}>Booking is available but there is no contact information.</Text>
     )
   } else {
     return (
-      <Text style={styles.list}>Booking is available but there is no contact information.</Text>
+      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flex: 1, paddingRight: 10}}>
+          <BookOnlineButton url={props.url} />
+        </View>
+        <View style={{flex: 1, paddingLeft: 10}}>
+          <PhoneButton info={props.phone} />
+        </View>
+      </View>
     )
   }
 }
