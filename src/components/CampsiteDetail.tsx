@@ -83,8 +83,8 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
 }
 
 function BookingActions(props: {
-  phone: {number: string, name?: string} | null | undefined,
-  url: string | null | undefined
+  phone: {number: string} | null,
+  url: string | null
 }) {
   if (props.phone && props.url) {
     return (
@@ -126,13 +126,13 @@ function BookingActions(props: {
   }
 }
 
-function openURL(url: string | null | undefined) {
+function openURL(url: string | null) {
   if (url) {
     Linking.openURL(url)
   }
 }
 
-function BookOnlineButton(props: {url: string | null | undefined}) {
+function BookOnlineButton(props: {url: string | null}) {
   let disabled = props.url ? false : true
   return (
     <Button onPress={() => openURL(props.url)} disabled={disabled}>
@@ -141,13 +141,13 @@ function BookOnlineButton(props: {url: string | null | undefined}) {
   )
 }
 
-function startPhoneCall(info: {number: string, name?: string} | null | undefined) {
+function startPhoneCall(info: {number: string, name?: string} | null) {
   if (info) {
     Linking.openURL(`tel:${info.number}`)
   }
 }
 
-function PhoneButton(props: {info: {number: string, name?: string} | null | undefined}) {
+function PhoneButton(props: {info: {number: string} | null}) {
   // let label = props.info.name ? props.info.name : props.info.number
   let disabled = props.info ? false : true
   return (
