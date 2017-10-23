@@ -42,11 +42,9 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
           <Booking booking={this.props.campsite.bookings}/>
-          <View style={{marginTop: 10}}>
-            <Button onPress={() => { this.onPress() }}>
-              Directions to campsite
-            </Button>
-          </View>
+          <Button onPress={() => { this.onPress() }}>
+            Directions to campsite
+          </Button>
         </View>
       </ScrollView>
     )
@@ -67,14 +65,14 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
     return null
   } else if (props.booking === null) {
     return (
-      <View>
+      <View style={{marginBottom: 20}}>
         <Text style={styles.sectionHeading}>Booking</Text>
         <Text style={styles.list}>Booking not available. It's first come, first served.</Text>
       </View>
     )
   } if (props.booking.phone === null && props.booking.url === null) {
     return (
-      <View>
+      <View style={{marginBottom: 20}}>
         <Text style={styles.sectionHeading}>Booking</Text>
         <Text style={styles.list}>Booking is available but there is no contact information.</Text>
       </View>
@@ -82,7 +80,6 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
   } else {
     return (
       <View>
-        <Text style={styles.sectionHeading}>Booking</Text>
         <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flex: 1, paddingRight: 10}}>
             <BookOnlineButton url={props.booking.url} />
