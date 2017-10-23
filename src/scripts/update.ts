@@ -15,7 +15,7 @@ import dataManual from '../libs/dataManual'
 Dotenv.config()
 
 // Returns all campsites from a particular source
-async function campsitesFromSource(source: string) {
+async function campsitesFromSource(db: PouchDB.Database<CampsiteNoId>, source: string) {
   // First get all campsites in the database with the same source
   let docs = await db.allDocs({include_docs: true})
   let campsites = docs.rows.map((row) => {
@@ -26,8 +26,8 @@ async function campsitesFromSource(source: string) {
   })
 }
 
-async function updateDatabase(campsites: CampsiteNoId[], source: string) {
-  let campsitesSource = await campsitesFromSource(source)
+async function updateDatabase(db: PouchDB.Database<CampsiteNoId>, campsites: CampsiteNoId[], source: string) {
+  let campsitesSource = await campsitesFromSource(db, source)
 
   let docs: (Campsite | CampsiteNoId)[] = []
 
@@ -60,37 +60,40 @@ async function updateDatabase(campsites: CampsiteNoId[], source: string) {
   return db.bulkDocs(docs)
 }
 
-async function updateDatabaseFromNationalParks() {
-  return updateDatabase(await dataNSWNationalParks(), 'nationalparks.nsw.gov.au')
+async function updateDatabaseFromNationalParks(db: PouchDB.Database<CampsiteNoId>) {
+  return updateDatabase(db, await dataNSWNationalParks(), 'nationalparks.nsw.gov.au')
 }
 
-async function updateDatabaseFromGoogle() {
-  return updateDatabase(await dataManual(), 'manual')
+async function updateDatabaseFromGoogle(db: PouchDB.Database<CampsiteNoId>) {
+  return updateDatabase(db, await dataManual(), 'manual')
 }
 
 let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
-
-// Obviously anyone who really wants to get access to the password below
-// can just decompile the binary. Not including the password in the source
-// code provides a minimal level of security.
-let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
-let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
-if (staging_password && production_password) {
-  let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
-  // Do a one time of remote to local database
-  console.log("Doing replication from remote to local database...")
-  PouchDB.replicate(remoteDb, db).then(() => {
-    console.log("Replication finished")
-  }).then(() => {
-    return updateDatabaseFromNationalParks()
-  }).then(() => {
-    return updateDatabaseFromGoogle()
-  }).then(() => {
-    console.log("Replicating from local to remote database...")
-    return PouchDB.replicate(db, remoteDb)
-  }).then(() => {
-    console.log("Done.")
-  })
-} else {
-  console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
-}
+console.log("First start from a clean slate...")
+db.destroy().then(() => {
+  let db = new PouchDB<CampsiteNoId>('./thatscamping.db')
+  // Obviously anyone who really wants to get access to the password below
+  // can just decompile the binary. Not including the password in the source
+  // code provides a minimal level of security.
+  let staging_password = process.env.COUCHDB_REMOTE_PASSWORD_STAGING
+  let production_password = process.env.COUCHDB_REMOTE_PASSWORD_PRODUCTION
+  if (staging_password && production_password) {
+    let remoteDb = remoteDbCreate(PouchDB, staging_password, production_password)
+    // Do a one time of remote to local database
+    console.log("Doing replication from remote to local database...")
+    PouchDB.replicate(remoteDb, db).then(() => {
+      console.log("Replication finished")
+    }).then(() => {
+      return updateDatabaseFromNationalParks(db)
+    }).then(() => {
+      return updateDatabaseFromGoogle(db)
+    }).then(() => {
+      console.log("Replicating from local to remote database...")
+      return PouchDB.replicate(db, remoteDb)
+    }).then(() => {
+      console.log("Done.")
+    })
+  } else {
+    console.error("environment variables COUCHDB_REMOTE_PASSWORD_STAGING and COUCHDB_REMOTE_PASSWORD_PRODUCTION not set")
+  }
+})
