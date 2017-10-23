@@ -8,7 +8,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+// import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position, BookingsInfo } from '../libs/types'
 import Star from '../components/Star'
@@ -42,11 +42,9 @@ export default class CampsiteDetail extends React.Component<Props, {}> {
           <Section heading="Facilities" fields={facilitiesFields} />
           <Section heading="Access" fields={accessFields} />
           <Booking booking={this.props.campsite.bookings}/>
-          <View style={{marginTop: 10}}>
-            <Button onPress={() => { this.onPress() }}>
-              Directions to campsite
-            </Button>
-          </View>
+          <Button onPress={() => { this.onPress() }}>
+            Directions to campsite
+          </Button>
         </View>
       </ScrollView>
     )
@@ -67,78 +65,61 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
     return null
   } else if (props.booking === null) {
     return (
-      <View>
+      <View style={{marginBottom: 20}}>
         <Text style={styles.sectionHeading}>Booking</Text>
         <Text style={styles.list}>Booking not available. It's first come, first served.</Text>
       </View>
     )
-  } else {
+  } if (props.booking.phone === null && props.booking.url === null) {
     return (
-      <View>
+      <View style={{marginBottom: 20}}>
         <Text style={styles.sectionHeading}>Booking</Text>
-        <BookingActions url={props.booking.url} phone={props.booking.phone}/>
-      </View>
-    )
-  }
-}
-
-function BookingActions(props: {
-  phone: {number: string, name?: string} | null | undefined,
-  url: string | null | undefined
-}) {
-  if (props.phone && props.url) {
-    return (
-      <View>
-        <View style={{marginTop: 10}}>
-          <BookOnlineButton url={props.url} />
-        </View>
-        <View style={{marginTop: 10, marginBottom: 20}}>
-          <PhoneButton info={props.phone} />
-        </View>
-      </View>
-    )
-  } else if (props.phone) {
-    return (
-      <View style={{marginTop: 10, marginBottom: 20}}>
-        <PhoneButton info={props.phone} />
-      </View>
-    )
-  } else if (props.url) {
-    return (
-      <View style={{marginTop: 10, marginBottom: 20}}>
-        <BookOnlineButton url={props.url} />
+        <Text style={styles.list}>Booking is available but there is no contact information.</Text>
       </View>
     )
   } else {
     return (
-      <Text style={styles.list}>Booking is available but there is no contact information.</Text>
+      <View>
+        <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flex: 1, paddingRight: 10}}>
+            <BookOnlineButton url={props.booking.url} />
+          </View>
+          <View style={{flex: 1, paddingLeft: 10}}>
+            <PhoneButton info={props.booking.phone} />
+          </View>
+        </View>
+      </View>
     )
   }
 }
 
-function BookOnlineButton(props: {url: string}) {
+function openURL(url: string | null) {
+  if (url) {
+    Linking.openURL(url)
+  }
+}
+
+function BookOnlineButton(props: {url: string | null}) {
+  let disabled = props.url ? false : true
   return (
-    <Button onPress={() => Linking.openURL(props.url)}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Icon style={styles.icon} name="ios-cart-outline" />
-        <Text style={styles.buttonText}>Book online</Text>
-      </View>
+    <Button onPress={() => openURL(props.url)} disabled={disabled}>
+      Book online
     </Button>
   )
 }
 
-function startPhoneCall(number: string) {
-  Linking.openURL(`tel:${number}`)
+function startPhoneCall(info: {number: string, name?: string} | null) {
+  if (info) {
+    Linking.openURL(`tel:${info.number}`)
+  }
 }
 
-function PhoneButton(props: {info: {number: string, name?: string}}) {
-  let label = props.info.name ? props.info.name : props.info.number
+function PhoneButton(props: {info: {number: string} | null}) {
+  // let label = props.info.name ? props.info.name : props.info.number
+  let disabled = props.info ? false : true
   return (
-    <Button onPress={() => {startPhoneCall(props.info.number)}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Icon style={styles.icon} name="ios-call-outline" />
-        <Text numberOfLines={1} style={styles.buttonText}>Phone {label}</Text>
-      </View>
+    <Button onPress={() => {startPhoneCall(props.info)}} disabled={disabled}>
+      Book by phone
     </Button>
   )
 }

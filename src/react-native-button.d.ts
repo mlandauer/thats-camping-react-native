@@ -5,7 +5,9 @@ declare module "react-native-button" {
   interface Props {
     containerStyle?: ViewStyle;
     style?: TextStyle;
+    styleDisabled?: TextStyle;
     onPress?: () => void;
+    disabled: boolean;
   }
 
   export default class Button extends React.Component<Props, {}> {

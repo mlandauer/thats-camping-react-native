@@ -46,7 +46,6 @@ function convertBookingRecord(booking: BookingRecord, url: string | null): (Book
   } else {
     return {
       phone: {
-        name: booking.phone_name,
         number: booking.phone_number
       },
       url: url

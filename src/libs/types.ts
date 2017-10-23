@@ -15,14 +15,11 @@ export interface CampsiteNoId {
 }
 
 export interface BookingsInfo {
-  // null means there is no phone number
-  // undefined means that we don't know
-  phone: Phone | null | undefined;
-  url: string | null | undefined;
+  phone: Phone | null;
+  url: string | null;
 }
 
 interface Phone {
-  name?: string;
   number: string;
 }
 
