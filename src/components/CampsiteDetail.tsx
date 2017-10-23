@@ -90,23 +90,33 @@ function BookingActions(props: {
     return (
       <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flex: 1, paddingRight: 10}}>
-          <BookOnlineButton url={props.url} disabled={true}/>
+          <BookOnlineButton url={props.url} />
         </View>
         <View style={{flex: 1, paddingLeft: 10}}>
-          <PhoneButton info={props.phone} disabled={false}/>
+          <PhoneButton info={props.phone} />
         </View>
       </View>
     )
   } else if (props.phone) {
     return (
-      <View style={{marginTop: 10, marginBottom: 20}}>
-        <PhoneButton info={props.phone} />
+      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flex: 1, paddingRight: 10}}>
+          <BookOnlineButton url={props.url} />
+        </View>
+        <View style={{flex: 1, paddingLeft: 10}}>
+          <PhoneButton info={props.phone} />
+        </View>
       </View>
     )
   } else if (props.url) {
     return (
-      <View style={{marginTop: 10, marginBottom: 20}}>
-        <BookOnlineButton url={props.url} />
+      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flex: 1, paddingRight: 10}}>
+          <BookOnlineButton url={props.url} />
+        </View>
+        <View style={{flex: 1, paddingLeft: 10}}>
+          <PhoneButton info={props.phone} />
+        </View>
       </View>
     )
   } else {
@@ -116,22 +126,32 @@ function BookingActions(props: {
   }
 }
 
-function BookOnlineButton(props: {url: string, disabled?: boolean}) {
+function openURL(url: string | null | undefined) {
+  if (url) {
+    Linking.openURL(url)
+  }
+}
+
+function BookOnlineButton(props: {url: string | null | undefined}) {
+  let disabled = props.url ? false : true
   return (
-    <Button onPress={() => Linking.openURL(props.url)} disabled={props.disabled}>
+    <Button onPress={() => openURL(props.url)} disabled={disabled}>
       Book online
     </Button>
   )
 }
 
-function startPhoneCall(number: string) {
-  Linking.openURL(`tel:${number}`)
+function startPhoneCall(info: {number: string, name?: string} | null | undefined) {
+  if (info) {
+    Linking.openURL(`tel:${info.number}`)
+  }
 }
 
-function PhoneButton(props: {info: {number: string, name?: string}, disabled?: boolean}) {
+function PhoneButton(props: {info: {number: string, name?: string} | null | undefined}) {
   // let label = props.info.name ? props.info.name : props.info.number
+  let disabled = props.info ? false : true
   return (
-    <Button onPress={() => {startPhoneCall(props.info.number)}} disabled={props.disabled}>
+    <Button onPress={() => {startPhoneCall(props.info)}} disabled={disabled}>
       Book by phone
     </Button>
   )

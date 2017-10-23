@@ -13,6 +13,7 @@ export default function StandardButton(props: Props) {
     <Button
       containerStyle={styles.buttonContainer}
       style={styles.buttonText}
+      styleDisabled={styles.disabledButtonText}
       onPress={props.onPress}
       disabled={props.disabled === true} >
       {props.children}
@@ -25,10 +26,15 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 12,
     borderRadius: 4,
-    borderWidth: 0.5
+    borderWidth: 0.5,
+    borderColor: '#777'
   },
   buttonText: {
     fontSize: 18,
     color: '#777'
+  },
+  disabledButtonText: {
+    fontSize: 18,
+    color: '#ccc'
   }
 })
