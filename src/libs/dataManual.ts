@@ -1,6 +1,6 @@
 import { String, Array, Record, Static, Literal, Union } from 'runtypes'
 
-import { CampsiteNoId } from '../libs/types'
+import { CampsiteNoId, BookingsInfo } from '../libs/types'
 import * as DataApi from '../libs/DataApi'
 
 const GoogleBoolean = Union(
@@ -25,7 +25,12 @@ const GoogleRecord = Record({
   caravan: GoogleBoolean,
   trailer: GoogleBoolean,
   car: GoogleBoolean,
-  drinking_water: GoogleBoolean
+  drinking_water: GoogleBoolean,
+  takes_bookings: GoogleBoolean,
+  booking_url: String,
+  booking_phone_name: String,
+  booking_phone_number: String,
+  booking_email: String
 })
 
 type GoogleRecord = Static<typeof GoogleRecord>
@@ -35,6 +40,22 @@ function convertGoogleBoolean(value: GoogleBoolean): boolean {
 }
 
 function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
+  var bookings: BookingsInfo | null
+  if (record.takes_bookings === 'yes') {
+    var phone: {number: string, name?: string}
+    if (record.booking_phone_name === '') {
+      phone = {number: record.booking_phone_number}
+    } else {
+      phone = {number: record.booking_phone_number, name: record.booking_phone_name}
+    }
+    bookings = {
+      phone: phone,
+      url: (record.booking_url === '' ? null : record.booking_url)
+    }
+  } else {
+    bookings = null
+  }
+
   return {
     name: record.name,
     parkName: record.area_name,
@@ -56,7 +77,7 @@ function convertGoogleRecordToCampsite(record: GoogleRecord): CampsiteNoId {
       trailers: convertGoogleBoolean(record.trailer),
       car: convertGoogleBoolean(record.car)
     },
-    bookings: undefined,
+    bookings: bookings,
     sourceId: record.id
   }
 }
