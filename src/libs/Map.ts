@@ -56,16 +56,14 @@ function setupDownloadPack() {
   });
 }
 
+function progress(p: DownloadProgress): number {
+  return p.countOfResourcesCompleted / p.countOfResourcesExpected
+}
+
 function setupUpdateProgressCallback(updateProgress: (progress: number) => void) {
-  Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
-    var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
-    updateProgress(progress)
-  })
+  Mapbox.addOfflinePackProgressListener((p: DownloadProgress) => updateProgress(progress(p)))
 }
 
 function setupReloadProgressCallback(reloadProgress: (progress: number) => void) {
-  Mapbox.addOfflinePackProgressListener((progressObject: DownloadProgress) => {
-    var progress = progressObject.countOfResourcesCompleted / progressObject.countOfResourcesExpected
-    reloadProgress(progress)
-  })
+  Mapbox.addOfflinePackProgressListener((p: DownloadProgress) => reloadProgress(progress(p)))
 }
