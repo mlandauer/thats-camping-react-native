@@ -8,7 +8,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+// import Icon from 'react-native-vector-icons/Ionicons'
 
 import { CampsiteWithStarred, Position, BookingsInfo } from '../libs/types'
 import Star from '../components/Star'
@@ -88,12 +88,12 @@ function BookingActions(props: {
 }) {
   if (props.phone && props.url) {
     return (
-      <View>
-        <View style={{marginTop: 10}}>
-          <BookOnlineButton url={props.url} />
+      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flex: 1, paddingRight: 10}}>
+          <BookOnlineButton url={props.url} disabled={true}/>
         </View>
-        <View style={{marginTop: 10, marginBottom: 20}}>
-          <PhoneButton info={props.phone} />
+        <View style={{flex: 1, paddingLeft: 10}}>
+          <PhoneButton info={props.phone} disabled={false}/>
         </View>
       </View>
     )
@@ -116,13 +116,10 @@ function BookingActions(props: {
   }
 }
 
-function BookOnlineButton(props: {url: string}) {
+function BookOnlineButton(props: {url: string, disabled?: boolean}) {
   return (
-    <Button onPress={() => Linking.openURL(props.url)}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Icon style={styles.icon} name="ios-cart-outline" />
-        <Text style={styles.buttonText}>Book online</Text>
-      </View>
+    <Button onPress={() => Linking.openURL(props.url)} disabled={props.disabled}>
+      Book online
     </Button>
   )
 }
@@ -131,14 +128,11 @@ function startPhoneCall(number: string) {
   Linking.openURL(`tel:${number}`)
 }
 
-function PhoneButton(props: {info: {number: string, name?: string}}) {
-  let label = props.info.name ? props.info.name : props.info.number
+function PhoneButton(props: {info: {number: string, name?: string}, disabled?: boolean}) {
+  // let label = props.info.name ? props.info.name : props.info.number
   return (
-    <Button onPress={() => {startPhoneCall(props.info.number)}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Icon style={styles.icon} name="ios-call-outline" />
-        <Text numberOfLines={1} style={styles.buttonText}>Phone {label}</Text>
-      </View>
+    <Button onPress={() => {startPhoneCall(props.info.number)}} disabled={props.disabled}>
+      Book by phone
     </Button>
   )
 }

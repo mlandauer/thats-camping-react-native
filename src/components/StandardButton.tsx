@@ -4,6 +4,7 @@ import Button from 'react-native-button'
 
 interface Props {
   onPress?: () => void;
+  disabled?: boolean;
   children: any;
 }
 
@@ -12,7 +13,8 @@ export default function StandardButton(props: Props) {
     <Button
       containerStyle={styles.buttonContainer}
       style={styles.buttonText}
-      onPress={props.onPress} >
+      onPress={props.onPress}
+      disabled={props.disabled === true} >
       {props.children}
     </Button>
   )
