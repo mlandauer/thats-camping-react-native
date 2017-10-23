@@ -72,32 +72,24 @@ function Booking(props: {booking: BookingsInfo | null | undefined}) {
         <Text style={styles.list}>Booking not available. It's first come, first served.</Text>
       </View>
     )
+  } if (props.booking.phone === null && props.booking.url === null) {
+    return (
+      <View>
+        <Text style={styles.sectionHeading}>Booking</Text>
+        <Text style={styles.list}>Booking is available but there is no contact information.</Text>
+      </View>
+    )
   } else {
     return (
       <View>
         <Text style={styles.sectionHeading}>Booking</Text>
-        <BookingActions url={props.booking.url} phone={props.booking.phone}/>
-      </View>
-    )
-  }
-}
-
-function BookingActions(props: {
-  phone: {number: string} | null,
-  url: string | null
-}) {
-  if (props.phone === null && props.url === null) {
-    return (
-      <Text style={styles.list}>Booking is available but there is no contact information.</Text>
-    )
-  } else {
-    return (
-      <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flex: 1, paddingRight: 10}}>
-          <BookOnlineButton url={props.url} />
-        </View>
-        <View style={{flex: 1, paddingLeft: 10}}>
-          <PhoneButton info={props.phone} />
+        <View style={{marginTop: 10, marginBottom: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flex: 1, paddingRight: 10}}>
+            <BookOnlineButton url={props.booking.url} />
+          </View>
+          <View style={{flex: 1, paddingLeft: 10}}>
+            <PhoneButton info={props.booking.phone} />
+          </View>
         </View>
       </View>
     )
