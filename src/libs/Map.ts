@@ -16,12 +16,19 @@ export function initialise(updateProgress: (progress: number) => void,
   // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
   // Mapbox.initializeOfflinePacks()
   // Get information about all the offline packs currently defined
+  // TODO: A better solution is to only have a single progress measure and store
+  // in the state whether we've completed a download.
   Mapbox.getOfflinePacks()
   .then((packs: DownloadProgress[]) => {
     console.log("packs", packs)
     if (packs.length > 0) {
       console.log("Already a download pack setup so we don't need to set one up")
-      setupReloadProgressCallback(reloadProgress)
+      // Checks if the pack hasn't finished downloading
+      if (progress(packs[0]) < 1) {
+        setupUpdateProgressCallback(updateProgress)
+      } else {
+        setupReloadProgressCallback(reloadProgress)
+      }
     } else {
       console.log("Need to setup a download pack")
       setupDownloadPack()
