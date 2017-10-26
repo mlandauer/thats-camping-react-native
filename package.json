@@ -11,6 +11,7 @@
     "update": "node lib/scripts/update.js"
   },
   "dependencies": {
+    "@mapbox/react-native-mapbox-gl": "5.2.2",
     "@types/pouchdb-adapter-http": "^6.1.1",
     "@types/pouchdb-core": "^6.1.5",
     "@types/pouchdb-replication": "^6.1.3",
