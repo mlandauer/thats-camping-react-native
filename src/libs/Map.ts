@@ -1,4 +1,4 @@
-import * as Mapbox from 'react-native-mapbox-gl'
+import * as Mapbox from '@mapbox/react-native-mapbox-gl'
 import Config from 'react-native-config'
 
 interface DownloadProgress {

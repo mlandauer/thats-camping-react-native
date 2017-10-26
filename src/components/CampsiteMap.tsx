@@ -2,7 +2,7 @@ import * as React from 'react'
 import {
   View
 } from 'react-native'
-import { MapView } from 'react-native-mapbox-gl'
+import { MapView } from '@mapbox/react-native-mapbox-gl'
 
 import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
