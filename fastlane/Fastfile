@@ -31,8 +31,10 @@ lane :beta do
   # TODO: Ensure a clean build typescript build by deleting /lib
   # TODO: Run typescript
 
+  build_number = get_build_number(xcodeproj: 'ios/ThatsCamping.xcodeproj').to_i
+
   increment_build_number(
-    build_number: latest_testflight_build_number + 1,
+    build_number: (build_number + 1),
     xcodeproj: 'ios/ThatsCamping.xcodeproj'
   )
 
