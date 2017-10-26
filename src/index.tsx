@@ -12,7 +12,6 @@ import { registerScreens } from './screens';
 import { reducer, State, initialState, stateToSave } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
-import * as OfflineMapActions from './ducks/offlineMap'
 import * as Database from './libs/Database'
 import * as Map from './libs/Map'
 import { Client, Configuration } from 'bugsnag-react-native'
@@ -37,10 +36,6 @@ const store = createStore(
 )
 
 Map.initialise()
-Map.initialiseOffline(
-  progress => store.dispatch(OfflineMapActions.updateProgress(progress)),
-  progress => store.dispatch(OfflineMapActions.updateReloadProgress(progress))
-)
 
 // begin periodically persisting part of the store
 persistStore(store, { storage: AsyncStorage as Storage, whitelist: stateToSave })

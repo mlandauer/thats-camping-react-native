@@ -7,12 +7,16 @@ import { MapView } from '@mapbox/react-native-mapbox-gl'
 import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
 import OfflineMapControls from './OfflineMapControls'
+import * as Map from '../libs/Map'
 
 interface Props {
   campsites: CampsiteWithStarred[];
   onPress: (id: string) => void;
+  // TODO: Move this state locally?
   downloadProgress: number;
   reloadProgress: number;
+  onUpdateProgress: (progress: number) => void;
+  onUpdateReloadProgress: (progress: number) => void;
 }
 
 interface RightAnnotationTappedInfo {
@@ -24,6 +28,13 @@ interface RightAnnotationTappedInfo {
 }
 
 export default class CampsiteMap extends React.Component<Props, {}> {
+  finishLoading() {
+    Map.initialiseOffline(
+      progress => this.props.onUpdateProgress(progress),
+      progress => this.props.onUpdateReloadProgress(progress)
+    )
+  }
+
   render() {
     // Centering on the "Heartbreak Hill camping area"
     // to start with
@@ -35,6 +46,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
     return (
       <View style={{flex: 1}}>
         <MapView
+          onFinishLoadingMap={() => this.finishLoading()}
           style={{ flex: 1 }}
           styleURL="mapbox://styles/mapbox/outdoors-v10"
           showsUserLocation={true}

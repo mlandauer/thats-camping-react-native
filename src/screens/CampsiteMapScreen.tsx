@@ -12,6 +12,7 @@ import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
 import { convertToCampsitesWithStarred } from '../libs/convertToCampsiteWithStarred'
 import ScreenWithAbout from './ScreenWithAbout'
+import * as OfflineMapActions from '../ducks/offlineMap'
 
 interface Props {
   navigator?: Navigator;
@@ -19,6 +20,8 @@ interface Props {
   position: Position | null;
   downloadProgress: number;
   reloadProgress: number;
+  onUpdateProgress: (progress: number) => void;
+  onUpdateReloadProgress: (progress: number) => void;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -61,7 +64,14 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
     }
     return (
       <View style={{ flex: 1 }}>
-        <CampsiteMap campsites={campsites} onPress={(id) => this.onPress(id)} downloadProgress={this.props.downloadProgress} reloadProgress={this.props.reloadProgress}/>
+        <CampsiteMap
+          campsites={campsites}
+          onPress={(id) => this.onPress(id)}
+          downloadProgress={this.props.downloadProgress}
+          reloadProgress={this.props.reloadProgress}
+          onUpdateProgress={this.props.onUpdateProgress}
+          onUpdateReloadProgress={this.props.onUpdateReloadProgress}
+        />
       </View>
     );
   }
@@ -78,8 +88,16 @@ function mapStateToProps(state: State, _ownProps: {}) {
   };
 }
 
-const mapDispatchToProps = (_dispatch: Dispatch<State>) => {
-  return {}
+const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+  return {
+    onUpdateProgress: (progress: number) => {
+      dispatch(OfflineMapActions.updateProgress(progress))
+    },
+    onUpdateReloadProgress: (progress: number) => {
+      dispatch(OfflineMapActions.updateReloadProgress(progress))
+    }
+  }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CampsiteMapScreen)
