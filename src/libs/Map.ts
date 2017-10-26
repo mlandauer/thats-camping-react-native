@@ -15,10 +15,7 @@ export async function initialise()
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
 }
 
-export async function initialiseOffline(
-  updateProgress: (progress: number) => void,
-  reloadProgress: (progress: number) => void)
-{
+export async function initialiseOffline( updateProgress: (progress: number) => void) {
   await Mapbox.initializeOfflinePacks()
   let packs: DownloadProgress[] = await Mapbox.getOfflinePacks()
   if (packs.length > 0) {
@@ -26,8 +23,6 @@ export async function initialiseOffline(
     // Checks if the pack hasn't finished downloading
     if (progress(packs[0]) < 1) {
       setupUpdateProgressCallback(updateProgress)
-    } else {
-      setupReloadProgressCallback(reloadProgress)
     }
   } else {
     console.log("Need to setup a download pack")
@@ -61,8 +56,4 @@ function progress(p: DownloadProgress): number {
 
 function setupUpdateProgressCallback(updateProgress: (progress: number) => void) {
   Mapbox.addOfflinePackProgressListener((p: DownloadProgress) => updateProgress(progress(p)))
-}
-
-function setupReloadProgressCallback(reloadProgress: (progress: number) => void) {
-  Mapbox.addOfflinePackProgressListener((p: DownloadProgress) => reloadProgress(progress(p)))
 }

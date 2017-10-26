@@ -14,9 +14,7 @@ interface Props {
   onPress: (id: string) => void;
   // TODO: Move this state locally?
   downloadProgress: number;
-  reloadProgress: number;
   onUpdateProgress: (progress: number) => void;
-  onUpdateReloadProgress: (progress: number) => void;
 }
 
 interface RightAnnotationTappedInfo {
@@ -29,10 +27,7 @@ interface RightAnnotationTappedInfo {
 
 export default class CampsiteMap extends React.Component<Props, {}> {
   finishLoading() {
-    Map.initialiseOffline(
-      progress => this.props.onUpdateProgress(progress),
-      progress => this.props.onUpdateReloadProgress(progress)
-    )
+    Map.initialiseOffline(progress => this.props.onUpdateProgress(progress))
   }
 
   render() {
@@ -58,7 +53,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           annotations={annotations(this.props.campsites)}
           onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
         />
-        <OfflineMapControls progress={this.props.downloadProgress} reloadProgress={this.props.reloadProgress}/>
+        <OfflineMapControls progress={this.props.downloadProgress} />
       </View>
     )
   }

@@ -19,9 +19,7 @@ interface Props {
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
   downloadProgress: number;
-  reloadProgress: number;
   onUpdateProgress: (progress: number) => void;
-  onUpdateReloadProgress: (progress: number) => void;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -68,9 +66,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
           campsites={campsites}
           onPress={(id) => this.onPress(id)}
           downloadProgress={this.props.downloadProgress}
-          reloadProgress={this.props.reloadProgress}
           onUpdateProgress={this.props.onUpdateProgress}
-          onUpdateReloadProgress={this.props.onUpdateReloadProgress}
         />
       </View>
     );
@@ -83,8 +79,7 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
     position: state.position,
-    downloadProgress: state.offlineMap.progress,
-    reloadProgress: state.offlineMap.reloadProgress
+    downloadProgress: state.offlineMap.progress
   };
 }
 
@@ -92,9 +87,6 @@ const mapDispatchToProps = (dispatch: Dispatch<State>) => {
   return {
     onUpdateProgress: (progress: number) => {
       dispatch(OfflineMapActions.updateProgress(progress))
-    },
-    onUpdateReloadProgress: (progress: number) => {
-      dispatch(OfflineMapActions.updateReloadProgress(progress))
     }
   }
 }

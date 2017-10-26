@@ -12,20 +12,16 @@ type Action = {
 // Reducer
 export interface State {
   readonly progress: number; // between 0 and 1
-  readonly reloadProgress: number; // between 0 and 1
 }
 
 export const initialState = {
   progress: 0,
-  reloadProgress: 0
 }
 
 export default function reducer(state: State | undefined = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_PROGRESS':
       return {...state, progress: action.progress}
-    case 'UPDATE_RELOAD_PROGRESS':
-      return {...state, reloadProgress: action.progress}
     default:
       return state
   }
@@ -35,13 +31,6 @@ export default function reducer(state: State | undefined = initialState, action:
 export function updateProgress(progress: number): Action {
   return {
     type: 'UPDATE_PROGRESS',
-    progress: progress
-  }
-}
-
-export function updateReloadProgress(progress: number): Action {
-  return {
-    type: 'UPDATE_RELOAD_PROGRESS',
     progress: progress
   }
 }
