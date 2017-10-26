@@ -10,9 +10,18 @@ interface DownloadProgress {
   countOfBytesCompleted: number;
 }
 
-export async function initialise(updateProgress: (progress: number) => void,
-  reloadProgress: (progress: number) => void) {
+export async function initialise(
+  updateProgress: (progress: number) => void,
+  reloadProgress: (progress: number) => void)
+{
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
+  initialiseOffline(updateProgress, reloadProgress)
+}
+
+async function initialiseOffline(
+  updateProgress: (progress: number) => void,
+  reloadProgress: (progress: number) => void)
+{
   await Mapbox.initializeOfflinePacks()
   let packs: DownloadProgress[] = await Mapbox.getOfflinePacks()
   if (packs.length > 0) {
