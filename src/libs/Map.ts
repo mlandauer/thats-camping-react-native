@@ -14,7 +14,7 @@ export function initialise(updateProgress: (progress: number) => void,
   reloadProgress: (progress: number) => void) {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
   // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
-  // Mapbox.initializeOfflinePacks()
+  // await Mapbox.initializeOfflinePacks()
   // Get information about all the offline packs currently defined
   // TODO: A better solution is to only have a single progress measure and store
   // in the state whether we've completed a download.
