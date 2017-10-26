@@ -36,7 +36,8 @@ const store = createStore(
   enhancer
 )
 
-Map.initialise(
+Map.initialise()
+Map.initialiseOffline(
   progress => store.dispatch(OfflineMapActions.updateProgress(progress)),
   progress => store.dispatch(OfflineMapActions.updateReloadProgress(progress))
 )

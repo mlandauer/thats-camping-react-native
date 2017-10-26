@@ -10,15 +10,12 @@ interface DownloadProgress {
   countOfBytesCompleted: number;
 }
 
-export async function initialise(
-  updateProgress: (progress: number) => void,
-  reloadProgress: (progress: number) => void)
+export async function initialise()
 {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
-  initialiseOffline(updateProgress, reloadProgress)
 }
 
-async function initialiseOffline(
+export async function initialiseOffline(
   updateProgress: (progress: number) => void,
   reloadProgress: (progress: number) => void)
 {
