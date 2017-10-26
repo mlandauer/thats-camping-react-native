@@ -10,38 +10,24 @@ interface DownloadProgress {
   countOfBytesCompleted: number;
 }
 
-export function initialise(updateProgress: (progress: number) => void,
+export async function initialise(updateProgress: (progress: number) => void,
   reloadProgress: (progress: number) => void) {
   Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN)
-  // The API call below is new in react-native-mapbox-gl 5.2.1. We're on 5.2.0
-  // await Mapbox.initializeOfflinePacks()
-  // Get information about all the offline packs currently defined
-  // TODO: A better solution is to only have a single progress measure and store
-  // in the state whether we've completed a download.
-  Mapbox.getOfflinePacks()
-  .then((packs: DownloadProgress[]) => {
-    console.log("packs", packs)
-    if (packs.length > 0) {
-      console.log("Already a download pack setup so we don't need to set one up")
-      // Checks if the pack hasn't finished downloading
-      if (progress(packs[0]) < 1) {
-        setupUpdateProgressCallback(updateProgress)
-      } else {
-        setupReloadProgressCallback(reloadProgress)
-      }
-    } else {
-      console.log("Need to setup a download pack")
-      setupDownloadPack()
+  await Mapbox.initializeOfflinePacks()
+  let packs: DownloadProgress[] = await Mapbox.getOfflinePacks()
+  if (packs.length > 0) {
+    console.log("Already a download pack setup so we don't need to set one up")
+    // Checks if the pack hasn't finished downloading
+    if (progress(packs[0]) < 1) {
       setupUpdateProgressCallback(updateProgress)
+    } else {
+      setupReloadProgressCallback(reloadProgress)
     }
-    // packs is an array of progress objects
-  })
-  .catch((err: string) => {
-    console.error(err)
-  })
-  // TODO: In react-native-mapbox-gl 5.2.1 we'll be able to control whether
-  // individual offline packs are being downloaded or not. So, we'll be able
-  // to pause and restart downloads.
+  } else {
+    console.log("Need to setup a download pack")
+    setupDownloadPack()
+    setupUpdateProgressCallback(updateProgress)
+  }
 }
 
 function setupDownloadPack() {
