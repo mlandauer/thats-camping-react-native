@@ -7,6 +7,7 @@ import { persistStore, autoRehydrate, Storage } from 'redux-persist'
 import * as Icon from 'react-native-vector-icons/Ionicons'
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
 import Config from 'react-native-config'
+import * as Instabug from 'instabug-reactnative'
 
 import { registerScreens } from './screens';
 import { reducer, State, initialState, stateToSave } from './ducks'
@@ -23,6 +24,8 @@ configuration.notifyReleaseStages = ['testflight', 'production']
 new Client()
 
 let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
+
+Instabug.startWithToken(Config.INSTABUG_API_KEY, Instabug.invocationEvent.shake)
 
 let enhancer = compose(
   applyMiddleware(thunk),
