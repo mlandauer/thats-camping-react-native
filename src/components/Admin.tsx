@@ -8,7 +8,6 @@ import Config from 'react-native-config'
 import Button from './StandardButton'
 
 interface State {
-  text: string | undefined;
 }
 
 interface Props {
@@ -21,14 +20,13 @@ interface Props {
 export default class Admin extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { text: props.text }
   }
 
   render() {
     return (
       <View>
-        <TextInput secureTextEntry={true} style={{ marginBottom: 20 }} value={this.state.text} onChangeText={(text) => this.onChangeText(text)} />
-        <Hide hide={this.state.text !== Config.ADMIN_PASSWORD}>
+        <TextInput secureTextEntry={true} style={{ marginBottom: 20 }} value={this.props.text} onChangeText={(text) => this.onChangeText(text)} />
+        <Hide hide={this.props.text !== Config.ADMIN_PASSWORD}>
           <Button onPress={this.props.onDestroyButtonPushed} >
             Destroy database
           </Button>
@@ -38,7 +36,6 @@ export default class Admin extends React.Component<Props, State> {
   }
 
   onChangeText(text: string) {
-    this.setState({ text: text })
     if (this.props.onTextChanged) {
       this.props.onTextChanged(text)
     }
