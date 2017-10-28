@@ -7,11 +7,9 @@ import {
 } from 'react-native'
 
 import Admin from './Admin'
-import Button from './StandardButton'
 
 interface Props {
   onDestroyButtonPushed?: () => void;
-  onSuggestButtonPushed?: () => void;
 }
 
 export default class About extends React.Component<Props, {}> {
@@ -33,11 +31,9 @@ export default class About extends React.Component<Props, {}> {
             Designed and developed by Matthew Landauer. Icon design by
             Gabriel Clark and Joanna Hill.
           </Text>
-          <View style={{marginBottom: 20}}>
-            <Button onPress={this.props.onSuggestButtonPushed}>
-              Suggest a feature or report an issue
-            </Button>
-          </View>
+          <Text style={styles.paragraph}>
+            We want to hear from you. To <Text style={{ fontWeight: 'bold' }}>suggest an improvement</Text> or <Text style={{ fontWeight: 'bold' }}>report a problem</Text> simply shake your phone while you're on the relevant page.
+          </Text>
           <Admin onDestroyButtonPushed={this.props.onDestroyButtonPushed}/>
         </View>
       </ScrollView>

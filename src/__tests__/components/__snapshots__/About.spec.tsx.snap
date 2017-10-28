@@ -66,68 +66,48 @@ exports[`renders correctly 1`] = `
       >
         Designed and developed by Matthew Landauer. Icon design by Gabriel Clark and Joanna Hill.
       </Text>
-      <View
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
         style={
           Object {
+            "fontSize": 20,
             "marginBottom": 20,
           }
         }
       >
-        <View
-          accessibilityComponentType="button"
-          accessibilityLabel={undefined}
-          accessibilityTraits="button"
+        We want to hear from you. To 
+        <Text
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
           style={
             Object {
-              "borderColor": "#777",
-              "borderRadius": 4,
-              "borderWidth": 0.5,
-              "opacity": 1,
-              "padding": 10,
-              "paddingBottom": 12,
+              "fontWeight": "bold",
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#007aff",
-                  "fontSize": 17,
-                  "fontWeight": "500",
-                  "textAlign": "center",
-                },
-                null,
-                Object {
-                  "color": "#777",
-                  "fontSize": 18,
-                },
-                null,
-              ]
+          suggest an improvement
+        </Text>
+         or 
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontWeight": "bold",
             }
-          >
-            Suggest a feature or report an issue
-          </Text>
-        </View>
-      </View>
+          }
+        >
+          report a problem
+        </Text>
+         simply shake your phone while you're on the relevant page.
+      </Text>
       <TextInput
         onChangeText={[Function]}
         secureTextEntry={true}
