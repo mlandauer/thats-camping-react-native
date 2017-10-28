@@ -25,7 +25,7 @@ export default class Admin extends React.Component<Props, State> {
   render() {
     return (
       <View>
-        <TextInput secureTextEntry={true} style={{ marginBottom: 20 }} onChangeText={(text) => this.onChangeText(text)} />
+        <TextInput secureTextEntry={true} style={{ marginBottom: 20 }} value={this.state.text} onChangeText={(text) => this.onChangeText(text)} />
         <Hide hide={this.state.text !== Config.ADMIN_PASSWORD}>
           <Button onPress={this.props.onDestroyButtonPushed} >
             Destroy database
