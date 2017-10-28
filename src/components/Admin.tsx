@@ -8,18 +8,20 @@ import Config from 'react-native-config'
 import Button from './StandardButton'
 
 interface State {
-  text: string;
+  text: string | undefined;
 }
 
 interface Props {
   onDestroyButtonPushed?: () => void;
+  text?: string;
+  onTextChanged?: (text: string) => void
 }
 
 // Really dumb little thing that protects a thing with a password
 export default class Admin extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { text: "" }
+    this.state = { text: props.text }
   }
 
   render() {
@@ -37,6 +39,9 @@ export default class Admin extends React.Component<Props, State> {
 
   onChangeText(text: string) {
     this.setState({ text: text })
+    if (this.props.onTextChanged) {
+      this.props.onTextChanged(text)
+    }
   }
 }
 
