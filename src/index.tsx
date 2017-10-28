@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, processColor } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
@@ -26,6 +26,7 @@ new Client()
 let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
 
 Instabug.startWithToken(Config.INSTABUG_API_KEY, Instabug.invocationEvent.shake)
+Instabug.setPrimaryColor(processColor('#97b13d'))
 
 let enhancer = compose(
   applyMiddleware(thunk),
