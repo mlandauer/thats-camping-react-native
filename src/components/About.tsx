@@ -5,13 +5,13 @@ import {
   Text,
   StyleSheet,
 } from 'react-native'
-import * as Instabug from 'instabug-reactnative'
 
 import Admin from './Admin'
 import Button from './StandardButton'
 
 interface Props {
   onDestroyButtonPushed?: () => void;
+  onSuggestButtonPushed?: () => void;
 }
 
 export default class About extends React.Component<Props, {}> {
@@ -34,7 +34,7 @@ export default class About extends React.Component<Props, {}> {
             Gabriel Clark and Joanna Hill.
           </Text>
           <View style={{marginBottom: 20}}>
-            <Button onPress={onPress}>
+            <Button onPress={this.props.onSuggestButtonPushed}>
               Suggest a feature or report an issue
             </Button>
           </View>
@@ -43,10 +43,6 @@ export default class About extends React.Component<Props, {}> {
       </ScrollView>
     )
   }
-}
-
-function onPress() {
-  Instabug.invoke()
 }
 
 const styles = StyleSheet.create({
