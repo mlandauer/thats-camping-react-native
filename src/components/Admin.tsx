@@ -23,24 +23,31 @@ export default class Admin extends React.Component<Props, State> {
   }
 
   render() {
-    if (this.state.locked) {
-      return (
-        <TextInput secureTextEntry={true} style={{ padding: 10 }} onChangeText={(text) => this.onChangeText(text)} />
-      )
-    } else {
-      return (
-        <View>
+    return (
+      <View>
+        <TextInput secureTextEntry={true} style={{ marginBottom: 20 }} onChangeText={(text) => this.onChangeText(text)} />
+        <Hide hide={this.state.locked}>
           <Button onPress={this.props.onDestroyButtonPushed} >
             Destroy database
           </Button>
-        </View>
-      )
-    }
+        </Hide>
+      </View>
+    )
   }
 
   onChangeText(text: string) {
     if (text === Config.ADMIN_PASSWORD) {
       this.setState({ locked: false })
+    } else {
+      this.setState({ locked: true })
     }
+  }
+}
+
+function Hide(props: {hide: boolean, children: any}) {
+  if (props.hide) {
+    return null
+  } else {
+    return <View>{props.children}</View>
   }
 }

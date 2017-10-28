@@ -108,15 +108,17 @@ exports[`renders correctly 1`] = `
         </Text>
          simply shake your phone while you're on the relevant page.
       </Text>
-      <TextInput
-        onChangeText={[Function]}
-        secureTextEntry={true}
-        style={
-          Object {
-            "padding": 10,
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          secureTextEntry={true}
+          style={
+            Object {
+              "marginBottom": 20,
+            }
           }
-        }
-      />
+        />
+      </View>
     </View>
   </View>
 </RCTScrollView>
