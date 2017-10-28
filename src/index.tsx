@@ -25,8 +25,16 @@ new Client()
 
 let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
 
-Instabug.startWithToken(Config.INSTABUG_API_KEY, Instabug.invocationEvent.shake)
-Instabug.setPrimaryColor(processColor('#97b13d'))
+Instabug.isRunningLive(function (isLive: boolean) {
+  var instabug_api_key: string
+  if (isLive) {
+    instabug_api_key = Config.INSTABUG_API_KEY_LIVE
+  } else {
+    instabug_api_key = Config.INSTABUG_API_KEY_BETA
+  }
+  Instabug.startWithToken(instabug_api_key, Instabug.invocationEvent.shake)
+  Instabug.setPrimaryColor(processColor('#97b13d'))
+})
 
 let enhancer = compose(
   applyMiddleware(thunk),
