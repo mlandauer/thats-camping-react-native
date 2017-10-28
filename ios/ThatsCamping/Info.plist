@@ -43,6 +43,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We use your location to show campsites that are nearest to you</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>That&apos;s Camping needs access to the microphone to be able to attach voice notes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>That&apos;s Camping needs access to your photo library for you to be able to attach images.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
