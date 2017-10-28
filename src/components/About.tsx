@@ -4,8 +4,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Linking,
 } from 'react-native'
+import * as Instabug from 'instabug-reactnative'
 
 import Admin from './Admin'
 import Button from './StandardButton'
@@ -46,7 +46,7 @@ export default class About extends React.Component<Props, {}> {
 }
 
 function onPress() {
-  Linking.openURL('https://github.com/mlandauer/thats-camping-react-native/wiki/Suggest-a-feature-or-report-an-issue')
+  Instabug.invoke()
 }
 
 const styles = StyleSheet.create({
