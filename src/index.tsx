@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { AsyncStorage, processColor } from 'react-native'
+import { AsyncStorage, processColor, AppState } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux'
 import thunk from 'redux-thunk'
@@ -67,6 +67,11 @@ async function initialiseData() {
 initialiseData()
 
 store.dispatch(PositionActions.startUpdatePosition())
+
+// Setup callbacks for tracking application state (e.g. when it's running in the background)
+AppState.addEventListener('change', (state: string) => {
+  console.log("Moved to new state:", state)
+})
 
 registerScreens(store, Provider) // this is where you register all of your app's screens
 
