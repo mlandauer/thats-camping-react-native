@@ -14,6 +14,8 @@ interface Props {
   onDestroyButtonPushed?: () => void;
   text?: string;
   onTextChanged?: (text: string) => void
+  showStateChanges?: boolean;
+  onToggleShowStateChanges?: () => void;
 }
 
 // Really dumb little thing that protects a thing with a password
@@ -29,6 +31,9 @@ export default class Admin extends React.Component<Props, State> {
         <Hide hide={this.props.text !== Config.ADMIN_PASSWORD}>
           <Button onPress={this.props.onDestroyButtonPushed} >
             Destroy database
+          </Button>
+          <Button onPress={this.props.onToggleShowStateChanges}>
+            {this.props.showStateChanges ? "Hide" : "Show"} state changes
           </Button>
         </Hide>
       </View>

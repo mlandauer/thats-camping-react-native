@@ -12,6 +12,8 @@ interface Props {
   onDestroyButtonPushed?: () => void;
   adminText?: string;
   onAdminTextChanged?: (text: string) => void;
+  showStateChanges?: boolean;
+  onToggleShowStateChanges?: () => void;
 }
 
 export default class About extends React.Component<Props, {}> {
@@ -36,7 +38,13 @@ export default class About extends React.Component<Props, {}> {
           <Text style={styles.paragraph}>
             We want to hear from you. To <Text style={{ fontWeight: 'bold' }}>suggest an improvement</Text> or <Text style={{ fontWeight: 'bold' }}>report a problem</Text> simply shake your phone while you're on the relevant page.
           </Text>
-          <Admin onDestroyButtonPushed={this.props.onDestroyButtonPushed} text={this.props.adminText} onTextChanged={this.props.onAdminTextChanged}/>
+          <Admin
+            onDestroyButtonPushed={this.props.onDestroyButtonPushed}
+            text={this.props.adminText}
+            onTextChanged={this.props.onAdminTextChanged}
+            showStateChanges={this.props.showStateChanges}
+            onToggleShowStateChanges={this.props.onToggleShowStateChanges}
+          />
         </View>
       </ScrollView>
     )
