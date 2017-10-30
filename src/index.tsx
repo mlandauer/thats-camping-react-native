@@ -13,6 +13,7 @@ import { registerScreens } from './screens';
 import { reducer, State, initialState, stateToSave } from './ducks'
 import * as CampsitesActions from './ducks/campsites'
 import * as PositionActions from './ducks/position'
+import * as SynchingActions from './ducks/synching'
 import * as Database from './libs/Database'
 import * as Map from './libs/Map'
 import { Client, Configuration } from 'bugsnag-react-native'
@@ -57,7 +58,7 @@ async function initialiseData() {
   let result = await Database.allChangesLocal()
   store.dispatch(CampsitesActions.updateCampsites(result.campsites))
   Database.replicateRemoteToLocal((replicating) => {
-    console.log("replicating", replicating)
+    store.dispatch(SynchingActions.setReplicating(replicating))
   })
   // And get all the changes live
   Database.changesLocal(result.last_seq, (campsite) => {

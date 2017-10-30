@@ -17,16 +17,16 @@ describe('position', () => {
     it('should return the initial state', () => {
       expect(
         reducer(undefined, { type: 'NOOP' })
-      ).toEqual({ mapProgress: 0 })
+      ).toEqual({ mapProgress: 0, replicating: false })
     })
 
     it('should handle UPDATE_MAP_PROGRESS', () => {
       expect(
-        reducer({ mapProgress: 0 }, {
+        reducer({ mapProgress: 0, replicating: false }, {
           type: 'UPDATE_MAP_PROGRESS',
           mapProgress: 0.2
         })
-      ).toEqual({ mapProgress: 0.2 })
+      ).toEqual({ mapProgress: 0.2, replicating: false })
     })
   })
 })
