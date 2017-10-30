@@ -1,3 +1,5 @@
+import { Alert } from 'react-native'
+
 import { Position } from '../libs/types'
 
 // Actions
@@ -41,14 +43,10 @@ interface Location {
 export function startUpdatePosition() {
   return (dispatch: (action: {}) => void) => {
     // TODO Also dispatch something immediately to let the user know something is going on
-    let locator = new Promise((resolve, reject) => {
-      navigator.geolocation.watchPosition(resolve, reject, { enableHighAccuracy: true });
-    })
-    locator.then((location: Location) => {
+    navigator.geolocation.watchPosition(function(location: Location) {
       dispatch(updatePosition(location.coords.latitude, location.coords.longitude))
-    })
-      .catch((err) => {
-        console.warn('Error getting location (' + err.code + '): ' + err.message)
-      })
+    }, function(err) {
+      console.warn('Error getting location (' + err.code + '): ' + err.message)
+    }, { enableHighAccuracy: true })
   }
 }
