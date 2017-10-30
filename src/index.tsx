@@ -56,7 +56,9 @@ async function initialiseData() {
   // First get all the changes from the local database
   let result = await Database.allChangesLocal()
   store.dispatch(CampsitesActions.updateCampsites(result.campsites))
-  Database.replicateRemoteToLocal()
+  Database.replicateRemoteToLocal((replicating) => {
+    console.log("replicating", replicating)
+  })
   // And get all the changes live
   Database.changesLocal(result.last_seq, (campsite) => {
     store.dispatch(CampsitesActions.updateCampsite(campsite))

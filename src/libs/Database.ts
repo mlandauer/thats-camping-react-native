@@ -17,8 +17,15 @@ PouchDB
 let remoteDb = remoteDbCreate(PouchDB)
 let localDb = new PouchDB<CampsiteNoId>('thatscamping')
 
-export function replicateRemoteToLocal() {
-  PouchDB.replicate(remoteDb, localDb, { live: true })
+export function replicateRemoteToLocal(onRunning: (running: boolean) => void) {
+  onRunning(true)
+  PouchDB.replicate(remoteDb, localDb, {
+    live: true
+  }).on('paused', (_err) => {
+    onRunning(false)
+  }).on('active', () => {
+    onRunning(true)
+  })
 }
 
 export function destroyLocal() {
