@@ -1,5 +1,3 @@
-import { Alert } from 'react-native'
-
 import { Position } from '../libs/types'
 
 // Actions
