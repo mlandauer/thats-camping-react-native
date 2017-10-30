@@ -22,7 +22,7 @@ export class AboutScreen extends React.Component<Props, {}> {
   }
 
   async destroyDatabase() {
-    await Database.destroy()
+    await Database.destroyLocal()
     Alert.alert("Database destroyed")
   }
 

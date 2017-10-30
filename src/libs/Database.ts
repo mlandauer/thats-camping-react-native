@@ -17,16 +17,15 @@ PouchDB
 let remoteDb = remoteDbCreate(PouchDB)
 let localDb = new PouchDB<CampsiteNoId>('thatscamping')
 
-// Starts live replication of remote to local database
-export function replicate() {
+export function replicateRemoteToLocal() {
   PouchDB.replicate(remoteDb, localDb, { live: true })
 }
 
-export function destroy() {
+export function destroyLocal() {
   return localDb.destroy()
 }
 
-export async function allChanges() {
+export async function allChangesLocal() {
   let response = await localDb.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
@@ -40,7 +39,7 @@ export async function allChanges() {
   }
 }
 
-export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
+export function changesLocal(since: number | string, onChange: (campsite: Campsite) => void) {
   localDb.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       // TODO: Actually propogate deletes rather than just ignoring them
