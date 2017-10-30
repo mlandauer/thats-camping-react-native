@@ -12,7 +12,7 @@ import { State } from '../ducks'
 import shortenName from '../libs/shortenName'
 import { convertToCampsitesWithStarred } from '../libs/convertToCampsiteWithStarred'
 import ScreenWithAbout from './ScreenWithAbout'
-import * as OfflineMapActions from '../ducks/offlineMap'
+import * as SynchingActions from '../ducks/synching'
 
 interface Props {
   navigator?: Navigator;
@@ -79,14 +79,14 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
     position: state.position,
-    downloadProgress: state.offlineMap.progress
+    downloadProgress: state.synching.mapProgress
   };
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
   return {
     onUpdateProgress: (progress: number) => {
-      dispatch(OfflineMapActions.updateProgress(progress))
+      dispatch(SynchingActions.updateMapProgress(progress))
     }
   }
 }

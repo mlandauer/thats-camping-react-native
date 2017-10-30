@@ -8,14 +8,14 @@ describe('index reducer', () => {
         campsites: {},
         position: null,
         starred: [],
-        offlineMap: { progress: 0 },
+        synching: { mapProgress: 0 },
         admin: { text: "", showStateChanges: false }
       }, { type: 'NOOP' })
     ).toEqual({
       campsites: {},
       position: null,
       starred: [],
-      offlineMap: { progress: 0 },
+      synching: { mapProgress: 0 },
       admin: { text : "", showStateChanges: false }
     })
   })
@@ -26,7 +26,7 @@ describe('index reducer', () => {
         campsites: {},
         position: null,
         starred: [],
-        offlineMap: { progress: 0 },
+        synching: { mapProgress: 0 },
         admin: { text: "", showStateChanges: false }
       }, {
           type: 'UPDATE_POSITION',
@@ -36,7 +36,7 @@ describe('index reducer', () => {
       campsites: {},
       position: { lat: 3.0, lng: 4.0 },
       starred: [],
-      offlineMap: { progress: 0 },
+      synching: { mapProgress: 0 },
       admin: { text : "", showStateChanges: false }
     })
   })
