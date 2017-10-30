@@ -15,19 +15,19 @@ PouchDB
 
 // Just get read-only access to the remote database
 let remoteDb = remoteDbCreate(PouchDB)
-let db = new PouchDB<CampsiteNoId>('thatscamping')
+let localDb = new PouchDB<CampsiteNoId>('thatscamping')
 
 // Starts live replication of remote to local database
 export function replicate() {
-  PouchDB.replicate(remoteDb, db, { live: true })
+  PouchDB.replicate(remoteDb, localDb, { live: true })
 }
 
 export function destroy() {
-  return db.destroy()
+  return localDb.destroy()
 }
 
 export async function allChanges() {
-  let response = await db.changes({ include_docs: true })
+  let response = await localDb.changes({ include_docs: true })
   let campsites3: Campsite[] = []
   response.results.forEach(result => {
     if (result.doc && !result.deleted) {
@@ -41,7 +41,7 @@ export async function allChanges() {
 }
 
 export function changes(since: number | string, onChange: (campsite: Campsite) => void) {
-  db.changes({ live: true, include_docs: true, since: since })
+  localDb.changes({ live: true, include_docs: true, since: since })
     .on('change', (response) => {
       // TODO: Actually propogate deletes rather than just ignoring them
       if (response.doc && !response.deleted) {
