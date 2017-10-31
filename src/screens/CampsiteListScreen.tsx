@@ -17,6 +17,7 @@ interface Props {
   navigator?: Navigator;
   campsites: { [index: string]: CampsiteWithStarred };
   position: Position | null;
+  replicating: boolean;
 }
 
 export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
@@ -60,7 +61,7 @@ export class CampsiteListScreen extends ScreenWithAbout<Props, {}> {
     }
     return (
       <View style={{ flex: 1 }}>
-        <CampsiteList campsites={campsites} position={this.props.position} onPress={(id) => this.onPress(id)} />
+        <CampsiteList campsites={campsites} replicating={this.props.replicating} position={this.props.position} onPress={(id) => this.onPress(id)} />
       </View>
     );
   }
@@ -71,7 +72,8 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // Put the star state directly into each campsite object to make things easier
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
-    position: state.position
+    position: state.position,
+    replicating: state.synching.replicating
   };
 }
 

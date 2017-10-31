@@ -19,6 +19,7 @@ interface Props {
   campsites: CampsiteWithStarred[];
   position: Position | null;
   onPress: (id: string) => void;
+  replicating: boolean;
 }
 
 export default function CampsiteList(props: Props) {
@@ -26,9 +27,21 @@ export default function CampsiteList(props: Props) {
     return includeDistanceAndBearing(campsite, props.position)
   }).sort(orderCampsites)
 
-  if (props.campsites.length == 0) {
+  if (props.campsites.length == 0 || props.replicating) {
     return (
-      <ActivityIndicator animating={true} style={{ marginTop: 10 }} />
+      <View style={styles.container}>
+        <View style={{position: 'absolute', top: 0, zIndex: 100, width: "100%", alignItems: 'center'}}>
+          <View style={{backgroundColor: '#fff', width: 50}}>
+            <ActivityIndicator animating={true} style={{margin: 10}}/>
+          </View>
+        </View>
+        <FlatList
+          data={campsites}
+          renderItem={({ item }) => renderItem(item, props.onPress)}
+          keyExtractor={keyExtractor}
+          ItemSeparatorComponent={Separator}
+        />
+      </View>
     )
   } else {
     return (

@@ -16,6 +16,6 @@ import * as renderer from 'react-test-renderer';
 // TODO: Figure out why this test fails
 xit('renders correctly', () => {
   renderer.create(
-    <CampsiteListScreen campsites={{}} position={null} />
+    <CampsiteListScreen campsites={{}} replicating={false} position={null} />
   );
 });
