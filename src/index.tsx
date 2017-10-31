@@ -19,10 +19,11 @@ import * as Map from './libs/Map'
 import { Client, Configuration } from 'bugsnag-react-native'
 
 // Initialise bugsnag
-const configuration = new Configuration()
-// We don't want to be notified of errors in development
-configuration.notifyReleaseStages = ['testflight', 'production']
-new Client()
+// Checking for production manually because switching off reports in development
+// using configuration.notifyReleaseStages didn't work
+if (process.env.NODE_ENV === 'production') {
+  new Client()
+}
 
 let tracker = new GoogleAnalyticsTracker(Config.GOOGLE_ANALYTICS)
 
