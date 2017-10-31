@@ -27,33 +27,30 @@ export default function CampsiteList(props: Props) {
     return includeDistanceAndBearing(campsite, props.position)
   }).sort(orderCampsites)
 
-  if (props.campsites.length == 0 || props.replicating) {
+  return (
+    <View style={styles.container}>
+      <Activity active={props.campsites.length == 0 || props.replicating} />
+      <FlatList
+        data={campsites}
+        renderItem={({ item }) => renderItem(item, props.onPress)}
+        keyExtractor={keyExtractor}
+        ItemSeparatorComponent={Separator}
+      />
+    </View>
+  )
+}
+
+function Activity(props: {active: boolean}) {
+  if (props.active) {
     return (
-      <View style={styles.container}>
-        <View style={{position: 'absolute', top: 0, zIndex: 100, width: "100%", alignItems: 'center'}}>
-          <View style={{backgroundColor: '#fff', width: 50}}>
-            <ActivityIndicator animating={true} style={{margin: 10}}/>
-          </View>
+      <View style={{position: 'absolute', top: 0, zIndex: 100, width: "100%", alignItems: 'center'}}>
+        <View style={{backgroundColor: '#fff', width: 50}}>
+          <ActivityIndicator animating={true} style={{margin: 10}}/>
         </View>
-        <FlatList
-          data={campsites}
-          renderItem={({ item }) => renderItem(item, props.onPress)}
-          keyExtractor={keyExtractor}
-          ItemSeparatorComponent={Separator}
-        />
       </View>
     )
   } else {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={campsites}
-          renderItem={({ item }) => renderItem(item, props.onPress)}
-          keyExtractor={keyExtractor}
-          ItemSeparatorComponent={Separator}
-        />
-      </View>
-    )
+    return null
   }
 }
 
