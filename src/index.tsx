@@ -16,7 +16,7 @@ import * as PositionActions from './ducks/position'
 import * as SynchingActions from './ducks/synching'
 import * as Database from './libs/Database'
 import * as Map from './libs/Map'
-import { Client, Configuration } from 'bugsnag-react-native'
+import { Client } from 'bugsnag-react-native'
 
 // Initialise bugsnag
 // Checking for production manually because switching off reports in development
