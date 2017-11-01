@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: '#fff',
-    width: 50
+    width: 50,
+    opacity: 0.9
   }
 })

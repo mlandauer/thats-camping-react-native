@@ -20,6 +20,7 @@ interface Props {
   position: Position | null;
   downloadProgress: number;
   onUpdateProgress: (progress: number) => void;
+  replicating: boolean;
 }
 
 export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
@@ -67,6 +68,7 @@ export class CampsiteMapScreen extends ScreenWithAbout<Props, {}> {
           onPress={(id) => this.onPress(id)}
           downloadProgress={this.props.downloadProgress}
           onUpdateProgress={this.props.onUpdateProgress}
+          replicating={this.props.replicating}
         />
       </View>
     );
@@ -79,7 +81,8 @@ function mapStateToProps(state: State, _ownProps: {}) {
     // elsewhere
     campsites: convertToCampsitesWithStarred(state.campsites, state.starred),
     position: state.position,
-    downloadProgress: state.synching.mapProgress
+    downloadProgress: state.synching.mapProgress,
+    replicating: state.synching.replicating
   };
 }
 

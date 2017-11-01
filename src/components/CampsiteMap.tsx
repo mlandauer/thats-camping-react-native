@@ -8,9 +8,11 @@ import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
 import OfflineMapControls from './OfflineMapControls'
 import * as Map from '../libs/Map'
+import Activity from './Activity'
 
 interface Props {
   campsites: CampsiteWithStarred[];
+  replicating: boolean;
   onPress: (id: string) => void;
   // TODO: Move this state locally?
   downloadProgress: number;
@@ -40,6 +42,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
 
     return (
       <View style={{flex: 1}}>
+        <Activity active={this.props.campsites.length == 0 || this.props.replicating} />
         <MapView
           onFinishLoadingMap={() => this.finishLoading()}
           style={{ flex: 1 }}
