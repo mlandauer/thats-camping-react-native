@@ -19,7 +19,7 @@ export default function OfflineMapControls(props: Props) {
 function DownloadProgress(props: {progress: number}) {
   if (props.progress > 0 && props.progress < 1) {
     return (
-      <View style={{ padding: 14}}>
+      <View style={styles.container}>
         <Text style={styles.progressLabelText}>Downloading Offline Map: {Math.round(props.progress * 100)}% Complete</Text>
         <ProgressViewIOS progress={props.progress} progressViewStyle="bar" />
       </View>
@@ -30,6 +30,14 @@ function DownloadProgress(props: {progress: number}) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 14,
+    position: 'absolute',
+    bottom: 0,
+    width: "100%",
+    zIndex: 100,
+    backgroundColor: 'white'
+  },
   progressLabelText: {
     fontSize: 14,
     color: '#777',
