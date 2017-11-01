@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     zIndex: 100,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    opacity: 0.9
   },
   progressLabelText: {
     fontSize: 14,
