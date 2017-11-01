@@ -3,12 +3,12 @@ import {
   View,
   FlatList,
   StyleSheet,
-  ActivityIndicator
 } from 'react-native'
 
 import { CampsiteWithStarred, Position } from '../libs/types'
 import CampsiteListItem from './CampsiteListItem'
 import PositionRelationship from '../libs/PositionRelationship'
+import Activity from './Activity'
 
 interface CampsiteWithDistanceAndBearing extends CampsiteWithStarred {
   distance: number | undefined;
@@ -38,20 +38,6 @@ export default function CampsiteList(props: Props) {
       />
     </View>
   )
-}
-
-function Activity(props: {active: boolean}) {
-  if (props.active) {
-    return (
-      <View style={{position: 'absolute', top: 0, zIndex: 100, width: "100%", alignItems: 'center'}}>
-        <View style={{backgroundColor: '#fff', width: 50}}>
-          <ActivityIndicator animating={true} style={{margin: 10}}/>
-        </View>
-      </View>
-    )
-  } else {
-    return null
-  }
 }
 
 function includeDistanceAndBearing(campsite: CampsiteWithStarred, position: Position | null): CampsiteWithDistanceAndBearing {
