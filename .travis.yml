@@ -1,4 +1,11 @@
+# TODO: Only run on master branch
 language: node_js
+language: objective-c
+osx_image: xcode8.3
+install:
+  - bundle install
+script:
+  - fastlane beta
 # os: osx
 # osx_image: xcode8.3
 # deploy:
