@@ -6,6 +6,7 @@ fastlane_version '1.109.0'
 default_platform :ios
 
 opt_out_crash_reporting
+setup_travis
 
 before_all do
   # Ensure that your git status is not dirty
