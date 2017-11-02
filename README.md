@@ -33,15 +33,21 @@ Install nvm. Then,
 ```
 nvm use
 yarn
+npm install -g react-native-cli
 react-native run-ios
-npm run tsc
+yarn tsc
 ```
 
 To run tests
 
 ```
 nvm use
-npm run test
+yarn test --watch --notify
+```
+
+If you see lots of error trying to run the tests with `--watch` then
+```
+brew install watchman
 ```
 
 ## Deploy beta version
