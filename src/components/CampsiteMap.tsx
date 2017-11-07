@@ -61,14 +61,6 @@ export default class CampsiteMap extends React.Component<Props, {}> {
         {
           // <MapView
           //   onFinishLoadingMap={() => this.finishLoading()}
-          //   style={{ flex: 1 }}
-          //   styleURL="mapbox://styles/mapbox/outdoors-v10"
-          //   showsUserLocation={true}
-          //   rotateEnabled={false}
-          //   pitchEnabled={false}
-          //   initialCenterCoordinate={initialCenterCoordinate}
-          //   initialZoomLevel={7}
-          //   logoIsHidden={true}
           //   annotations={annotations(this.props.campsites)}
           //   onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
           // />
