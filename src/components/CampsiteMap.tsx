@@ -52,7 +52,11 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           zoomLevel={7}
           logoEnabled={false}
         >
-          <Annotations campsites={this.props.campsites}/>
+          {
+            this.props.campsites
+              .filter(campsite => campsite.position)
+              .map(campsite => <Annotation campsite={campsite} key={campsite._id}/>)
+          }
         </MapboxGL.MapView>
         {
           // <MapView
@@ -73,12 +77,6 @@ export default class CampsiteMap extends React.Component<Props, {}> {
       </View>
     )
   }
-}
-
-function Annotations(props: {campsites: CampsiteWithStarred[]}) {
-  return props.campsites
-    .filter(campsite => campsite.position)
-    .map(campsite => <Annotation campsite={campsite} key={campsite._id}/>)
 }
 
 function Annotation(props: {campsite: CampsiteWithStarred}) {
