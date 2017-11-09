@@ -2,6 +2,9 @@ import * as React from 'react'
 import {
   View,
   Image,
+  StyleSheet,
+  Text,
+  Animated,
 } from 'react-native'
 import MapboxGL from '@mapbox/react-native-mapbox-gl'
 
@@ -86,7 +89,14 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
             uri: (props.campsite.starred ? 'starred_map_pin' : 'default_map_pin')}
           }
         />
-        <MapboxGL.Callout title={shortenName(props.campsite.name)}/>
+        <MapboxGL.Callout>
+          <Animated.View style={styles.container}>
+            <View style={styles.content}>
+              <Text style={styles.title}>{shortenName(props.campsite.name)}</Text>
+            </View>
+            <View style={styles.tip} />
+          </Animated.View>
+        </MapboxGL.Callout>
       </MapboxGL.PointAnnotation>
     )
   } else {
@@ -120,3 +130,39 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
 //     return null
 //   }
 // }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 180,
+    zIndex: 9999999,
+  },
+  tip: {
+    zIndex: 1000,
+    marginTop: -2,
+    elevation: 0,
+    backgroundColor: 'transparent',
+    borderTopWidth: 16,
+    borderRightWidth: 8,
+    borderBottomWidth: 0,
+    borderLeftWidth: 8,
+    borderTopColor: 'white',
+    borderRightColor: 'transparent',
+    borderBottomColor: 'transparent',
+    borderLeftColor: 'transparent',
+  },
+  content: {
+    position: 'relative',
+    padding: 8,
+    flex: 1,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'white',
+  },
+  title: {
+    color: 'black',
+    textAlign: 'center',
+  },
+});
