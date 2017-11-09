@@ -92,7 +92,8 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
         <MapboxGL.Callout>
           <Animated.View style={styles.container}>
             <View style={styles.content}>
-              <Text style={styles.title}>{shortenName(props.campsite.name)}</Text>
+              <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
+              <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
             </View>
             <View style={styles.tip} />
           </Animated.View>
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 180,
+    width: 300,
     zIndex: 9999999,
   },
   tip: {
@@ -154,15 +155,19 @@ const styles = StyleSheet.create({
   },
   content: {
     position: 'relative',
-    padding: 8,
+    padding: 10,
     flex: 1,
     borderRadius: 3,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white',
   },
-  title: {
-    color: 'black',
-    textAlign: 'center',
+  campsiteName: {
+    fontSize: 20,
+    fontWeight: "500"
   },
+  parkName: {
+    fontSize: 20,
+    color: '#aaa'
+  }
 });
