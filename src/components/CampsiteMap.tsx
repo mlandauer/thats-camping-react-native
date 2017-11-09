@@ -4,9 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
-  Animated,
   TouchableHighlight,
-  Alert,
 } from 'react-native'
 import MapboxGL from '@mapbox/react-native-mapbox-gl'
 
@@ -92,26 +90,32 @@ function Annotation(props: {campsite: CampsiteWithStarred, onPress: () => void})
           }
         />
         <MapboxGL.Callout>
-          <Animated.View style={styles.container}>
-            <View style={styles.content}>
-              <TouchableHighlight onPress={props.onPress} >
-                <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 10}}>
-                  <View>
-                    <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
-                    <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
-                  </View>
-                  <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
-                </View>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.tip} />
-          </Animated.View>
+          <Popup campsite={props.campsite} onPress={props.onPress}/>
         </MapboxGL.Callout>
       </MapboxGL.PointAnnotation>
     )
   } else {
     return null
   }
+}
+
+function Popup(props: {campsite: CampsiteWithStarred, onPress: () => void}) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <TouchableHighlight onPress={props.onPress} >
+          <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 10}}>
+            <View>
+              <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
+              <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
+            </View>
+            <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
+          </View>
+        </TouchableHighlight>
+      </View>
+      <View style={styles.tip} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
