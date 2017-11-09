@@ -44,6 +44,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
       <View style={{flex: 1}}>
         <Activity active={this.props.campsites.length == 0 || this.props.replicating} />
         <MapboxGL.MapView
+          style={{flex: 1}}
           styleURL="mapbox://styles/mapbox/outdoors-v10"
           showUserLocation={true}
           rotateEnabled={false}
