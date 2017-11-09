@@ -109,7 +109,7 @@ function Popup(props: {campsite: CampsiteWithStarred, onPress: () => void}) {
               <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
               <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
             </View>
-            <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
+            <Image style={styles.arrow} source={{ uri: 'ion-ios-arrow-forward' }} />
           </View>
         </TouchableHighlight>
       </View>
@@ -154,5 +154,11 @@ const styles = StyleSheet.create({
   parkName: {
     fontSize: 20,
     color: '#aaa'
+  },
+  arrow: {
+    width: 30,
+    height: 30,
+    paddingLeft: 30,
+    opacity: 0.3
   }
 });
