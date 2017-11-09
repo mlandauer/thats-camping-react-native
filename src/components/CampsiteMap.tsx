@@ -5,6 +5,8 @@ import {
   StyleSheet,
   Text,
   Animated,
+  TouchableHighlight,
+  Alert,
 } from 'react-native'
 import MapboxGL from '@mapbox/react-native-mapbox-gl'
 
@@ -91,12 +93,16 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
         />
         <MapboxGL.Callout>
           <Animated.View style={styles.container}>
-            <View style={[styles.content, {flexDirection: 'row', alignItems: 'center'}]}>
-              <View>
-                <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
-                <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
-              </View>
-              <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
+            <View style={styles.content}>
+              <TouchableHighlight onPress={() => Alert.alert("pressed")} >
+                <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 10}}>
+                  <View>
+                    <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
+                    <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
+                  </View>
+                  <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
+                </View>
+              </TouchableHighlight>
             </View>
             <View style={styles.tip} />
           </Animated.View>
@@ -107,33 +113,6 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
     return null
   }
 }
-// function annotation(campsite: CampsiteWithStarred) {
-//   if (campsite.position) {
-//     return {
-//       coordinates: [campsite.position.lat, campsite.position.lng],
-//       type: 'point',
-//       title: shortenName(campsite.name),
-//       subtitle: shortenName(campsite.parkName),
-//       id: campsite._id,
-//       annotationImage: {
-//         source: {
-//           uri: (campsite.starred ? 'starred_map_pin' : 'default_map_pin')
-//         },
-//         height: 82.5,
-//         width: 29.6
-//       },
-//       rightCalloutAccessory: {
-//         source: {
-//           uri: 'ion-ios-arrow-forward'
-//         },
-//         height: 20,
-//         width: 20,
-//       }
-//     }
-//   } else {
-//     return null
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -158,7 +137,6 @@ const styles = StyleSheet.create({
   },
   content: {
     position: 'relative',
-    padding: 10,
     flex: 1,
     borderRadius: 3,
     borderWidth: 1,
