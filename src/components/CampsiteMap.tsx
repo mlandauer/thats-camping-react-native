@@ -91,9 +91,12 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
         />
         <MapboxGL.Callout>
           <Animated.View style={styles.container}>
-            <View style={styles.content}>
-              <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
-              <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
+            <View style={[styles.content, {flexDirection: 'row', alignItems: 'center'}]}>
+              <View>
+                <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
+                <Text style={styles.parkName}>{shortenName(props.campsite.parkName)}</Text>
+              </View>
+              <Image source={{ uri: 'ion-ios-arrow-forward' }} style={{width: 30, height: 30, paddingLeft: 30}} />
             </View>
             <View style={styles.tip} />
           </Animated.View>
