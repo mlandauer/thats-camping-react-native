@@ -61,7 +61,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           {
             this.props.campsites
               .filter(campsite => campsite.position)
-              .map(campsite => <Annotation campsite={campsite} key={campsite._id}/>)
+              .map(campsite => <Annotation campsite={campsite} key={campsite._id} onPress={() => this.props.onPress(campsite._id)}/>)
           }
         </MapboxGL.MapView>
         {
@@ -77,7 +77,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
   }
 }
 
-function Annotation(props: {campsite: CampsiteWithStarred}) {
+function Annotation(props: {campsite: CampsiteWithStarred, onPress: () => void}) {
   if (props.campsite.position) {
     return (
       <MapboxGL.PointAnnotation
@@ -94,7 +94,7 @@ function Annotation(props: {campsite: CampsiteWithStarred}) {
         <MapboxGL.Callout>
           <Animated.View style={styles.container}>
             <View style={styles.content}>
-              <TouchableHighlight onPress={() => Alert.alert("pressed")} >
+              <TouchableHighlight onPress={props.onPress} >
                 <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 10}}>
                   <View>
                     <Text style={styles.campsiteName}>{shortenName(props.campsite.name)}</Text>
