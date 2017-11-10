@@ -11,7 +11,7 @@ import MapboxGL from '@mapbox/react-native-mapbox-gl'
 import { CampsiteWithStarred } from '../libs/types'
 import shortenName from '../libs/shortenName'
 import OfflineMapControls from './OfflineMapControls'
-// import * as Map from '../libs/Map'
+import * as Map from '../libs/Map'
 import Activity from './Activity'
 
 interface Props {
@@ -24,9 +24,9 @@ interface Props {
 }
 
 export default class CampsiteMap extends React.Component<Props, {}> {
-  // finishLoading() {
-  //   Map.initialiseOffline(progress => this.props.onUpdateProgress(progress))
-  // }
+  finishLoading() {
+    Map.initialiseOffline(progress => this.props.onUpdateProgress(progress))
+  }
 
   render() {
     // Centering on the "Heartbreak Hill camping area"
@@ -47,6 +47,7 @@ export default class CampsiteMap extends React.Component<Props, {}> {
           centerCoordinate={initialCenterCoordinate}
           zoomLevel={7}
           logoEnabled={false}
+          onDidFinishLoadingMap={() => this.finishLoading()}
         >
           {
             this.props.campsites
@@ -54,11 +55,6 @@ export default class CampsiteMap extends React.Component<Props, {}> {
               .map(campsite => <Annotation campsite={campsite} key={campsite._id} onPress={() => this.props.onPress(campsite._id)}/>)
           }
         </MapboxGL.MapView>
-        {
-          // <MapView
-          //   onFinishLoadingMap={() => this.finishLoading()}
-          // />
-        }
         <OfflineMapControls progress={this.props.downloadProgress} />
       </View>
     )
