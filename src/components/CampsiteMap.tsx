@@ -23,14 +23,6 @@ interface Props {
   onUpdateProgress: (progress: number) => void;
 }
 
-// interface RightAnnotationTappedInfo {
-//   id: string;
-//   title: null | string;
-//   subtitle: null | string;
-//   latitude: number;
-//   longitude: number;
-// }
-
 export default class CampsiteMap extends React.Component<Props, {}> {
   // finishLoading() {
   //   Map.initialiseOffline(progress => this.props.onUpdateProgress(progress))
@@ -65,8 +57,6 @@ export default class CampsiteMap extends React.Component<Props, {}> {
         {
           // <MapView
           //   onFinishLoadingMap={() => this.finishLoading()}
-          //   annotations={annotations(this.props.campsites)}
-          //   onRightAnnotationTapped={(info: RightAnnotationTappedInfo) => this.props.onPress(info.id)}
           // />
         }
         <OfflineMapControls progress={this.props.downloadProgress} />
