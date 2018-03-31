@@ -1,10 +1,11 @@
 // This contains database functions that work in both react native and node
 // So, we shouldn't importing any react native specific stuff
 
-const stagingDatabase = 'thats-camping-react-native-staging'
-const stagingUsername = 'eggstalaythavearinglefor'
-const productionDatabase = 'thats-camping-react-native'
-const productionUsername = 'chookeementootworsenters'
+const host = 'da888a46-8bd1-4c4e-9a53-e26a0562ce07-bluemix.cloudant.com'
+const stagingDatabase = 'thatscamping-staging'
+const stagingUsername = 'piguirdillylittentoloone'
+const productionDatabase = 'thatscamping-production'
+const productionUsername = 'tlesseemorchadmidedpipid'
 
 // If no password is given just get read access to the remote database
 export function remoteDbCreate(PouchDB: any,
@@ -25,7 +26,7 @@ export function remoteDbCreate(PouchDB: any,
     password = stagingPassword
     console.log("Using staging database...")
   }
-  let url = 'https://mlandauer.cloudant.com/' + database
+  let url = 'https://' + host + '/' + database
 
   if (password) {
     return new PouchDB(url, {
